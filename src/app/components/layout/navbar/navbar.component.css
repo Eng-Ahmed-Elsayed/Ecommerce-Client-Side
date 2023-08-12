@@ -1,0 +1,147 @@
+/* --- */
+/* Navbar */
+/* --- */
+.navbar {
+  background-color: var(--secondary-color);
+  /* background: transparent; */
+  border-bottom: 1px solid rgba(128, 208, 199, 0.35);
+  z-index: 9;
+  color: var(--white-color);
+}
+
+.navbar-brand span {
+  font-family: var(--title-font-family);
+}
+
+.navbar a.nav-link {
+  color: var(--white-color);
+  font-size: medium;
+  margin-inline: 0.5rem;
+}
+
+.navbar .dropdown-menu {
+  background: var(--white-color);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+  border: 0;
+  display: none;
+  opacity: 0;
+  min-width: 9rem;
+  margin-top: 1.25rem;
+  padding: 0.813rem 0 0.625rem 0;
+  transition: all 0.3s;
+  pointer-events: none;
+}
+
+.navbar .dropdown-item {
+  display: inline-block;
+  color: var(--p-bg-color);
+  font-family: var(--title-font-family);
+  font-size: var(--menu-font-size);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.navbar .dropdown-item.active,
+.navbar .dropdown-item:active,
+.navbar .dropdown-item:focus,
+.navbar .dropdown-item:hover {
+  background: transparent;
+  color: var(--primary-color);
+}
+
+.navbar .dropdown-toggle::after {
+  content: "\f282";
+  display: inline-block;
+  font-family: bootstrap-icons !important;
+  font-size: var(--copyright-font-size);
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  vertical-align: -0.125em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  left: 0.125rem;
+  border: 0;
+}
+
+.navbar .dropdown:hover .dropdown-menu {
+  display: inherit;
+  opacity: 1;
+  margin-top: 0;
+  pointer-events: auto;
+  width: 25%;
+  padding: 0.5rem;
+}
+
+.navbar .dropdown:hover .dropdown-menu .dropdown-item {
+  text-align: center;
+}
+
+@media screen and (min-width: 992px) {
+  .navbar .dropdown:hover .dropdown-menu {
+    /* margin-top: 0.8rem; */
+    width: auto;
+  }
+
+  .navbar .dropdown:hover .dropdown-menu .dropdown-item {
+    text-align: start;
+  }
+
+  .navbar .dropdown-menu::before {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 1.25rem solid transparent;
+    border-right: 1.25rem solid transparent;
+    border-bottom: 0.94rem solid var(--white-color);
+    position: absolute;
+    top: -0.4rem;
+    left: 0.8rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .navbar a.nav-link {
+    margin-inline: 1rem;
+  }
+}
+
+.navbar a.nav-link.active,
+.navbar a.nav-link:hover {
+  color: var(--primary-color);
+}
+
+.bi-back {
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-weight-bold);
+  color: var(--dark-color);
+}
+
+.navbar-brand span {
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-weight-bold);
+  color: var(--dark-color);
+}
+
+.bi-person {
+  background-color: var(--white-color);
+  color: var(--primary-color);
+  font-size: var(--h5-font-size);
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  margin-inline-end: 1rem;
+  padding: 0.3rem 0.5rem;
+  transition: all 0.3 ease;
+  border-radius: var(--border-radius-large);
+}
+
+.bi-person:hover {
+  background: var(--primary-color);
+  color: var(--white-color);
+}
