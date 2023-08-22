@@ -1,42 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-:root {
-  --white-color: #ffffff;
-  --primary-color: #13547a;
-  --secondary-color: #80d0c7;
-  --primary-color--rgba: rgba(19, 84, 122, 0.8);
-  --secondary-color-rgba: rgba(128, 208, 199, 0.8);
-  --gray-color: #717275;
-  --section-bg-color: #f0f8ff;
-  --custom-btn-bg-color: #80d0c7;
-  --custom-btn-bg-hover-color: #13547a;
-  --dark-color: #000000;
-  --p-color: #717275;
-  --border-color: #7fffd4;
-  --link-hover-color: #13547a;
-
-  --body-font-family: "Open Sans", sans-serif;
-  --title-font-family: "Montserrat", sans-serif;
-
-  --h1-font-size: 58px;
-  --h2-font-size: 46px;
-  --h3-font-size: 32px;
-  --h4-font-size: 28px;
-  --h5-font-size: 24px;
-  --h6-font-size: 22px;
-  --p-font-size: 1.25rem;
-  --menu-font-size: 14px;
-  --btn-font-size: 18px;
-  --copyright-font-size: 16px;
-
-  --border-radius-large: 100px;
-  --border-radius-medium: 1.25rem;
-  --border-radius-small: 0.625rem;
-
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-}
+@import "variables";
 
 /* --- */
 /* TYPOGRAPHY */
@@ -82,7 +45,7 @@ h5 {
 }
 
 h6 {
-  color: var(--primary-color);
+  color: var(--light-color);
   font-size: var(--h6-font-size);
 }
 
@@ -98,16 +61,34 @@ ul li {
   font-weight: var(--font-weight-normal);
 }
 
-body {
-  background-color: var(--white-color);
-  font-family: var(--body-font-family);
-}
-
 html,
 body {
   height: 100%;
+  font-family: var(--body-font-family);
 }
+
 body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--light-color);
+}
+
+.custom-btn-transparent {
+  background: transparent;
+  border: 2px solid var(--custom-btn-bg-color);
+  color: var(--custom-btn-bg-color);
+}
+.custom-btn-transparent:hover {
+  background: var(--secondary-color);
+  color: var(--white-color);
+  border: 2px solid var(--custom-btn-bg-color);
+}
+
+.custom-btn {
+  background: var(--custom-btn-bg-color);
+  border: 0;
+  color: var(--white-color);
+  font-size: var(--btn-font-size);
+}
+
+.custom-btn:hover {
+  background: var(--custom-btn-bg-hover-color);
 }

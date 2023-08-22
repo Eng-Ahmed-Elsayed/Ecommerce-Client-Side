@@ -1,0 +1,42 @@
+:root {
+  --white-color: #ebf5ee;
+  --primary-color: #801a86;
+  --secondary-color: #2e86ab;
+  --light-color: #b9ddec;
+  --dark-color: #430e46;
+
+  // --primary-color: #13547a;
+  // --secondary-color: #80d0c7;
+  --dark-color-rgba: rgba(67, 14, 70, 0.8);
+  --secondary-color-rgba: rgba(46, 134, 171, 0.8);
+  --gray-color: #717275;
+  --section-bg-color: #ebf5ee;
+  --custom-btn-bg-color: #2e86ab;
+  --custom-btn-bg-hover-color: #801a86;
+  --p-color: #717275;
+  --border-color: #73bfb8;
+  --link-hover-color: #2e86ab;
+
+  --body-font-family: "Open Sans", sans-serif;
+  --title-font-family: "Montserrat", sans-serif;
+
+  --h1-font-size: 58px;
+  --h2-font-size: 46px;
+  --h3-font-size: 32px;
+  --h4-font-size: 28px;
+  --h5-font-size: 24px;
+  --h6-font-size: 22px;
+  --p-font-size: 1.25rem;
+  --menu-font-size: 14px;
+  --btn-font-size: 18px;
+  --copyright-font-size: 16px;
+
+  --border-radius-large: 100px;
+  --border-radius-medium: 1.25rem;
+  --border-radius-small: 0.625rem;
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+}

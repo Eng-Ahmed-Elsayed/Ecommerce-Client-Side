@@ -2,11 +2,7 @@
 /* Hero section */
 /* --- */
 .hero-section {
-  background-image: linear-gradient(
-    15deg,
-    var(--primary-color) 0%,
-    var(--secondary-color) 100%
-  );
+  background-image: linear-gradient(15deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   /* padding-bottom: 6rem; */
   position: relative;
   overflow: hidden;
@@ -21,17 +17,6 @@
 
 #search-container {
   width: 65%;
-}
-
-.custom-btn {
-  background: var(--custom-btn-bg-color);
-  border: 0;
-  color: var(--white-color);
-  font-size: var(--btn-font-size);
-}
-
-.custom-btn:hover {
-  background: var(--custom-btn-bg-hover-color);
 }
 
 /* --- */
@@ -62,10 +47,7 @@
 }
 
 .custom-card-background {
-  background: linear-gradient(
-      var(--secondary-color-rgba),
-      var(--primary-color--rgba)
-    ),
+  background: linear-gradient(var(--secondary-color-rgba), var(--dark-color-rgba)),
     url("../../../assets/images/businesswoman-using-tablet-analysis.jpg");
   background-position: center;
   background-size: cover;
@@ -118,10 +100,7 @@
 /* Timeline section */
 /* --- */
 .timeline-section {
-  background: linear-gradient(
-      var(--secondary-color-rgba),
-      var(--primary-color--rgba)
-    ),
+  background: linear-gradient(var(--secondary-color-rgba), var(--dark-color-rgba)),
     url("../../../assets/images/colleagues-working-cozy-office-medium-shot.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -217,22 +196,8 @@
   background-color: var(--primary-color);
 }
 
-.timeline-container
-  .vertical-scrollable-timeline
-  li.active
-  .icon-holder::before {
+.timeline-container .vertical-scrollable-timeline li.active .icon-holder::before {
   background-color: var(--primary-color);
-}
-
-.custom-btn-transparent {
-  background: transparent;
-  border: 2px solid var(--custom-btn-bg-color);
-  color: var(--custom-btn-bg-color);
-}
-.custom-btn-transparent:hover {
-  background: var(--secondary-color);
-  color: var(--white-color);
-  border: 2px solid var(--custom-btn-bg-color);
 }
 
 /* --- */
