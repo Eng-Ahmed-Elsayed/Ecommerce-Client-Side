@@ -2,7 +2,7 @@
 /* Navbar */
 /* --- */
 .navbar {
-  background-color: var(--secondary-color);
+  background-color: var(--navbar-color);
   /* background: transparent; */
   // border-bottom: 1px solid rgba(128, 208, 199, 0.35);
   // z-index: 9;
@@ -48,7 +48,7 @@
 .navbar .dropdown-item:focus,
 .navbar .dropdown-item:hover {
   background: transparent;
-  color: var(--primary-color);
+  color: var(--secondary-color);
 }
 
 .navbar .dropdown-toggle::after {
@@ -115,7 +115,7 @@
 .navbar {
   a.nav-link.active,
   a.nav-link:hover {
-    color: var(--dark-color);
+    color: var(--secondary-color);
   }
 }
 
@@ -133,7 +133,7 @@
 
 .bi-person {
   background-color: var(--white-color);
-  color: var(--primary-color);
+  color: var(--secondary-color);
   font-size: var(--h5-font-size);
   width: 2.5rem;
   height: 2.5rem;
@@ -145,7 +145,7 @@
 }
 
 .bi-person:hover {
-  background: var(--primary-color);
+  background: var(--secondary-color);
   color: var(--white-color);
 }
 
