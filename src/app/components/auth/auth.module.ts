@@ -13,9 +13,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ExternalProvidersComponent } from './external-providers/external-providers.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
-  declarations: [AuthComponent, LoginComponent, RegisterComponent],
+  declarations: [
+    AuthComponent,
+    LoginComponent,
+    RegisterComponent,
+    ExternalProvidersComponent,
+  ],
   imports: [
     CommonModule,
     AuthRoutingModule,
@@ -27,6 +34,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatButtonModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCheckboxModule,
   ],
 })
 export class AuthModule {}

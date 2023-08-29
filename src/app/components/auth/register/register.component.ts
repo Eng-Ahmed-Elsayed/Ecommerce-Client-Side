@@ -48,9 +48,8 @@ export class RegisterComponent implements OnInit {
           },
         ],
         birthday: ['', { validators: [Validators.required] }],
-      }
-      // ,
-      // { updateOn: 'blur' }
+      },
+      { updateOn: 'blur' }
     );
   }
 

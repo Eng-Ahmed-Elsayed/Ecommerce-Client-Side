@@ -1,0 +1,12 @@
+.external-login::after {
+  content: "Or";
+  display: block;
+  position: relative;
+  left: 50%;
+  bottom: -50%;
+  margin-left: -18px;
+  text-align: center;
+  width: 40px;
+  background-color: var(--light-color);
+  color: #222 !important;
+}

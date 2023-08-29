@@ -12,21 +12,7 @@
       </p>
       <!-- External Regsitration -->
       <h2>Sign Up with</h2>
-      <div class="row justify-content-center">
-        <div class="col-5 m-1">
-          <button class="btn btn-warning text-bg-warning w-100">Google</button>
-        </div>
-        <div class="col-5 m-1">
-          <button class="btn btn-dark text-bg-dark w-100">Apple</button>
-        </div>
-        <div class="col-5 m-1">
-          <button class="btn btn-primary w-100">Facebook</button>
-        </div>
-        <div class="col-5 m-1">
-          <button class="btn btn-info text-bg-info w-100">Twitter</button>
-        </div>
-        <div class="external-login border-bottom justify-content-center"></div>
-      </div>
+      <app-external-providers></app-external-providers>
       <!-- Internal Registration -->
       <form [formGroup]="registerForm" class="mt-3" (submit)="registerUser()">
         <div class="row">
@@ -197,10 +183,16 @@
           <div class="col-12">
             <button
               mat-raised-button
-              color="primary"
+              color="accent"
               [disabled]="registerForm.invalid"
             >
-              Create Account
+              <span class="p-5"> Create Account </span>
+            </button>
+          </div>
+          <div class="col-12 mt-2">Already have an account? Login</div>
+          <div class="col-12 mt-1 mb-3">
+            <button mat-raised-button>
+              <span class="p-3"> Login </span>
             </button>
           </div>
         </div>

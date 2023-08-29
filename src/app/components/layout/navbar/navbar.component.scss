@@ -2,7 +2,7 @@
 /* Navbar */
 /* --- */
 .navbar {
-  background-color: var(--navbar-color);
+  background-color: var(--dark-primary-color);
   /* background: transparent; */
   // border-bottom: 1px solid rgba(128, 208, 199, 0.35);
   // z-index: 9;
@@ -132,8 +132,8 @@
 }
 
 .bi-person {
-  background-color: var(--white-color);
-  color: var(--secondary-color);
+  background: var(--secondary-color);
+  color: var(--white-color);
   font-size: var(--h5-font-size);
   width: 2.5rem;
   height: 2.5rem;
@@ -145,7 +145,7 @@
 }
 
 .bi-person:hover {
-  background: var(--secondary-color);
+  background: var(--dark-secondary-color);
   color: var(--white-color);
 }
 

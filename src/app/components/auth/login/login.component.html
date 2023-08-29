@@ -1,11 +1,109 @@
-<section>
-  <div class="example-label">Raised</div>
-  <div class="example-button-row">
-    <button mat-raised-button>Basic</button>
-    <button mat-raised-button color="primary">Primary</button>
-    <button mat-raised-button color="accent">Accent</button>
-    <button mat-raised-button color="warn">Warn</button>
-    <button mat-raised-button disabled>Disabled</button>
-    <a mat-raised-button href="https://www.google.com/" target="_blank">Link</a>
+<!-- <link
+    rel="stylesheet"
+    href="../../../../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+  /> -->
+<div class="container-fluid register-container">
+  <div class="row px-4 py-2 test">
+    <div class="col-10 mx-auto col-lg-6 text-center shadow-lg rounded">
+      <!-- External Regsitration -->
+      <h2>Log in with</h2>
+      <app-external-providers></app-external-providers>
+      <!-- Internal Registration -->
+      <form [formGroup]="loginForm" class="mt-3" (submit)="registerUser()">
+        <div class="row">
+          <!-- Username Field -->
+          <div class="col-12">
+            <mat-form-field class="w-100">
+              <mat-label>Username</mat-label>
+              <input
+                type="text"
+                matInput
+                formControlName="userName"
+                placeholder="Ex. pat@example.com"
+              />
+              <!-- Min length error message -->
+              <mat-error
+                *ngIf="loginForm.get('userName')?.hasError('minlength')"
+              >
+                Username length should be more than <strong>3</strong>
+              </mat-error>
+              <!-- Max length error message -->
+              <mat-error
+                *ngIf="loginForm.get('userName')?.hasError('maxlength')"
+              >
+                Username length should be less than <strong>15</strong>
+              </mat-error>
+              <!-- Required error message -->
+              <mat-error
+                *ngIf="loginForm.get('userName')?.hasError('required')"
+              >
+                Username is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Password Field -->
+          <div class="col-12">
+            <mat-form-field class="w-100">
+              <mat-label>Enter your password</mat-label>
+              <input
+                formControlName="password"
+                matInput
+                [type]="hidePassword ? 'password' : 'text'"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="hidePassword = !hidePassword"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hidePassword"
+              >
+                <mat-icon>{{
+                  hidePassword ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
+              <!-- Min length error message -->
+              <mat-error
+                *ngIf="loginForm.get('password')?.hasError('minlength')"
+              >
+                Password length should be more than <strong>5</strong>
+              </mat-error>
+              <!-- Max length error message -->
+              <mat-error
+                *ngIf="loginForm.get('password')?.hasError('maxlength')"
+              >
+                Password length should be less than <strong>20</strong>
+              </mat-error>
+              <!-- Required error message -->
+              <mat-error
+                *ngIf="loginForm.get('password')?.hasError('required')"
+              >
+                Password is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-sm-5 col-md-4">
+            <mat-checkbox formControlName="stayLoggedIn" class=""
+              >Stay logged in?</mat-checkbox
+            >
+          </div>
+
+          <div class="col-12">
+            <button
+              mat-raised-button
+              color="accent"
+              [disabled]="loginForm.invalid"
+            >
+              <span class="p-5"> Login </span>
+            </button>
+          </div>
+          <div class="col-12 my-2">Forgot username? | Forgot password?</div>
+          <div class="col-12 my-3">
+            <button mat-raised-button>
+              <span class="p-3"> Sign Up </span>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
-</section>
+</div>
