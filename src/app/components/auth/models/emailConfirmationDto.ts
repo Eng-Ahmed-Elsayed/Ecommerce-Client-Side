@@ -1,4 +1,4 @@
-export interface EmailConfirmaionDto {
+export interface EmailConfirmationDto {
   email: string;
   token: string;
 }
