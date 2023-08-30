@@ -29,7 +29,7 @@ export class AuthService {
   }
 
   private authApiUrl = environment.baseApiUrl + 'auth/';
-  private clientUrl = environment.clientURI;
+  private authClientUrl = environment.clientURI + 'auth/';
 
   constructor(
     private httpClient: HttpClient,
@@ -40,14 +40,17 @@ export class AuthService {
   }
 
   isUserAuthenticated(): boolean {
-    const token = localStorage.getItem('token');
+    let token = sessionStorage.getItem('token');
+    if (token === null) {
+      token = localStorage.getItem('token');
+    }
     return token !== null && !this.jwtHelper.isTokenExpired(token);
   }
 
   registerUser(
     body: UserForRegistrationDto
   ): Observable<RegistrationResponseDto> {
-    body.clientURI = this.clientUrl + 'auth/email-confirmation/';
+    body.clientURI = this.authClientUrl + 'email-confirmation';
     return this.httpClient.post<RegistrationResponseDto>(
       this.authApiUrl + 'registration',
       body
@@ -55,6 +58,7 @@ export class AuthService {
   }
 
   loginUser(body: UserForAuthenticationDto): Observable<AuthResponseDto> {
+    body.clientURI = this.authClientUrl + 'forgot-password';
     return this.httpClient.post<AuthResponseDto>(
       this.authApiUrl + 'login',
       body
@@ -68,14 +72,22 @@ export class AuthService {
     );
   }
 
-  afterLoginSuccess(token: string, returnURL: string, email: string) {
-    localStorage.setItem('token', token);
+  afterLoginSuccess(
+    token: string,
+    returnURL: string,
+    email: string,
+    stayLoggedIn: boolean = false
+  ) {
+    stayLoggedIn
+      ? localStorage.setItem('token', token)
+      : sessionStorage.setItem('token', token);
     this.userEmail = email;
     this.sendAuthStateChangeNotification();
     this.router.navigateByUrl(returnURL || '/');
   }
 
   forgotPassword(body: ForgotPasswordDto): Observable<any> {
+    body.clientURI = this.authClientUrl + 'reset-password';
     return this.httpClient.post<any>(this.authApiUrl + 'forgot-password', body);
   }
 
@@ -91,6 +103,7 @@ export class AuthService {
   }
 
   SendEmailConfirmation(body: SendEmailConfirmationDto): Observable<any> {
+    body.clientURI = this.authClientUrl + 'email-confirmation';
     return this.httpClient.post<any>(
       this.authApiUrl + 'send-email-confirmation',
       body

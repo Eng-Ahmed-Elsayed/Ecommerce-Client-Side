@@ -7,7 +7,6 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 const routes: Routes = [
   { path: '404', component: NotFoundComponent },
   { path: 'forbidden', component: ForbiddenComponent },
-  { path: '**', redirectTo: '/error/404', pathMatch: 'full' },
 ];
 
 @NgModule({

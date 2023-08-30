@@ -9,12 +9,12 @@
       <h2>Log in with</h2>
       <app-external-providers></app-external-providers>
       <!-- Internal Registration -->
-      <form [formGroup]="loginForm" class="mt-3" (submit)="registerUser()">
+      <form [formGroup]="loginForm" class="mt-3" (submit)="loginUser()">
         <div class="row">
-          <!-- Username Field -->
+          <!-- UserName Field -->
           <div class="col-12">
             <mat-form-field class="w-100">
-              <mat-label>Username</mat-label>
+              <mat-label>UserName</mat-label>
               <input
                 type="text"
                 matInput
@@ -25,19 +25,19 @@
               <mat-error
                 *ngIf="loginForm.get('userName')?.hasError('minlength')"
               >
-                Username length should be more than <strong>3</strong>
+                UserName length should be more than <strong>3</strong>
               </mat-error>
               <!-- Max length error message -->
               <mat-error
                 *ngIf="loginForm.get('userName')?.hasError('maxlength')"
               >
-                Username length should be less than <strong>15</strong>
+                UserName length should be less than <strong>15</strong>
               </mat-error>
               <!-- Required error message -->
               <mat-error
                 *ngIf="loginForm.get('userName')?.hasError('required')"
               >
-                Username is <strong>required</strong>
+                UserName is <strong>required</strong>
               </mat-error>
             </mat-form-field>
           </div>
@@ -95,6 +95,24 @@
             >
               <span class="p-5"> Login </span>
             </button>
+          </div>
+          <div class="col-12">
+            Email is not confirmed
+            <a
+              *ngIf="errorMessage === 'Email is not confirmed'"
+              class="text-primary h2"
+              routerLink="/send-email-confirmation"
+            >
+              Send email confirmation link
+            </a>
+            <div
+              class="text-danger"
+              *ngIf="
+                errorMessage !== '' && errorMessage !== 'Email is not confirmed'
+              "
+            >
+              {{ errorMessage }}
+            </div>
           </div>
           <div class="col-12 my-2">Forgot username? | Forgot password?</div>
           <div class="col-12 my-3">

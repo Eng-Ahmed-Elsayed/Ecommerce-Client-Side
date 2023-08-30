@@ -1,5 +1,5 @@
 export interface UserForAuthenticationDto {
-  email: string
-  pasword: string
-  clientURI: string
+  userName: string;
+  pasword: string;
+  clientURI: string;
 }

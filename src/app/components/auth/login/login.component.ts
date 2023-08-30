@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
+import { ExternalAuthDto } from '../models/externalAuthDto';
+import { AuthResponseDto } from '../models/authResponseDto';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +16,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   hidePassword: boolean = true;
-  hideConfirmPassword: boolean = true;
+  errorMessage: string = '';
+  returnUrl: string = this.activatedRoute.snapshot.queryParams['returnUrl'];
+  private clientId = environment.googleClientId;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private _ngZone: NgZone,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group(
@@ -40,9 +55,74 @@ export class LoginComponent implements OnInit {
       },
       { updateOn: 'blur' }
     );
+
+    // @ts-ignore
+    window.onGoogleLibraryLoad = () => {
+      // @ts-ignore
+      google.accounts.id.initialize({
+        client_id: this.clientId,
+        callback: this.handleCredentialResponse.bind(this),
+        auto_select: false,
+        cancel_on_tap_outside: true,
+      });
+      // @ts-ignore
+      google.accounts.id.renderButton(
+        // @ts-ignore
+        document.getElementById('buttonDiv'),
+        { theme: 'outline', size: 'large', width: '100%' }
+      );
+      // @ts-ignore
+      google.accounts.id.prompt((notification: PromptMomentNotification) => {});
+    };
   }
 
-  registerUser() {
-    console.log(this.loginForm.getRawValue());
+  async handleCredentialResponse(response: CredentialResponse) {
+    const body: ExternalAuthDto = {
+      idToken: response.credential,
+      provider: 'GOOGLE',
+    };
+    this.authService.externalLogin(body).subscribe({
+      next: (res: AuthResponseDto) => {
+        this._ngZone.run(() => {
+          this.authService.afterLoginSuccess(
+            res.token,
+            this.returnUrl,
+            res.email,
+            true
+          );
+        });
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
+  }
+
+  loginUser() {
+    let { stayLoggedIn: _, ...body } = this.loginForm.getRawValue();
+    this.authService.loginUser(body).subscribe({
+      next: (res: AuthResponseDto) => {
+        if (res.is2StepVerificationRequired) {
+          this.router.navigate(['/two-step-verification'], {
+            queryParams: {
+              returnUrl: this.returnUrl,
+              provider: res.provider,
+              email: this.loginForm.get('email')?.value,
+            },
+          });
+        } else {
+          this.authService.afterLoginSuccess(
+            res.token,
+            this.returnUrl,
+            res.email,
+            this.loginForm.get('stayLoggedIn')?.value
+          );
+        }
+      },
+      error: (err: HttpErrorResponse) => {
+        this.errorMessage = err.message;
+        console.log(this.errorMessage);
+      },
+    });
   }
 }

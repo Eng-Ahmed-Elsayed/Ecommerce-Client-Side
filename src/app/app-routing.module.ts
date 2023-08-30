@@ -23,7 +23,6 @@ const routes: Routes = [
         (m) => m.DashboardModule
       ),
   },
-  { path: 'home', redirectTo: '/', pathMatch: 'full' },
   {
     path: 'error',
     loadChildren: () =>
@@ -31,6 +30,8 @@ const routes: Routes = [
         (m) => m.ErrorPagesModule
       ),
   },
+  { path: 'home', redirectTo: '/', pathMatch: 'full' },
+  { path: '**', redirectTo: '/error/404', pathMatch: 'full' },
 ];
 
 @NgModule({

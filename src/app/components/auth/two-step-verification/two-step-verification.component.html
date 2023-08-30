@@ -1,1 +1,41 @@
-<p>two-step-verification works!</p>
+<h1>Two Step Verification</h1>
+<div *ngIf="errorMessage" class="alert alert-danger text-center" role="alert">
+  {{ errorMessage }}
+</div>
+
+<div class="d-flex justify-content-center">
+  <form
+    [formGroup]="twoStepLoginForm"
+    class="w-50 mx-auto mt-1"
+    (submit)="twoStepLoginUser()"
+  >
+    <!-- Password Field -->
+    <mat-form-field class="w-100">
+      <mat-label>Verification Code</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="token"
+        placeholder="Enter the verification code"
+      />
+      <mat-error
+        *ngIf="twoStepLoginForm.get('token')?.hasError('invaildToken')"
+      >
+        Please enter a valid password.
+      </mat-error>
+      <mat-error *ngIf="twoStepLoginForm.get('token')?.hasError('required')">
+        Verification Code <strong>required.</strong>
+      </mat-error>
+    </mat-form-field>
+    <div class="d-flex justify-content-center">
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="twoStepLoginForm.invalid"
+      >
+        Login
+      </button>
+    </div>
+  </form>
+</div>
