@@ -1,4 +1,5 @@
 export interface RegistrationResponseDto {
   isSuccessfulRegistration: boolean;
-  errros: string[];
+  erros: string[];
+  error: string;
 }

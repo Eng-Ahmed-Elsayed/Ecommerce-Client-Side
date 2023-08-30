@@ -1,0 +1,36 @@
+<div class="row text-center">
+  <h1 class="text-primary">Email Confirmation</h1>
+  <div
+    *ngIf="errorMessage && errorMessage.length != 0"
+    class="alert alert-danger"
+    role="alert"
+  >
+    {{ errorMessage }}
+  </div>
+  <div
+    *ngIf="successMessage && successMessage.length != 0"
+    class="alert alert-success"
+    role="alert"
+  >
+    {{ successMessage }}
+  </div>
+</div>
+
+<div class="d-flex justify-content-center">
+  <form
+    [formGroup]="emailConfirmationForm"
+    class="w-50 mx-auto mt-1"
+    (submit)="emailConfirmation()"
+  >
+    <div class="d-flex justify-content-center">
+      <button
+        mat-raised-button
+        color="accent"
+        type="submit"
+        [disabled]="emailConfirmationForm.invalid"
+      >
+        Confirm Email
+      </button>
+    </div>
+  </form>
+</div>

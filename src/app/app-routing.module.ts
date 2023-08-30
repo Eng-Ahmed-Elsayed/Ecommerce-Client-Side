@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { notAuthenticatedGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () =>
       import('./components/auth/auth.module').then((m) => m.AuthModule),
+    canActivate: [notAuthenticatedGuard],
   },
   {
     path: 'dashboard',
@@ -22,8 +24,13 @@ const routes: Routes = [
       ),
   },
   { path: 'home', redirectTo: '/', pathMatch: 'full' },
-  // { path: '**', component:  }, // Wildcard route for a 404 page
-  // { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
+  {
+    path: 'error',
+    loadChildren: () =>
+      import('./components/error-pages/error-pages.module').then(
+        (m) => m.ErrorPagesModule
+      ),
+  },
 ];
 
 @NgModule({

@@ -15,14 +15,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ExternalProvidersComponent } from './external-providers/external-providers.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { JwtModule } from '@auth0/angular-jwt';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ErrorHandlerService } from 'src/app/shared/services/error-handler.service';
-
-// Get the token
-export function tokenGetter() {
-  return localStorage.getItem('token');
-}
+import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { SendEmailConfirmationComponent } from './send-email-confirmation/send-email-confirmation.component';
+import { TwoStepVerificationComponent } from './two-step-verification/two-step-verification.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +27,11 @@ export function tokenGetter() {
     LoginComponent,
     RegisterComponent,
     ExternalProvidersComponent,
+    EmailConfirmationComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    SendEmailConfirmationComponent,
+    TwoStepVerificationComponent,
   ],
   imports: [
     CommonModule,
@@ -43,20 +45,7 @@ export function tokenGetter() {
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:7021'],
-        disallowedRoutes: [],
-      },
-    }),
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorHandlerService,
-      multi: true,
-    },
-  ],
+  providers: [],
 })
 export class AuthModule {}

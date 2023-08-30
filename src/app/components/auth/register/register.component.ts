@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { RegistrationResponseDto } from '../models/registrationResponseDto';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -7,11 +11,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+  errorMessage!: string;
   registerForm!: FormGroup;
   hidePassword: boolean = true;
   hideConfirmPassword: boolean = true;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.registerForm = this.fb.group(
@@ -54,6 +63,15 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
-    console.log(this.registerForm.getRawValue());
+    this.authService.registerUser(this.registerForm.getRawValue()).subscribe({
+      next: (val) => console.log(`Successful registration \n ${val}`),
+      error: (err: HttpErrorResponse) => {
+        console.log(err.error);
+        this.errorMessage = err.error.errors;
+      },
+      complete: () => {
+        this.router.navigateByUrl('auth/login');
+      },
+    });
   }
 }

@@ -24,14 +24,12 @@ export class AuthService {
   public authChange = this.authChangeSub.asObservable();
   private userEmail!: string;
 
-  // set setUserEmail(v: string) {
-  //   this.userEmail = v;
-  // }
   get getUserEmail() {
     return this.userEmail;
   }
 
-  private authApiUrl = environment.baseApiUrl + 'accounts/';
+  private authApiUrl = environment.baseApiUrl + 'auth/';
+  private clientUrl = environment.clientURI;
 
   constructor(
     private httpClient: HttpClient,
@@ -49,6 +47,7 @@ export class AuthService {
   registerUser(
     body: UserForRegistrationDto
   ): Observable<RegistrationResponseDto> {
+    body.clientURI = this.clientUrl + 'auth/email-confirmation/';
     return this.httpClient.post<RegistrationResponseDto>(
       this.authApiUrl + 'registration',
       body
