@@ -6,7 +6,7 @@
   /* background: transparent; */
   // border-bottom: 1px solid rgba(128, 208, 199, 0.35);
   // z-index: 9;
-  color: var(--white-color);
+  color: var(--light-color);
 }
 
 .navbar-brand span {
@@ -14,13 +14,13 @@
 }
 
 .navbar a.nav-link {
-  color: var(--white-color);
+  color: var(--light-color);
   font-size: medium;
   margin-inline: 0.5rem;
 }
 
 .navbar .dropdown-menu {
-  background: var(--white-color);
+  background: var(--light-color);
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
   border: 0;
   display: none;
@@ -99,7 +99,7 @@
     height: 0;
     border-left: 1.25rem solid transparent;
     border-right: 1.25rem solid transparent;
-    border-bottom: 0.94rem solid var(--white-color);
+    border-bottom: 0.94rem solid var(--light-color);
     position: absolute;
     top: -0.4rem;
     left: 0.8rem;
@@ -133,7 +133,7 @@
 
 .bi-person {
   background: var(--secondary-color);
-  color: var(--white-color);
+  color: var(--light-color);
   font-size: var(--h5-font-size);
   width: 2.5rem;
   height: 2.5rem;
@@ -146,7 +146,7 @@
 
 .bi-person:hover {
   background: var(--dark-secondary-color);
-  color: var(--white-color);
+  color: var(--light-color);
 }
 
 .navbar-toggler:focus {
