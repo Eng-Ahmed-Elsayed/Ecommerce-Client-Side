@@ -6,11 +6,15 @@
   <!-- Discount  -->
   <div class="row">
     <div class="col justify-content-center align-items-center d-flex g-1">
-      <mat-icon fontIcon="card_giftcard" color="accent" class="mx-1"></mat-icon>
+      <mat-icon
+        fontIcon="card_giftcard"
+        color="primary"
+        class="mx-1"
+      ></mat-icon>
       <h6 class="text-dark" class="mx-1 mb-0">
         BUY NOW, PAY LATER STARTING AT 0% APR
       </h6>
-      <button mat-raised-button color="accent" class="mx-1">LEARN MORE</button>
+      <button mat-raised-button color="primary" class="mx-1">LEARN MORE</button>
     </div>
   </div>
   <!-- Hero -->
@@ -88,8 +92,8 @@
     <h2>50% Off For New Customers</h2>
     <p>Free Shipping & Free Return at no order min. Restricitons apply</p>
     <a href="#!">
-      <!-- <button mat-button color="accent">Start your order now</button> -->
-      <button mat-fab extended color="accent">
+      <!-- <button mat-button color="primary">Start your order now</button> -->
+      <button mat-fab extended color="primary">
         <mat-icon>shop</mat-icon>
         Start Your Order Now
       </button></a
@@ -98,20 +102,30 @@
   <div class="row">
     <h5>Shop By Categories</h5>
     <span><a href="">View all</a></span>
-    <carousel
-      [itemsPerSlide]="itemsPerSlide"
-      [singleSlideOffset]="singleSlideOffset"
-      [interval]="3000"
-      [showIndicators]="showIndicators"
-      class="categories-carousel"
-    >
-      <slide
-        *ngFor="let slide of slides; let index = index"
-        class="mx-5 mx-sm-4 mx-lg-0"
+    <div class="card">
+      <p-carousel
+        [value]="products"
+        [numVisible]="5"
+        [numScroll]="1"
+        [responsiveOptions]="responsiveOptions"
       >
-        <img [src]="slide.image" alt="image slide" class="rounded-pill" />
-        <p>{{ slide.name }}</p>
-      </slide>
-    </carousel>
+        <ng-template let-product pTemplate="item">
+          <div class="cart-item rounded m-2 text-center py-5 px-3">
+            <div class="mb-3">
+              <img
+                src="https://primefaces.org/cdn/primeng/images/demo/product/{{
+                  product.image
+                }}"
+                [alt]="product.name"
+                class="w-75"
+              />
+            </div>
+            <div>
+              <h6 class="mb-1">{{ product.name }}</h6>
+            </div>
+          </div>
+        </ng-template>
+      </p-carousel>
+    </div>
   </div>
 </div>

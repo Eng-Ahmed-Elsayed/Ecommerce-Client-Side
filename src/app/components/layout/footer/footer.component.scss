@@ -3,7 +3,7 @@
 /* --- */
 .footer {
   padding-block: 4rem;
-  border-bottom: 0.625rem solid var(--dark-primary-color);
+  border-bottom: 0.625rem solid var(--primary-color);
   // border-bottom: 0.625rem solid $secondary-color;
   position: relative;
 }
@@ -17,7 +17,7 @@
   height: 0;
   border-style: solid;
   border-width: 0 0 12.5rem 12.5rem;
-  border-color: transparent transparent var(--dark-primary-color) transparent;
+  border-color: transparent transparent var(--primary-color) transparent;
   pointer-events: none;
 }
 

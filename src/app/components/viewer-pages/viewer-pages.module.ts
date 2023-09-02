@@ -8,6 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { CarouselModule as PrimeCarouselModule } from 'primeng/carousel';
+import { TagModule } from 'primeng/tag';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [ViewerPagesComponent, HomeComponent],
@@ -18,6 +21,10 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     MatButtonModule,
     MatDividerModule,
     CarouselModule,
+    // PrimeNg
+    PrimeCarouselModule,
+    TagModule,
+    ButtonModule,
   ],
 })
 export class ViewerPagesModule {}

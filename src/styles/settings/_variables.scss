@@ -1,15 +1,16 @@
 :root {
-  --white-color: white;
-  --black-color: black;
-  --light-color: #e0f7fa;
-  --dark-color: #2e323f;
-  --backgorund-color: linear-gradient(180deg, #2e323f 0%, #0a061a 100%);
-  // --backgorund-color: #2d303e;
-  --dark-primary-color: #0097a7;
-  --primary-color: #ffff;
-  --secondary-color: #e92fb1;
-  --dark-secondary-color: #f50057;
-  --light-color: #e0f7fa;
+  // --white-color: white;
+  // --black-color: black;
+  // --light-color: #e0f7fa;
+  // --dark-color: #2e323f;
+  // --backgorund-color: linear-gradient(180deg, #2e323f 0%, #0a061a 100%);
+  // --backgorund-color: #9eade629;
+  // // --backgorund-color: #2d303e;
+  // --primary-color: #ffff;
+  // --secondary-color: #e82eb0;
+  // --dark-primary-color: #0097a7;
+  // --dark-secondary-color: #f50057;
+  // --light-color: #e0f7fa;
   // COMPLEMENTARY
   // #2fe967
   // ANALOGOUS
@@ -18,14 +19,14 @@
   // TRIADIC
   // #e9672f
   // #b1e92f
-  --secondary-color-rgba: rgba(46, 134, 171, 0.8);
-  --gray-color: #717275;
-  --section-bg-color: #ebf5ee;
-  --custom-btn-bg-color: #ff4081;
-  --custom-btn-bg-hover-color: #f50057;
-  --p-color: #717275;
-  --border-color: #73bfb8;
-  --link-hover-color: #2e86ab;
+  // --secondary-color-rgba: rgba(46, 134, 171, 0.8);
+  // --gray-color: #717275;
+  // --section-bg-color: #ebf5ee;
+  // --custom-btn-bg-color: #ff4081;
+  // --custom-btn-bg-hover-color: #f50057;
+  // --p-color: #717275;
+  // --border-color: #73bfb8;
+  // --link-hover-color: #2e86ab;
 
   --body-font-family: "Open Sans", sans-serif;
   --title-font-family: "Montserrat", sans-serif;
@@ -50,3 +51,11 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 }
+
+// $Text: #E6E6E6;
+// $SecondaryText: #B3B3B3;
+// $BorderRadius: 6px;
+// $DisabledOpacity: 0.4;
+// $Primary: #E82EB2;
+// $textOnPrimary: #263238;
+// $HighlightBackground: black;
