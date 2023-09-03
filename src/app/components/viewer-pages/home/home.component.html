@@ -20,72 +20,39 @@
   <!-- Hero -->
   <div class="row my-3">
     <!-- Carousel  -->
-    <div class="col-12 mx-auto col-md-7">
-      <carousel [isAnimated]="true" [interval]="2500" class="carousel">
-        <slide>
-          <img
-            src="../../../../assets/images/rear-view-young-college-student.jpg"
-            alt="third slide"
-            class="image-fluid rounded w-100"
-          />
-        </slide>
-        <slide>
-          <img
-            src="../../../../assets/images/colleagues-working-cozy-office-medium-shot.jpg"
-            alt="second slide"
-            class="image-fluid rounded w-100"
-          />
-        </slide>
-        <slide>
-          <img
-            src="../../../../assets/images/rear-view-young-college-student.jpg"
-            alt="third slide"
-            class="image-fluid rounded w-100"
-          />
-        </slide>
-        <slide>
-          <img
-            src="../../../../assets/images/colleagues-working-cozy-office-medium-shot.jpg"
-            alt="second slide"
-            class="image-fluid rounded w-100"
-          />
-        </slide>
-      </carousel>
+    <div class="col-12 col-md-7 d-flex justify-content-center">
+      <p-galleria
+        [value]="images"
+        [showIndicators]="true"
+        [showThumbnails]="false"
+        [autoPlay]="true"
+        [circular]="true"
+        [responsiveOptions]="responsiveOptions"
+        [containerStyle]="{ 'max-width': '640px' }"
+      >
+        <ng-template pTemplate="item" let-item>
+          <img [src]="item.itemImageSrc" style="width: 100%; display: block" />
+        </ng-template>
+      </p-galleria>
     </div>
     <!-- Sales -->
-    <div class="col-12 my-3 col-md-5 my-md-0 sales">
-      <div class="d-flex flex-row justify-content-center">
-        <a href="#!">
-          <img
-            src="../../../../assets/images/sales/Home-20-slider-banner-1.avif"
-            alt=""
-            class="img-fluid w-100"
-          />
-        </a>
-        <a href="#!">
-          <img
-            src="../../../../assets/images/sales/Home-20-slider-banner-1.avif"
-            alt=""
-            class="img-fluid w-100"
-          />
-        </a>
-      </div>
-      <div class="d-flex flex-row justify-content-center">
-        <a href="#!">
-          <img
-            src="../../../../assets/images/sales/Home-20-slider-banner-1.avif"
-            alt=""
-            class="img-fluid w-100"
-          />
-        </a>
-        <a href="#!">
-          <img
-            src="../../../../assets/images/sales/Home-20-slider-banner-1.avif"
-            alt=""
-            class="img-fluid w-100"
-          />
-        </a>
-      </div>
+    <div
+      class="sales col-12 my-3 col-md-5 my-md-0 d-flex flex-row flex-md-column justify-content-center align-items-center"
+    >
+      <a href="#!">
+        <p-image
+          src="../../../../assets/images/sales/Home-20-slider-banner-1.avif"
+          alt="Image"
+          imageClass="w-100 rounded"
+        ></p-image>
+      </a>
+      <a href="#!">
+        <p-image
+          src="../../../../assets/images/sales/Home-20-slider-banner-1.avif"
+          alt="Image"
+          imageClass="w-100 rounded"
+        ></p-image>
+      </a>
     </div>
   </div>
   <div class="row new-customers-ad rounded-pill text-center">
@@ -99,9 +66,10 @@
       </button></a
     >
   </div>
-  <div class="row">
-    <h5>Shop By Categories</h5>
-    <span><a href="">View all</a></span>
+  <!-- Categories -->
+  <div class="row my-3">
+    <h4>Shop By Categories <a href="#!">View all</a></h4>
+
     <div class="card">
       <p-carousel
         [value]="products"
@@ -110,7 +78,7 @@
         [responsiveOptions]="responsiveOptions"
       >
         <ng-template let-product pTemplate="item">
-          <div class="cart-item rounded m-2 text-center py-5 px-3">
+          <div class="cart-item rounded mx-2 text-center py-5 px-3">
             <div class="mb-3">
               <img
                 src="https://primefaces.org/cdn/primeng/images/demo/product/{{
@@ -128,4 +96,14 @@
       </p-carousel>
     </div>
   </div>
+  <!-- New products -->
+  <div class="row my-3">
+    <h4>New Products <a href="#!">View all</a></h4>
+    <app-products-carousel [products]="products"></app-products-carousel>
+  </div>
+  <div class="row my-3">
+    <h4>Featured Products <a href="#!">View all</a></h4>
+    <app-products-carousel [products]="products"></app-products-carousel>
+  </div>
 </div>
+<app-confirm-dialog></app-confirm-dialog>

@@ -1,0 +1,52 @@
+<div class="col">
+  <div class="card">
+    <p-carousel
+      [value]="products"
+      [numVisible]="3"
+      [numScroll]="3"
+      [circular]="false"
+      [responsiveOptions]="responsiveOptions"
+    >
+      <ng-template let-product pTemplate="item">
+        <div class="cart-item rounded mx-2 text-center py-5 px-3">
+          <div class="mb-3">
+            <img
+              src="https://primefaces.org/cdn/primeng/images/demo/product/{{
+                product.image
+              }}"
+              [alt]="product.name"
+              class="w-100"
+            />
+          </div>
+          <div>
+            <h4 class="mb-1">{{ product.name }}</h4>
+            <h6 class="mt-0 mb-3">{{ "$" + product.price }}</h6>
+            <p-tag
+              [value]="product.inventoryStatus"
+              [severity]="getSeverity(product.inventoryStatus)"
+            ></p-tag>
+            <div class="car-buttons mt-5">
+              <p-button
+                type="button"
+                styleClass="p-button p-button-rounded mr-2"
+                icon="pi pi-shopping-cart"
+                (click)="shopCartConfirm()"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-info p-button-rounded mr-2"
+                icon="pi pi-search"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button-success p-button-rounded mr-2"
+                icon="pi pi-star-fill"
+                (click)="favouritConfirm()"
+              ></p-button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+  </div>
+</div>

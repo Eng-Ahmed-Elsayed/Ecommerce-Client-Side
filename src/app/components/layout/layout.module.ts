@@ -10,6 +10,11 @@ import { NavComponent } from './nav/nav.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { ToastComponent } from './toast/toast.component';
+import { ToastModule } from 'primeng/toast';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -17,6 +22,8 @@ import { MatListModule } from '@angular/material/list';
     NavbarComponent,
     FooterComponent,
     NavComponent,
+    ToastComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +33,10 @@ import { MatListModule } from '@angular/material/list';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
+    ToastModule,
+    ButtonModule,
+    ConfirmDialogModule,
   ],
-  exports: [NavbarComponent, FooterComponent, NavComponent],
+  exports: [NavComponent, ToastComponent, ConfirmDialogComponent],
 })
 export class LayoutModule {}

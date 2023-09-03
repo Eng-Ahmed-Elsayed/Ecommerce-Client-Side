@@ -1,25 +1,30 @@
-.sales a {
-  margin: 0 0.3rem 0.3rem 0.3rem;
+.sales {
+  a {
+    margin-bottom: 1rem;
+    margin-inline: 1rem;
+  }
 }
 
 .new-customers-ad {
   background: var(--surface-card);
 
   h2 {
-    // color: var(--text-color-secondary);
     margin-top: 1rem;
   }
-  // p {
-  //   color: var(--text-color);
-  // }
   a {
     margin-bottom: 1rem;
   }
 }
 
-p-carousel {
-  .cart-item {
-    border: 1px solid var(--surface-d);
-    border-radius: 3px;
+h4 {
+  > a {
+    color: var(--primary-color);
+    font-size: medium;
+    margin-left: 0.5rem;
+  }
+
+  > a:hover,
+  > a:focus {
+    color: var(--primary-300);
   }
 }

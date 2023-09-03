@@ -84,3 +84,15 @@ mat-sidenav-content {
   border-radius: 10px;
   margin-bottom: 1rem;
 }
+
+p-carousel {
+  .cart-item {
+    border: 2px solid var(--surface-d);
+    border-radius: 3px;
+    height: 100%;
+  }
+
+  p-button {
+    margin-inline: 0.5rem;
+  }
+}
