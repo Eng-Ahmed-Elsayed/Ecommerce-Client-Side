@@ -19,7 +19,7 @@
   </div>
   <!-- Hero -->
   <div class="row my-3">
-    <!-- Carousel  -->
+    <!-- Galleria  -->
     <div class="col-12 col-md-7 d-flex justify-content-center">
       <p-galleria
         [value]="images"
@@ -31,7 +31,7 @@
         [containerStyle]="{ 'max-width': '640px' }"
       >
         <ng-template pTemplate="item" let-item>
-          <img [src]="item.itemImageSrc" style="width: 100%; display: block" />
+          <img [src]="item.itemImageSrc" class="d-block w-100 rounded" />
         </ng-template>
       </p-galleria>
     </div>
@@ -69,8 +69,11 @@
   <!-- Categories -->
   <div class="row my-3">
     <h4>Shop By Categories <a href="#!">View all</a></h4>
-
-    <div class="card">
+    <app-custom-carousel
+      [items]="products"
+      [withName]="true"
+    ></app-custom-carousel>
+    <!-- <div class="card">
       <p-carousel
         [value]="products"
         [numVisible]="5"
@@ -85,7 +88,7 @@
                   product.image
                 }}"
                 [alt]="product.name"
-                class="w-75"
+                class="carousel-img"
               />
             </div>
             <div>
@@ -94,16 +97,26 @@
           </div>
         </ng-template>
       </p-carousel>
-    </div>
+    </div> -->
   </div>
   <!-- New products -->
   <div class="row my-3">
     <h4>New Products <a href="#!">View all</a></h4>
     <app-products-carousel [products]="products"></app-products-carousel>
   </div>
+  <!-- Featured products -->
   <div class="row my-3">
     <h4>Featured Products <a href="#!">View all</a></h4>
     <app-products-carousel [products]="products"></app-products-carousel>
+  </div>
+  <!-- Top brands -->
+  <div class="row my-3">
+    <h4>Top Brands <a href="#!">View all</a></h4>
+    <app-custom-carousel
+      [items]="products"
+      [withName]="false"
+      imgClass="rounded-pill"
+    ></app-custom-carousel>
   </div>
 </div>
 <app-confirm-dialog></app-confirm-dialog>

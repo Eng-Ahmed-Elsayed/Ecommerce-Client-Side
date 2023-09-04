@@ -15,9 +15,10 @@ import { ImageModule } from 'primeng/image';
 import { BadgeModule } from 'primeng/badge';
 import { LayoutModule } from '../layout/layout.module';
 import { ProductsCarouselComponent } from './products-carousel/products-carousel.component';
+import { CustomCarouselComponent } from './custom-carousel/custom-carousel.component';
 
 @NgModule({
-  declarations: [ViewerPagesComponent, HomeComponent, ProductsCarouselComponent],
+  declarations: [ViewerPagesComponent, HomeComponent, ProductsCarouselComponent, CustomCarouselComponent],
   imports: [
     CommonModule,
     ViewerPagesRoutingModule,

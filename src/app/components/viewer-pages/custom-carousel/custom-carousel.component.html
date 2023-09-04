@@ -1,0 +1,25 @@
+<div class="card">
+  <p-carousel
+    [value]="items"
+    [numVisible]="5"
+    [numScroll]="1"
+    [responsiveOptions]="responsiveOptions"
+  >
+    <ng-template let-item pTemplate="item">
+      <div class="cart-item rounded mx-2 text-center py-5 px-3">
+        <div class="mb-3">
+          <img
+            src="https://primefaces.org/cdn/primeng/images/demo/product/{{
+              item.image
+            }}"
+            [alt]="item.name"
+            [class]="'carousel-img ' + imgClass"
+          />
+        </div>
+        <div *ngIf="withName">
+          <h6 class="mb-1">{{ item.name }}</h6>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+</div>
