@@ -4,7 +4,7 @@
 /> -->
 <div class="container-fluid px-4">
   <!-- Discount  -->
-  <div class="row">
+  <div class="row mb-3">
     <div class="col justify-content-center align-items-center d-flex g-1">
       <mat-icon
         fontIcon="card_giftcard"
@@ -73,31 +73,6 @@
       [items]="products"
       [withName]="true"
     ></app-custom-carousel>
-    <!-- <div class="card">
-      <p-carousel
-        [value]="products"
-        [numVisible]="5"
-        [numScroll]="1"
-        [responsiveOptions]="responsiveOptions"
-      >
-        <ng-template let-product pTemplate="item">
-          <div class="cart-item rounded mx-2 text-center py-5 px-3">
-            <div class="mb-3">
-              <img
-                src="https://primefaces.org/cdn/primeng/images/demo/product/{{
-                  product.image
-                }}"
-                [alt]="product.name"
-                class="carousel-img"
-              />
-            </div>
-            <div>
-              <h6 class="mb-1">{{ product.name }}</h6>
-            </div>
-          </div>
-        </ng-template>
-      </p-carousel>
-    </div> -->
   </div>
   <!-- New products -->
   <div class="row my-3">
@@ -118,5 +93,66 @@
       imgClass="rounded-pill"
     ></app-custom-carousel>
   </div>
+  <!--  -->
+  <div class="row my-3 g-3">
+    <div class="col-12 col-md-6">
+      <img
+        src="../../../../assets/images/sales/home-20-banner-custom-1-2-1_775x.webp"
+        alt="Image"
+        class="w-100 rounded"
+      />
+    </div>
+    <div class="col-12 col-md-6">
+      <img
+        src="../../../../assets/images/sales/home-20-banner-custom-1-2-2_775x.webp"
+        alt="Image"
+        class="w-100 rounded"
+      />
+    </div>
+  </div>
+  <!-- Clothing, Shoes & Accessories -->
+  <div class="row my-3 g-3">
+    <div class="col-7 mx-auto mx-md-0 col-md-4">
+      <img
+        src="../../../../assets/images/sales/home-20-product-block-collection-1.webp"
+        alt="Image"
+        class="img-fluid w-100 rounded-3"
+      />
+    </div>
+    <div class="col-12 col-md-8">
+      <app-products-carousel
+        [products]="products"
+        [responsiveOptions]="accessoriesResponsiveOptions"
+        [numVisible]="2"
+      ></app-products-carousel>
+    </div>
+  </div>
+  <!--  -->
+  <div class="row my-3 g-3">
+    <div class="col-10 mx-auto col-md-4 mx-md-0">
+      <img
+        src="../../../../assets/images/categories/home-20-banner-custom-1-3-1_510x.avif"
+        alt="Image"
+        class="img-fluid w-100 rounded-3"
+      />
+    </div>
+    <div class="col-10 mx-auto col-md-4 mx-md-0">
+      <img
+        src="../../../../assets/images/categories/home-20-banner-custom-1-3-2_510x.avif"
+        alt="Image"
+        class="img-fluid w-100 rounded-3"
+      />
+    </div>
+    <div class="col-10 mx-auto col-md-4 mx-md-0">
+      <img
+        src="../../../../assets/images/categories/home-20-banner-custom-1-3-3_510x.avif"
+        alt="Image"
+        class="img-fluid w-100 rounded-3"
+      />
+    </div>
+  </div>
+  <!-- Recommended For You -->
+  <div class="row my-3">
+    <h4>Recommended For You</h4>
+  </div>
 </div>
-<app-confirm-dialog></app-confirm-dialog>

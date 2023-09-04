@@ -10,6 +10,6 @@ export class CustomCarouselComponent {
   @Input() items!: any[];
   @Input() imgClass!: string;
   @Input() withName: boolean = false;
-  responsiveOptions = this.layoutService.getResponsiveOptions();
+  responsiveOptions = this.layoutService.getCustomCarouselResponsiveOptions();
   constructor(private layoutService: LayoutService) {}
 }

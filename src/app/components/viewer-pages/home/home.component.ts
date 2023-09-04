@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   products: Product[] | undefined | any;
   images: any[] | undefined;
   responsiveOptions: any[] | undefined;
+  accessoriesResponsiveOptions!: any[];
 
   constructor(
     private productService: ProductService,
@@ -30,5 +31,7 @@ export class HomeComponent implements OnInit {
     });
 
     this.responsiveOptions = this.layoutService.getResponsiveOptions();
+    this.accessoriesResponsiveOptions =
+      this.layoutService.getAccessoriesResponsiveOptions();
   }
 }

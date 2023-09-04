@@ -10,7 +10,8 @@ import { LayoutService } from 'src/app/shared/services/layout.service';
 })
 export class ProductsCarouselComponent {
   @Input() products!: Product[];
-  responsiveOptions = this.layoutService.getResponsiveOptions();
+  @Input() numVisible: number = 3;
+  @Input() responsiveOptions = this.layoutService.getResponsiveOptions();
   constructor(
     private layoutService: LayoutService,
     private customOverlayService: CustomOverlayService
