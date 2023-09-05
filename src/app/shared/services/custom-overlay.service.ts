@@ -45,4 +45,11 @@ export class CustomOverlayService {
       },
     });
   }
+  showToast(severity: string, summary: string, detail: string) {
+    this.messageService.add({
+      severity: severity,
+      summary: summary,
+      detail: detail,
+    });
+  }
 }

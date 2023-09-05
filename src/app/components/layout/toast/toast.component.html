@@ -1,0 +1,11 @@
+<p-toast></p-toast>
+<button
+  type="button"
+  pButton
+  pRipple
+  (click)="showToast()"
+  (label)="(summary)"
+  [class]="'p-button-' + severity"
+>
+  {{ btnName }}
+</button>
