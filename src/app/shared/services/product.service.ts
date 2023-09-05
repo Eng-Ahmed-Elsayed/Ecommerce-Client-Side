@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Product } from '../models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -1221,5 +1222,21 @@ export class ProductService {
 
   getProductsWithOrders() {
     return Promise.resolve(this.getProductsWithOrdersData());
+  }
+
+  getSeverity(product: Product) {
+    switch (product.inventoryStatus) {
+      case 'INSTOCK':
+        return 'success';
+
+      case 'LOWSTOCK':
+        return 'warning';
+
+      case 'OUTOFSTOCK':
+        return 'danger';
+
+      default:
+        return undefined;
+    }
   }
 }

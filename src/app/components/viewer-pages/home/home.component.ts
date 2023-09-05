@@ -11,6 +11,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 })
 export class HomeComponent implements OnInit {
   products: Product[] | undefined | any;
+  recommendedProducts: Product[] | undefined | any;
   images: any[] | undefined;
   responsiveOptions: any[] | undefined;
   accessoriesResponsiveOptions!: any[];
@@ -33,5 +34,8 @@ export class HomeComponent implements OnInit {
     this.responsiveOptions = this.layoutService.getResponsiveOptions();
     this.accessoriesResponsiveOptions =
       this.layoutService.getAccessoriesResponsiveOptions();
+    this.productService
+      .getProducts()
+      .then((data) => (this.recommendedProducts = data.slice(0, 12)));
   }
 }

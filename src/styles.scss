@@ -91,16 +91,18 @@ p-carousel {
     border-radius: 3px;
     height: 100%;
   }
-
   p-button {
     margin-inline: 0.5rem;
   }
-  .carousel-img {
-    transition: all 0.3s ease;
-    width: 100%;
-    border-radius: 0.3rem;
-  }
-  .carousel-img:hover {
-    transform: translateY(-3px);
-  }
+}
+
+.dataView-img,
+.carousel-img {
+  transition: all 0.3s ease;
+  width: 100%;
+  border-radius: 0.3rem;
+}
+.dataView-img:hover,
+.carousel-img:hover {
+  transform: translateY(-3px);
 }

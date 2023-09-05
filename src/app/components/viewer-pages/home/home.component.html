@@ -84,15 +84,6 @@
     <h4>Featured Products <a href="#!">View all</a></h4>
     <app-products-carousel [products]="products"></app-products-carousel>
   </div>
-  <!-- Top brands -->
-  <div class="row my-3">
-    <h4>Top Brands <a href="#!">View all</a></h4>
-    <app-custom-carousel
-      [items]="products"
-      [withName]="false"
-      imgClass="rounded-pill"
-    ></app-custom-carousel>
-  </div>
   <!--  -->
   <div class="row my-3 g-3">
     <div class="col-12 col-md-6">
@@ -110,8 +101,18 @@
       />
     </div>
   </div>
+  <!-- Top brands -->
+  <div class="row my-3">
+    <h4>Top Brands <a href="#!">View all</a></h4>
+    <app-custom-carousel
+      [items]="products"
+      [withName]="false"
+      imgClass="rounded-pill"
+    ></app-custom-carousel>
+  </div>
+
   <!-- Clothing, Shoes & Accessories -->
-  <div class="row my-3 g-3">
+  <!-- <div class="row my-3 g-3">
     <div class="col-7 mx-auto mx-md-0 col-md-4">
       <img
         src="../../../../assets/images/sales/home-20-product-block-collection-1.webp"
@@ -126,7 +127,7 @@
         [numVisible]="2"
       ></app-products-carousel>
     </div>
-  </div>
+  </div> -->
   <!--  -->
   <div class="row my-3 g-3">
     <div class="col-10 mx-auto col-md-4 mx-md-0">
@@ -154,5 +155,10 @@
   <!-- Recommended For You -->
   <div class="row my-3">
     <h4>Recommended For You</h4>
+    <!-- <app-custom-data-view
+      [products]="recommendedProducts"
+    ></app-custom-data-view> -->
   </div>
 </div>
+
+<app-custom-data-view [products]="recommendedProducts"></app-custom-data-view>

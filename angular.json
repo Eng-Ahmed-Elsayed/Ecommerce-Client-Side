@@ -32,12 +32,11 @@
               "includePaths": ["src/styles/settings"]
             },
             "styles": [
+              { "input": "src/styles/settings/mat-theme.scss", "inject": true },
               "src/styles/primeng-custom-theme/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/bootstrap/scss/bootstrap.scss",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
-              "src/styles.scss",
-              { "input": "src/styles/settings/mat-theme.scss", "inject": true }
+              "src/styles.scss"
             ],
             "scripts": ["/node_modules/bootstrap/dist/js/bootstrap.js"]
           },

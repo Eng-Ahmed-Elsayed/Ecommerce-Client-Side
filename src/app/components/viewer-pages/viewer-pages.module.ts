@@ -16,9 +16,18 @@ import { BadgeModule } from 'primeng/badge';
 import { LayoutModule } from '../layout/layout.module';
 import { ProductsCarouselComponent } from './products-carousel/products-carousel.component';
 import { CustomCarouselComponent } from './custom-carousel/custom-carousel.component';
+import { DataViewModule } from 'primeng/dataview';
+import { RatingModule } from 'primeng/rating';
+import { CustomDataViewComponent } from './custom-data-view/custom-data-view.component';
 
 @NgModule({
-  declarations: [ViewerPagesComponent, HomeComponent, ProductsCarouselComponent, CustomCarouselComponent],
+  declarations: [
+    ViewerPagesComponent,
+    HomeComponent,
+    ProductsCarouselComponent,
+    CustomCarouselComponent,
+    CustomDataViewComponent,
+  ],
   imports: [
     CommonModule,
     ViewerPagesRoutingModule,
@@ -33,6 +42,8 @@ import { CustomCarouselComponent } from './custom-carousel/custom-carousel.compo
     GalleriaModule,
     ImageModule,
     BadgeModule,
+    DataViewModule,
+    RatingModule,
   ],
 })
 export class ViewerPagesModule {}
