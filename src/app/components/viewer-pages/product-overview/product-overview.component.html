@@ -1,0 +1,235 @@
+<div class="container-fluid px-4 py-2 product-overview">
+  <div class="row mb-5">
+    <div class="col-12 col-md-6 mb-3">
+      <p-galleria
+        [value]="images"
+        [showIndicators]="false"
+        [showThumbnails]="true"
+        [showThumbnailNavigators]="false"
+        verticalThumbnailViewPortHeight="100%"
+        [autoPlay]="false"
+        [circular]="false"
+        thumbnailsPosition="left"
+        [numVisible]="4"
+        [responsiveOptions]="responsiveOptions"
+        [containerStyle]="{ 'max-width': '640px' }"
+      >
+        <ng-template pTemplate="item" let-item>
+          <img [src]="item.itemImageSrc" class="img-fluid rounded" />
+        </ng-template>
+        <ng-template pTemplate="thumbnail" let-item>
+          <img [src]="item.thumbnailImageSrc" class="tempImg" />
+        </ng-template>
+      </p-galleria>
+    </div>
+    <div class="col-12 col-md-6 px-5">
+      <div class="row">
+        <h3>Product Title</h3>
+        <p
+          class="d-flex flex-column flex-sm-row align-items-md-center justify-content-sm-between"
+        >
+          <span class="h4">
+            {{ 120 | currency }}
+          </span>
+          <p-rating
+            (ngModel)="(ratingValue)"
+            [readonly]="true"
+            [cancel]="false"
+          ></p-rating>
+          <span m>24 reviews</span>
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <!-- Order Form -->
+          <form [formGroup]="orderForm" class="order-form">
+            <div class="row">
+              <div class="col-12 product-color mb-3">
+                <h6>Color</h6>
+                <p-selectButton
+                  [options]="colorStateOptions"
+                  formControlName="color"
+                  optionValue="value"
+                >
+                  <ng-template let-item pTemplate>
+                    <span [class]="item.productColor"> </span> </ng-template
+                ></p-selectButton>
+              </div>
+              <div class="col-12 product-size mb-3">
+                <div class="row">
+                  <h6>Size</h6>
+                  <p-selectButton
+                    [options]="sizeStateOptions"
+                    formControlName="size"
+                    optionLabel="label"
+                    optionValue="value"
+                  >
+                    ></p-selectButton
+                  >
+                </div>
+              </div>
+              <div class="col-12">
+                <h6>Quantity</h6>
+                <div
+                  class="d-flex justify-content-center justify-content-sm-between align-items-center"
+                >
+                  <p-inputNumber
+                    formControlName="quantity"
+                    [showButtons]="true"
+                    buttonLayout="horizontal"
+                    inputId="horizontal"
+                    spinnerMode="horizontal"
+                    [step]="1"
+                    decrementButtonClass="p-button-danger p-button-help p-button-text"
+                    incrementButtonClass="p-button-success p-button-help p-button-text"
+                    incrementButtonIcon="pi pi-plus "
+                    decrementButtonIcon="pi pi-minus inputNumber-btn"
+                    inputStyleClass="p-inputtext-sm inputNumber"
+                    [min]="1"
+                  ></p-inputNumber>
+
+                  <p-button
+                    label="Add to Cart"
+                    icon="pi pi-shopping-cart"
+                    styleClass="p-button-raised "
+                  ></p-button>
+                  <p-button
+                    icon="pi pi-heart"
+                    styleClass="p-button-rounded p-button-help p-button-text"
+                  ></p-button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Tab View For -->
+  <!-- Details, reviews, shipping and returns -->
+  <div class="row product-tabview">
+    <p-tabView [style]="{ background: 'transparent' }">
+      <p-tabPanel header="Detail">
+        <h3>Product Details</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <div class="row">
+          <div class="col-12 col-md-4">
+            <h6>Highlights</h6>
+            <ul>
+              <li>Lorem ipsum dolor sit amet</li>
+              <li>Consectetur adipiscing elit</li>
+              <li>Duis aute irure dolor in reprehenderit in voluptate</li>
+              <li>Cillum dolore eu fugiat nulla pariatur.</li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-4">
+            <h6>Size and Fit</h6>
+            <ul class="list-unstyled">
+              <li>Lorem ipsum dolor sit amet</li>
+              <li>Consectetur adipiscing elit</li>
+              <li>Duis aute irure dolor in reprehenderit in voluptate</li>
+              <li>Cillum dolore eu fugiat nulla pariatur.</li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-4">
+            <h6>Material & Care</h6>
+            <ul class="list-unstyled">
+              <li><i class="pi pi-sun me-2"></i><span>Not dryer safe</span></li>
+              <li>
+                <i class="pi pi-times-circle me-2"></i
+                ><span>No chemical wash</span>
+              </li>
+              <li>
+                <i class="pi pi-sliders-h me-2"></i
+                ><span>Iron medium heat</span>
+              </li>
+              <li>
+                <i class="pi pi-minus-circle me-2"></i><span>Dry flat</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Reviews">
+        <h3>Customer Reviews</h3>
+        <div class="d-flex flex-column review">
+          <h4>Absolute Perfect</h4>
+          <p-rating
+            (ngModel)="(ratingValue)"
+            [readonly]="true"
+            [cancel]="false"
+          ></p-rating>
+          <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+            eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci
+            velit, sed quia non numquam eius modi.
+          </p>
+          <span>Darlene Robertson, 2 days ago</span>
+        </div>
+        <div class="d-flex flex-column review">
+          <h4>Absolute Perfect</h4>
+          <p-rating
+            (ngModel)="(ratingValue)"
+            [readonly]="true"
+            [cancel]="false"
+          ></p-rating>
+          <p>
+            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+            quae ab illo inventore veritatis et quasi architecto beatae vitae
+            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
+            eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci
+            velit, sed quia non numquam eius modi.
+          </p>
+          <span>Darlene Robertson, 2 days ago</span>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Shipping & Returns">
+        <h3>Shipping Placeholder</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat. Duis aute irure dolor in
+          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+          culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <h6>Shipping Costs</h6>
+            <ul>
+              <li>Japan - JPY 2,500.</li>
+              <li>Europe - EUR 10</li>
+              <li>Switzerland - CHF 10</li>
+              <li>Canada - CAD 25</li>
+              <li>USA - USD 20</li>
+              <li>Australia - AUD 30</li>
+              <li>United Kingdom - GBP 10</li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-6">
+            <h6>Return Policy</h6>
+            <p>
+              Pharetra et ultrices neque ornare aenean euismod elementum nisi.
+              Diam phasellus vestibulum lorem sed. Mattis molestie a iaculis at.
+            </p>
+          </div>
+        </div>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>

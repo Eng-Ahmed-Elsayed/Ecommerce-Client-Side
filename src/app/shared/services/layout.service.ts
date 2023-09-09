@@ -67,6 +67,21 @@ export class LayoutService {
     },
   ];
 
+  private galleriaResponsiveOptions: any[] = [
+    {
+      breakpoint: '1024px',
+      numVisible: 4,
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 4,
+    },
+    {
+      breakpoint: '560px',
+      numVisible: 4,
+    },
+  ];
+
   constructor() {}
 
   getResponsiveOptions() {
@@ -77,5 +92,8 @@ export class LayoutService {
   }
   getCustomCarouselResponsiveOptions() {
     return this.customCarouselResponsiveOptions;
+  }
+  getGalleriaResponsiveOptions() {
+    return this.galleriaResponsiveOptions;
   }
 }

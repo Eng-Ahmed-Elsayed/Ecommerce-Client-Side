@@ -106,3 +106,131 @@ p-carousel {
 .carousel-img:hover {
   transform: translateY(-3px);
 }
+
+.product-overview {
+  .p-galleria-thumbnail-items {
+    display: flex;
+    gap: 0.1rem;
+    margin-right: 0.1rem;
+  }
+  .p-galleria-thumbnail-item-current {
+    img {
+      border: 1px solid var(--primary-color);
+      border-radius: var(--border-radius);
+    }
+  }
+}
+
+// product-overview.component
+p-galleria {
+  img {
+    border-radius: var(--border-radius);
+  }
+}
+
+.order-form {
+  .p-buttonset .p-button {
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .product-color {
+    .p-ripple {
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+    .p-button:focus {
+      box-shadow: none;
+    }
+
+    .dark-gray,
+    .blue,
+    .green {
+      padding: 1rem;
+      border-radius: 50%;
+    }
+
+    .dark-gray {
+      background-color: var(--bluegray-800);
+    }
+
+    .green {
+      background-color: var(--green-500);
+    }
+
+    .blue {
+      background-color: var(--blue-500);
+    }
+
+    .p-selectbutton .p-button.p-highlight {
+      background: none;
+
+      .dark-gray {
+        border: 1px solid var(--bluegray-500);
+      }
+
+      .green {
+        border: 1px solid var(--green-200);
+      }
+
+      .blue {
+        border: 1px solid var(--blue-200);
+      }
+    }
+  }
+
+  .product-size {
+    .p-selectbutton {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .p-ripple {
+      border: 2px solid var(--surface-border) !important;
+      border-radius: var(--border-radius) !important;
+      width: 100%;
+      // width: 3.5rem;
+      justify-content: center;
+      padding-block: 0.5rem;
+    }
+  }
+}
+
+.inputNumber {
+  width: 3.5rem;
+}
+
+.product-tabview {
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    background: transparent;
+  }
+
+  .p-tabview .p-tabview-panels {
+    background: transparent;
+  }
+
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link:not(.p-disabled):focus {
+    box-shadow: none;
+  }
+
+  h3 {
+    margin-bottom: 1.5rem;
+  }
+  p,
+  li {
+    font-size: 0.9rem;
+    color: var(--gray-300);
+  }
+
+  .review {
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--surface-border);
+
+    span {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+}

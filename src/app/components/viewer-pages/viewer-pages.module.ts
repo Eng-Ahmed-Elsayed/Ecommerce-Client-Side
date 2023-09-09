@@ -19,6 +19,11 @@ import { CustomCarouselComponent } from './custom-carousel/custom-carousel.compo
 import { DataViewModule } from 'primeng/dataview';
 import { RatingModule } from 'primeng/rating';
 import { CustomDataViewComponent } from './custom-data-view/custom-data-view.component';
+import { ProductOverviewComponent } from './product-overview/product-overview.component';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [
@@ -27,6 +32,7 @@ import { CustomDataViewComponent } from './custom-data-view/custom-data-view.com
     ProductsCarouselComponent,
     CustomCarouselComponent,
     CustomDataViewComponent,
+    ProductOverviewComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +41,6 @@ import { CustomDataViewComponent } from './custom-data-view/custom-data-view.com
     MatButtonModule,
     MatDividerModule,
     LayoutModule,
-    // PrimeNg
     CarouselModule,
     TagModule,
     ButtonModule,
@@ -44,6 +49,11 @@ import { CustomDataViewComponent } from './custom-data-view/custom-data-view.com
     BadgeModule,
     DataViewModule,
     RatingModule,
+    SelectButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputNumberModule,
+    TabViewModule,
   ],
 })
 export class ViewerPagesModule {}
