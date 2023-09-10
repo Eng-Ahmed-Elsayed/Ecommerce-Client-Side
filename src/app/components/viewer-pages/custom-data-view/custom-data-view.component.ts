@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SelectItem } from 'primeng/api';
+import { DataView } from 'primeng/dataview';
 import { Product } from 'src/app/shared/models/product';
 import { CustomOverlayService } from 'src/app/shared/services/custom-overlay.service';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -10,6 +12,14 @@ import { ProductService } from 'src/app/shared/services/product.service';
 })
 export class CustomDataViewComponent implements OnInit {
   @Input() products!: Product[];
+  @Input() paginator: boolean = false;
+  @Input() sortOptions!: SelectItem[];
+  @Input() filterBy!: string;
+  @Input() rows: number = 6;
+  sortField!: string;
+  sortOrder!: number;
+  sortKey!: string;
+
   layout: string = 'list';
   // gridLayoutContainer!: Element;
   constructor(
@@ -19,11 +29,30 @@ export class CustomDataViewComponent implements OnInit {
 
   ngOnInit(): void {
     // Add class row to the grid layout container(To solve the conflict between bootstrap and primeflex )
-    document.getElementsByClassName('grid-nogutter')[0].classList.add('row');
+    // document.getElementsByClassName('grid-nogutter')[0].classList.add('row');
+  }
+  onSortChange(event: any) {
+    let value = event.value;
+
+    if (value.indexOf('!') === 0) {
+      this.sortOrder = -1;
+      this.sortField = value.substring(1, value.length);
+    } else {
+      this.sortOrder = 1;
+      this.sortField = value;
+    }
   }
   shopCartConfirm = () =>
     this.customOverlayService.confirmDialog(
       'Are you sure that you want to add this item to your cart?'
     );
   getSeverity = (product: Product) => this.productService.getSeverity(product);
+
+  inputFilter(event: Event) {
+    return (event.target as HTMLTextAreaElement)?.value;
+  }
+
+  //   clear(dataView: DataView) {
+  //     dataView.;
+  // }
 }

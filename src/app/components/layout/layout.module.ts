@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LayoutComponent } from './layout.component';
-import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
@@ -19,7 +18,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 @NgModule({
   declarations: [
     LayoutComponent,
-    NavbarComponent,
     FooterComponent,
     NavComponent,
     ToastComponent,

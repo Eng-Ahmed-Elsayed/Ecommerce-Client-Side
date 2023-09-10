@@ -24,6 +24,9 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TabViewModule } from 'primeng/tabview';
+import { ProductListComponent } from './product-list/product-list.component';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,7 @@ import { TabViewModule } from 'primeng/tabview';
     CustomCarouselComponent,
     CustomDataViewComponent,
     ProductOverviewComponent,
+    ProductListComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +58,8 @@ import { TabViewModule } from 'primeng/tabview';
     ReactiveFormsModule,
     InputNumberModule,
     TabViewModule,
+    DropdownModule,
+    InputTextModule,
   ],
 })
 export class ViewerPagesModule {}

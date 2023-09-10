@@ -1,12 +1,51 @@
-<p-dataView #dv [value]="products" (layout)="(layout)">
+<p-dataView
+  #dv
+  [value]="products"
+  [rows]="rows"
+  (layout)="(layout)"
+  [paginator]="paginator"
+  [sortField]="sortField"
+  [sortOrder]="sortOrder"
+  [filterBy]="filterBy"
+  gridStyleClass="row"
+>
   <ng-template pTemplate="header">
-    <div class="d-flex justify-content-end">
+    <div
+      class="flex justify-content-center align-items-start sm:align-items-center sm:justify-content-between flex-column sm:flex-row"
+    >
+      <p-dropdown
+        [options]="sortOptions"
+        (ngModel)="(sortKey)"
+        placeholder="Sort By"
+        (onChange)="onSortChange($event)"
+        styleClass="mb-2 sm:mb-0"
+      ></p-dropdown>
+
+      <div class="flex mb-2 sm:mb-0">
+        <!-- <button
+          pButton
+          label="Clear"
+          class="p-button-outlined"
+          icon="pi pi-filter-slash"
+          (click)="clear(dt1)"
+        ></button> -->
+        <span class="p-input-icon-left ml-auto">
+          <i class="pi pi-search"></i>
+          <input
+            type="search"
+            pInputText
+            placeholder="Search keyword"
+            (input)="dv.filter(inputFilter($event), 'contains')"
+          />
+        </span>
+      </div>
       <p-dataViewLayoutOptions (layout)="(layout)"></p-dataViewLayoutOptions>
     </div>
   </ng-template>
+
   <ng-template let-product pTemplate="listItem">
     <div class="col-12">
-      <div class="flex flex-row xl:align-items-start p-4 gap-4">
+      <div class="flex flex-column sm:flex-row xl:align-items-start p-4 gap-4">
         <img
           class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round dataView-img"
           [src]="
@@ -59,7 +98,7 @@
 
   <ng-template let-product pTemplate="gridItem">
     <div class="col-12 sm:col-6 lg:col-4">
-      <div class="p-4 border-1 surface-border surface-card border-round">
+      <div class="mx-1 p-4 border-1 surface-border border-round">
         <div
           class="flex flex-wrap align-items-center justify-content-between g-2"
         >
@@ -89,7 +128,9 @@
           ></p-rating>
         </div>
         <div class="flex align-items-center justify-content-between">
-          <span class="text-2xl font-semibold">{{ "$" + product.price }}</span>
+          <span class="text-2xl font-semibold">{{
+            product.price | currency
+          }}</span>
           <button
             pButton
             icon="pi pi-shopping-cart"
