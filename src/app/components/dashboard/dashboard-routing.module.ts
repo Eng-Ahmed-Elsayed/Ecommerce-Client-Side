@@ -1,11 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
-import { ShoppingCartComponent } from './customer/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'cart', component: ShoppingCartComponent },
+  // { path: '', component: DashboardComponent },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./customer/customer.module').then((m) => m.CustomerModule),
+  },
 ];
 
 @NgModule({
