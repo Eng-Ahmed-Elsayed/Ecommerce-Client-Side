@@ -3,13 +3,14 @@
     #drawer
     class="sidenav"
     fixedInViewport
-    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'"
-    [opened]="(isHandset$ | async) === false"
+    [attr.role]="(isLarge$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isLarge$ | async) ? 'over' : 'side'"
+    [opened]="(isLarge$ | async) === false"
   >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/">Home</a>
+      <a mat-list-item routerLink="/dashboard/cart">My Cart</a>
       <a mat-list-item routerLink="/auth/login">Login</a>
       <a mat-list-item routerLink="/auth/register">Register</a>
       <a mat-list-item routerLink="/product-overview">Product Overview</a>
@@ -26,7 +27,7 @@
         aria-label="Toggle sidenav"
         mat-icon-button
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
+        *ngIf="isLarge$ | async"
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>

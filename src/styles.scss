@@ -235,3 +235,17 @@ p-galleria {
     }
   }
 }
+
+// Shopping Cart
+.shopping-cart {
+  .p-dataview .p-dataview-header {
+    margin-bottom: 1rem;
+    padding-inline-start: 1rem;
+  }
+  .p-dataview-content {
+    padding-inline: 1rem;
+  }
+  .card {
+    padding: 1rem;
+  }
+}

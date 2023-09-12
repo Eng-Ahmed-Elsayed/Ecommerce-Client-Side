@@ -3,27 +3,28 @@ import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { HomeDashComponent } from './home-dash/home-dash.component';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatCardModule } from '@angular/material/card';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-
+import { AdminComponent } from './admin/admin.component';
+import { CustomerComponent } from './customer/customer.component';
+import { ShoppingCartComponent } from './customer/shopping-cart/shopping-cart.component';
+import { DataViewModule } from 'primeng/dataview';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 @NgModule({
   declarations: [
     DashboardComponent,
-    HomeDashComponent
+    AdminComponent,
+    CustomerComponent,
+    ShoppingCartComponent,
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
-    MatGridListModule,
-    MatCardModule,
-    MatMenuModule,
-    MatIconModule,
-    MatButtonModule
-  ]
+    DataViewModule,
+    ButtonModule,
+    InputTextModule,
+    InputNumberModule,
+  ],
 })
-export class DashboardModule { }
+export class DashboardModule {}
