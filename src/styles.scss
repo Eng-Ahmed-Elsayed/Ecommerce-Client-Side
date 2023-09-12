@@ -130,57 +130,10 @@ p-galleria {
 }
 
 .order-form {
-  .p-buttonset .p-button {
-    margin-right: 1rem;
-    margin-top: 0.5rem;
-  }
-
-  .product-color {
-    .p-ripple {
-      padding: 0;
-      border: 0;
-      background: transparent;
-    }
-    .p-button:focus {
-      box-shadow: none;
-    }
-
-    .dark-gray,
-    .blue,
-    .green {
-      padding: 1rem;
-      border-radius: 50%;
-    }
-
-    .dark-gray {
-      background-color: var(--bluegray-800);
-    }
-
-    .green {
-      background-color: var(--green-500);
-    }
-
-    .blue {
-      background-color: var(--blue-500);
-    }
-
-    .p-selectbutton .p-button.p-highlight {
-      background: none;
-
-      .dark-gray {
-        border: 1px solid var(--bluegray-500);
-      }
-
-      .green {
-        border: 1px solid var(--green-200);
-      }
-
-      .blue {
-        border: 1px solid var(--blue-200);
-      }
-    }
-  }
-
+  // .p-buttonset .p-button {
+  //   margin-right: 1rem;
+  //   margin-top: 0.5rem;
+  // }
   .product-size {
     .p-selectbutton {
       display: flex;
@@ -195,6 +148,56 @@ p-galleria {
       // width: 3.5rem;
       justify-content: center;
       padding-block: 0.5rem;
+    }
+  }
+}
+
+.product-color {
+  .p-buttonset .p-button {
+    margin-right: 1rem;
+    margin-top: 0.5rem;
+  }
+  .p-ripple {
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  .p-button:focus {
+    box-shadow: none;
+  }
+
+  .dark-gray,
+  .blue,
+  .green {
+    padding: 1rem;
+    border-radius: 50%;
+  }
+
+  .dark-gray {
+    background-color: var(--bluegray-800);
+  }
+
+  .green {
+    background-color: var(--green-500);
+  }
+
+  .blue {
+    background-color: var(--blue-500);
+  }
+
+  .p-selectbutton .p-button.p-highlight {
+    background: none;
+
+    .dark-gray {
+      border: 1px solid var(--bluegray-500);
+    }
+
+    .green {
+      border: 1px solid var(--green-200);
+    }
+
+    .blue {
+      border: 1px solid var(--blue-200);
     }
   }
 }
@@ -247,5 +250,19 @@ p-galleria {
   }
   .card {
     padding: 1rem;
+  }
+}
+
+// ---Admin---
+// Add Product
+.custom-input-card {
+  border: 1px solid var(--surface-border);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+}
+// price-input
+p-inputnumber {
+  span.p-inputnumber.p-component {
+    width: 100%;
   }
 }

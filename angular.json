@@ -22,6 +22,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": ["quill"],
             "outputPath": "dist/ecommerce-client-side",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -35,10 +36,15 @@
               { "input": "src/styles/settings/mat-theme.scss", "inject": true },
               "src/styles/primeng-custom-theme/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css",
               "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.scss"
             ],
-            "scripts": ["/node_modules/bootstrap/dist/js/bootstrap.js"]
+            "scripts": [
+              "node_modules/quill/dist/quill.js",
+              "node_modules/bootstrap/dist/js/bootstrap.js"
+            ]
           },
           "configurations": {
             "production": {

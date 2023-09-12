@@ -1,1 +1,157 @@
-<p>add-product works!</p>
+<div class="container-fluid p-4">
+  <div class="card">
+    <h2>Create Product</h2>
+    <form [formGroup]="addProductForm" (submit)="AddProduct()">
+      <div class="row">
+        <div class="col-12 col-md-8">
+          <div class="row">
+            <div class="col-12">
+              <span class="p-float-label">
+                <input
+                  pInputText
+                  id="name"
+                  formControlName="name"
+                  class="w-100"
+                />
+                <label htmlFor="name">Product Name</label>
+              </span>
+            </div>
+            <div class="col-12 col-md-4">
+              <span class="p-float-label">
+                <p-inputNumber
+                  id="price"
+                  formControlName="price"
+                  inputStyleClass="w-100"
+                  inputId="locale-user"
+                  [minFractionDigits]="2"
+                  [min]="0"
+                  class="w-100"
+                >
+                </p-inputNumber>
+                <label htmlFor="price">Price</label>
+              </span>
+            </div>
+            <div class="col-12 col-md-4">
+              <span class="p-float-label">
+                <input
+                  pInputText
+                  id="code"
+                  formControlName="code"
+                  class="w-100"
+                />
+                <label htmlFor="code">Product Code</label>
+              </span>
+            </div>
+            <div class="col-12 col-md-4">
+              <span class="p-float-label">
+                <input
+                  pInputText
+                  id="sku"
+                  formControlName="sku"
+                  class="w-100"
+                />
+                <label htmlFor="sku">Product SKU</label>
+              </span>
+            </div>
+            <div class="col-12">
+              <p-editor
+                formControlName="details"
+                [style]="{ height: '20rem' }"
+              ></p-editor>
+            </div>
+            <div class="col-12">
+              <!-- <p-toast></p-toast> -->
+              <p-fileUpload
+                name="demo[]"
+                url="https://www.primefaces.org/cdn/api/upload.php"
+                (onUpload)="onUpload($event)"
+                [multiple]="true"
+                accept="image/*"
+                [maxFileSize]="1000000"
+                cancelStyleClass="p-button-danger"
+                uploadStyleClass="p-button-success"
+              >
+                <ng-template pTemplate="content">
+                  <h5 class="text-center">Choose your images then upload</h5>
+                  <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">
+                      {{ file.name }} - {{ file.size }} bytes
+                    </li>
+                  </ul>
+                </ng-template>
+              </p-fileUpload>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="row">
+            <div class="col-12 custom-input-card">
+              <h5>Publish</h5>
+              <hr />
+              <p-dropdown
+                formControlName="status"
+                [options]="statusOptions"
+                optionLabel="status"
+                styleClass="w-100"
+              ></p-dropdown>
+            </div>
+            <div class="col-12 custom-input-card">
+              <h5>Tags</h5>
+              <hr />
+              <p-chips
+                formControlName="tags"
+                [max]="10"
+                [addOnTab]="true"
+                [showClear]="true"
+              ></p-chips>
+            </div>
+            <div class="col-12 custom-input-card">
+              <h5>Caregory</h5>
+              <hr />
+              <p-dropdown
+                formControlName="category"
+                [options]="caregoryOptions"
+                optionLabel="categoryName"
+                styleClass="w-100"
+              ></p-dropdown>
+            </div>
+            <div class="col-12 custom-input-card product-color">
+              <h5>Colors</h5>
+              <hr />
+              <div class="d-flex justify-content-center align-items-center">
+                <p-selectButton
+                  [options]="colorStateOptions"
+                  formControlName="colors"
+                  optionValue="value"
+                  [multiple]="true"
+                >
+                  <ng-template let-item pTemplate>
+                    <span [class]="item.productColor"></span> </ng-template
+                ></p-selectButton>
+              </div>
+            </div>
+            <div class="col-12 custom-input-card">
+              <h5>Stock</h5>
+              <hr />
+              <p-dropdown
+                formControlName="stock"
+                [options]="stockOptions"
+                optionLabel="stockName"
+                styleClass="w-100"
+              ></p-dropdown>
+            </div>
+            <div
+              class="col-12 custom-input-card d-flex justify-content-between"
+            >
+              <h5>In Stock</h5>
+              <p-inputSwitch formControlName="inStock"></p-inputSwitch>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 d-flex justify-content-center">
+        <button pButton type="submit">Add Product</button>
+      </div>
+    </form>
+  </div>
+</div>

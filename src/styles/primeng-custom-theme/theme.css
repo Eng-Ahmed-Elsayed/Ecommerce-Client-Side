@@ -5113,6 +5113,9 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-bottom-color: #3f4b5b;
 }
 .p-fileupload .p-fileupload-buttonbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #2a323d;
   padding: 1rem;
   border: 2px solid #3f4b5b;
@@ -5120,6 +5123,14 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-bottom: 0 none;
   border-top-right-radius: 6px;
   border-top-left-radius: 6px;
+}
+@media screen and (max-width: 550px) {
+  .p-fileupload .p-fileupload-buttonbar {
+    flex-direction: column;
+  }
+  .p-fileupload .p-fileupload-buttonbar .p-button {
+    margin: 0.3rem 0;
+  }
 }
 .p-fileupload .p-fileupload-buttonbar .p-button {
   margin-right: 0.5rem;

@@ -7,11 +7,11 @@ import { DeleteProductComponent } from './product/delete-product/delete-product.
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
-  { path: 'prodcut/add', component: AddProductComponent },
-  { path: 'prodcut/update', component: UpdateProductComponent },
-  { path: 'prodcut/delete', component: DeleteProductComponent },
-  { path: 'prodcut/all', component: DeleteProductComponent },
-  // { path: 'prodcut/id', component: DeleteProductComponent },
+  { path: 'product/add', component: AddProductComponent },
+  { path: 'product/update', component: UpdateProductComponent },
+  { path: 'product/delete', component: DeleteProductComponent },
+  { path: 'product/all', component: DeleteProductComponent },
+  // { path: 'product/id', component: DeleteProductComponent },
 ];
 
 @NgModule({
