@@ -62,7 +62,7 @@
           >
             <div class="text-2xl font-bold text-900">{{ product.name }}</div>
             <p-rating
-              (ngModel)="(product.rating)"
+              [ngModel]="product.rating"
               [readonly]="true"
               [cancel]="false"
             ></p-rating>
@@ -122,7 +122,7 @@
           />
           <div class="text-2xl font-bold">{{ product.name }}</div>
           <p-rating
-            (ngModel)="(product.rating)"
+            [ngModel]="product.rating"
             [readonly]="true"
             [cancel]="false"
           ></p-rating>
