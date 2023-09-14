@@ -22,6 +22,10 @@ import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
+import { AddCategoryComponent } from './category/add-category/add-category.component';
+import { AllCategoriesComponent } from './category/all-categories/all-categories.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,12 +34,15 @@ import { ToolbarModule } from 'primeng/toolbar';
     UpdateProductComponent,
     DeleteProductComponent,
     AllProductsComponent,
+    AddCategoryComponent,
+    AllCategoriesComponent,
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     InputTextModule,
     InputSwitchModule,
     EditorModule,
@@ -50,6 +57,7 @@ import { ToolbarModule } from 'primeng/toolbar';
     RatingModule,
     ToastModule,
     ToolbarModule,
+    InputTextareaModule,
   ],
 })
 export class AdminModule {}
