@@ -1,0 +1,81 @@
+<div class="container-fluid p-4">
+  <div class="row">
+    <div class="col-12 col-sm-10 col-md-8 mx-auto">
+      <div class="card">
+        <h2 class="mb-3">{{ urlPath | titlecase }} Category</h2>
+        <form [formGroup]="upsertCategoryForm">
+          <div class="row">
+            <div class="col-12">
+              <div class="row">
+                <div class="col-12">
+                  <span class="p-float-label">
+                    <input
+                      pInputText
+                      id="name"
+                      formControlName="name"
+                      class="w-100"
+                    />
+                    <label htmlFor="name">Category Name</label>
+                  </span>
+                </div>
+                <div class="col-12">
+                  <span class="p-float-label">
+                    <textarea
+                      id="float-input"
+                      rows="5"
+                      cols="30"
+                      pInputTextarea
+                      formControlName="description"
+                      class="w-100"
+                    ></textarea>
+                    <label for="float-input">Summary</label>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card flex justify-content-center">
+              <p-fileUpload
+                name="demo[]"
+                #pFile
+                (onUpload)="onUpload($event)"
+                [multiple]="false"
+                accept="image/*"
+                [showUploadButton]="false"
+                [maxFileSize]="1000000"
+              >
+                <ng-template pTemplate="content">
+                  <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">
+                      {{ file.name }} - {{ file.size }} bytes
+                    </li>
+                  </ul>
+                </ng-template>
+              </p-fileUpload>
+            </div>
+          </div>
+          <div class="col-12 d-flex justify-content-center">
+            <button
+              pButton
+              type="submit"
+              (click)="uploadFile(pFile.files); pFile.clear()"
+              [disabled]="pFile.files.length === 0"
+              *ngIf="urlPath === 'add'"
+            >
+              Add Category
+            </button>
+            <button
+              pButton
+              type="submit"
+              (click)="uploadFile(pFile.files)"
+              *ngIf="urlPath === 'update'"
+            >
+              Update Category
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

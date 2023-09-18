@@ -1,0 +1,114 @@
+<div class="container-fluid p-4">
+  <div class="row">
+    <div class="col-12">
+      <p-table
+        #dt
+        [value]="categories"
+        [rows]="10"
+        [paginator]="true"
+        [globalFilterFields]="['name', 'description']"
+        [tableStyle]="{ 'min-width': '75rem' }"
+        [rowHover]="true"
+        dataKey="id"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [(selection)]="selectedCategories"
+        [showCurrentPageReport]="true"
+      >
+        <ng-template pTemplate="caption">
+          <div
+            class="d-flex flex-column flex-md-row align-items-center justify-content-between"
+          >
+            <h4 class="mb-3 m-md-0">Manage Categories</h4>
+            <span class="mb-3 mb-md-0"
+              ><button
+                pButton
+                pRipple
+                label="New"
+                icon="pi pi-plus"
+                class="p-button-success me-2"
+                (click)="openNew()"
+              ></button>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-trash"
+                label="Delete Selected Records"
+                class="p-button-danger"
+                (click)="deleteSelectedCategories()"
+                [disabled]="!selectedCategories || !selectedCategories.length"
+              ></button
+            ></span>
+            <span class="p-input-icon-left mb-2">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                type="text"
+                (input)="dt.filterGlobal(inputFilter($event), 'contains')"
+                placeholder="Search..."
+              />
+            </span>
+          </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width: 4rem">
+              <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="id" style="min-width: 15rem">
+              Id <p-sortIcon field="id"></p-sortIcon>
+            </th>
+            <th pSortableColumn="name" style="min-width: 15rem">
+              Name <p-sortIcon field="name"></p-sortIcon>
+            </th>
+            <th>Image</th>
+            <th pSortableColumn="description">
+              Description <p-sortIcon field="description"></p-sortIcon>
+            </th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-category>
+          <tr>
+            <td>
+              <p-tableCheckbox [value]="category"></p-tableCheckbox>
+            </td>
+            <td>{{ category.id }}</td>
+            <td>{{ category.name }}</td>
+            <td>
+              <img
+                [src]="createImgPath(category.imgPath)"
+                [alt]="category.name"
+                width="100"
+                class="shadow-lg rounded"
+              />
+              <!-- {{ createImgPath(category.imgPath) }} -->
+            </td>
+            <td>{{ category.description }}</td>
+            <td>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-success me-2"
+                routerLink="/dashboard/admin/category/update/{{ category.id }}"
+              ></button>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-warning"
+                (click)="deleteCategory(category)"
+              ></button>
+            </td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="summary">
+          <div class="flex align-items-center justify-content-between">
+            In total there are
+            {{ categories ? categories.length : 0 }} categories.
+          </div>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

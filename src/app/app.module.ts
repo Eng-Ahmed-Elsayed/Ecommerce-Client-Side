@@ -10,6 +10,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { UploadComponent } from './components/dashboard/admin/upload/upload.component';
 
 // Get the token
 export function tokenGetter() {

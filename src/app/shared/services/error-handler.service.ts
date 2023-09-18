@@ -50,7 +50,9 @@ export class ErrorHandlerService implements HttpInterceptor {
   }
 
   private handleNotFound(error: HttpErrorResponse): string {
-    this.router.navigate(['/404']);
+    if (this.router.url.search('/list') === -1) {
+      this.router.navigate(['/404']);
+    }
     return error.message;
   }
 
