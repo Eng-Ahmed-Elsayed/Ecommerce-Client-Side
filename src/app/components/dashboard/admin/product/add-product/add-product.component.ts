@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { FileUploadEvent } from 'primeng/fileupload';
+import { AdminService } from '../../services/admin.service';
+import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
+import { ActivatedRoute } from '@angular/router';
+import { CategoryDto } from 'src/app/shared/models/categoryDto';
 
 @Component({
   selector: 'app-add-product',
@@ -10,43 +15,49 @@ import { FileUploadEvent } from 'primeng/fileupload';
 export class AddProductComponent implements OnInit {
   addProductForm!: FormGroup;
   uploadedFiles: any[] = [];
-  // From the api
   statusOptions!: any[];
-  caregoryOptions!: any[];
-  stockOptions!: any[];
+  // From the api
+  caregoryOptions!: CategoryDto[];
   colorStateOptions!: any[];
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private adminService: AdminService,
+    private messageService: MessageService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.addProductForm = this.fb.group({
       name: [''],
-      price: [null],
-      code: [''],
-      sku: [''],
-      details: [''],
-      images: [''],
+      description: [''],
+      productCode: [''],
+      productSKU: [''],
+      price: [],
       status: ['draft'],
-      tags: new FormControl<string[] | null>(null),
-      category: [''],
+      inStock: [false],
       colors: [''],
-      stock: [''],
-      inStock: [''],
+      productImages: [''],
+      tags: new FormControl<string[] | null>(null),
+      quantity: [1],
+      // discountValue: [''],
+      categoryId: [''],
+      // inventoryId: [''],
+      // discountId: [''],
     });
 
     this.statusOptions = [
       { status: 'Draft', value: 'draft' },
       { status: 'Publish', value: 'publish' },
     ];
-    this.caregoryOptions = [
-      { categoryName: 'Tvs', value: 'tvs' },
-      { categoryName: 'Mobiles', value: 'mobiles' },
-    ];
-    this.stockOptions = [
-      { stockName: 'Sneakers', value: 'sneakers' },
-      { stockName: 'Apparel', value: 'apparel' },
-      { stockName: 'Etc', value: 'etc' },
-    ];
+    // Get all categories
+    this.activatedRoute.data.subscribe({
+      next: (data: any) => {
+        console.log(data.categoryList);
+        this.caregoryOptions = data.categoryList;
+      },
+    });
+
     this.colorStateOptions = [
       { productColor: 'dark-gray', value: 'darkGray' },
       { productColor: 'green', value: 'green' },
@@ -57,11 +68,58 @@ export class AddProductComponent implements OnInit {
     for (let file of event.files) {
       this.uploadedFiles.push(file);
       this.addProductForm.patchValue({ images: file });
-      this.addProductForm.get('images')?.updateValueAndValidity();
+      this.addProductForm.get('productImages')?.updateValueAndValidity();
     }
   }
 
   AddProduct() {
-    console.log(this.addProductForm.getRawValue());
+    this.adminService
+      .addProdcut(
+        this.addProductForm.getRawValue(),
+        this.addProductForm.get('tags')?.value,
+        this.addProductForm.get('colors')?.value,
+        this.addProductForm.get('productImages')?.value
+      )
+      .subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Add new product successfully!',
+            detail: `Add new product: ${
+              this.addProductForm.get('name')?.value
+            }`,
+          });
+          this.addProductForm.reset();
+        },
+        error: (err: HttpErrorResponse) => {
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Add product failed!',
+            detail: err.message,
+          });
+          console.log(err);
+        },
+      });
   }
+
+  uploadFiles = (files: any) => {
+    if (files.length !== 0) {
+      this.adminService.uploadFiles(files, true).subscribe({
+        next: (res: any) => {
+          if (res.type === HttpEventType.Response) {
+            console.log('Upload image success.');
+            console.log('-----------------');
+            this.addProductForm.patchValue({
+              productImages: res.body.dbPathList,
+            });
+            // this.addProductForm.get('productImages')?.updateValueAndValidity();
+            this.AddProduct();
+          }
+        },
+        error: (err: HttpErrorResponse) => console.log(err),
+      });
+    } else {
+      this.AddProduct();
+    }
+  };
 }

@@ -19,13 +19,13 @@ export class CategoryListComponent implements OnInit {
   selectedCategories!: CategoryDto[];
 
   constructor(
-    private adminServices: AdminService,
+    private adminService: AdminService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
 
   ngOnInit(): void {
-    this.adminServices.getCategoryList().subscribe({
+    this.adminService.getCategoryList().subscribe({
       next: (res) => {
         this.categories = res;
       },
@@ -33,8 +33,7 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
-  createImgPath = (imgPath: string) =>
-    this.adminServices.createImgPath(imgPath);
+  createImgPath = (imgPath: string) => this.adminService.createImgPath(imgPath);
 
   inputFilter(event: Event) {
     return (event.target as HTMLTextAreaElement)?.value;
@@ -63,7 +62,7 @@ export class CategoryListComponent implements OnInit {
         //   detail: 'You have accepted the category will be deleted',
         // });
         if (category.id !== undefined) {
-          this.adminServices.deleteCategory(category.id).subscribe({
+          this.adminService.deleteCategory(category.id).subscribe({
             next: (res) => {
               this.messageService.add({
                 severity: 'success',
@@ -94,7 +93,7 @@ export class CategoryListComponent implements OnInit {
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.adminServices
+        this.adminService
           .deleteCategoryRange(this.selectedCategories)
           .subscribe({
             next: (res) => {

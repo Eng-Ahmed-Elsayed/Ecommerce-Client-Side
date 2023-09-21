@@ -7,7 +7,16 @@
         [value]="products"
         [rows]="10"
         [paginator]="true"
-        [globalFilterFields]="['name', 'category', 'status']"
+        [globalFilterFields]="[
+          'id',
+          'name',
+          'category',
+          'status',
+          'productCode',
+          'productSKU',
+          'price',
+          'inStock'
+        ]"
         [tableStyle]="{ 'min-width': '75rem' }"
         [rowHover]="true"
         dataKey="id"
@@ -55,7 +64,10 @@
             <th style="width: 4rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th pSortableColumn="name" style="min-width: 15rem">
+            <th pSortableColumn="id" style="min-width: 15rem">
+              Id <p-sortIcon field="id"></p-sortIcon>
+            </th>
+            <th pSortableColumn="name">
               Name <p-sortIcon field="name"></p-sortIcon>
             </th>
             <th>Image</th>
@@ -79,13 +91,11 @@
             <td>
               <p-tableCheckbox [value]="product"></p-tableCheckbox>
             </td>
+            <td>{{ product.id }}</td>
             <td>{{ product.name }}</td>
             <td>
               <img
-                [src]="
-                  'https://primefaces.org/cdn/primeng/images/demo/product/' +
-                  product.image
-                "
+                [src]="createImgPath(product.productImages[0].imgPath)"
                 [alt]="product.name"
                 width="100"
                 class="shadow-lg rounded"

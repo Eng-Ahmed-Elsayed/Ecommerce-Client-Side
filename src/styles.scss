@@ -202,8 +202,14 @@ p-galleria {
   }
 }
 
+// Input number for all
 .inputNumber {
-  width: 3.5rem;
+  width: 100%;
+}
+
+p-inputnumber,
+.p-inputnumber {
+  display: flex;
 }
 
 .product-tabview {
@@ -266,3 +272,5 @@ p-inputnumber {
     width: 100%;
   }
 }
+
+// Upsert Product

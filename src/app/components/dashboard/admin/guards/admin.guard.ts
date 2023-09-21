@@ -13,9 +13,16 @@ import { AdminService } from '../services/admin.service';
 //   return true;
 // };
 
-export const editCategoryResolver: ResolveFn<Observable<CategoryDto>> = (
+export const getCategoryResolver: ResolveFn<Observable<CategoryDto>> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ) => {
   return inject(AdminService).getCategory(route.paramMap.get('id')!);
+};
+
+export const getCategoryListResolver: ResolveFn<Observable<CategoryDto[]>> = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+) => {
+  return inject(AdminService).getCategoryList();
 };

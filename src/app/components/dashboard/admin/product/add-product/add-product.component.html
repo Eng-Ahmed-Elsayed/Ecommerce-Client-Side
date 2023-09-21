@@ -1,7 +1,7 @@
 <div class="container-fluid p-4">
   <div class="card">
     <h2>Create Product</h2>
-    <form [formGroup]="addProductForm" (submit)="AddProduct()">
+    <form [formGroup]="addProductForm">
       <div class="row">
         <div class="col-12 col-md-8">
           <div class="row">
@@ -35,40 +35,39 @@
               <span class="p-float-label">
                 <input
                   pInputText
-                  id="code"
-                  formControlName="code"
+                  id="productCode"
+                  formControlName="productCode"
                   class="w-100"
                 />
-                <label htmlFor="code">Product Code</label>
+                <label htmlFor="productCode">Product Code</label>
               </span>
             </div>
             <div class="col-12 col-md-4">
               <span class="p-float-label">
                 <input
                   pInputText
-                  id="sku"
-                  formControlName="sku"
+                  id="productSKU"
+                  formControlName="productSKU"
                   class="w-100"
                 />
-                <label htmlFor="sku">Product SKU</label>
+                <label htmlFor="productSKU">Product SKU</label>
               </span>
             </div>
             <div class="col-12">
               <p-editor
-                formControlName="details"
+                formControlName="description"
                 [style]="{ height: '20rem' }"
               ></p-editor>
             </div>
             <div class="col-12">
-              <!-- <p-toast></p-toast> -->
               <p-fileUpload
-                name="demo[]"
-                url="https://www.primefaces.org/cdn/api/upload.php"
-                (onUpload)="onUpload($event)"
+                name="product-images"
+                #pFile
                 [multiple]="true"
                 accept="image/*"
                 [maxFileSize]="1000000"
                 cancelStyleClass="p-button-danger"
+                [showUploadButton]="false"
                 uploadStyleClass="p-button-success"
               >
                 <ng-template pTemplate="content">
@@ -86,12 +85,13 @@
         <div class="col-12 col-md-4">
           <div class="row">
             <div class="col-12 custom-input-card">
-              <h5>Publish</h5>
+              <h5>Status</h5>
               <hr />
               <p-dropdown
                 formControlName="status"
                 [options]="statusOptions"
                 optionLabel="status"
+                optionValue="value"
                 styleClass="w-100"
               ></p-dropdown>
             </div>
@@ -109,9 +109,10 @@
               <h5>Caregory</h5>
               <hr />
               <p-dropdown
-                formControlName="category"
                 [options]="caregoryOptions"
-                optionLabel="categoryName"
+                formControlName="categoryId"
+                optionLabel="name"
+                optionValue="id"
                 styleClass="w-100"
               ></p-dropdown>
             </div>
@@ -130,27 +131,46 @@
                 ></p-selectButton>
               </div>
             </div>
-            <div class="col-12 custom-input-card">
-              <h5>Stock</h5>
-              <hr />
-              <p-dropdown
-                formControlName="stock"
-                [options]="stockOptions"
-                optionLabel="stockName"
-                styleClass="w-100"
-              ></p-dropdown>
-            </div>
             <div
               class="col-12 custom-input-card d-flex justify-content-between"
             >
               <h5>In Stock</h5>
               <p-inputSwitch formControlName="inStock"></p-inputSwitch>
             </div>
+            <div class="col-12 custom-input-card">
+              <h5>Caregory</h5>
+              <hr />
+              <p-inputNumber
+                formControlName="quantity"
+                [showButtons]="true"
+                buttonLayout="horizontal"
+                inputId="horizontal"
+                spinnerMode="horizontal"
+                [step]="1"
+                decrementButtonClass="p-button-danger p-button-help p-button-text"
+                incrementButtonClass="p-button-success p-button-help p-button-text"
+                incrementButtonIcon="pi pi-plus"
+                decrementButtonIcon="pi pi-minus"
+                inputStyleClass="p-inputtext-sm inputNumber text-center"
+                [min]="1"
+                [max]="99"
+              ></p-inputNumber>
+            </div>
           </div>
         </div>
       </div>
       <div class="col-12 d-flex justify-content-center">
-        <button pButton type="submit">Add Product</button>
+        <button
+          pButton
+          type="submit"
+          (click)="uploadFiles(pFile.files); pFile.clear()"
+          [disabled]="pFile.files.length === 0"
+        >
+          Add Product
+        </button>
+        <!-- <button pButton type="submit" (click)="uploadFiles(pFile.files)">
+          Add Product
+        </button> -->
       </div>
     </form>
   </div>

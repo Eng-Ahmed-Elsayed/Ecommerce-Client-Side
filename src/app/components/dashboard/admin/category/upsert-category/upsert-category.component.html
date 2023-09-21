@@ -37,9 +37,8 @@
           <div class="col-12">
             <div class="card flex justify-content-center">
               <p-fileUpload
-                name="demo[]"
+                name="category-image"
                 #pFile
-                (onUpload)="onUpload($event)"
                 [multiple]="false"
                 accept="image/*"
                 [showUploadButton]="false"
@@ -59,7 +58,7 @@
             <button
               pButton
               type="submit"
-              (click)="uploadFile(pFile.files); pFile.clear()"
+              (click)="uploadFiles(pFile.files); pFile.clear()"
               [disabled]="pFile.files.length === 0"
               *ngIf="urlPath === 'add'"
             >
@@ -68,7 +67,7 @@
             <button
               pButton
               type="submit"
-              (click)="uploadFile(pFile.files)"
+              (click)="uploadFiles(pFile.files)"
               *ngIf="urlPath === 'update'"
             >
               Update Category

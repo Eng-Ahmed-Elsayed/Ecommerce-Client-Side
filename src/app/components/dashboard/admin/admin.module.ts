@@ -6,7 +6,7 @@ import { AdminComponent } from './admin.component';
 import { AddProductComponent } from './product/add-product/add-product.component';
 import { UpdateProductComponent } from './product/update-product/update-product.component';
 import { DeleteProductComponent } from './product/delete-product/delete-product.component';
-import { AllProductsComponent } from './product/all-products/all-products.component';
+import { ProductListComponent } from './product/product-list/product-list.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
@@ -35,7 +35,7 @@ import { RouterModule } from '@angular/router';
     AddProductComponent,
     UpdateProductComponent,
     DeleteProductComponent,
-    AllProductsComponent,
+    ProductListComponent,
     UpsertCategoryComponent,
     CategoryListComponent,
   ],

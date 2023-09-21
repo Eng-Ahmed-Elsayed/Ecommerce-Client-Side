@@ -4,17 +4,24 @@ import { AdminComponent } from './admin.component';
 import { AddProductComponent } from './product/add-product/add-product.component';
 import { UpdateProductComponent } from './product/update-product/update-product.component';
 import { DeleteProductComponent } from './product/delete-product/delete-product.component';
-import { AllProductsComponent } from './product/all-products/all-products.component';
+import { ProductListComponent } from './product/product-list/product-list.component';
 import { UpsertCategoryComponent } from './category/upsert-category/upsert-category.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
-import { editCategoryResolver } from './guards/admin.guard';
+import {
+  getCategoryListResolver,
+  getCategoryResolver,
+} from './guards/admin.guard';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
   // Product
-  { path: 'product/add', component: AddProductComponent },
+  {
+    path: 'product/add',
+    component: AddProductComponent,
+    resolve: { categoryList: getCategoryListResolver },
+  },
   { path: 'product/delete', component: DeleteProductComponent },
-  { path: 'product/all', component: AllProductsComponent },
+  { path: 'product/all', component: ProductListComponent },
   { path: 'product/update', component: UpdateProductComponent },
 
   // Category
@@ -23,7 +30,7 @@ const routes: Routes = [
   {
     path: 'category/update/:id',
     component: UpsertCategoryComponent,
-    resolve: { category: editCategoryResolver },
+    resolve: { category: getCategoryResolver },
   },
 
   // { path: 'product/id', component:  },

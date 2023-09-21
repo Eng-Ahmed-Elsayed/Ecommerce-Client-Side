@@ -1,27 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/shared/models/product';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { AdminService } from '../../services/admin.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-all-products',
-  templateUrl: './all-products.component.html',
-  styleUrls: ['./all-products.component.scss'],
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.scss'],
 })
-export class AllProductsComponent implements OnInit {
+export class ProductListComponent implements OnInit {
   products!: Product[];
   product!: Product;
   selectedProducts!: Product[] | null;
 
-  constructor(private productService: ProductService) {}
+  constructor(
+    private productService: ProductService,
+    private adminService: AdminService
+  ) {}
 
   ngOnInit(): void {
-    this.productService.getProducts().then((data) => (this.products = data));
+    // this.productService.getProducts().then((data) => (this.products = data));
+    this.adminService.getProductList().subscribe({
+      next: (res) => {
+        this.products = res;
+      },
+      error: (err: HttpErrorResponse) => console.log(err.message),
+    });
   }
 
   inputFilter(event: Event) {
     return (event.target as HTMLTextAreaElement)?.value;
   }
   getSeverity = (product: Product) => this.productService.getSeverity(product);
+
+  createImgPath = (imgPath: string) => this.adminService.createImgPath(imgPath);
 
   openNew() {
     // this.product = {};

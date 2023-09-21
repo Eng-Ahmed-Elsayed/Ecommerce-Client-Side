@@ -65,7 +65,14 @@ export class UpsertCategoryComponent implements OnInit {
             });
             this.upsertCategoryForm.reset();
           },
-          error: (err) => console.log(err),
+          error: (err: HttpErrorResponse) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Add category failed!',
+              detail: err.message,
+            });
+            console.log(err);
+          },
         });
     } else {
       this.adminService
@@ -90,9 +97,9 @@ export class UpsertCategoryComponent implements OnInit {
     }
   }
   // Upload the image first then add or update the category
-  uploadFile = (files: any) => {
+  uploadFiles = (files: any) => {
     if (files.length !== 0) {
-      this.adminService.uploadFile(files).subscribe({
+      this.adminService.uploadFiles(files).subscribe({
         next: (res: any) => {
           if (res.type === HttpEventType.Response) {
             console.log('Upload image success.');
@@ -108,9 +115,9 @@ export class UpsertCategoryComponent implements OnInit {
     }
   };
 
-  onUpload(event: FileUploadEvent) {
-    for (let file of event.files) {
-      this.uploadedFiles.push(file);
-    }
-  }
+  // onUpload(event: FileUploadEvent) {
+  //   for (let file of event.files) {
+  //     this.uploadedFiles.push(file);
+  //   }
+  // }
 }
