@@ -108,6 +108,7 @@
             <div class="col-12 custom-input-card">
               <h5>Caregory</h5>
               <hr />
+              <!-- Will need a filter because there will be too much categories -->
               <p-dropdown
                 [options]="caregoryOptions"
                 formControlName="categoryId"
@@ -138,7 +139,7 @@
               <p-inputSwitch formControlName="inStock"></p-inputSwitch>
             </div>
             <div class="col-12 custom-input-card">
-              <h5>Caregory</h5>
+              <h5>Quantity</h5>
               <hr />
               <p-inputNumber
                 formControlName="quantity"

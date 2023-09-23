@@ -26,8 +26,10 @@ import { UpsertCategoryComponent } from './category/upsert-category/upsert-categ
 import { CategoryListComponent } from './category/category-list/category-list.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { HttpClientModule } from '@angular/common/http';
-import { AppModule } from 'src/app/app.module';
 import { RouterModule } from '@angular/router';
+import { UpsertDiscountComponent } from './discount/upsert-discount/upsert-discount.component';
+import { DiscountListComponent } from './discount/discount-list/discount-list.component';
+import { PickListModule } from 'primeng/picklist';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { RouterModule } from '@angular/router';
     ProductListComponent,
     UpsertCategoryComponent,
     CategoryListComponent,
+    UpsertDiscountComponent,
+    DiscountListComponent,
   ],
   imports: [
     CommonModule,
@@ -61,6 +65,7 @@ import { RouterModule } from '@angular/router';
     ToolbarModule,
     InputTextareaModule,
     RouterModule,
+    PickListModule,
   ],
 })
 export class AdminModule {}

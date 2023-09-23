@@ -10,7 +10,11 @@ import { CategoryListComponent } from './category/category-list/category-list.co
 import {
   getCategoryListResolver,
   getCategoryResolver,
+  getDiscountResolver,
+  getProductListResolver,
 } from './guards/admin.guard';
+import { UpsertDiscountComponent } from './discount/upsert-discount/upsert-discount.component';
+import { DiscountListComponent } from './discount/discount-list/discount-list.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -31,6 +35,17 @@ const routes: Routes = [
     path: 'category/update/:id',
     component: UpsertCategoryComponent,
     resolve: { category: getCategoryResolver },
+  },
+
+  // Discount
+  { path: 'discount/add', component: UpsertDiscountComponent },
+  { path: 'discount/list', component: DiscountListComponent },
+  {
+    path: 'discount/update/:id',
+    component: UpsertDiscountComponent,
+    resolve: {
+      discount: getDiscountResolver,
+    },
   },
 
   // { path: 'product/id', component:  },

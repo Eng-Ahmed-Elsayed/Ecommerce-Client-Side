@@ -14,6 +14,7 @@ import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ToastModule,
     ButtonModule,
     ConfirmDialogModule,
+    MatMenuModule,
   ],
   exports: [NavComponent, ToastComponent, ConfirmDialogComponent],
 })

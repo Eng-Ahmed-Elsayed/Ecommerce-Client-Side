@@ -17,7 +17,7 @@ export class AddProductComponent implements OnInit {
   uploadedFiles: any[] = [];
   statusOptions!: any[];
   // From the api
-  caregoryOptions!: CategoryDto[];
+  caregoryOptions: CategoryDto[] = [{ name: 'Select Catgory', id: '0' }];
   colorStateOptions!: any[];
 
   constructor(
@@ -53,8 +53,7 @@ export class AddProductComponent implements OnInit {
     // Get all categories
     this.activatedRoute.data.subscribe({
       next: (data: any) => {
-        console.log(data.categoryList);
-        this.caregoryOptions = data.categoryList;
+        this.caregoryOptions = this.caregoryOptions.concat(data.categoryList);
       },
     });
 

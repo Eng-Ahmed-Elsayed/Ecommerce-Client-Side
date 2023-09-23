@@ -3,7 +3,7 @@
     <div class="col-12">
       <p-table
         #dt
-        [value]="categories"
+        [value]="discounts"
         [rows]="10"
         [paginator]="true"
         [globalFilterFields]="['name', 'description']"
@@ -11,11 +11,11 @@
         [rowHover]="true"
         dataKey="id"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [(selection)]="selectedCategories"
+        [(selection)]="selectedDiscounts"
         [showCurrentPageReport]="true"
       >
         <ng-template pTemplate="caption">
-          <h1 class="mb-3">Manage Categories</h1>
+          <h1 class="mb-3">Manage Discounts</h1>
           <div
             class="d-flex flex-column flex-md-row align-items-center justify-content-between"
           >
@@ -26,7 +26,7 @@
                 label="New"
                 icon="pi pi-plus"
                 class="p-button-success me-2"
-                routerLink="/dashboard/admin/category/add"
+                routerLink="/dashboard/admin/discount/add"
               ></button>
               <button
                 pButton
@@ -34,11 +34,11 @@
                 icon="pi pi-trash"
                 label="Delete Selected Records"
                 class="p-button-danger"
-                (click)="deleteSelectedCategories()"
-                [disabled]="!selectedCategories || !selectedCategories.length"
+                (click)="deleteSelectedDiscounts()"
+                [disabled]="!selectedDiscounts || !selectedDiscounts.length"
               ></button
             ></span>
-            <span class="p-input-icon-left mb-md-0">
+            <span class="p-input-icon-left mb-3 mb-md-0">
               <i class="pi pi-search"></i>
               <input
                 pInputText
@@ -60,44 +60,38 @@
             <th pSortableColumn="name" style="min-width: 15rem">
               Name <p-sortIcon field="name"></p-sortIcon>
             </th>
-            <th>Image</th>
+            <th pSortableColumn="name" style="min-width: 15rem">
+              Discount Percent <p-sortIcon field="name"></p-sortIcon>
+            </th>
             <th pSortableColumn="description">
-              Description <p-sortIcon field="description"></p-sortIcon>
+              Is Active <p-sortIcon field="description"></p-sortIcon>
             </th>
             <th></th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-category>
+        <ng-template pTemplate="body" let-discount>
           <tr>
             <td>
-              <p-tableCheckbox [value]="category"></p-tableCheckbox>
+              <p-tableCheckbox [value]="discount"></p-tableCheckbox>
             </td>
-            <td>{{ category.id }}</td>
-            <td>{{ category.name }}</td>
-            <td>
-              <img
-                [src]="createImgPath(category.imgPath)"
-                [alt]="category.name"
-                width="100"
-                class="shadow-lg rounded"
-              />
-              <!-- {{ createImgPath(category.imgPath) }} -->
-            </td>
-            <td>{{ category.description }}</td>
+            <td>{{ discount.id }}</td>
+            <td>{{ discount.name }}</td>
+            <td>{{ discount.discountPercent }}</td>
+            <td>{{ discount.isActive }}</td>
             <td>
               <button
                 pButton
                 pRipple
                 icon="pi pi-pencil"
                 class="p-button-rounded p-button-success me-2"
-                routerLink="/dashboard/admin/category/update/{{ category.id }}"
+                routerLink="/dashboard/admin/discount/update/{{ discount.id }}"
               ></button>
               <button
                 pButton
                 pRipple
                 icon="pi pi-trash"
                 class="p-button-rounded p-button-warning"
-                (click)="deleteCategory(category)"
+                (click)="deleteDiscount(discount)"
               ></button>
             </td>
           </tr>
@@ -105,7 +99,7 @@
         <ng-template pTemplate="summary">
           <div class="flex align-items-center justify-content-between">
             In total there are
-            {{ categories ? categories.length : 0 }} categories.
+            {{ discounts ? discounts.length : 0 }} discounts.
           </div>
         </ng-template>
       </p-table>

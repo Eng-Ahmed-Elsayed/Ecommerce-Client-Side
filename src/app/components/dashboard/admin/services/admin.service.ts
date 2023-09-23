@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CategoryDto } from 'src/app/shared/models/categoryDto';
+import { DiscountDto } from 'src/app/shared/models/discountDto';
 import { ProductDto } from 'src/app/shared/models/productDto';
 import { TagDto } from 'src/app/shared/models/tagDto';
 import { environment } from 'src/environments/environment';
@@ -12,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class AdminService {
   private adminApiUrl: string = environment.baseApiUrl + 'admin/';
   private categoryApiUrl: string = this.adminApiUrl + 'category/';
+  private discountApiUrl: string = environment.baseApiUrl + 'discount/';
   private productyApiUrl: string = environment.baseApiUrl + 'product/';
   private clientURI: string = environment.clientURI;
 
@@ -45,6 +47,18 @@ export class AdminService {
       observe: 'events',
     });
   };
+
+  // Generate new Guid
+  private generate_uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+      /[xy]/g,
+      function (c) {
+        var uuid = (Math.random() * 16) | 0,
+          v = c == 'x' ? uuid : (uuid & 0x3) | 0x8;
+        return uuid.toString(16);
+      }
+    );
+  }
 
   // <-----Category----->
 
@@ -108,15 +122,32 @@ export class AdminService {
     return this.httpClient.get<ProductDto[]>(this.productyApiUrl + 'list');
   }
 
-  // Generate new Guid
-  private generate_uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
-      /[xy]/g,
-      function (c) {
-        var uuid = (Math.random() * 16) | 0,
-          v = c == 'x' ? uuid : (uuid & 0x3) | 0x8;
-        return uuid.toString(16);
-      }
+  // <-----Discount----->
+
+  addDiscount(body: DiscountDto): Observable<DiscountDto> {
+    return this.httpClient.post<DiscountDto>(this.discountApiUrl + 'add', body);
+  }
+
+  updateDiscount(body: DiscountDto): Observable<DiscountDto> {
+    return this.httpClient.put<DiscountDto>(
+      this.discountApiUrl + body.id,
+      body
     );
+  }
+
+  getDiscountList(): Observable<DiscountDto[]> {
+    return this.httpClient.get<DiscountDto[]>(this.discountApiUrl + 'list');
+  }
+
+  getDiscount(id: string): Observable<DiscountDto> {
+    return this.httpClient.get<DiscountDto>(this.discountApiUrl + id);
+  }
+
+  deleteDiscount(id: string) {
+    return this.httpClient.delete(this.discountApiUrl + id);
+  }
+
+  deleteDiscountRange(body: DiscountDto[]) {
+    return this.httpClient.delete(this.discountApiUrl, { body });
   }
 }
