@@ -38,10 +38,17 @@ export const getDiscountResolver: ResolveFn<Observable<DiscountDto>> = (
   return inject(AdminService).getDiscount(route.paramMap.get('id')!);
 };
 
-// Product Guards
+// Product Resolver Guards
 export const getProductListResolver: ResolveFn<Observable<ProductDto[]>> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot
 ) => {
   return inject(AdminService).getProductList();
+};
+
+export const getProductResolver: ResolveFn<Observable<ProductDto>> = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+) => {
+  return inject(AdminService).getProduct(route.paramMap.get('id')!);
 };

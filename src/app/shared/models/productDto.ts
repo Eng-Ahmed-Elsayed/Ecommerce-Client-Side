@@ -1,4 +1,7 @@
+import { CategoryDto } from './categoryDto';
 import { ColorDto } from './colorsDto';
+import { DiscountDto } from './discountDto';
+import { InventoryDto } from './inventoryDto';
 import { ProductImage } from './productImageDto';
 import { TagDto } from './tagDto';
 
@@ -16,8 +19,10 @@ export interface ProductDto {
   colors?: ColorDto[];
   productImages?: ProductImage[];
   quantity?: number;
-  // discountValue?: number;
   categoryId?: string;
+  category?: CategoryDto;
   inventoryId?: string;
+  inventory?: InventoryDto;
   discountId?: string;
+  discount?: DiscountDto;
 }

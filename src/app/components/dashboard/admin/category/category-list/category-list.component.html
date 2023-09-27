@@ -1,13 +1,12 @@
-<div class="container-fluid p-4">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 px-0">
       <p-table
         #dt
         [value]="categories"
         [rows]="10"
         [paginator]="true"
         [globalFilterFields]="['name', 'description']"
-        [tableStyle]="{ 'min-width': '75rem' }"
         [rowHover]="true"
         dataKey="id"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -19,13 +18,13 @@
           <div
             class="d-flex flex-column flex-md-row align-items-center justify-content-between"
           >
-            <span class="mb-3 mb-md-0"
+            <span class="mb-3 mb-md-0 d-flex flex-column flex-sm-row"
               ><button
                 pButton
                 pRipple
                 label="New"
                 icon="pi pi-plus"
-                class="p-button-success me-2"
+                class="p-button-success me-0 me-sm-2 mb-3 mb-sm-0"
                 routerLink="/dashboard/admin/category/add"
               ></button>
               <button
@@ -61,9 +60,8 @@
               Name <p-sortIcon field="name"></p-sortIcon>
             </th>
             <th>Image</th>
-            <th pSortableColumn="description">
-              Description <p-sortIcon field="description"></p-sortIcon>
-            </th>
+            <th style="min-width: 15rem">Description</th>
+
             <th></th>
           </tr>
         </ng-template>
@@ -83,22 +81,32 @@
               />
               <!-- {{ createImgPath(category.imgPath) }} -->
             </td>
-            <td>{{ category.description }}</td>
+            <td>{{ category.description | slice : 0 : 20 }}</td>
             <td>
-              <button
-                pButton
-                pRipple
-                icon="pi pi-pencil"
-                class="p-button-rounded p-button-success me-2"
-                routerLink="/dashboard/admin/category/update/{{ category.id }}"
-              ></button>
-              <button
-                pButton
-                pRipple
-                icon="pi pi-trash"
-                class="p-button-rounded p-button-warning"
-                (click)="deleteCategory(category)"
-              ></button>
+              <span class="d-flex">
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-eye"
+                  class="p-button-rounded p-button-info me-2"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-pencil"
+                  class="p-button-rounded p-button-success me-2"
+                  routerLink="/dashboard/admin/category/update/{{
+                    category.id
+                  }}"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-trash"
+                  class="p-button-rounded p-button-warning"
+                  (click)="deleteCategory(category)"
+                ></button>
+              </span>
             </td>
           </tr>
         </ng-template>

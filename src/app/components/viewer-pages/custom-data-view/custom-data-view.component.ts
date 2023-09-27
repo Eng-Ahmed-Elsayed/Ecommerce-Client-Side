@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { DataView } from 'primeng/dataview';
 import { Product } from 'src/app/shared/models/product';
+import { ProductDto } from 'src/app/shared/models/productDto';
 import { CustomOverlayService } from 'src/app/shared/services/custom-overlay.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 
@@ -46,7 +47,8 @@ export class CustomDataViewComponent implements OnInit {
     this.customOverlayService.confirmDialog(
       'Are you sure that you want to add this item to your cart?'
     );
-  getSeverity = (product: Product) => this.productService.getSeverity(product);
+  getSeverity = (product: ProductDto) =>
+    this.productService.getSeverity(product);
 
   inputFilter(event: Event) {
     return (event.target as HTMLTextAreaElement)?.value;

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { CategoryDto } from 'src/app/shared/models/categoryDto';
 import { DiscountDto } from 'src/app/shared/models/discountDto';
 import { ProductDto } from 'src/app/shared/models/productDto';
-import { TagDto } from 'src/app/shared/models/tagDto';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -14,7 +13,7 @@ export class AdminService {
   private adminApiUrl: string = environment.baseApiUrl + 'admin/';
   private categoryApiUrl: string = this.adminApiUrl + 'category/';
   private discountApiUrl: string = environment.baseApiUrl + 'discount/';
-  private productyApiUrl: string = environment.baseApiUrl + 'product/';
+  private productApiUrl: string = environment.baseApiUrl + 'product/';
   private clientURI: string = environment.clientURI;
 
   constructor(private httpClient: HttpClient) {}
@@ -115,11 +114,53 @@ export class AdminService {
         imgPath: val,
       };
     });
-    return this.httpClient.post<ProductDto>(this.productyApiUrl + 'add', body);
+    return this.httpClient.post<ProductDto>(this.productApiUrl + 'add', body);
+  }
+
+  updateProdcut(
+    body: ProductDto,
+    tags: string[],
+    colors: string[],
+    productImages: string[]
+  ): Observable<ProductDto> {
+    body.tags = tags.map((val: string) => {
+      return {
+        id: this.generate_uuidv4(),
+        name: val,
+      };
+    });
+    body.colors = colors.map((val: string) => {
+      return {
+        id: this.generate_uuidv4(),
+        name: val,
+      };
+    });
+
+    if (productImages != undefined)
+      body.productImages = productImages.map((val: string) => {
+        return {
+          id: this.generate_uuidv4(),
+          imgPath: val,
+          productId: body.id,
+        };
+      });
+    return this.httpClient.put<ProductDto>(this.productApiUrl + body.id, body);
   }
 
   getProductList(): Observable<ProductDto[]> {
-    return this.httpClient.get<ProductDto[]>(this.productyApiUrl + 'list');
+    return this.httpClient.get<ProductDto[]>(this.productApiUrl + 'list');
+  }
+
+  getProduct(id: string): Observable<ProductDto> {
+    return this.httpClient.get<ProductDto>(this.productApiUrl + id);
+  }
+
+  deleteProduct(id: string) {
+    return this.httpClient.delete(this.productApiUrl + id);
+  }
+
+  deleteProductsRange(body: ProductDto[]) {
+    return this.httpClient.delete(this.productApiUrl, { body });
   }
 
   // <-----Discount----->

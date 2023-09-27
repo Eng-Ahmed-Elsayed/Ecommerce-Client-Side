@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
-import { AddProductComponent } from './product/add-product/add-product.component';
-import { UpdateProductComponent } from './product/update-product/update-product.component';
-import { DeleteProductComponent } from './product/delete-product/delete-product.component';
+import { UpsertProductComponent } from './product/upsert-product/upsert-product.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { UpsertCategoryComponent } from './category/upsert-category/upsert-category.component';
 import { CategoryListComponent } from './category/category-list/category-list.component';
@@ -12,6 +10,7 @@ import {
   getCategoryResolver,
   getDiscountResolver,
   getProductListResolver,
+  getProductResolver,
 } from './guards/admin.guard';
 import { UpsertDiscountComponent } from './discount/upsert-discount/upsert-discount.component';
 import { DiscountListComponent } from './discount/discount-list/discount-list.component';
@@ -21,12 +20,18 @@ const routes: Routes = [
   // Product
   {
     path: 'product/add',
-    component: AddProductComponent,
+    component: UpsertProductComponent,
     resolve: { categoryList: getCategoryListResolver },
   },
-  { path: 'product/delete', component: DeleteProductComponent },
   { path: 'product/all', component: ProductListComponent },
-  { path: 'product/update', component: UpdateProductComponent },
+  {
+    path: 'product/update/:id',
+    component: UpsertProductComponent,
+    resolve: {
+      categoryList: getCategoryListResolver,
+      product: getProductResolver,
+    },
+  },
 
   // Category
   { path: 'category/add', component: UpsertCategoryComponent },

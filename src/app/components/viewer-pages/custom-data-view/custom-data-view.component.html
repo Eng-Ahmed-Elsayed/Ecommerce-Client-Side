@@ -73,7 +73,7 @@
               </span>
               <p-tag
                 [value]="product.inventoryStatus"
-                [severity]="getSeverity(product)"
+                [severity]="'info'"
               ></p-tag>
             </div>
           </div>
@@ -106,10 +106,11 @@
             <i class="pi pi-tag mr-1"></i>
             <span class="font-semibold">{{ product.category }}</span>
           </span>
-          <p-tag
+          <p-tag [value]="product.inventoryStatus" [severity]="'info'"></p-tag>
+          <!-- <p-tag
             [value]="product.inventoryStatus"
             [severity]="getSeverity(product)"
-          ></p-tag>
+          ></p-tag> -->
         </div>
         <div class="flex flex-column align-items-center g-3 py-5">
           <img

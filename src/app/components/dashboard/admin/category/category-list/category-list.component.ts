@@ -56,11 +56,6 @@ export class CategoryListComponent implements OnInit {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        // this.messageService.add({
-        //   severity: 'info',
-        //   summary: 'Confirmed',
-        //   detail: 'You have accepted the category will be deleted',
-        // });
         if (category.id !== undefined) {
           this.adminService.deleteCategory(category.id).subscribe({
             next: (res) => {

@@ -1588,10 +1588,10 @@ p-password.ng-invalid.ng-dirty > .p-password > .p-inputtext {
   background: #e693a9;
 }
 .p-password-panel .p-password-meter .p-password-strength.medium {
-  background: #ffe08a;
+  background: #ffe082;
 }
 .p-password-panel .p-password-meter .p-password-strength.strong {
-  background: #cede9c;
+  background: #9fdaa8;
 }
 p-password.p-password-clearable .p-password-input {
   padding-right: 2.5rem;
@@ -2266,15 +2266,15 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 .p-buttonset.p-button-success > .p-button,
 .p-splitbutton.p-button-success > .p-button {
   color: #20262e;
-  background: #cede9c;
-  border: 1px solid #cede9c;
+  background: #9fdaa8;
+  border: 1px solid #9fdaa8;
 }
 .p-button.p-button-success:enabled:hover,
 .p-buttonset.p-button-success > .p-button:enabled:hover,
 .p-splitbutton.p-button-success > .p-button:enabled:hover {
-  background: #c0d580;
+  background: #78cc86;
   color: #20262e;
-  border-color: #c0d580;
+  border-color: #5ac06c;
 }
 .p-button.p-button-success:enabled:focus,
 .p-buttonset.p-button-success > .p-button:enabled:focus,
@@ -2284,36 +2284,36 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 .p-button.p-button-success:enabled:active,
 .p-buttonset.p-button-success > .p-button:enabled:active,
 .p-splitbutton.p-button-success > .p-button:enabled:active {
-  background: #b2cb63;
+  background: #5ac06c;
   color: #20262e;
-  border-color: #b2cb63;
+  border-color: #3cb553;
 }
 .p-button.p-button-success.p-button-outlined,
 .p-buttonset.p-button-success > .p-button.p-button-outlined,
 .p-splitbutton.p-button-success > .p-button.p-button-outlined {
   background-color: transparent;
-  color: #cede9c;
+  color: #9fdaa8;
   border: 2px solid;
 }
 .p-button.p-button-success.p-button-outlined:enabled:hover,
 .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:hover,
 .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:hover {
   background: rgba(206, 222, 156, 0.04);
-  color: #cede9c;
+  color: #9fdaa8;
   border: 2px solid;
 }
 .p-button.p-button-success.p-button-outlined:enabled:active,
 .p-buttonset.p-button-success > .p-button.p-button-outlined:enabled:active,
 .p-splitbutton.p-button-success > .p-button.p-button-outlined:enabled:active {
   background: rgba(206, 222, 156, 0.16);
-  color: #cede9c;
+  color: #9fdaa8;
   border: 2px solid;
 }
 .p-button.p-button-success.p-button-text,
 .p-buttonset.p-button-success > .p-button.p-button-text,
 .p-splitbutton.p-button-success > .p-button.p-button-text {
   background-color: transparent;
-  color: #cede9c;
+  color: #9fdaa8;
   border-color: transparent;
 }
 .p-button.p-button-success.p-button-text:enabled:hover,
@@ -2321,21 +2321,21 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:hover {
   background: rgba(206, 222, 156, 0.04);
   border-color: transparent;
-  color: #cede9c;
+  color: #9fdaa8;
 }
 .p-button.p-button-success.p-button-text:enabled:active,
 .p-buttonset.p-button-success > .p-button.p-button-text:enabled:active,
 .p-splitbutton.p-button-success > .p-button.p-button-text:enabled:active {
   background: rgba(206, 222, 156, 0.16);
   border-color: transparent;
-  color: #cede9c;
+  color: #9fdaa8;
 }
 .p-button.p-button-warning,
 .p-buttonset.p-button-warning > .p-button,
 .p-splitbutton.p-button-warning > .p-button {
   color: #20262e;
-  background: #ffe08a;
-  border: 1px solid #ffe08a;
+  background: #ffe082;
+  border: 1px solid #ffe082;
 }
 .p-button.p-button-warning:enabled:hover,
 .p-buttonset.p-button-warning > .p-button:enabled:hover,
@@ -2360,28 +2360,28 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 .p-buttonset.p-button-warning > .p-button.p-button-outlined,
 .p-splitbutton.p-button-warning > .p-button.p-button-outlined {
   background-color: transparent;
-  color: #ffe08a;
+  color: #ffe082;
   border: 2px solid;
 }
 .p-button.p-button-warning.p-button-outlined:enabled:hover,
 .p-buttonset.p-button-warning > .p-button.p-button-outlined:enabled:hover,
 .p-splitbutton.p-button-warning > .p-button.p-button-outlined:enabled:hover {
   background: rgba(255, 224, 138, 0.04);
-  color: #ffe08a;
+  color: #ffe082;
   border: 2px solid;
 }
 .p-button.p-button-warning.p-button-outlined:enabled:active,
 .p-buttonset.p-button-warning > .p-button.p-button-outlined:enabled:active,
 .p-splitbutton.p-button-warning > .p-button.p-button-outlined:enabled:active {
   background: rgba(255, 224, 138, 0.16);
-  color: #ffe08a;
+  color: #ffe082;
   border: 2px solid;
 }
 .p-button.p-button-warning.p-button-text,
 .p-buttonset.p-button-warning > .p-button.p-button-text,
 .p-splitbutton.p-button-warning > .p-button.p-button-text {
   background-color: transparent;
-  color: #ffe08a;
+  color: #ffe082;
   border-color: transparent;
 }
 .p-button.p-button-warning.p-button-text:enabled:hover,
@@ -2389,14 +2389,14 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 .p-splitbutton.p-button-warning > .p-button.p-button-text:enabled:hover {
   background: rgba(255, 224, 138, 0.04);
   border-color: transparent;
-  color: #ffe08a;
+  color: #ffe082;
 }
 .p-button.p-button-warning.p-button-text:enabled:active,
 .p-buttonset.p-button-warning > .p-button.p-button-text:enabled:active,
 .p-splitbutton.p-button-warning > .p-button.p-button-text:enabled:active {
   background: rgba(255, 224, 138, 0.16);
   border-color: transparent;
-  color: #ffe08a;
+  color: #ffe082;
 }
 .p-button.p-button-help,
 .p-buttonset.p-button-help > .p-button,
@@ -2786,24 +2786,24 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 }
 .p-splitbutton.p-button-success.p-button-outlined > .p-button {
   background-color: transparent;
-  color: #cede9c;
+  color: #9fdaa8;
   border: 2px solid;
 }
 .p-splitbutton.p-button-success.p-button-outlined > .p-button:enabled:hover,
 .p-splitbutton.p-button-success.p-button-outlined
   > .p-button:not(button):not(a):not(.p-disabled):hover {
   background: rgba(206, 222, 156, 0.04);
-  color: #cede9c;
+  color: #9fdaa8;
 }
 .p-splitbutton.p-button-success.p-button-outlined > .p-button:enabled:active,
 .p-splitbutton.p-button-success.p-button-outlined
   > .p-button:not(button):not(a):not(.p-disabled):active {
   background: rgba(206, 222, 156, 0.16);
-  color: #cede9c;
+  color: #9fdaa8;
 }
 .p-splitbutton.p-button-success.p-button-text > .p-button {
   background-color: transparent;
-  color: #cede9c;
+  color: #9fdaa8;
   border-color: transparent;
 }
 .p-splitbutton.p-button-success.p-button-text > .p-button:enabled:hover,
@@ -2811,35 +2811,35 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   > .p-button:not(button):not(a):not(.p-disabled):hover {
   background: rgba(206, 222, 156, 0.04);
   border-color: transparent;
-  color: #cede9c;
+  color: #9fdaa8;
 }
 .p-splitbutton.p-button-success.p-button-text > .p-button:enabled:active,
 .p-splitbutton.p-button-success.p-button-text
   > .p-button:not(button):not(a):not(.p-disabled):active {
   background: rgba(206, 222, 156, 0.16);
   border-color: transparent;
-  color: #cede9c;
+  color: #9fdaa8;
 }
 .p-splitbutton.p-button-warning.p-button-outlined > .p-button {
   background-color: transparent;
-  color: #ffe08a;
+  color: #ffe082;
   border: 2px solid;
 }
 .p-splitbutton.p-button-warning.p-button-outlined > .p-button:enabled:hover,
 .p-splitbutton.p-button-warning.p-button-outlined
   > .p-button:not(button):not(a):not(.p-disabled):hover {
   background: rgba(255, 224, 138, 0.04);
-  color: #ffe08a;
+  color: #ffe082;
 }
 .p-splitbutton.p-button-warning.p-button-outlined > .p-button:enabled:active,
 .p-splitbutton.p-button-warning.p-button-outlined
   > .p-button:not(button):not(a):not(.p-disabled):active {
   background: rgba(255, 224, 138, 0.16);
-  color: #ffe08a;
+  color: #ffe082;
 }
 .p-splitbutton.p-button-warning.p-button-text > .p-button {
   background-color: transparent;
-  color: #ffe08a;
+  color: #ffe082;
   border-color: transparent;
 }
 .p-splitbutton.p-button-warning.p-button-text > .p-button:enabled:hover,
@@ -2847,14 +2847,14 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   > .p-button:not(button):not(a):not(.p-disabled):hover {
   background: rgba(255, 224, 138, 0.04);
   border-color: transparent;
-  color: #ffe08a;
+  color: #ffe082;
 }
 .p-splitbutton.p-button-warning.p-button-text > .p-button:enabled:active,
 .p-splitbutton.p-button-warning.p-button-text
   > .p-button:not(button):not(a):not(.p-disabled):active {
   background: rgba(255, 224, 138, 0.16);
   border-color: transparent;
-  color: #ffe08a;
+  color: #ffe082;
 }
 .p-splitbutton.p-button-help.p-button-outlined > .p-button {
   background-color: transparent;
@@ -6932,7 +6932,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #20262e;
 }
 .p-badge.p-badge-success {
-  background-color: #cede9c;
+  background-color: #9fdaa8;
   color: #20262e;
 }
 .p-badge.p-badge-info {
@@ -6940,7 +6940,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #fff;
 }
 .p-badge.p-badge-warning {
-  background-color: #ffe08a;
+  background-color: #ffe082;
   color: #20262e;
 }
 .p-badge.p-badge-danger {
@@ -7064,7 +7064,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   border-radius: 6px;
 }
 .p-tag.p-tag-success {
-  background-color: #cede9c;
+  background-color: #9fdaa8;
   color: #20262e;
 }
 .p-tag.p-tag-info {
@@ -7072,7 +7072,7 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
   color: #fff;
 }
 .p-tag.p-tag-warning {
-  background-color: #ffe08a;
+  background-color: #ffe082;
   color: #20262e;
 }
 .p-tag.p-tag-danger {

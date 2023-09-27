@@ -1,0 +1,30 @@
+p-galleria {
+  .itemImage {
+    width: 25rem;
+    height: 22rem;
+    max-width: 100%;
+  }
+  .tempImg {
+    width: 6rem;
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  p-galleria {
+    .itemImage {
+      width: 100vw;
+      height: 100%;
+    }
+    .tempImg {
+      width: 8rem;
+    }
+  }
+}
+@media only screen and (max-width: 500px) {
+  p-galleria {
+    .tempImg {
+      width: 5rem;
+    }
+  }
+}

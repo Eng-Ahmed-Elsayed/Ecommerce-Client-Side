@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { ProductImage } from '../models/productImageDto';
 
 @Injectable({
   providedIn: 'root',
@@ -131,5 +133,22 @@ export class PhotoService {
 
   getImages() {
     return Promise.resolve(this.getData());
+  }
+
+  // Create a full image path
+  public createImgPath = (imgPath: string): string => {
+    return `${environment.baseServerUrl}${imgPath}`;
+  };
+
+  public getGalleriaProductImage(
+    productImage: ProductImage[],
+    productName: string
+  ) {
+    return productImage.map((img) => ({
+      itemImageSrc: this.createImgPath(img.imgPath!),
+      thumbnailImageSrc: this.createImgPath(img.imgPath!),
+      alt: productName,
+      title: productName,
+    }));
   }
 }

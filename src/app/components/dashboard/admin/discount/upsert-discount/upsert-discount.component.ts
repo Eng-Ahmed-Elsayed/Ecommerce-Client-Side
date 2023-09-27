@@ -45,7 +45,6 @@ export class UpsertDiscountComponent implements OnInit {
       this.activatedRoute.data.subscribe({
         next: (data: any) => {
           let discount: DiscountDto = data.discount;
-          console.log(discount);
           this.upsertDiscountForm = this.fb.group({
             id: [discount.id],
             name: [discount.name],

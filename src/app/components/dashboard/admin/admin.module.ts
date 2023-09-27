@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
-import { AddProductComponent } from './product/add-product/add-product.component';
-import { UpdateProductComponent } from './product/update-product/update-product.component';
-import { DeleteProductComponent } from './product/delete-product/delete-product.component';
+import { UpsertProductComponent } from './product/upsert-product/upsert-product.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,9 +32,7 @@ import { PickListModule } from 'primeng/picklist';
 @NgModule({
   declarations: [
     AdminComponent,
-    AddProductComponent,
-    UpdateProductComponent,
-    DeleteProductComponent,
+    UpsertProductComponent,
     ProductListComponent,
     UpsertCategoryComponent,
     CategoryListComponent,

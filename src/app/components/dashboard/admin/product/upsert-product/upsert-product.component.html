@@ -1,7 +1,7 @@
 <div class="container-fluid p-4">
   <div class="card">
     <h2>Create Product</h2>
-    <form [formGroup]="addProductForm">
+    <form [formGroup]="upsertProductForm">
       <div class="row">
         <div class="col-12 col-md-8">
           <div class="row">
@@ -100,7 +100,7 @@
               <hr />
               <p-chips
                 formControlName="tags"
-                [max]="10"
+                [max]="20"
                 [addOnTab]="true"
                 [showClear]="true"
               ></p-chips>
@@ -108,13 +108,29 @@
             <div class="col-12 custom-input-card">
               <h5>Caregory</h5>
               <hr />
-              <!-- Will need a filter because there will be too much categories -->
+              <!-- If add new category -->
               <p-dropdown
+                [filter]="true"
+                filterBy="name"
                 [options]="caregoryOptions"
+                placeholder="Select a Category"
                 formControlName="categoryId"
                 optionLabel="name"
                 optionValue="id"
                 styleClass="w-100"
+                *ngIf="urlPath === 'add'"
+              ></p-dropdown>
+              <!-- If update -->
+              <p-dropdown
+                [filter]="true"
+                filterBy="name"
+                [options]="caregoryOptions"
+                placeholder="Select a Category"
+                formControlName="categoryId"
+                optionLabel="name"
+                optionValue="id"
+                styleClass="w-100"
+                *ngIf="urlPath === 'update'"
               ></p-dropdown>
             </div>
             <div class="col-12 custom-input-card product-color">
@@ -124,6 +140,7 @@
                 <p-selectButton
                   [options]="colorStateOptions"
                   formControlName="colors"
+                  optionLabel=""
                   optionValue="value"
                   [multiple]="true"
                 >
@@ -154,7 +171,7 @@
                 decrementButtonIcon="pi pi-minus"
                 inputStyleClass="p-inputtext-sm inputNumber text-center"
                 [min]="1"
-                [max]="99"
+                [max]="99999"
               ></p-inputNumber>
             </div>
           </div>
@@ -166,12 +183,18 @@
           type="submit"
           (click)="uploadFiles(pFile.files); pFile.clear()"
           [disabled]="pFile.files.length === 0"
+          *ngIf="urlPath === 'add'"
         >
           Add Product
         </button>
-        <!-- <button pButton type="submit" (click)="uploadFiles(pFile.files)">
-          Add Product
-        </button> -->
+        <button
+          pButton
+          type="submit"
+          (click)="uploadFiles(pFile.files)"
+          *ngIf="urlPath === 'update'"
+        >
+          Update Product
+        </button>
       </div>
     </form>
   </div>

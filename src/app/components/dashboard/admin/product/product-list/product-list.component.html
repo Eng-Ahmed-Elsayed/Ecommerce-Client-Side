@@ -1,6 +1,6 @@
-<div class="container-fluid p-4">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 px-0">
       <!-- <p-toast></p-toast> -->
       <p-table
         #dt
@@ -8,7 +8,6 @@
         [rows]="10"
         [paginator]="true"
         [globalFilterFields]="[
-          'id',
           'name',
           'category',
           'status',
@@ -25,17 +24,17 @@
         [showCurrentPageReport]="true"
       >
         <ng-template pTemplate="caption">
+          <h1 class="mb-3">Manage Products</h1>
           <div
             class="d-flex flex-column flex-md-row align-items-center justify-content-between"
           >
-            <h4 class="mb-3 m-md-0">Manage Products</h4>
-            <span class="mb-3 mb-md-0"
+            <span class="mb-3 mb-md-0 d-flex flex-column flex-sm-row"
               ><button
                 pButton
                 pRipple
                 label="New"
                 icon="pi pi-plus"
-                class="p-button-success me-2"
+                class="p-button-success me-0 me-sm-2 mb-3 mb-sm-0"
                 (click)="openNew()"
               ></button>
               <button
@@ -48,7 +47,7 @@
                 [disabled]="!selectedProducts || !selectedProducts.length"
               ></button
             ></span>
-            <span class="p-input-icon-left mb-2">
+            <span class="p-input-icon-left">
               <i class="pi pi-search"></i>
               <input
                 pInputText
@@ -64,24 +63,30 @@
             <th style="width: 4rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th pSortableColumn="id" style="min-width: 15rem">
-              Id <p-sortIcon field="id"></p-sortIcon>
-            </th>
-            <th pSortableColumn="name">
+            <th pSortableColumn="name" style="min-width: 15rem">
               Name <p-sortIcon field="name"></p-sortIcon>
             </th>
-            <th>Image</th>
-            <th pSortableColumn="price">
+            <th pSortableColumn="productCode" style="min-width: 15rem">
+              Product Code <p-sortIcon field="productCode"></p-sortIcon>
+            </th>
+            <th style="min-width: 5rem">Image</th>
+            <th pSortableColumn="price" style="min-width: 10rem">
               Price <p-sortIcon field="price"></p-sortIcon>
             </th>
-            <th pSortableColumn="category" style="min-width: 10rem">
+            <th pSortableColumn="category.name" style="min-width: 10rem">
               Category <p-sortIcon field="category"></p-sortIcon>
             </th>
             <th pSortableColumn="rating">
               Reviews <p-sortIcon field="rating"></p-sortIcon>
             </th>
-            <th pSortableColumn="inventoryStatus" style="min-width: 10rem">
-              Status <p-sortIcon field="inventoryStatus"></p-sortIcon>
+            <th pSortableColumn="status" style="min-width: 5rem">
+              Status <p-sortIcon field="status"></p-sortIcon>
+            </th>
+            <th pSortableColumn="inventory.status" style="min-width: 10rem">
+              Inventory Status <p-sortIcon field="inventoryStatus"></p-sortIcon>
+            </th>
+            <th pSortableColumn="inventory.quantity" style="min-width: 10rem">
+              Quantity <p-sortIcon field="quantity"></p-sortIcon>
             </th>
             <th></th>
           </tr>
@@ -91,18 +96,17 @@
             <td>
               <p-tableCheckbox [value]="product"></p-tableCheckbox>
             </td>
-            <td>{{ product.id }}</td>
-            <td>{{ product.name }}</td>
+            <td>{{ product.name | titlecase }}</td>
+            <td>{{ product.productCode }}</td>
             <td>
               <img
                 [src]="createImgPath(product.productImages[0].imgPath)"
                 [alt]="product.name"
-                width="100"
-                class="shadow-lg rounded"
+                class="shadow-lg rounded w-100 h-100"
               />
             </td>
             <td>{{ product.price | currency : "USD" }}</td>
-            <td>{{ product.category }}</td>
+            <td>{{ product.category.name | titlecase }}</td>
             <td>
               <p-rating
                 [ngModel]="product.rating"
@@ -110,27 +114,38 @@
                 [cancel]="false"
               ></p-rating>
             </td>
+            <td>{{ product.status | titlecase }}</td>
             <td>
               <p-tag
-                [value]="product.inventoryStatus"
+                [value]="product.inventory.status"
                 [severity]="getSeverity(product)"
               ></p-tag>
             </td>
+            <td>{{ product.inventory.quantity }}</td>
             <td>
-              <button
-                pButton
-                pRipple
-                icon="pi pi-pencil"
-                class="p-button-rounded p-button-success me-2"
-                (click)="editProduct(product)"
-              ></button>
-              <button
-                pButton
-                pRipple
-                icon="pi pi-trash"
-                class="p-button-rounded p-button-warning"
-                (click)="deleteProduct(product)"
-              ></button>
+              <span class="d-flex">
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-eye"
+                  class="p-button-rounded p-button-info me-2"
+                  routerLink="/product/{{ product.id }}"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-pencil"
+                  class="p-button-rounded p-button-success me-2"
+                  routerLink="/dashboard/admin/product/update/{{ product.id }}"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-trash"
+                  class="p-button-rounded p-button-warning"
+                  (click)="deleteProduct(product)"
+                ></button>
+              </span>
             </td>
           </tr>
         </ng-template>

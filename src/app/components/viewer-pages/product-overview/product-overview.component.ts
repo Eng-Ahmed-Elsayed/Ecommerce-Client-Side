@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ProductDto } from 'src/app/shared/models/productDto';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 import { PhotoService } from 'src/app/shared/services/photo.service';
 
@@ -10,7 +12,9 @@ import { PhotoService } from 'src/app/shared/services/photo.service';
 })
 export class ProductOverviewComponent implements OnInit {
   orderForm!: FormGroup;
+  product!: ProductDto;
   images: any[] | undefined;
+  // images2: any[] | undefined;
   responsiveOptions = this.layoutService.getGalleriaResponsiveOptions();
   // From the api
   ratingValue: number = 4;
@@ -29,17 +33,28 @@ export class ProductOverviewComponent implements OnInit {
   constructor(
     private layoutService: LayoutService,
     private photoService: PhotoService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.photoService
-      .getImages()
-      .then((images: any[]) => (this.images = images.slice(0, 4)));
+    // this.photoService.getImages().then((images: any[]) => {
+    //   console.log(images.slice(0, 4));
+    //   this.images = images.slice(0, 4);
+    // });
     this.orderForm = this.fb.group({
       color: [],
       size: [],
       quantity: [],
+    });
+    this.activatedRoute.data.subscribe({
+      next: (data: any) => {
+        this.product = data.product;
+        this.images = this.photoService.getGalleriaProductImage(
+          this.product.productImages!,
+          this.product.name!
+        );
+      },
     });
   }
 }

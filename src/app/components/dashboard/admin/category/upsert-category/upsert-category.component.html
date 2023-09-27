@@ -67,7 +67,7 @@
             <button
               pButton
               type="submit"
-              (click)="uploadFiles(pFile.files)"
+              (click)="uploadFiles(pFile.files); pFile.clear()"
               *ngIf="urlPath === 'update'"
             >
               Update Category

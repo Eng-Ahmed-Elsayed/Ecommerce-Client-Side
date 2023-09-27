@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product';
+import { ProductDto } from '../models/productDto';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
+  private productApiUrl: string = environment.baseApiUrl + 'product/';
+
+  constructor(private httpClient: HttpClient) {}
+
   getProductsData() {
     return [
       {
@@ -1224,19 +1232,28 @@ export class ProductService {
     return Promise.resolve(this.getProductsWithOrdersData());
   }
 
-  getSeverity(product: Product) {
-    switch (product.inventoryStatus) {
-      case 'INSTOCK':
+  // New
+  getSeverity(product: ProductDto) {
+    switch (product.inventory!.status) {
+      case 'IN STOCK':
         return 'success';
 
-      case 'LOWSTOCK':
+      case 'LOW STOCK':
         return 'warning';
 
-      case 'OUTOFSTOCK':
+      case 'OUT OF STOCK':
         return 'danger';
 
       default:
-        return undefined;
+        return 'danger';
     }
+  }
+
+  getProductList(): Observable<ProductDto[]> {
+    return this.httpClient.get<ProductDto[]>(this.productApiUrl + 'list');
+  }
+
+  getProduct(id: string): Observable<ProductDto> {
+    return this.httpClient.get<ProductDto>(this.productApiUrl + id);
   }
 }

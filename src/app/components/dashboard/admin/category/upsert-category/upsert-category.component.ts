@@ -102,8 +102,6 @@ export class UpsertCategoryComponent implements OnInit {
       this.adminService.uploadFiles(files).subscribe({
         next: (res: any) => {
           if (res.type === HttpEventType.Response) {
-            console.log('Upload image success.');
-            console.log('-----------------');
             this.upsertCategoryForm.patchValue({ imgPath: res.body.dbPath });
             this.upsertCategory();
           }
