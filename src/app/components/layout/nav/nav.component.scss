@@ -16,5 +16,17 @@
   top: 0;
   z-index: 2;
   background: var(--surface-overlay);
-  // border: var(--surface-border);
+  padding-inline: 0;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+.user-actions {
+  background: var(--surface-overlay);
+}
+
+@media screen and (max-width: 575.9px) {
+  .user-actions {
+    border-top: 1px solid var(--surface-border);
+    border-bottom: 1px solid var(--surface-border);
+  }
 }

@@ -15,6 +15,13 @@ import { ButtonModule } from 'primeng/button';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { SidebarModule } from 'primeng/sidebar';
+import { MenuModule } from 'primeng/menu';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { BadgeModule } from 'primeng/badge';
+import { DialogModule } from 'primeng/dialog';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,6 +43,13 @@ import { MatMenuModule } from '@angular/material/menu';
     ButtonModule,
     ConfirmDialogModule,
     MatMenuModule,
+    SidebarModule,
+    MenuModule,
+    AvatarModule,
+    AvatarGroupModule,
+    BadgeModule,
+    DialogModule,
+    FormsModule,
   ],
   exports: [NavComponent, ToastComponent, ConfirmDialogComponent],
 })

@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryDto } from 'src/app/shared/models/categoryDto';
 import { ProductDto } from 'src/app/shared/models/productDto';
+import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
   selector: 'app-upsert-product',
@@ -26,7 +27,8 @@ export class UpsertProductComponent implements OnInit {
     private fb: FormBuilder,
     private adminService: AdminService,
     private messageService: MessageService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService
   ) {}
 
   ngOnInit(): void {
@@ -36,11 +38,7 @@ export class UpsertProductComponent implements OnInit {
       { status: 'Publish', value: 'publish' },
     ];
 
-    this.colorStateOptions = [
-      { productColor: 'dark-gray', value: 'darkGray' },
-      { productColor: 'green', value: 'green' },
-      { productColor: 'blue', value: 'blue' },
-    ];
+    this.colorStateOptions = this.productService.getColors();
 
     // Add product form
     if (this.urlPath === 'add') {
@@ -61,6 +59,7 @@ export class UpsertProductComponent implements OnInit {
         colors: [''],
         productImages: [''],
         tags: new FormControl<string[] | null>(null),
+        sizes: [],
         quantity: [1],
         categoryId: [''],
         // inventoryId: [''],
@@ -88,6 +87,7 @@ export class UpsertProductComponent implements OnInit {
             productImages: [],
             // productImages: [product.productImages],
             tags: [product.tags?.map((x) => x.name)],
+            sizes: [product.sizes?.map((x) => x.name)],
             quantity: [product.quantity],
             categoryId: [product.categoryId],
             inventoryId: [product.inventoryId],
@@ -98,6 +98,16 @@ export class UpsertProductComponent implements OnInit {
     }
   }
 
+  // Add colors form the output of the custom colors component
+  addColorsToForm(colorsValue: string[]) {
+    this.upsertProductForm.patchValue({ colors: colorsValue });
+  }
+
+  // Add Sizes form the output of the custom sizes component
+  addSizesToForm(sizesValue: string[]) {
+    this.upsertProductForm.patchValue({ sizes: sizesValue });
+  }
+
   upsertProduct() {
     // Add product form
     if (this.urlPath === 'add') {
@@ -105,6 +115,7 @@ export class UpsertProductComponent implements OnInit {
         .addProdcut(
           this.upsertProductForm.getRawValue(),
           this.upsertProductForm.get('tags')?.value,
+          this.upsertProductForm.get('sizes')?.value,
           this.upsertProductForm.get('colors')?.value,
           this.upsertProductForm.get('productImages')?.value
         )
@@ -133,6 +144,7 @@ export class UpsertProductComponent implements OnInit {
         .updateProdcut(
           this.upsertProductForm.getRawValue(),
           this.upsertProductForm.get('tags')?.value,
+          this.upsertProductForm.get('sizes')?.value,
           this.upsertProductForm.get('colors')?.value,
           this.upsertProductForm.get('productImages')?.value
         )

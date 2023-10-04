@@ -27,7 +27,6 @@ export class ProductListComponent implements OnInit {
     // this.productService.getProducts().then((data) => (this.products = data));
     this.adminService.getProductList().subscribe({
       next: (res: ProductDto[]) => {
-        console.log(res);
         this.products = res;
       },
       error: (err: HttpErrorResponse) => console.log(err.message),

@@ -59,6 +59,25 @@ export class AdminService {
     );
   }
 
+  // Custom map for colors, sizes, tags and images
+  private customMap(arr: any[], id: string = '') {
+    if (id === '') {
+      return arr.map((val: string) => ({
+        id: this.generate_uuidv4(),
+        name: val,
+      }));
+    }
+
+    // Image map is diffrent
+    else {
+      return arr.map((val: string) => ({
+        id: this.generate_uuidv4(),
+        imgPath: val,
+        productId: id,
+      }));
+    }
+  }
+
   // <-----Category----->
 
   addCategory(body: CategoryDto): Observable<CategoryDto> {
@@ -92,58 +111,32 @@ export class AdminService {
   addProdcut(
     body: ProductDto,
     tags: string[],
+    sizes: string[],
     colors: string[],
     productImages: string[]
   ): Observable<ProductDto> {
-    body.tags = tags.map((val: string) => {
-      return {
-        id: this.generate_uuidv4(),
-        name: val,
-      };
-    });
-    body.colors = colors.map((val: string) => {
-      return {
-        id: this.generate_uuidv4(),
-        name: val,
-      };
-    });
-
-    body.productImages = productImages.map((val: string) => {
-      return {
-        id: this.generate_uuidv4(),
-        imgPath: val,
-      };
-    });
+    body.tags = this.customMap(tags);
+    body.sizes = this.customMap(sizes);
+    body.colors = this.customMap(colors);
+    if (productImages != undefined) {
+      body.productImages = this.customMap(productImages, body.id);
+    }
     return this.httpClient.post<ProductDto>(this.productApiUrl + 'add', body);
   }
 
   updateProdcut(
     body: ProductDto,
     tags: string[],
+    sizes: string[],
     colors: string[],
     productImages: string[]
   ): Observable<ProductDto> {
-    body.tags = tags.map((val: string) => {
-      return {
-        id: this.generate_uuidv4(),
-        name: val,
-      };
-    });
-    body.colors = colors.map((val: string) => {
-      return {
-        id: this.generate_uuidv4(),
-        name: val,
-      };
-    });
-
-    if (productImages != undefined)
-      body.productImages = productImages.map((val: string) => {
-        return {
-          id: this.generate_uuidv4(),
-          imgPath: val,
-          productId: body.id,
-        };
-      });
+    body.tags = this.customMap(tags);
+    body.sizes = this.customMap(sizes);
+    body.colors = this.customMap(colors);
+    if (productImages != undefined) {
+      body.productImages = this.customMap(productImages, body.id);
+    }
     return this.httpClient.put<ProductDto>(this.productApiUrl + body.id, body);
   }
 

@@ -24,9 +24,17 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { TabViewModule } from 'primeng/tabview';
-import { ProductListComponent } from './product-list/product-list.component';
+import { ProductsComponent } from './products/products.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
+import { SliderModule } from 'primeng/slider';
+import { PanelModule } from 'primeng/panel';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { CheckboxModule } from 'primeng/checkbox';
+import { SidebarModule } from 'primeng/sidebar';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { CustomProductColorsComponent } from './custom-product-colors/custom-product-colors.component';
+import { CustomProductSizesComponent } from './custom-product-sizes/custom-product-sizes.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +44,9 @@ import { InputTextModule } from 'primeng/inputtext';
     CustomCarouselComponent,
     CustomDataViewComponent,
     ProductOverviewComponent,
-    ProductListComponent,
+    ProductsComponent,
+    CustomProductColorsComponent,
+    CustomProductSizesComponent,
   ],
   imports: [
     CommonModule,
@@ -60,6 +70,13 @@ import { InputTextModule } from 'primeng/inputtext';
     TabViewModule,
     DropdownModule,
     InputTextModule,
+    SliderModule,
+    PanelModule,
+    ScrollPanelModule,
+    CheckboxModule,
+    SidebarModule,
+    ToggleButtonModule,
   ],
+  exports: [CustomProductColorsComponent, CustomProductSizesComponent],
 })
 export class ViewerPagesModule {}

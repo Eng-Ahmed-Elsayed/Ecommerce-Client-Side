@@ -133,21 +133,21 @@
                 *ngIf="urlPath === 'update'"
               ></p-dropdown>
             </div>
-            <div class="col-12 custom-input-card product-color">
+            <div class="col-12 custom-input-card">
               <h5>Colors</h5>
               <hr />
-              <div class="d-flex justify-content-center align-items-center">
-                <p-selectButton
-                  [options]="colorStateOptions"
-                  formControlName="colors"
-                  optionLabel=""
-                  optionValue="value"
-                  [multiple]="true"
-                >
-                  <ng-template let-item pTemplate>
-                    <span [class]="item.productColor"></span> </ng-template
-                ></p-selectButton>
-              </div>
+              <app-custom-product-colors
+                (colorsValueEmitter)="addColorsToForm($event)"
+                [colorsValue]="upsertProductForm.get('colors')?.value"
+              ></app-custom-product-colors>
+            </div>
+            <div class="col-12 custom-input-card">
+              <h5>Sizes</h5>
+              <hr />
+              <app-custom-product-sizes
+                (sizesValueEmitter)="addSizesToForm($event)"
+                [sizesValue]="upsertProductForm.get('sizes')?.value"
+              ></app-custom-product-sizes>
             </div>
             <div
               class="col-12 custom-input-card d-flex justify-content-between"

@@ -1,0 +1,12 @@
+<div class="product-color">
+  <p-selectButton
+    [options]="colorStateOptions"
+    optionValue="value"
+    [multiple]="true"
+    [(ngModel)]="colorsValue"
+    (onChange)="emitColorsValue()"
+  >
+    <ng-template let-item pTemplate>
+      <span [class]="item.productColor"></span> </ng-template
+  ></p-selectButton>
+</div>

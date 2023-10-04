@@ -1,9 +1,28 @@
+import { BreakpointObserver, BreakpointState } from '@angular/cdk/layout';
 import { Injectable } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, map, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LayoutService {
+  // If in products page make the breakpoint too large
+  // because we will need space for filter(Like price filter and etc).
+  private isLarge$ = this.router.events
+    .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+    .pipe(
+      map((x) => {
+        let breakPoint = x.url.startsWith('/products')
+          ? '(max-width: 1799.98px)'
+          : '(max-width: 1199.98px)';
+        return this.breakpointObserver.observe(breakPoint).pipe(
+          map((result) => result.matches),
+          shareReplay()
+        );
+      })
+    );
+
   private responsiveOptions: any[] = [
     {
       breakpoint: '1199px',
@@ -82,7 +101,10 @@ export class LayoutService {
     },
   ];
 
-  constructor() {}
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private router: Router
+  ) {}
 
   getResponsiveOptions() {
     return this.responsiveOptions;
@@ -96,4 +118,6 @@ export class LayoutService {
   getGalleriaResponsiveOptions() {
     return this.galleriaResponsiveOptions;
   }
+
+  getIsLarge = () => this.isLarge$;
 }

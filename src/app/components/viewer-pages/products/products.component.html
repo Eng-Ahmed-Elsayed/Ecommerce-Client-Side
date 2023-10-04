@@ -1,0 +1,144 @@
+<div class="container-fluid py-2 px-5 mt-5 mt-sm-0">
+  <div class="row">
+    <!-- If search -->
+    <h4 class="text-center py-3">15 RESULTS FOUND FOR “DEM”</h4>
+    <!-- Filters -->
+    <div class="col-12 col-lg-3">
+      <!-- <p-sidebar [visible]="true" position="left"></p-sidebar> -->
+      <div class="row">
+        <!-- Category filter -->
+        <div class="col-12 filter-card">
+          <p-panel header="Categories" [toggleable]="true">
+            <p-scrollPanel [style]="{ width: '100%' }">
+              <ul class="custom-list">
+                <li
+                  *ngFor="
+                    let category of categories;
+                    index as i;
+                    first as isFirst
+                  "
+                >
+                  {{ category }}
+                </li>
+              </ul>
+            </p-scrollPanel>
+
+            <p-button
+              [label]="showAllCategories ? 'Show Less' : 'Show All'"
+              [icon]="showAllCategories ? 'pi pi-angle-up' : 'pi pi-angle-down'"
+              styleClass="p-button-secondary p-button-rounded p-button-text "
+              (click)="toggleShowAllCategories()"
+            ></p-button>
+          </p-panel>
+        </div>
+        <!-- Price filter -->
+        <div class="col-12 filter-card">
+          <p-panel header="Price" [toggleable]="true">
+            <p-slider
+              [(ngModel)]="priceRangeValues"
+              [range]="true"
+              [max]="9999"
+            ></p-slider>
+            <div class="row">
+              <div
+                class="col-12 d-flex align-items-center justify-content-center mt-3"
+              >
+                <p-inputNumber
+                  [(ngModel)]="priceRangeValues[0]"
+                  mode="currency"
+                  currency="USD"
+                  locale="en-US"
+                  [min]="0"
+                  [max]="9998"
+                  (ngModelChange)="
+                    priceRangeValues = [
+                      priceRangeValues[0],
+                      priceRangeValues[1]
+                    ]
+                  "
+                  inputStyleClass="w-100"
+                  styleClass="w-100"
+                >
+                </p-inputNumber>
+                <span class="px-2">to</span>
+                <p-inputNumber
+                  [(ngModel)]="priceRangeValues[1]"
+                  mode="currency"
+                  currency="USD"
+                  locale="en-US"
+                  [min]="1"
+                  [max]="9999"
+                  (ngModelChange)="
+                    priceRangeValues = [
+                      priceRangeValues[0],
+                      priceRangeValues[1]
+                    ]
+                  "
+                  inputStyleClass="w-100"
+                  styleClass="w-100"
+                >
+                </p-inputNumber>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+        <!-- Availability filter -->
+        <div class="col-12 filter-card">
+          <p-panel header="Availability" [toggleable]="true">
+            <div class="row">
+              <div class="col-12 d-flex align-items-center mb-2">
+                <p-checkbox
+                  value="InStock"
+                  id="in-stock"
+                  styleClass="me-2"
+                ></p-checkbox>
+                <label for="in-stock">In Stock(189)</label>
+              </div>
+              <div class="col-12 d-flex align-items-center mb-2">
+                <p-checkbox
+                  value="LowStock"
+                  id="low-stock"
+                  styleClass="me-2"
+                ></p-checkbox>
+                <label for="low-stock">Low Stock(50)</label>
+              </div>
+              <div class="col-12 d-flex align-items-center mb-2">
+                <p-checkbox
+                  value="OutOfStock"
+                  id="out-of-stock"
+                  styleClass="me-2"
+                ></p-checkbox>
+                <label for="out-of-stock">Out Of Stock(70)</label>
+              </div>
+            </div>
+          </p-panel>
+        </div>
+        <!-- Colors filter -->
+        <div class="col-12 filter-card">
+          <p-panel header="Colors" [toggleable]="true">
+            <p-scrollPanel [style]="{ width: '100%', height: '15vh' }">
+              <app-custom-product-colors></app-custom-product-colors>
+            </p-scrollPanel>
+          </p-panel>
+        </div>
+        <!-- Size filter -->
+        <div class="col-12 filter-card">
+          <p-panel header="Size" [toggleable]="true">
+            <p-scrollPanel [style]="{ width: '100%', height: '25vh' }">
+              <app-custom-product-sizes></app-custom-product-sizes>
+            </p-scrollPanel>
+          </p-panel>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-9">
+      <app-custom-data-view
+        [products]="recommendedProducts"
+        [sortOptions]="sortOptions"
+        [rows]="9"
+        [paginator]="true"
+        [filterBy]="filterBy"
+      ></app-custom-data-view>
+    </div>
+  </div>
+</div>

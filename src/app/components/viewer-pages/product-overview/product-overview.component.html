@@ -44,18 +44,8 @@
           <!-- Order Form -->
           <form [formGroup]="orderForm" class="order-form">
             <div class="row">
-              <div class="col-12 product-color mb-3">
-                <h6>Color</h6>
-                <p-selectButton
-                  [options]="colorStateOptions"
-                  formControlName="color"
-                  optionValue="value"
-                >
-                  <ng-template let-item pTemplate>
-                    <span [class]="item.productColor"> </span> </ng-template
-                ></p-selectButton>
-              </div>
-              <div class="col-12 product-size mb-3">
+              <app-custom-product-colors></app-custom-product-colors>
+              <!-- <div class="col-12 product-size mb-3">
                 <div class="row">
                   <h6>Size</h6>
                   <p-selectButton
@@ -66,6 +56,12 @@
                   >
                     ></p-selectButton
                   >
+                </div>
+              </div> -->
+              <div class="col-12 mb-3">
+                <div class="row">
+                  <h6>Size</h6>
+                  <app-custom-product-sizes></app-custom-product-sizes>
                 </div>
               </div>
               <div class="col-12">

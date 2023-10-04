@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ViewerPagesComponent } from './viewer-pages.component';
 import { HomeComponent } from './home/home.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
-import { ProductListComponent } from './product-list/product-list.component';
+import { ProductsComponent } from './products/products.component';
 import { getProductResolver } from 'src/app/shared/guards/product.guard';
 
 const routes: Routes = [
@@ -13,7 +12,8 @@ const routes: Routes = [
     component: ProductOverviewComponent,
     resolve: { product: getProductResolver },
   },
-  { path: 'product-list', component: ProductListComponent },
+  { path: 'products', component: ProductsComponent },
+  { path: 'products/:filter', component: ProductsComponent },
 ];
 
 @NgModule({

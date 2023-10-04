@@ -1,0 +1,11 @@
+.custom-list {
+  li {
+    list-style: none;
+    transition: all 0.3s ease;
+    margin-bottom: 0.5rem;
+  }
+  li:hover,
+  li:focus {
+    transform: translateX(6px);
+  }
+}

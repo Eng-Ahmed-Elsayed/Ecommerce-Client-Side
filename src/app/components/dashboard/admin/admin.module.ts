@@ -28,6 +28,7 @@ import { RouterModule } from '@angular/router';
 import { UpsertDiscountComponent } from './discount/upsert-discount/upsert-discount.component';
 import { DiscountListComponent } from './discount/discount-list/discount-list.component';
 import { PickListModule } from 'primeng/picklist';
+import { ViewerPagesModule } from '../../viewer-pages/viewer-pages.module';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { PickListModule } from 'primeng/picklist';
     InputTextareaModule,
     RouterModule,
     PickListModule,
+    ViewerPagesModule,
   ],
 })
 export class AdminModule {}
