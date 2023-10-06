@@ -97,14 +97,6 @@ mat-sidenav-content {
   padding: 2rem;
 }
 
-// .card {
-//   padding: 2rem;
-// }
-
-.filter-card {
-  // margin: 1rem;
-}
-
 p-carousel {
   .cart-item {
     border: 2px solid var(--surface-d);
@@ -386,4 +378,7 @@ p-inputnumber {
   }
 }
 
-// Upsert Product
+// Custom custom-input-group(error message & input)
+.custom-input-group {
+  padding-block: 1rem;
+}

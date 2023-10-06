@@ -1,0 +1,141 @@
+<form [formGroup]="checkOutForm">
+  <div class="custom-input-group">
+    <span class="p-float-label">
+      <input
+        pInputText
+        id="firstName"
+        formControlName="firstName"
+        class="w-100"
+      />
+      <label htmlFor="firstName">First Name</label>
+    </span>
+  </div>
+  <div class="custom-input-group">
+    <span class="p-float-label">
+      <input
+        pInputText
+        id="lastName"
+        formControlName="lastName"
+        class="w-100"
+      />
+      <label htmlFor="lastName">Last Name</label>
+    </span>
+  </div>
+  <div class="custom-input-group">
+    <span class="p-float-label">
+      <input
+        pInputText
+        id="addressLine1"
+        formControlName="addressLine1"
+        class="w-100"
+      />
+      <label htmlFor="addressLine1">Address Line 1</label>
+    </span>
+  </div>
+  <div class="custom-input-group">
+    <span class="p-float-label">
+      <input
+        pInputText
+        id="addressLine2"
+        formControlName="addressLine2"
+        class="w-100"
+      />
+      <label htmlFor="addressLine2">Address Line 2</label>
+    </span>
+  </div>
+  <div class="custom-input-group">
+    <span class="p-float-label">
+      <p-dropdown
+        id="country"
+        [options]="countries"
+        formControlName="country"
+        placeholder="Select a country"
+        styleClass="w-100"
+        optionLabel="name"
+        (onChange)="onCountryChange($event)"
+      ></p-dropdown>
+      <label for="country">Country</label>
+    </span>
+  </div>
+  <div class="custom-input-group">
+    <span class="p-float-label">
+      <p-dropdown
+        id="state"
+        [options]="checkOutForm.get('country')?.value?.states"
+        optionLabel="name"
+        formControlName="state"
+        placeholder="Select a state"
+        [attr.disabled]="!checkOutForm.get('country')?.value"
+        styleClass="w-100"
+      ></p-dropdown>
+      <label for="state">State</label>
+    </span>
+  </div>
+  <div class="custom-input-group">
+    <span class="p-float-label">
+      <p-dropdown
+        id="city"
+        [options]="checkOutForm.get('state')?.value?.cities"
+        formControlName="city"
+        placeholder="Select a city"
+        [attr.disabled]="!checkOutForm.get('state')?.value"
+        styleClass="w-100"
+      ></p-dropdown>
+      <label for="city">City</label>
+    </span>
+  </div>
+  <div class="custom-input-group">
+    <span class="p-float-label">
+      <p-inputNumber
+        inputId="postalCode"
+        formControlName="postalCode"
+        [minlength]="5"
+        [maxlength]="10"
+        [required]="true"
+        [class]="
+          checkOutForm.get('postalCode')?.invalid &&
+          checkOutForm.get('postalCode')?.dirty
+            ? 'ng-invalid ng-dirty'
+            : 'ng-valid'
+        "
+      >
+      </p-inputNumber>
+      <label htmlFor="postalCode">Postal Code</label>
+    </span>
+    <app-custom-input-error
+      [msg]="
+        checkOutForm.get('postalCode')?.invalid &&
+        checkOutForm.get('postalCode')?.dirty
+          ? 'Please enter a valid Postal Code'
+          : ''
+      "
+    ></app-custom-input-error>
+  </div>
+  <div class="custom-input-group">
+    <span class="p-float-label">
+      <p-inputNumber
+        inputId="telephone"
+        formControlName="telephone"
+        [minlength]="4"
+        [maxlength]="20"
+      >
+      </p-inputNumber>
+      <label htmlFor="telephone">Telephone</label>
+    </span>
+  </div>
+  <div class="custom-input-group">
+    <span class="p-float-label">
+      <p-inputNumber
+        inputId="mobile"
+        formControlName="mobile"
+        [minlength]="4"
+        [maxlength]="20"
+      >
+      </p-inputNumber>
+      <label htmlFor="mobile">Mobile</label>
+    </span>
+  </div>
+  <div class="d-flex justify-content-center">
+    <button pButton pRipple label="Submit"></button>
+  </div>
+</form>

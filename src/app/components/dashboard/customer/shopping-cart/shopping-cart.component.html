@@ -1,75 +1,102 @@
 <div class="container-fluid p-3 shopping-cart">
-  <h2>Shopping Cart</h2>
-  <hr />
-  <div class="row">
-    <div class="col-12 col-lg-8">
-      <div class="card">
-        <p-dataView #dv [value]="products">
-          <ng-template pTemplate="header">
-            <div class="row text-center" *ngIf="!(isSmall$ | async)">
-              <div class="col-3">Product</div>
-              <div class="col-2">Price</div>
-              <div class="col-3">Qty</div>
-              <div class="col-2">Total</div>
-              <div class="col-2"></div>
-            </div>
-            <div class="row text-center" *ngIf="isSmall$ | async">
-              <div class="col h3">Your Items</div>
-            </div>
-          </ng-template>
+  <div class="row" *ngIf="!isSidebar">
+    <div class="col-12">
+      <h2>Shopping Cart</h2>
+      <hr />
+    </div>
+  </div>
 
-          <ng-template let-product pTemplate="listItem">
-            <div
-              class="row align-items-center text-center mb-2 p-3"
-              style="border-width: 1px; border-radius: var(--border-radius)"
-            >
+  <div class="row">
+    <div [class]="isSidebar ? 'col-12' : 'col-12 col-lg-8'">
+      <div class="card">
+        <p-scrollPanel
+          [style]="{
+            width: '100%',
+            height: isSidebar ? '50vh' : '100%'
+          }"
+        >
+          <p-dataView #dv [value]="products">
+            <ng-template pTemplate="header">
               <div
-                class="col-12 col-sm-3 d-flex flex-column flex-sm-row justify-content-start align-items-center ps-sm-0"
+                class="row text-center"
+                *ngIf="!(isSmall$ | async) && !isSidebar"
               >
-                <img
-                  class="w-50 me-sm-2 rounded"
-                  [src]="
-                    'https://primefaces.org/cdn/primeng/images/demo/product/' +
-                    product.image
+                <div class="col-3">Product</div>
+                <div class="col-2">Price</div>
+                <div class="col-3">Qty</div>
+                <div class="col-2">Total</div>
+                <div class="col-2"></div>
+              </div>
+              <div
+                class="row text-center"
+                *ngIf="(isSmall$ | async) && !isSidebar"
+              >
+                <div class="col h3">Your Items</div>
+              </div>
+            </ng-template>
+
+            <ng-template let-product pTemplate="listItem">
+              <div
+                class="row align-items-center text-center mb-2 p-3"
+                style="border-width: 1px; border-radius: var(--border-radius)"
+              >
+                <div
+                  [class]="
+                    isSidebar
+                      ? 'col-12 d-flex flex-column justify-content-start align-items-center'
+                      : 'col-12 col-sm-3 d-flex flex-column flex-sm-row justify-content-start align-items-center ps-sm-0'
                   "
-                  [alt]="product.name"
-                /><span>{{ product.name }}</span>
+                >
+                  <img
+                    class="w-50 me-sm-2 rounded"
+                    [src]="
+                      'https://primefaces.org/cdn/primeng/images/demo/product/' +
+                      product.image
+                    "
+                    [alt]="product.name"
+                  /><span>{{ product.name }}</span>
+                </div>
+                <div [class]="isSidebar ? 'col-12' : 'col-12 col-sm-2'">
+                  {{ product.price | currency }}
+                </div>
+                <div [class]="isSidebar ? 'col-12' : 'col-12 col-sm-3'">
+                  <p-inputNumber
+                    formControlName="quantity"
+                    [showButtons]="true"
+                    buttonLayout="horizontal"
+                    inputId="horizontal"
+                    spinnerMode="horizontal"
+                    [step]="1"
+                    decrementButtonClass="p-button-danger p-button-help p-button-text w-25"
+                    incrementButtonClass="p-button-success p-button-help p-button-text w-25"
+                    incrementButtonIcon="pi pi-plus"
+                    decrementButtonIcon="pi pi-minus"
+                    inputStyleClass="p-inputtext-sm inputNumber text-center"
+                    [min]="1"
+                    [max]="99"
+                  ></p-inputNumber>
+                </div>
+                <!-- <div class="col-12 col-sm-2">10</div> -->
+                <div
+                  [class]="isSidebar ? 'col-12' : 'col-12 col-sm-2'"
+                  style="color: var(--primary-color)"
+                >
+                  {{ 90 | currency }}
+                </div>
+                <div [class]="isSidebar ? 'col-12' : 'col-12 col-sm-2'">
+                  <button
+                    pButton
+                    icon="pi pi-trash"
+                    class="p-button-rounded p-button-danger"
+                  ></button>
+                </div>
               </div>
-              <div class="col-12 col-sm-2">{{ product.price | currency }}</div>
-              <div class="col-12 col-sm-3">
-                <p-inputNumber
-                  formControlName="quantity"
-                  [showButtons]="true"
-                  buttonLayout="horizontal"
-                  inputId="horizontal"
-                  spinnerMode="horizontal"
-                  [step]="1"
-                  decrementButtonClass="p-button-danger p-button-help p-button-text w-25"
-                  incrementButtonClass="p-button-success p-button-help p-button-text w-25"
-                  incrementButtonIcon="pi pi-plus"
-                  decrementButtonIcon="pi pi-minus"
-                  inputStyleClass="p-inputtext-sm inputNumber text-center"
-                  [min]="1"
-                  [max]="99"
-                ></p-inputNumber>
-              </div>
-              <!-- <div class="col-12 col-sm-2">10</div> -->
-              <div class="col-12 col-sm-2" style="color: var(--primary-color)">
-                {{ 90 | currency }}
-              </div>
-              <div class="col-12 col-sm-2">
-                <button
-                  pButton
-                  icon="pi pi-trash"
-                  class="p-button-rounded p-button-danger"
-                ></button>
-              </div>
-            </div>
-          </ng-template>
-        </p-dataView>
+            </ng-template>
+          </p-dataView>
+        </p-scrollPanel>
       </div>
     </div>
-    <div class="col-12 col-lg-4">
+    <div [class]="isSidebar ? 'col-12' : 'col-12 col-lg-4'">
       <div class="card d-flex flex-column">
         <div class="d-flex justify-content-between">
           <span>4 Items</span><span>{{ 510 | currency }}</span>

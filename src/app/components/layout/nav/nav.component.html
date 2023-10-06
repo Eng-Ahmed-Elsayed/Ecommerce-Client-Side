@@ -10,6 +10,11 @@
     <mat-toolbar class="px-3">Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/">Home</a>
+      <a mat-list-item [matMenuTriggerFor]="discount">Customer</a>
+      <mat-menu #discount="matMenu">
+        <a mat-menu-item routerLink="/dashboard/cart">My Cart</a>
+        <a mat-menu-item routerLink="/dashboard/check-out">Check Out</a>
+      </mat-menu>
       <a mat-list-item [matMenuTriggerFor]="discount">Discount</a>
       <mat-menu #discount="matMenu">
         <a mat-menu-item routerLink="/dashboard/admin/discount/add"
@@ -52,8 +57,6 @@
         >
       </mat-menu>
 
-      <a mat-list-item routerLink="/dashboard/cart">My Cart</a>
-      <a mat-list-item routerLink="/products">Search and filter for products</a>
       <a mat-list-item routerLink="/dashboard">Dashboard</a>
       <a mat-list-item href="#">Link 2</a>
       <a mat-list-item href="#">Link 3</a>
@@ -124,18 +127,24 @@
     <router-outlet></router-outlet>
     <app-footer></app-footer>
     <app-confirm-dialog></app-confirm-dialog>
+    <p-scrollTop target="parent" icon="pi pi-arrow-up"></p-scrollTop>
   </mat-sidenav-content>
 </mat-sidenav-container>
 
 <!-- Card sidebar -->
-<p-sidebar [(visible)]="cartVisible" position="right">
-  <h3>My Cart</h3>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-    consequat.
-  </p>
+<p-sidebar
+  [(visible)]="cartVisible"
+  position="right"
+  [style]="{ width: '25rem', 'max-width': '100vw' }"
+>
+  <ng-template pTemplate="header"
+    ><a routerLink="/dashboard/cart" class="text-decoration-none text-white h3"
+      >My Cart</a
+    ></ng-template
+  >
+  <ng-template pTemplate="content">
+    <app-shopping-cart [isSidebar]="true"></app-shopping-cart>
+  </ng-template>
 </p-sidebar>
 
 <!-- User Menu -->

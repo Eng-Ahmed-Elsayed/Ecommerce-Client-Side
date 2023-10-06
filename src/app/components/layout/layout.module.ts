@@ -22,6 +22,8 @@ import { AvatarGroupModule } from 'primeng/avatargroup';
 import { BadgeModule } from 'primeng/badge';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
+import { CustomerModule } from '../dashboard/customer/customer.module';
+import { ScrollTopModule } from 'primeng/scrolltop';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { FormsModule } from '@angular/forms';
     BadgeModule,
     DialogModule,
     FormsModule,
+    CustomerModule,
+    ScrollTopModule,
   ],
   exports: [NavComponent, ToastComponent, ConfirmDialogComponent],
 })

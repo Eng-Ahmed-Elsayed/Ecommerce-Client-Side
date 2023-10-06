@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { Observable, map, shareReplay } from 'rxjs';
 import { Product } from 'src/app/shared/models/product';
 import { CustomOverlayService } from 'src/app/shared/services/custom-overlay.service';
@@ -11,6 +11,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent implements OnInit {
+  @Input() isSidebar: boolean = false;
   products!: Product[];
   private breakpointObserver = inject(BreakpointObserver);
   isSmall$: Observable<boolean> = this.breakpointObserver
