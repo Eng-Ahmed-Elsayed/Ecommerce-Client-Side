@@ -14,10 +14,20 @@ import { CheckOutComponent } from './check-out/check-out.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomComponentsModule } from '../../custom-components/custom-components.module';
 import { DropdownModule } from 'primeng/dropdown';
+import { CheckboxModule } from 'primeng/checkbox';
+import { CardModule } from 'primeng/card';
+import { InputMaskModule } from 'primeng/inputmask';
 import { UserAddressComponent } from './user-address/user-address.component';
+import { UserPaymentComponent } from './user-payment/user-payment.component';
 
 @NgModule({
-  declarations: [CustomerComponent, ShoppingCartComponent, CheckOutComponent, UserAddressComponent],
+  declarations: [
+    CustomerComponent,
+    ShoppingCartComponent,
+    CheckOutComponent,
+    UserAddressComponent,
+    UserPaymentComponent,
+  ],
   imports: [
     CommonModule,
     CustomerRoutingModule,
@@ -31,6 +41,9 @@ import { UserAddressComponent } from './user-address/user-address.component';
     ReactiveFormsModule,
     CustomComponentsModule,
     DropdownModule,
+    CheckboxModule,
+    CardModule,
+    InputMaskModule,
   ],
   exports: [ShoppingCartComponent],
 })

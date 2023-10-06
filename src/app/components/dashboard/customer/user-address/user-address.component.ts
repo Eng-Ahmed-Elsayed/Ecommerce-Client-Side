@@ -10,7 +10,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrls: ['./user-address.component.scss'],
 })
 export class UserAddressComponent implements OnInit {
-  checkOutForm!: FormGroup;
+  userAddressForm!: FormGroup;
   products!: Product[];
   // Have to put this in the form before the API call.
   selectedCountry: any;
@@ -67,7 +67,7 @@ export class UserAddressComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.checkOutForm = this.fb.group({
+    this.userAddressForm = this.fb.group({
       firstName: [''],
       lastName: [''],
       addressLine1: [''],

@@ -1,4 +1,4 @@
-<form [formGroup]="checkOutForm">
+<form [formGroup]="userAddressForm">
   <div class="custom-input-group">
     <span class="p-float-label">
       <input
@@ -61,11 +61,11 @@
     <span class="p-float-label">
       <p-dropdown
         id="state"
-        [options]="checkOutForm.get('country')?.value?.states"
+        [options]="userAddressForm.get('country')?.value?.states"
         optionLabel="name"
         formControlName="state"
         placeholder="Select a state"
-        [attr.disabled]="!checkOutForm.get('country')?.value"
+        [attr.disabled]="!userAddressForm.get('country')?.value"
         styleClass="w-100"
       ></p-dropdown>
       <label for="state">State</label>
@@ -75,10 +75,10 @@
     <span class="p-float-label">
       <p-dropdown
         id="city"
-        [options]="checkOutForm.get('state')?.value?.cities"
+        [options]="userAddressForm.get('state')?.value?.cities"
         formControlName="city"
         placeholder="Select a city"
-        [attr.disabled]="!checkOutForm.get('state')?.value"
+        [attr.disabled]="!userAddressForm.get('state')?.value"
         styleClass="w-100"
       ></p-dropdown>
       <label for="city">City</label>
@@ -93,8 +93,8 @@
         [maxlength]="10"
         [required]="true"
         [class]="
-          checkOutForm.get('postalCode')?.invalid &&
-          checkOutForm.get('postalCode')?.dirty
+          userAddressForm.get('postalCode')?.invalid &&
+          userAddressForm.get('postalCode')?.dirty
             ? 'ng-invalid ng-dirty'
             : 'ng-valid'
         "
@@ -104,8 +104,8 @@
     </span>
     <app-custom-input-error
       [msg]="
-        checkOutForm.get('postalCode')?.invalid &&
-        checkOutForm.get('postalCode')?.dirty
+        userAddressForm.get('postalCode')?.invalid &&
+        userAddressForm.get('postalCode')?.dirty
           ? 'Please enter a valid Postal Code'
           : ''
       "
