@@ -16,9 +16,12 @@ import { CustomComponentsModule } from '../../custom-components/custom-component
 import { DropdownModule } from 'primeng/dropdown';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CardModule } from 'primeng/card';
+import { TableModule } from 'primeng/table';
 import { InputMaskModule } from 'primeng/inputmask';
 import { UserAddressComponent } from './user-address/user-address.component';
 import { UserPaymentComponent } from './user-payment/user-payment.component';
+import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
+import { ShippingOptionsComponent } from './shipping-options/shipping-options.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import { UserPaymentComponent } from './user-payment/user-payment.component';
     CheckOutComponent,
     UserAddressComponent,
     UserPaymentComponent,
+    OrderConfirmationComponent,
+    ShippingOptionsComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +49,7 @@ import { UserPaymentComponent } from './user-payment/user-payment.component';
     CheckboxModule,
     CardModule,
     InputMaskModule,
+    TableModule,
   ],
   exports: [ShoppingCartComponent],
 })
