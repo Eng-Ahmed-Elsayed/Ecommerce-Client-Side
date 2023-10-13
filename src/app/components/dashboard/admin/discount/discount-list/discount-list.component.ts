@@ -3,6 +3,7 @@ import { DiscountDto } from 'src/app/shared/models/discountDto';
 import { AdminService } from '../../services/admin.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
+import { createImgPath } from 'src/app/shared/services/photo.service';
 
 @Component({
   selector: 'app-discount-list',
@@ -29,7 +30,7 @@ export class DiscountListComponent implements OnInit {
     });
   }
 
-  createImgPath = (imgPath: string) => this.adminService.createImgPath(imgPath);
+  createImgPath = (imgPath: string) => createImgPath(imgPath);
 
   inputFilter(event: Event) {
     return (event.target as HTMLTextAreaElement)?.value;

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CategoryDto } from 'src/app/shared/models/categoryDto';
 import { DiscountDto } from 'src/app/shared/models/discountDto';
 import { ProductDto } from 'src/app/shared/models/productDto';
+import { uploadFiles } from 'src/app/shared/services/photo.service';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,41 +12,16 @@ import { environment } from 'src/environments/environment';
 })
 export class AdminService {
   private adminApiUrl: string = environment.baseApiUrl + 'admin/';
-  private categoryApiUrl: string = this.adminApiUrl + 'category/';
+  private categoryApiUrl: string = environment.baseApiUrl + 'category/';
   private discountApiUrl: string = environment.baseApiUrl + 'discount/';
   private productApiUrl: string = environment.baseApiUrl + 'product/';
-  private clientURI: string = environment.clientURI;
 
   constructor(private httpClient: HttpClient) {}
 
   // Create a full image path
-  public createImgPath = (imgPath: string): string => {
-    return `${environment.baseServerUrl}${imgPath}`;
-  };
-
-  // Upload Files
-  uploadFiles = (files: any, multi: boolean = false): any => {
-    let url: string = this.adminApiUrl;
-    if (files.length === 0) {
-      return;
-    }
-    const formData = new FormData();
-    if (multi) {
-      url += 'upload-files';
-      let filesToUpload: File[] = files;
-      Array.from(filesToUpload).map((file, index) => {
-        return formData.append('file' + index, file, file.name);
-      });
-    } else {
-      url += 'upload-file';
-      let fileToUpload = <File>files[0];
-      formData.append('file', fileToUpload, fileToUpload.name);
-    }
-    return this.httpClient.post(url, formData, {
-      reportProgress: true,
-      observe: 'events',
-    });
-  };
+  // public createImgPath = (imgPath: string): string => {
+  //   return `${environment.baseServerUrl}${imgPath}`;
+  // };
 
   // Generate new Guid
   private generate_uuidv4() {
@@ -81,7 +57,7 @@ export class AdminService {
   // <-----Category----->
 
   addCategory(body: CategoryDto): Observable<CategoryDto> {
-    return this.httpClient.post<CategoryDto>(this.categoryApiUrl + 'add', body);
+    return this.httpClient.post<CategoryDto>(this.categoryApiUrl, body);
   }
 
   updateCategory(body: CategoryDto): Observable<CategoryDto> {
@@ -91,8 +67,16 @@ export class AdminService {
     );
   }
 
+  uploadCategoryImage(files: any, multi: boolean = false) {
+    let { url, formData } = uploadFiles(files, multi, this.categoryApiUrl);
+    return this.httpClient.post(url, formData, {
+      reportProgress: true,
+      observe: 'events',
+    });
+  }
+
   getCategoryList(): Observable<CategoryDto[]> {
-    return this.httpClient.get<CategoryDto[]>(this.categoryApiUrl + 'list');
+    return this.httpClient.get<CategoryDto[]>(this.categoryApiUrl);
   }
 
   getCategory(id: string): Observable<CategoryDto> {
@@ -138,6 +122,14 @@ export class AdminService {
       body.productImages = this.customMap(productImages, body.id);
     }
     return this.httpClient.put<ProductDto>(this.productApiUrl + body.id, body);
+  }
+
+  uploadProductImages(files: any, multi: boolean = true) {
+    let { url, formData } = uploadFiles(files, multi, this.productApiUrl);
+    return this.httpClient.post(url, formData, {
+      reportProgress: true,
+      observe: 'events',
+    });
   }
 
   getProductList(): Observable<ProductDto[]> {

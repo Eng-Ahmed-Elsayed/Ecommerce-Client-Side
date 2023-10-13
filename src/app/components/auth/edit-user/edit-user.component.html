@@ -1,0 +1,166 @@
+<div class="container-fluid">
+  <div class="row">
+    <!-- Personal Information -->
+    <div class="col-12">
+      <h2 class="my-3">Your Personal Information</h2>
+      <form [formGroup]="updateUserForm" (submit)="updateUser()">
+        <div class="row custom-input-card">
+          <h4 class="mb-3">Update your informations</h4>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-12 col-sm-6 custom-input-group">
+                <span class="p-float-label">
+                  <input
+                    pInputText
+                    id="firstName"
+                    formControlName="firstName"
+                    class="w-100"
+                  />
+                  <label htmlFor="firstName">First Name</label>
+                </span>
+              </div>
+              <div class="col-12 col-sm-6 custom-input-group">
+                <span class="p-float-label">
+                  <input
+                    pInputText
+                    id="lastName"
+                    formControlName="lastName"
+                    class="w-100"
+                  />
+                  <label htmlFor="lastName">Last Name</label>
+                </span>
+              </div>
+              <div class="col-12 col-sm-6 custom-input-group">
+                <span class="p-float-label">
+                  <input
+                    pInputText
+                    id="email"
+                    class="w-100"
+                    [value]="userEmail"
+                    [disabled]="true"
+                  />
+                  <label htmlFor="email">Email</label>
+                </span>
+              </div>
+              <div class="col-12 col-sm-6 custom-input-group">
+                <span class="p-float-label">
+                  <p-inputMask
+                    inputId="phoneNumber"
+                    mask="(999) 999-9999"
+                    formControlName="phoneNumber"
+                    placeholder="(999) 999-9999"
+                    styleClass="w-100"
+                  ></p-inputMask>
+                  <label htmlFor="phoneNumber">Phone Number</label>
+                </span>
+              </div>
+              <div class="col-12 col-sm-6 custom-input-group">
+                <span class="p-float-label">
+                  <input
+                    pInputText
+                    id="oldBirthdate"
+                    class="w-100"
+                    [value]="oldBirthdate"
+                    [disabled]="true"
+                  />
+                  <label htmlFor="oldBirthdate">Old Birthdate</label>
+                </span>
+              </div>
+              <div class="col-12 col-sm-6 d-flex align-items-center">
+                <label htmlFor="birthdate" class="me-3">Birthdate: </label>
+                <p-calendar
+                  inputId="birthdate"
+                  formControlName="birthdate"
+                  [minDate]="minDate"
+                  [maxDate]="maxDate"
+                ></p-calendar>
+              </div>
+              <div
+                class="col-12 d-flex justify-content-center align-items-center mt-3"
+              >
+                <button pButton type="submit">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- Change Password -->
+    <div class="col-12">
+      <h2 class="my-3">Update Your Password</h2>
+      <form
+        [formGroup]="userChangePasswordForm"
+        (submit)="updateUserPassword()"
+      >
+        <div class="row custom-input-card">
+          <div class="col-12">
+            <div class="row d-flex">
+              <div class="col-12 col-sm-6 col-md-4 custom-input-group">
+                <span class="p-float-label">
+                  <p-password
+                    formControlName="currentPassword"
+                    inputStyleClass="w-100"
+                    [toggleMask]="true"
+                    [feedback]="false"
+                  ></p-password>
+                  <label htmlFor="currentPassword">Current Password</label>
+                </span>
+              </div>
+              <div class="col-12 col-sm-6 col-md-4 custom-input-group">
+                <span class="p-float-label">
+                  <p-password
+                    formControlName="password"
+                    inputStyleClass="w-100"
+                    [toggleMask]="true"
+                  ></p-password>
+                  <label htmlFor="password">New Password</label>
+                </span>
+              </div>
+              <div class="col-12 col-sm-6 col-md-4 custom-input-group">
+                <span class="p-float-label">
+                  <p-password
+                    formControlName="confirmPassword"
+                    inputStyleClass="w-100"
+                    [toggleMask]="true"
+                    [feedback]="false"
+                  ></p-password>
+                  <label htmlFor="confirmPassword">Confirm Password</label>
+                </span>
+              </div>
+              <div
+                class="col-sm-6 col-md-12 d-flex justify-content-center align-items-center mt-2 mt-sm-0 mt-md-2"
+              >
+                <button pButton type="submit">Change Password</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- Update profile image -->
+    <div class="col-12">
+      <h2 class="my-3">Update Profile Image</h2>
+      <div class="row custom-input-card">
+        <div class="col-12 col-sm-4 d-flex justify-content-center mb-3 mb-sm-0">
+          <img
+            [src]="oldImgPath"
+            alt="Current Image"
+            class="shadow-lg rounded current-img"
+          />
+        </div>
+        <div class="col-12 col-sm-8 flex justify-content-center">
+          <p-fileUpload
+            name="user-image"
+            [multiple]="false"
+            accept="image/*"
+            [maxFileSize]="1000000"
+            [customUpload]="true"
+            [showCancelButton]="false"
+            (uploadHandler)="uploadUserImg($event)"
+          >
+          </p-fileUpload>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

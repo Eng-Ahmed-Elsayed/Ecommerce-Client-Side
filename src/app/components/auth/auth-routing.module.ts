@@ -8,18 +8,55 @@ import { TwoStepVerificationComponent } from './two-step-verification/two-step-v
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SendEmailConfirmationComponent } from './send-email-confirmation/send-email-confirmation.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import {
+  getUserDataResolver,
+  notAuthenticatedGuard,
+  userAuthenticatedGuard,
+} from 'src/app/shared/guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'email-confirmation', component: EmailConfirmationComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [notAuthenticatedGuard],
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [notAuthenticatedGuard],
+  },
+  {
+    path: 'email-confirmation',
+    component: EmailConfirmationComponent,
+    canActivate: [notAuthenticatedGuard],
+  },
   {
     path: 'send-email-confirmation',
     component: SendEmailConfirmationComponent,
+    canActivate: [notAuthenticatedGuard],
   },
-  { path: 'two-step-verification', component: TwoStepVerificationComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
+  {
+    path: 'two-step-verification',
+    component: TwoStepVerificationComponent,
+    canActivate: [notAuthenticatedGuard],
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordComponent,
+    canActivate: [notAuthenticatedGuard],
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
+    canActivate: [notAuthenticatedGuard],
+  },
+  {
+    path: 'edit-user',
+    component: EditUserComponent,
+    canActivate: [userAuthenticatedGuard],
+    resolve: { user: getUserDataResolver },
+  },
 ];
 
 @NgModule({

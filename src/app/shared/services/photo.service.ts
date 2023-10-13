@@ -135,20 +135,40 @@ export class PhotoService {
     return Promise.resolve(this.getData());
   }
 
-  // Create a full image path
-  public createImgPath = (imgPath: string): string => {
-    return `${environment.baseServerUrl}${imgPath}`;
-  };
-
   public getGalleriaProductImage(
     productImage: ProductImage[],
     productName: string
   ) {
     return productImage.map((img) => ({
-      itemImageSrc: this.createImgPath(img.imgPath!),
-      thumbnailImageSrc: this.createImgPath(img.imgPath!),
+      itemImageSrc: createImgPath(img.imgPath!),
+      thumbnailImageSrc: createImgPath(img.imgPath!),
       alt: productName,
       title: productName,
     }));
   }
+}
+
+// Create a full image path
+export function createImgPath(imgPath: string | undefined): string {
+  return `${environment.baseServerUrl}${imgPath}`;
+}
+
+// Generic upload Files function
+export function uploadFiles(files: any, multi: boolean, url: string): any {
+  if (files.length === 0) {
+    return;
+  }
+  const formData = new FormData();
+  if (multi) {
+    url += 'upload-files';
+    let filesToUpload: File[] = files;
+    Array.from(filesToUpload).map((file, index) => {
+      return formData.append('file' + index, file, file.name);
+    });
+  } else {
+    url += 'upload-file';
+    let fileToUpload = <File>files[0];
+    formData.append('file', fileToUpload, fileToUpload.name);
+  }
+  return { url, formData };
 }

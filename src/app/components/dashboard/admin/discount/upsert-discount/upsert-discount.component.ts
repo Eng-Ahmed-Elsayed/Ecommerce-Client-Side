@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DiscountDto } from 'src/app/shared/models/discountDto';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ProductDto } from 'src/app/shared/models/productDto';
+import { createImgPath } from 'src/app/shared/services/photo.service';
 
 @Component({
   selector: 'app-upsert-discount',
@@ -28,7 +29,7 @@ export class UpsertDiscountComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {}
 
-  createImgPath = (imgPath: string) => this.adminService.createImgPath(imgPath);
+  createImgPath = (imgPath: string) => createImgPath(imgPath);
 
   ngOnInit(): void {
     // Add discount form

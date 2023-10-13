@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
           this.authService.afterLoginSuccess(
             res.token,
             this.returnUrl,
-            res.email,
+            // res.email,
             true
           );
         });
@@ -114,7 +114,7 @@ export class LoginComponent implements OnInit {
           this.authService.afterLoginSuccess(
             res.token,
             this.returnUrl,
-            res.email,
+            // res.email,
             this.loginForm.get('stayLoggedIn')?.value
           );
         }

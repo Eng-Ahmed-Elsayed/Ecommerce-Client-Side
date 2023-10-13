@@ -18,8 +18,8 @@ export class UserPaymentComponent implements OnInit {
   ngOnInit(): void {
     this.userPaymentForm = this.fb.group({
       name: [''],
-      number: [],
-      date: [''],
+      accountNo: [],
+      expiry: [''],
       cvv: [''],
       remember: [''],
     });

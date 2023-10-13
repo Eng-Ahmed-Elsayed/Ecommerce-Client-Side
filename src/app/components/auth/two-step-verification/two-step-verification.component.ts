@@ -41,8 +41,8 @@ export class TwoStepVerificationComponent implements OnInit {
         next: (res) =>
           this.authService.afterLoginSuccess(
             res.token,
-            this.returnURL,
-            res.email
+            this.returnURL
+            // res.email
           ),
         error: (err: HttpErrorResponse) => (this.errorMessage = err.message),
       });

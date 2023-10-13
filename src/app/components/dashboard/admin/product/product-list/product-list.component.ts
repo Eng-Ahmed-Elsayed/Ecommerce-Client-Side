@@ -5,6 +5,7 @@ import { AdminService } from '../../services/admin.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ProductDto } from 'src/app/shared/models/productDto';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { createImgPath } from 'src/app/shared/services/photo.service';
 
 @Component({
   selector: 'app-all-products',
@@ -39,7 +40,7 @@ export class ProductListComponent implements OnInit {
   getSeverity = (product: ProductDto) =>
     this.productService.getSeverity(product);
 
-  createImgPath = (imgPath: string) => this.adminService.createImgPath(imgPath);
+  createImgPath = (imgPath: string) => createImgPath(imgPath);
 
   openNew() {
     // this.product = {};

@@ -20,6 +20,13 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SendEmailConfirmationComponent } from './send-email-confirmation/send-email-confirmation.component';
 import { TwoStepVerificationComponent } from './two-step-verification/two-step-verification.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { InputMaskModule } from 'primeng/inputmask';
+import { CalendarModule } from 'primeng/calendar';
+import { PasswordModule } from 'primeng/password';
 
 @NgModule({
   declarations: [
@@ -32,6 +39,7 @@ import { TwoStepVerificationComponent } from './two-step-verification/two-step-v
     ResetPasswordComponent,
     SendEmailConfirmationComponent,
     TwoStepVerificationComponent,
+    EditUserComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +53,12 @@ import { TwoStepVerificationComponent } from './two-step-verification/two-step-v
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
+    FileUploadModule,
+    CalendarModule,
+    InputTextModule,
+    InputNumberModule,
+    InputMaskModule,
+    PasswordModule,
   ],
   providers: [],
 })

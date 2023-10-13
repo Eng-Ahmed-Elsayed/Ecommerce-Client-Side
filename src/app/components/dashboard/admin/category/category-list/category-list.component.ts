@@ -7,6 +7,7 @@ import {
   MessageService,
 } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
+import { createImgPath } from 'src/app/shared/services/photo.service';
 
 @Component({
   selector: 'app-category-list',
@@ -33,7 +34,7 @@ export class CategoryListComponent implements OnInit {
     });
   }
 
-  createImgPath = (imgPath: string) => this.adminService.createImgPath(imgPath);
+  createImgPath = (imgPath: string) => createImgPath(imgPath);
 
   inputFilter(event: Event) {
     return (event.target as HTMLTextAreaElement)?.value;

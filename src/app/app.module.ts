@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,11 +10,13 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { tokenGetter } from './shared/services/auth.service';
 
 // Get the token
-export function tokenGetter() {
-  return localStorage.getItem('token');
-}
+// export function tokenGetter() {
+//   console.log(localStorage.getItem('token'));
+//   return localStorage.getItem('token');
+// }
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,17 +30,21 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:7021'],
+        allowedDomains: [
+          'localhost:44372',
+          'https://localhost:44372/api/',
+          'https://localhost:44372/api/auth',
+        ],
         disallowedRoutes: [],
       },
     }),
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: ErrorHandlerService,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: ErrorHandlerService,
+    //   multi: true,
+    // },
     ConfirmationService,
     MessageService,
   ],

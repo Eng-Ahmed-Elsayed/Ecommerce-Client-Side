@@ -14,7 +14,6 @@ const routes: Routes = [
     path: 'auth',
     loadChildren: () =>
       import('./components/auth/auth.module').then((m) => m.AuthModule),
-    canActivate: [notAuthenticatedGuard],
   },
   {
     path: 'dashboard',

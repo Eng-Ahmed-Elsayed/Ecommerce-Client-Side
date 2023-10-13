@@ -172,7 +172,7 @@ export class UpsertProductComponent implements OnInit {
 
   uploadFiles = (files: any) => {
     if (files.length !== 0) {
-      this.adminService.uploadFiles(files, true).subscribe({
+      this.adminService.uploadProductImages(files, true).subscribe({
         next: (res: any) => {
           if (res.type === HttpEventType.Response) {
             this.upsertProductForm.patchValue({

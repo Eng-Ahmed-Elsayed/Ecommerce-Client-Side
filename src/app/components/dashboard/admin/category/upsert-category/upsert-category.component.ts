@@ -99,7 +99,7 @@ export class UpsertCategoryComponent implements OnInit {
   // Upload the image first then add or update the category
   uploadFiles = (files: any) => {
     if (files.length !== 0) {
-      this.adminService.uploadFiles(files).subscribe({
+      this.adminService.uploadCategoryImage(files).subscribe({
         next: (res: any) => {
           if (res.type === HttpEventType.Response) {
             this.upsertCategoryForm.patchValue({ imgPath: res.body.dbPath });

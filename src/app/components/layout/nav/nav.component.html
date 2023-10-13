@@ -45,11 +45,6 @@
         >
       </mat-menu>
 
-      <a mat-list-item [matMenuTriggerFor]="auth">Auth</a>
-      <mat-menu #auth="matMenu">
-        <a mat-menu-item routerLink="/auth/login">Login</a>
-        <a mat-menu-item routerLink="/auth/register">Register</a>
-      </mat-menu>
       <a mat-list-item [matMenuTriggerFor]="viewerPages">Viewer Pages</a>
       <mat-menu #viewerPages="matMenu">
         <a mat-menu-item routerLink="/products"
@@ -58,15 +53,15 @@
       </mat-menu>
 
       <a mat-list-item routerLink="/dashboard">Dashboard</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar
       class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center"
     >
-      <span class="d-flex align-items-center text-center w-100 px-2">
+      <span
+        class="d-flex align-items-center text-center w-100 px-2 px-sm-4 px-lg-5"
+      >
         <button
           type="button"
           class="me-auto me-sm-0"
@@ -80,20 +75,20 @@
         <span class="me-auto me-sm-0">Ecommerce Full Stack</span>
       </span>
       <span
-        class="d-flex justify-content-between justify-content-sm-end align-items-center user-actions w-100 px-2"
+        class="d-flex justify-content-between justify-content-sm-end align-items-center user-actions w-100 px-2 px-sm-4 px-lg-5"
       >
         <!-- Search for products -->
         <p-button
-          (click)="showDialog()"
           styleClass="p-button-secondary p-button-text"
-          [style]="{ 'font-size': '1.5rem' }"
+          icon="pi pi-search"
+          (click)="showDialog()"
         >
-          <i class="pi pi-search" style="font-size: 1.5rem"></i>
         </p-button>
         <!-- Notifications -->
         <p-button
           styleClass="p-button-secondary p-button-text"
           (click)="billMenu.toggle($event)"
+          *ngIf="isAuthenticated"
         >
           <i
             class="pi pi-bell p-text-secondary"
@@ -103,17 +98,28 @@
           ></i
         ></p-button>
         <!-- User actions -->
+        <!-- If user -->
         <p-button
           styleClass="p-button-text p-button-secondary"
           (click)="userMenu.toggle($event)"
+          *ngIf="isAuthenticated"
         >
+          <!-- ../../../../assets/images/user/profile.jpg -->
           <img
             alt="logo"
-            src="../../../../assets/images/user/profile.jpg"
+            [src]="userImgPath"
             style="width: 2rem"
             class="me-2"
           />
-          <span>User Name</span>
+          <span>{{ username }}</span>
+        </p-button>
+        <!-- Else -->
+        <p-button
+          styleClass="p-button-text p-button-secondary"
+          icon="pi pi-user"
+          (click)="anonymousMenu.toggle($event)"
+          *ngIf="!isAuthenticated"
+        >
         </p-button>
         <!-- My cart -->
         <p-button
@@ -124,7 +130,9 @@
       </span>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <router-outlet></router-outlet>
+    <div class="mt-5 mt-sm-2">
+      <router-outlet></router-outlet>
+    </div>
     <app-footer></app-footer>
     <app-confirm-dialog></app-confirm-dialog>
     <p-scrollTop target="parent" icon="pi pi-arrow-up"></p-scrollTop>
@@ -149,6 +157,8 @@
 
 <!-- User Menu -->
 <p-menu #userMenu [model]="userMenuItems" [popup]="true"></p-menu>
+<!-- Anonymous Menu -->
+<p-menu #anonymousMenu [model]="anonymousMenuItems" [popup]="true"></p-menu>
 
 <!-- Notifications menu -->
 <p-menu #billMenu [model]="billMenuItems" [popup]="true"></p-menu>
