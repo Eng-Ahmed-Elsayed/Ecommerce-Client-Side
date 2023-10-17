@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
+import { CustomerService } from '../../admin/services/customer.service';
+import { UserPaymentDto } from 'src/app/shared/models/userPaymentDto';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-payment',
@@ -8,29 +10,101 @@ import { Router } from '@angular/router';
   styleUrls: ['./user-payment.component.scss'],
 })
 export class UserPaymentComponent implements OnInit {
-  paymentInformation: any;
-  userPaymentForm!: FormGroup;
+  items: MenuItem[] | undefined;
+  activeItem: MenuItem | undefined;
+  userPayments!: UserPaymentDto[];
+  userPayment!: UserPaymentDto;
+  current: string = 'list';
 
-  // constructor(private router: Router) {}
+  constructor(
+    private customerService: CustomerService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
+  ) {}
 
-  constructor(private fb: FormBuilder) {}
+  ngOnInit() {
+    this.getPaymentList();
+    this.items = [
+      {
+        label: 'Your Payment Methods',
+        icon: 'pi pi-fw pi-list',
+        command: () => {
+          this.current != 'list' ? this.getPaymentList() : '';
+          this.current = 'list';
+        },
+      },
+      {
+        label: 'Add New Payment',
+        icon: 'pi pi-fw pi-plus',
+        command: () => {
+          this.current = 'add';
+        },
+      },
+    ];
 
-  ngOnInit(): void {
-    this.userPaymentForm = this.fb.group({
-      name: [''],
-      accountNo: [],
-      expiry: [''],
-      cvv: [''],
-      remember: [''],
+    this.activeItem = this.items[0];
+  }
+
+  inputFilter(event: Event) {
+    return (event.target as HTMLTextAreaElement)?.value;
+  }
+
+  getPaymentList() {
+    this.customerService.getUserPaymentsList().subscribe({
+      next: (res: UserPaymentDto[]) => {
+        this.userPayments = res;
+      },
+      error: (err: HttpErrorResponse) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Retrive failed!',
+          detail: 'Faild to get your payment methods.',
+        });
+        console.log(err);
+      },
     });
   }
 
-  //   nextPage() {
-  //       this.ticketService.ticketInformation.paymentInformation = this.paymentInformation;
-  //       this.router.navigate(['steps/confirmation']);
-  //   }
+  deleteUserPayment(userPayment: UserPaymentDto) {
+    this.confirmationService.confirm({
+      message: `Are you sure that you want to delete: ${userPayment.name}`,
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        if (userPayment.id !== undefined) {
+          this.customerService.deleteUserPayment(userPayment.id).subscribe({
+            next: (res) => {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Delete Payment successfully!',
+                detail: `Selected Payment (${userPayment.name}) has been removed successfully!`,
+              });
+              this.userPayments = this.userPayments.filter(
+                (val) => val.id !== userPayment.id
+              );
+            },
+            error: (err: HttpErrorResponse) => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Failed to delete your payment.',
+                detail: err.message,
+              });
+              console.log(err);
+            },
+          });
+        }
+      },
+    });
+  }
 
-  //  prevPage() {
-  //       this.router.navigate(['steps/seat']);
-  //   }
+  getUserPaymentForUpdate(id: string) {
+    this.customerService.getUserPayment(id).subscribe({
+      next: (res: UserPaymentDto) => {
+        this.current = 'edit';
+        this.userPayment = res;
+        this.activeItem = this.items![2];
+      },
+      error: (err: HttpErrorResponse) => console.log(err),
+    });
+  }
 }

@@ -59,7 +59,7 @@ export class DiscountListComponent implements OnInit {
               this.messageService.add({
                 severity: 'success',
                 summary: 'Delete discount successfully!',
-                detail: `Selected discount (${discount.name}) have been removed successfully!`,
+                detail: `Selected discount (${discount.name}) has been removed successfully!`,
               });
               this.discounts = this.discounts.filter(
                 (val) => val.id !== discount.id

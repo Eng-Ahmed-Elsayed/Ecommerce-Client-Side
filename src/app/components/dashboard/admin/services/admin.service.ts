@@ -18,11 +18,6 @@ export class AdminService {
 
   constructor(private httpClient: HttpClient) {}
 
-  // Create a full image path
-  // public createImgPath = (imgPath: string): string => {
-  //   return `${environment.baseServerUrl}${imgPath}`;
-  // };
-
   // Generate new Guid
   private generate_uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(

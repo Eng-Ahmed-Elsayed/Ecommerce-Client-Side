@@ -16,11 +16,11 @@
           }"
         >
           <p-dataView #dv [value]="products">
-            <ng-template pTemplate="header">
-              <div
-                class="row text-center"
-                *ngIf="!(isSmall$ | async) && !isSidebar"
-              >
+            <ng-template
+              pTemplate="header"
+              *ngIf="!(isSmall$ | async) && !isSidebar"
+            >
+              <div class="row text-center">
                 <div class="col-3">Product</div>
                 <div class="col-2">Price</div>
                 <div class="col-3">Qty</div>

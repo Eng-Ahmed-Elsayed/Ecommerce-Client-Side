@@ -52,12 +52,12 @@ export class NavComponent implements OnInit {
       {
         label: 'Addresses',
         icon: 'pi pi-map-marker',
-        routerLink: '/dashboard/user-address',
+        routerLink: '/dashboard/user/address',
       },
       {
         label: 'Payments',
         icon: 'pi pi-id-card',
-        routerLink: '/dashboard/user-payment',
+        routerLink: '/dashboard/user/payment',
       },
       {
         label: 'Orders',

@@ -1,54 +1,83 @@
-<form [formGroup]="userPaymentForm">
-  <div class="row">
-    <div class="col-12 d-flex flex-column">
-      <label for="class">Card Holder Name</label>
-      <input type="text" required pInputText formControlName="name" />
-    </div>
-    <div class="col-8 col-sm-12 col-lg-8 d-flex flex-column">
-      <label id="accountNo" for="lastname">Account Number</label>
-      <p-inputMask
-        inputId="accountNo"
-        mask="9999-9999-9999-9999"
-        formControlName="accountNo"
-        styleClass="w-100"
-      ></p-inputMask>
-    </div>
-    <div class="col-2 col-sm-6 col-lg-2 d-flex flex-column">
-      <label id="expiry" for="date">Expiry Date</label>
-      <p-inputMask
-        inputId="expiry"
-        mask="99/99"
-        formControlName="expiry"
-        styleClass="w-100"
-      ></p-inputMask>
-    </div>
-    <div class="col-2 col-sm-6 col-lg-2 d-flex flex-column">
-      <label for="cvv">CVV</label>
-      <p-inputMask
-        id="cvv"
-        mask="999"
-        formControlName="cvv"
-        styleClass="w-100"
-      ></p-inputMask>
-    </div>
-    <div class="col-12 d-flex align-items-center">
-      <p-checkbox
-        id="remember"
-        [binary]="true"
-        formControlName="remember"
-        styleClass="me-3"
-      ></p-checkbox>
-      <label for="remember" class=""
-        >Save credit card information for future</label
-      >
-    </div>
+<div class="container-fluid custom-input-card">
+  <p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
+  <div class="row mt-4 px-4" *ngIf="current == 'list'">
+    <p-table
+      #dt
+      [value]="userPayments"
+      [rows]="10"
+      [paginator]="true"
+      [globalFilterFields]="['name', 'accountNo', 'provider']"
+      [tableStyle]="{ 'min-width': '80%' }"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+    >
+      <ng-template pTemplate="caption">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 class="mb-3">Manage Payments</h2>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="dt.filterGlobal(inputFilter($event), 'contains')"
+              placeholder="Search..."
+            />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="name" style="min-width: 15rem">
+            Card Holder Name <p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="accountNo" style="min-width: 15rem">
+            Account No <p-sortIcon field="accountNo"></p-sortIcon>
+          </th>
+          <th pSortableColumn="provider">
+            Provider <p-sortIcon field="provider"></p-sortIcon>
+          </th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-userPayment>
+        <tr>
+          <td>{{ userPayment.name }}</td>
+          <td>{{ userPayment.accountNo }}</td>
+          <td>{{ userPayment.provider }}</td>
+          <td>
+            <span class="d-flex">
+              <button
+                pButton
+                pRipple
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-success me-2"
+                (click)="getUserPaymentForUpdate(userPayment.id)"
+              ></button>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-warning"
+                (click)="deleteUserPayment(userPayment)"
+              ></button>
+            </span>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+          In total there are
+          {{ userPayments ? userPayments.length : 0 }} Payment Methods.
+        </div>
+      </ng-template>
+    </p-table>
   </div>
-</form>
-<!-- </ng-template>
-  <ng-template pTemplate="footer">
-      <div class="grid grid-nogutter justify-content-between">
-          <p-button label="Back" (onClick)="prevPage()" icon="pi pi-angle-left"></p-button>
-          <p-button label="Next" (onClick)="nextPage()" icon="pi pi-angle-right" iconPos="right"></p-button>
-      </div>
-  </ng-template>
-</p-card> -->
+</div>
+<app-user-payment-form *ngIf="current == 'add'"></app-user-payment-form>
+<app-user-payment-form
+  [userPayment]="userPayment"
+  [isUpdate]="true"
+  *ngIf="current == 'edit'"
+></app-user-payment-form>

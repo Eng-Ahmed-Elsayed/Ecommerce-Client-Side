@@ -1,143 +1,115 @@
-<!-- If there is an address display here in small table  -->
-<h2>User Address</h2>
-<form [formGroup]="userAddressForm">
-  <div class="custom-input-group">
-    <span class="p-float-label">
-      <input
-        pInputText
-        id="firstName"
-        formControlName="firstName"
-        class="w-100"
-      />
-      <label htmlFor="firstName">First Name</label>
-    </span>
+<div class="container-fluid custom-input-card">
+  <p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
+  <div class="row mt-4 px-4" *ngIf="current == 'list'">
+    <p-table
+      #dt
+      [value]="userAddresses"
+      [rows]="10"
+      [paginator]="true"
+      [globalFilterFields]="[
+        'firstName',
+        'lastName',
+        'country',
+        'state',
+        'city',
+        'postalCode',
+        'telephone',
+        'mobile'
+      ]"
+      [tableStyle]="{ 'min-width': '80%' }"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+    >
+      <ng-template pTemplate="caption">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2 class="mb-3">Manage Addresses</h2>
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              pInputText
+              type="text"
+              (input)="dt.filterGlobal(inputFilter($event), 'contains')"
+              placeholder="Search..."
+            />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
+          <th pSortableColumn="firstName">
+            First Name <p-sortIcon field="firstName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="lastName">
+            Last Name <p-sortIcon field="lastName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="country">
+            Country <p-sortIcon field="country"></p-sortIcon>
+          </th>
+          <th pSortableColumn="state">
+            State <p-sortIcon field="state"></p-sortIcon>
+          </th>
+          <th pSortableColumn="city">
+            City <p-sortIcon field="city"></p-sortIcon>
+          </th>
+          <th pSortableColumn="postalCode">
+            Postal Code <p-sortIcon field="postalCode"></p-sortIcon>
+          </th>
+          <th pSortableColumn="telephone">
+            Telephone <p-sortIcon field="telephone"></p-sortIcon>
+          </th>
+          <th pSortableColumn="mobile">
+            Mobile <p-sortIcon field="mobile"></p-sortIcon>
+          </th>
+
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-userAddress>
+        <tr>
+          <td>{{ userAddress.id }}</td>
+          <td>{{ userAddress.firstName }}</td>
+          <td>{{ userAddress.lastName }}</td>
+          <td>{{ userAddress.country }}</td>
+          <td>{{ userAddress.state }}</td>
+          <td>{{ userAddress.city }}</td>
+          <td>{{ userAddress.postalCode }}</td>
+          <td>{{ userAddress.telephone }}</td>
+          <td>{{ userAddress.mobile }}</td>
+          <td>
+            <span class="d-flex">
+              <button
+                pButton
+                pRipple
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-success me-2"
+                (click)="getUserAddressForUpdate(userAddress.id)"
+              ></button>
+              <button
+                pButton
+                pRipple
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-warning"
+                (click)="deleteUserAddress(userAddress)"
+              ></button>
+            </span>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary">
+        <div class="flex align-items-center justify-content-between">
+          In total there are
+          {{ userAddresses ? userAddresses.length : 0 }} Address.
+        </div>
+      </ng-template>
+    </p-table>
   </div>
-  <div class="custom-input-group">
-    <span class="p-float-label">
-      <input
-        pInputText
-        id="lastName"
-        formControlName="lastName"
-        class="w-100"
-      />
-      <label htmlFor="lastName">Last Name</label>
-    </span>
-  </div>
-  <div class="custom-input-group">
-    <span class="p-float-label">
-      <input
-        pInputText
-        id="addressLine1"
-        formControlName="addressLine1"
-        class="w-100"
-      />
-      <label htmlFor="addressLine1">Address Line 1</label>
-    </span>
-  </div>
-  <div class="custom-input-group">
-    <span class="p-float-label">
-      <input
-        pInputText
-        id="addressLine2"
-        formControlName="addressLine2"
-        class="w-100"
-      />
-      <label htmlFor="addressLine2">Address Line 2</label>
-    </span>
-  </div>
-  <div class="custom-input-group">
-    <span class="p-float-label">
-      <p-dropdown
-        id="country"
-        [options]="countries"
-        formControlName="country"
-        placeholder="Select a country"
-        styleClass="w-100"
-        optionLabel="name"
-        (onChange)="onCountryChange($event)"
-      ></p-dropdown>
-      <label for="country">Country</label>
-    </span>
-  </div>
-  <div class="custom-input-group">
-    <span class="p-float-label">
-      <p-dropdown
-        id="state"
-        [options]="userAddressForm.get('country')?.value?.states"
-        optionLabel="name"
-        formControlName="state"
-        placeholder="Select a state"
-        [attr.disabled]="!userAddressForm.get('country')?.value"
-        styleClass="w-100"
-      ></p-dropdown>
-      <label for="state">State</label>
-    </span>
-  </div>
-  <div class="custom-input-group">
-    <span class="p-float-label">
-      <p-dropdown
-        id="city"
-        [options]="userAddressForm.get('state')?.value?.cities"
-        formControlName="city"
-        placeholder="Select a city"
-        [attr.disabled]="!userAddressForm.get('state')?.value"
-        styleClass="w-100"
-      ></p-dropdown>
-      <label for="city">City</label>
-    </span>
-  </div>
-  <div class="custom-input-group">
-    <span class="p-float-label">
-      <p-inputNumber
-        inputId="postalCode"
-        formControlName="postalCode"
-        [minlength]="5"
-        [maxlength]="10"
-        [required]="true"
-        [class]="
-          userAddressForm.get('postalCode')?.invalid &&
-          userAddressForm.get('postalCode')?.dirty
-            ? 'ng-invalid ng-dirty'
-            : 'ng-valid'
-        "
-      >
-      </p-inputNumber>
-      <label htmlFor="postalCode">Postal Code</label>
-    </span>
-    <app-custom-input-error
-      [msg]="
-        userAddressForm.get('postalCode')?.invalid &&
-        userAddressForm.get('postalCode')?.dirty
-          ? 'Please enter a valid Postal Code'
-          : ''
-      "
-    ></app-custom-input-error>
-  </div>
-  <div class="custom-input-group">
-    <span class="p-float-label">
-      <p-inputNumber
-        inputId="telephone"
-        formControlName="telephone"
-        [minlength]="4"
-        [maxlength]="20"
-      >
-      </p-inputNumber>
-      <label htmlFor="telephone">Telephone</label>
-    </span>
-  </div>
-  <div class="custom-input-group">
-    <span class="p-float-label">
-      <p-inputNumber
-        inputId="mobile"
-        formControlName="mobile"
-        [minlength]="4"
-        [maxlength]="20"
-      >
-      </p-inputNumber>
-      <label htmlFor="mobile">Mobile</label>
-    </span>
-  </div>
-  <div class="d-flex justify-content-center">
-    <button pButton pRipple label="Continue"></button>
-  </div>
-</form>
+</div>
+<app-user-address-form *ngIf="current == 'add'"></app-user-address-form>
+<app-user-address-form
+  [userAddress]="userAddress"
+  [isUpdate]="true"
+  *ngIf="current == 'edit'"
+></app-user-address-form>

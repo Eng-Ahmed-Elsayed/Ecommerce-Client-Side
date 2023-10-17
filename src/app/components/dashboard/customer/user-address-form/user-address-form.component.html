@@ -1,0 +1,151 @@
+<form [formGroup]="userAddressForm" (submit)="upsertAddress()">
+  <div [class]="'row ' + (checkOut ? '' : 'py-3 px-4 px-md-5')">
+    <h2 class="mb-3">Add a New Address</h2>
+    <div class="col-12 col-md-6 custom-input-group">
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="firstName"
+          formControlName="firstName"
+          class="w-100"
+        />
+        <label htmlFor="firstName">First Name</label>
+      </span>
+    </div>
+    <div class="col-12 col-md-6 custom-input-group">
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="lastName"
+          formControlName="lastName"
+          class="w-100"
+        />
+        <label htmlFor="lastName">Last Name</label>
+      </span>
+    </div>
+    <div class="col-12 custom-input-group">
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="addressLine1"
+          formControlName="addressLine1"
+          class="w-100"
+        />
+        <label htmlFor="addressLine1">Address Line 1</label>
+      </span>
+    </div>
+    <div class="col-12 custom-input-group">
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="addressLine2"
+          formControlName="addressLine2"
+          class="w-100"
+        />
+        <label htmlFor="addressLine2">Address Line 2</label>
+      </span>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 custom-input-group">
+      <span class="p-float-label">
+        <p-dropdown
+          id="country"
+          [options]="countries"
+          formControlName="country"
+          placeholder="Select a country"
+          styleClass="w-100"
+          optionLabel="name"
+          (onChange)="onCountryChange($event)"
+        ></p-dropdown>
+        <label for="country">Country</label>
+      </span>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 custom-input-group">
+      <span class="p-float-label">
+        <p-dropdown
+          id="state"
+          [options]="userAddressForm.get('country')?.value?.states"
+          optionLabel="name"
+          formControlName="state"
+          placeholder="Select a state"
+          [attr.disabled]="!userAddressForm.get('country')?.value"
+          styleClass="w-100"
+          (onChange)="onStateChange($event)"
+        ></p-dropdown>
+        <label for="state">State</label>
+      </span>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 custom-input-group">
+      <span class="p-float-label">
+        <p-dropdown
+          id="city"
+          [options]="userAddressForm.get('state')?.value?.cities"
+          formControlName="city"
+          placeholder="Select a city"
+          [attr.disabled]="!userAddressForm.get('state')?.value"
+          styleClass="w-100"
+        ></p-dropdown>
+        <label for="city">City</label>
+      </span>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 custom-input-group">
+      <span class="p-float-label">
+        <p-inputMask
+          inputId="postalCode"
+          formControlName="postalCode"
+          styleClass="w-100"
+          [minlength]="5"
+          [maxlength]="10"
+          mask="999999999"
+          [unmask]="true"
+          [autoClear]="false"
+          [required]="true"
+          [class]="
+            userAddressForm.get('postalCode')?.invalid &&
+            userAddressForm.get('postalCode')?.dirty
+              ? 'ng-invalid ng-dirty'
+              : 'ng-valid'
+          "
+        >
+        </p-inputMask>
+        <label htmlFor="postalCode">Postal Code</label>
+      </span>
+      <app-custom-input-error
+        [msg]="
+          userAddressForm.get('postalCode')?.invalid &&
+          userAddressForm.get('postalCode')?.dirty
+            ? 'Please enter a valid Postal Code'
+            : ''
+        "
+      ></app-custom-input-error>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 custom-input-group">
+      <span class="p-float-label">
+        <p-inputMask
+          inputId="telephone"
+          mask="(999) 999-9999"
+          formControlName="telephone"
+          placeholder="(999) 999-9999"
+          styleClass="w-100"
+          [autoClear]="false"
+        ></p-inputMask>
+        <label htmlFor="telephone">Phone Telephone</label>
+      </span>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 custom-input-group">
+      <span class="p-float-label">
+        <p-inputMask
+          inputId="mobile"
+          mask="(999) 999-9999"
+          formControlName="mobile"
+          placeholder="(999) 999-9999"
+          styleClass="w-100"
+          [autoClear]="false"
+        ></p-inputMask>
+        <label htmlFor="mobile">Phone Mobile</label>
+      </span>
+    </div>
+    <div class="col-12 d-flex justify-content-center align-items-center">
+      <button pButton pRipple label="Save"></button>
+    </div>
+  </div>
+</form>

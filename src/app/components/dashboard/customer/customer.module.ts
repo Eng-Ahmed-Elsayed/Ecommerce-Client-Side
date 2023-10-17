@@ -22,6 +22,9 @@ import { UserAddressComponent } from './user-address/user-address.component';
 import { UserPaymentComponent } from './user-payment/user-payment.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import { ShippingOptionsComponent } from './shipping-options/shipping-options.component';
+import { UserPaymentFormComponent } from './user-payment-form/user-payment-form.component';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { UserAddressFormComponent } from './user-address-form/user-address-form.component';
 
 @NgModule({
   declarations: [
@@ -29,9 +32,11 @@ import { ShippingOptionsComponent } from './shipping-options/shipping-options.co
     ShoppingCartComponent,
     CheckOutComponent,
     UserAddressComponent,
+    UserPaymentFormComponent,
     UserPaymentComponent,
     OrderConfirmationComponent,
     ShippingOptionsComponent,
+    UserAddressFormComponent,
   ],
   imports: [
     CommonModule,
@@ -50,6 +55,7 @@ import { ShippingOptionsComponent } from './shipping-options/shipping-options.co
     CardModule,
     InputMaskModule,
     TableModule,
+    TabMenuModule,
   ],
   exports: [ShoppingCartComponent],
 })

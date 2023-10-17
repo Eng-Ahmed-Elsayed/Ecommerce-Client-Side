@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Country } from 'src/app/shared/models/country';
-import { Product } from 'src/app/shared/models/product';
-import { ProductService } from 'src/app/shared/services/product.service';
+import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
+import { UserAddressDto } from 'src/app/shared/models/userAddressDto';
+import { CustomerService } from '../../admin/services/customer.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-address',
@@ -10,86 +11,101 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrls: ['./user-address.component.scss'],
 })
 export class UserAddressComponent implements OnInit {
-  userAddressForm!: FormGroup;
-  products!: Product[];
-  // Have to put this in the form before the API call.
-  selectedCountry: any;
-  selectedState: any;
-  countries: Country[] = [
-    {
-      name: 'Australia',
-      states: [
-        {
-          name: 'New South Wales',
-          cities: ['Sydney', 'Newcastle', 'Wollongong'],
-        },
-        {
-          name: 'Queensland',
-          cities: ['Brisbane', 'Townsville'],
-        },
-      ],
-    },
-    {
-      name: 'Canada',
-      states: [
-        {
-          name: 'Quebec',
-          cities: ['Montreal', 'Quebec City'],
-        },
-        {
-          name: 'Ontario',
-          cities: ['Ottawa', 'Toronto'],
-        },
-      ],
-    },
-    {
-      name: 'United States',
-      states: [
-        {
-          name: 'California',
-          cities: ['Los Angeles', 'San Diego', 'San Francisco'],
-        },
-        {
-          name: 'Florida',
-          cities: ['Jacksonville', 'Miami', 'Tampa', 'Orlando'],
-        },
-        {
-          name: 'Texas',
-          cities: ['Austin', 'Dallas', 'Houston'],
-        },
-      ],
-    },
-  ];
+  items: MenuItem[] | undefined;
+  activeItem: MenuItem | undefined;
+  userAddresses!: UserAddressDto[];
+  userAddress!: UserAddressDto;
+  current: string = 'list';
 
   constructor(
-    private fb: FormBuilder,
-    private productService: ProductService
+    private customerService: CustomerService,
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {}
 
-  ngOnInit(): void {
-    this.userAddressForm = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      addressLine1: [''],
-      addressLine2: [''],
-      country: [''],
-      state: [''],
-      city: [''],
-      postalCode: [],
-      telephone: [],
-      mobile: [],
-    });
+  ngOnInit() {
+    this.getAddressList();
+    this.items = [
+      {
+        label: 'Your Address',
+        icon: 'pi pi-fw pi-list',
+        command: () => {
+          this.current != 'list' ? this.getAddressList() : '';
+          this.current = 'list';
+        },
+      },
+      {
+        label: 'Add New Address',
+        icon: 'pi pi-fw pi-plus',
+        command: () => {
+          this.current = 'add';
+        },
+      },
+    ];
 
-    this.productService.getProductsSmall().then((products) => {
-      this.products = products.slice(0, 3);
+    this.activeItem = this.items[0];
+  }
+
+  inputFilter(event: Event) {
+    return (event.target as HTMLTextAreaElement)?.value;
+  }
+
+  getAddressList() {
+    this.customerService.getUserAddresssList().subscribe({
+      next: (res: UserAddressDto[]) => {
+        this.userAddresses = res;
+      },
+      error: (err: HttpErrorResponse) => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Retrive failed!',
+          detail: 'Faild to get your addresses.',
+        });
+        console.log(err);
+      },
     });
   }
 
-  onCountryChange(event: any) {
-    this.selectedCountry = event.value.name;
+  deleteUserAddress(userAddress: UserAddressDto) {
+    this.confirmationService.confirm({
+      message: `Are you sure that you want to delete this address`,
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        if (userAddress.id !== undefined) {
+          this.customerService.deleteUserAddress(userAddress.id).subscribe({
+            next: (res) => {
+              this.messageService.add({
+                severity: 'success',
+                summary: 'Delete Address successfully!',
+                detail: `Selected Address has been removed successfully!`,
+              });
+              this.userAddresses = this.userAddresses.filter(
+                (val) => val.id !== userAddress.id
+              );
+            },
+            error: (err: HttpErrorResponse) => {
+              this.messageService.add({
+                severity: 'error',
+                summary: 'Failed to delete your address',
+                detail: err.message,
+              });
+              console.log(err);
+            },
+          });
+        }
+      },
+    });
   }
 
-  onStateChange(event: any) {
-    this.selectedState = event.value.name;
+  getUserAddressForUpdate(id: string) {
+    this.customerService.getUserAddress(id).subscribe({
+      next: (res: UserAddressDto) => {
+        this.current = 'edit';
+        this.userAddress = res;
+        this.activeItem = this.items![2];
+      },
+      error: (err: HttpErrorResponse) => console.log(err),
+    });
   }
 }
