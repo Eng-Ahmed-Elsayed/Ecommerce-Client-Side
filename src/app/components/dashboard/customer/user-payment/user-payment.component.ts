@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
-import { CustomerService } from '../../admin/services/customer.service';
+import { CustomerService } from '../../../../shared/services/customer.service';
 import { UserPaymentDto } from 'src/app/shared/models/userPaymentDto';
 import { HttpErrorResponse } from '@angular/common/http';
 

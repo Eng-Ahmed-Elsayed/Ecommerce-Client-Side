@@ -42,22 +42,13 @@
       <div class="row">
         <div class="col-12">
           <!-- Order Form -->
-          <form [formGroup]="orderForm" class="order-form">
+          <form
+            [formGroup]="orderForm"
+            class="order-form"
+            (submit)="addCartItem()"
+          >
             <div class="row">
               <app-custom-product-colors></app-custom-product-colors>
-              <!-- <div class="col-12 product-size mb-3">
-                <div class="row">
-                  <h6>Size</h6>
-                  <p-selectButton
-                    [options]="sizeStateOptions"
-                    formControlName="size"
-                    optionLabel="label"
-                    optionValue="value"
-                  >
-                    ></p-selectButton
-                  >
-                </div>
-              </div> -->
               <div class="col-12 mb-3">
                 <div class="row">
                   <h6>Size</h6>
@@ -89,6 +80,7 @@
                     label="Add to Cart"
                     icon="pi pi-shopping-cart"
                     styleClass="p-button-raised "
+                    type="submit"
                   ></p-button>
                   <p-button
                     icon="pi pi-heart"

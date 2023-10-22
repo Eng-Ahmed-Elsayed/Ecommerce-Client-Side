@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { CustomerService } from '../../admin/services/customer.service';
+import { CustomerService } from '../../../../shared/services/customer.service';
 import { MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserPaymentDto } from 'src/app/shared/models/userPaymentDto';

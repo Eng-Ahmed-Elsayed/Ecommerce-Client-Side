@@ -11,9 +11,7 @@
         <div class="cart-item rounded mx-2 text-center py-5 px-3">
           <div class="mb-3">
             <img
-              src="https://primefaces.org/cdn/primeng/images/demo/product/{{
-                product.image
-              }}"
+              [src]="createImgPath(product.productImages[0].imgPath)"
               [alt]="product.name"
               class="carousel-img"
             />
@@ -22,20 +20,21 @@
             <h4 class="mb-1">{{ product.name }}</h4>
             <h6 class="mt-0 mb-3">{{ "$" + product.price }}</h6>
             <p-tag
-              [value]="product.inventoryStatus"
-              [severity]="getSeverity(product.inventoryStatus)"
+              [value]="product.inventory.status"
+              [severity]="getSeverity(product)"
             ></p-tag>
             <div class="car-buttons mt-5">
               <p-button
                 type="button"
-                styleClass="p-button p-button-rounded mr-2"
-                icon="pi pi-shopping-cart"
-                (click)="shopCartConfirm()"
+                styleClass="p-button-info p-button-rounded mr-2"
+                icon="pi pi-eye"
+                routerLink="/product/{{ product.id }}"
               ></p-button>
               <p-button
                 type="button"
-                styleClass="p-button-info p-button-rounded mr-2"
-                icon="pi pi-search"
+                styleClass="p-button p-button-rounded mr-2"
+                icon="pi pi-shopping-cart"
+                (click)="shopCartConfirm(product.id)"
               ></p-button>
               <p-button
                 type="button"

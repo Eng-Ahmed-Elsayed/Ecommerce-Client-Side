@@ -15,7 +15,7 @@
             height: isSidebar ? '50vh' : '100%'
           }"
         >
-          <p-dataView #dv [value]="products">
+          <p-dataView #dv [value]="cartItems">
             <ng-template
               pTemplate="header"
               *ngIf="!(isSmall$ | async) && !isSidebar"
@@ -35,7 +35,7 @@
               </div>
             </ng-template>
 
-            <ng-template let-product pTemplate="listItem">
+            <ng-template let-cartItem pTemplate="listItem">
               <div
                 class="row align-items-center text-center mb-2 p-3"
                 style="border-width: 1px; border-radius: var(--border-radius)"
@@ -50,19 +50,18 @@
                   <img
                     class="w-50 me-sm-2 rounded"
                     [src]="
-                      'https://primefaces.org/cdn/primeng/images/demo/product/' +
-                      product.image
+                      createImgPath(cartItem.product.productImages[0]?.imgPath)
                     "
-                    [alt]="product.name"
-                  /><span>{{ product.name }}</span>
+                    [alt]="cartItem.product.name"
+                  /><span>{{ cartItem.product.name }}</span>
                 </div>
                 <div [class]="isSidebar ? 'col-12' : 'col-12 col-sm-2'">
-                  {{ product.price | currency }}
+                  {{ cartItem.product.price | currency }}
                 </div>
                 <div [class]="isSidebar ? 'col-12' : 'col-12 col-sm-3'">
                   <p-inputNumber
-                    formControlName="quantity"
                     [showButtons]="true"
+                    [ngModel]="cartItem.quantity"
                     buttonLayout="horizontal"
                     inputId="horizontal"
                     spinnerMode="horizontal"
@@ -74,6 +73,8 @@
                     inputStyleClass="p-inputtext-sm inputNumber text-center"
                     [min]="1"
                     [max]="99"
+                    (onInput)="onQtyInput($event, cartItem)"
+                    (onBlur)="onQtyInputBlur($event, cartItem)"
                   ></p-inputNumber>
                 </div>
                 <!-- <div class="col-12 col-sm-2">10</div> -->
@@ -81,13 +82,14 @@
                   [class]="isSidebar ? 'col-12' : 'col-12 col-sm-2'"
                   style="color: var(--primary-color)"
                 >
-                  {{ 90 | currency }}
+                  {{ cartItem.price | currency }}
                 </div>
                 <div [class]="isSidebar ? 'col-12' : 'col-12 col-sm-2'">
                   <button
                     pButton
                     icon="pi pi-trash"
                     class="p-button-rounded p-button-danger"
+                    (click)="DeleteCartItemConfirm(cartItem.id)"
                   ></button>
                 </div>
               </div>

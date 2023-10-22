@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { MenuItem, MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { CartItemDto } from 'src/app/shared/models/cartItemDto';
+import { CustomerService } from '../../../shared/services/customer.service';
+import { ShoppingCartDto } from 'src/app/shared/models/shoppingCartDto';
 
 @Component({
   selector: 'app-nav',
@@ -17,6 +20,8 @@ export class NavComponent implements OnInit {
   userImgPath!: string;
 
   cartVisible: boolean = false;
+  // cartItems: CartItemDto[] | undefined;
+
   userMenuItems: MenuItem[] | undefined;
   anonymousMenuItems: MenuItem[] | undefined;
   billMenuItems: MenuItem[] | undefined;
@@ -26,13 +31,16 @@ export class NavComponent implements OnInit {
   constructor(
     private messageService: MessageService,
     private layoutService: LayoutService,
-    private authService: AuthService
+    private authService: AuthService,
+    private customerService: CustomerService
   ) {}
 
   ngOnInit() {
+    // If the screen is large or no
     this.layoutService.getIsLarge().subscribe((isLarge) => {
       this.isLarge$ = isLarge;
     });
+    // User informations
     this.authService.authChange.subscribe((value) => {
       this.isAuthenticated = value;
       if (this.isAuthenticated) {
@@ -41,8 +49,16 @@ export class NavComponent implements OnInit {
           this.authService.getUserImgPath() === ''
             ? '../../../../assets/images/user/default-user-image.png'
             : this.authService.getUserImgPath();
+        // User cart
+        // this.customerService.cartReview().subscribe({
+        //   next: (res: ShoppingCartDto) => {
+        //     console.log(res);
+        //     this.cartItems = res.cartItems;
+        //   },
+        // });
       }
     });
+
     this.userMenuItems = [
       {
         label: 'Information',

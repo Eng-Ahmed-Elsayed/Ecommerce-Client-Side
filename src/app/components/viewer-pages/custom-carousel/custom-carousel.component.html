@@ -9,9 +9,7 @@
       <div class="cart-item rounded mx-2 text-center py-5 px-3">
         <div class="mb-3">
           <img
-            src="https://primefaces.org/cdn/primeng/images/demo/product/{{
-              item.image
-            }}"
+            [src]="createImgPath(item.imgPath)"
             [alt]="item.name"
             [class]="'carousel-img ' + imgClass"
           />

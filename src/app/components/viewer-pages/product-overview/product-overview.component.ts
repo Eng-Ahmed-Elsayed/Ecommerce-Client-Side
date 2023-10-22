@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductDto } from 'src/app/shared/models/productDto';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 import { PhotoService } from 'src/app/shared/services/photo.service';
+import { CustomerService } from '../../../shared/services/customer.service';
+import { CartItemDto } from 'src/app/shared/models/cartItemDto';
 
 @Component({
   selector: 'app-product-overview',
@@ -34,7 +36,8 @@ export class ProductOverviewComponent implements OnInit {
     private layoutService: LayoutService,
     private photoService: PhotoService,
     private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private customerService: CustomerService
   ) {}
 
   ngOnInit() {
@@ -43,9 +46,9 @@ export class ProductOverviewComponent implements OnInit {
     //   this.images = images.slice(0, 4);
     // });
     this.orderForm = this.fb.group({
-      color: [],
-      size: [],
-      quantity: [],
+      // color: [],
+      // size: [],
+      quantity: ['1'],
     });
     this.activatedRoute.data.subscribe({
       next: (data: any) => {
@@ -56,5 +59,10 @@ export class ProductOverviewComponent implements OnInit {
         );
       },
     });
+  }
+  addCartItem() {
+    let cartItem: CartItemDto = this.orderForm.getRawValue();
+    cartItem.productId = this.product.id;
+    this.customerService.addCartItem(cartItem);
   }
 }

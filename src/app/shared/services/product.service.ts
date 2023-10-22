@@ -1286,7 +1286,7 @@ export class ProductService {
     ];
   }
 
-  // API
+  // API end points
   getProductList(): Observable<ProductDto[]> {
     return this.httpClient.get<ProductDto[]>(this.productApiUrl + 'list');
   }

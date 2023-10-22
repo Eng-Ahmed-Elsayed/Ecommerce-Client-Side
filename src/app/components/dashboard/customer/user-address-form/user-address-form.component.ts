@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Country } from 'src/app/shared/models/country';
 import { UserAddressDto } from 'src/app/shared/models/userAddressDto';
-import { CustomerService } from '../../admin/services/customer.service';
+import { CustomerService } from '../../../../shared/services/customer.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({

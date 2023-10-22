@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { UserAddressDto } from 'src/app/shared/models/userAddressDto';
-import { CustomerService } from '../../admin/services/customer.service';
+import { CustomerService } from '../../../../shared/services/customer.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
