@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
-import { UserAddressDto } from 'src/app/shared/models/userAddressDto';
+import { UserAddressDto } from 'src/app/shared/models/customer/userAddressDto';
 import { CustomerService } from '../../../../shared/services/customer.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 @Component({
   selector: 'app-user-address',
@@ -20,7 +20,8 @@ export class UserAddressComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private utilityService: UtilityService
   ) {}
 
   ngOnInit() {
@@ -46,9 +47,7 @@ export class UserAddressComponent implements OnInit {
     this.activeItem = this.items[0];
   }
 
-  inputFilter(event: Event) {
-    return (event.target as HTMLTextAreaElement)?.value;
-  }
+  inputFilter = (event: Event) => this.utilityService.inputFilter(event);
 
   getAddressList() {
     this.customerService.getUserAddresssList().subscribe({

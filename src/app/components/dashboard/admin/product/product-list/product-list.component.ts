@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/shared/models/product';
+import { Product } from 'src/app/shared/models/shared/product';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { AdminService } from '../../services/admin.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ProductDto } from 'src/app/shared/models/productDto';
+import { ProductDto } from 'src/app/shared/models/shared/productDto';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { createImgPath } from 'src/app/shared/services/photo.service';
 

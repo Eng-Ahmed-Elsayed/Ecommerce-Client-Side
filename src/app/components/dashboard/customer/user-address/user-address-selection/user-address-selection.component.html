@@ -1,0 +1,37 @@
+<p-table
+  #dt
+  [value]="userAddresses"
+  [tableStyle]="{ 'min-width': '80%' }"
+  [rowHover]="true"
+  dataKey="country"
+  (selectionChange)="selectAddress($event)"
+  *ngIf="userAddresses?.length != 0"
+>
+  <ng-template pTemplate="caption">
+    <h4>Select Address</h4>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 4rem"></th>
+      <th>Country</th>
+      <th>State</th>
+      <th>City</th>
+      <th>Postal Code</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-userAddress>
+    <tr>
+      <td>
+        <p-tableRadioButton [value]="userAddress"></p-tableRadioButton>
+      </td>
+      <td>{{ userAddress.country }}</td>
+      <td>{{ userAddress.state }}</td>
+      <td>{{ userAddress.city }}</td>
+      <td>{{ userAddress.postalCode }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<app-user-address-form
+  *ngIf="userAddresses?.length == 0"
+></app-user-address-form>

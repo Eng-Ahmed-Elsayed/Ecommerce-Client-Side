@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
 import { DataView } from 'primeng/dataview';
-import { Product } from 'src/app/shared/models/product';
-import { ProductDto } from 'src/app/shared/models/productDto';
+import { Product } from 'src/app/shared/models/shared/product';
+import { ProductDto } from 'src/app/shared/models/shared/productDto';
 import { CustomOverlayService } from 'src/app/shared/services/custom-overlay.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 

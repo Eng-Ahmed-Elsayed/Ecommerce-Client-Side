@@ -4,9 +4,8 @@ import { Observable } from 'rxjs';
 import { MenuItem, MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { CartItemDto } from 'src/app/shared/models/cartItemDto';
 import { CustomerService } from '../../../shared/services/customer.service';
-import { ShoppingCartDto } from 'src/app/shared/models/shoppingCartDto';
+import { ShoppingCartDto } from 'src/app/shared/models/customer/shoppingCartDto';
 
 @Component({
   selector: 'app-nav',

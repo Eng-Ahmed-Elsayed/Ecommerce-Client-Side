@@ -6,10 +6,10 @@ import {
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CategoryDto } from 'src/app/shared/models/categoryDto';
 import { AdminService } from '../services/admin.service';
-import { DiscountDto } from 'src/app/shared/models/discountDto';
-import { ProductDto } from 'src/app/shared/models/productDto';
+import { DiscountDto } from 'src/app/shared/models/shared/discountDto';
+import { ProductDto } from 'src/app/shared/models/shared/productDto';
+import { CategoryDto } from 'src/app/shared/models/shared/categoryDto';
 
 // export const adminGuard: CanActivateFn = (route, state) => {
 //   return true;

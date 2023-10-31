@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { Product } from 'src/app/shared/models/product';
+import { Product } from 'src/app/shared/models/shared/product';
 import { CustomOverlayService } from 'src/app/shared/services/custom-overlay.service';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 import { createImgPath } from 'src/app/shared/services/photo.service';
 import { CustomerService } from '../../../shared/services/customer.service';
-import { CartItemDto } from 'src/app/shared/models/cartItemDto';
-import { ProductDto } from 'src/app/shared/models/productDto';
+import { ProductDto } from 'src/app/shared/models/shared/productDto';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { CartItemDto } from 'src/app/shared/models/customer/cartItemDto';
 
 @Component({
   selector: 'app-products-carousel',

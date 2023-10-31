@@ -6,19 +6,10 @@
       [value]="userAddresses"
       [rows]="10"
       [paginator]="true"
-      [globalFilterFields]="[
-        'firstName',
-        'lastName',
-        'country',
-        'state',
-        'city',
-        'postalCode',
-        'telephone',
-        'mobile'
-      ]"
+      [globalFilterFields]="['country']"
       [tableStyle]="{ 'min-width': '80%' }"
       [rowHover]="true"
-      dataKey="id"
+      dataKey="country"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [showCurrentPageReport]="true"
     >
@@ -38,46 +29,22 @@
       </ng-template>
       <ng-template pTemplate="header">
         <tr>
-          <th pSortableColumn="id">Id <p-sortIcon field="id"></p-sortIcon></th>
-          <th pSortableColumn="firstName">
-            First Name <p-sortIcon field="firstName"></p-sortIcon>
-          </th>
-          <th pSortableColumn="lastName">
-            Last Name <p-sortIcon field="lastName"></p-sortIcon>
-          </th>
           <th pSortableColumn="country">
             Country <p-sortIcon field="country"></p-sortIcon>
           </th>
-          <th pSortableColumn="state">
-            State <p-sortIcon field="state"></p-sortIcon>
-          </th>
-          <th pSortableColumn="city">
-            City <p-sortIcon field="city"></p-sortIcon>
-          </th>
-          <th pSortableColumn="postalCode">
-            Postal Code <p-sortIcon field="postalCode"></p-sortIcon>
-          </th>
-          <th pSortableColumn="telephone">
-            Telephone <p-sortIcon field="telephone"></p-sortIcon>
-          </th>
-          <th pSortableColumn="mobile">
-            Mobile <p-sortIcon field="mobile"></p-sortIcon>
-          </th>
+          <th>State</th>
+          <th>City</th>
+          <th>Postal Code</th>
 
           <th></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-userAddress>
         <tr>
-          <td>{{ userAddress.id }}</td>
-          <td>{{ userAddress.firstName }}</td>
-          <td>{{ userAddress.lastName }}</td>
           <td>{{ userAddress.country }}</td>
           <td>{{ userAddress.state }}</td>
           <td>{{ userAddress.city }}</td>
           <td>{{ userAddress.postalCode }}</td>
-          <td>{{ userAddress.telephone }}</td>
-          <td>{{ userAddress.mobile }}</td>
           <td>
             <span class="d-flex">
               <button
@@ -101,7 +68,8 @@
       <ng-template pTemplate="summary">
         <div class="flex align-items-center justify-content-between">
           In total there are
-          {{ userAddresses ? userAddresses.length : 0 }} Address.
+          {{ userAddresses ? userAddresses.length : 0 }}
+          {{ userAddresses.length == 1 ? "Address" : "Addresses" }}.
         </div>
       </ng-template>
     </p-table>

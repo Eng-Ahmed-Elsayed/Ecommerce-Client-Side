@@ -1,0 +1,35 @@
+<p-table
+  #dt
+  [value]="userPayments"
+  [tableStyle]="{ 'min-width': '80%' }"
+  [rowHover]="true"
+  dataKey="name"
+  (selectionChange)="selectPayment($event)"
+  *ngIf="userPayments?.length != 0"
+>
+  <ng-template pTemplate="caption">
+    <h4>Select Payment</h4>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 4rem"></th>
+      <th>Card Holder Name</th>
+      <th>Account No</th>
+      <th>Provider</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-userPayment>
+    <tr>
+      <td>
+        <p-tableRadioButton [value]="userPayment"></p-tableRadioButton>
+      </td>
+      <td>{{ userPayment.name }}</td>
+      <td>**** **** **** {{ userPayment.accountNo | slice : -4 }}</td>
+      <td>{{ userPayment.provider }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<app-user-payment-form
+  *ngIf="userPayments?.length == 0"
+></app-user-payment-form>

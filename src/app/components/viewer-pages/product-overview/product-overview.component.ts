@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ProductDto } from 'src/app/shared/models/productDto';
+import { ProductDto } from 'src/app/shared/models/shared/productDto';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 import { PhotoService } from 'src/app/shared/services/photo.service';
 import { CustomerService } from '../../../shared/services/customer.service';
-import { CartItemDto } from 'src/app/shared/models/cartItemDto';
+import { CartItemDto } from 'src/app/shared/models/customer/cartItemDto';
 
 @Component({
   selector: 'app-product-overview',

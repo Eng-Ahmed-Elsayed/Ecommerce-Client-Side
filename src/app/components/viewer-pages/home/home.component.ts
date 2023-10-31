@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { CartItemDto } from 'src/app/shared/models/cartItemDto';
-import { Product } from 'src/app/shared/models/product';
+import { Product } from 'src/app/shared/models/shared/product';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 import { PhotoService } from 'src/app/shared/services/photo.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { CustomerService } from '../../../shared/services/customer.service';
-import { ProductDto } from 'src/app/shared/models/productDto';
+import { ProductDto } from 'src/app/shared/models/shared/productDto';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AdminService } from '../../dashboard/admin/services/admin.service';
-import { CategoryDto } from 'src/app/shared/models/categoryDto';
+import { CategoryDto } from 'src/app/shared/models/shared/categoryDto';
+import { CartItemDto } from 'src/app/shared/models/customer/cartItemDto';
 
 @Component({
   selector: 'app-home',

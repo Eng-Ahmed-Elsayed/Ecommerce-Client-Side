@@ -2,28 +2,45 @@
   <h2>Review and Confirm Your Order</h2>
   <div class="col-12">
     <h4>Shipping Information</h4>
-    <p>Name: John Doe</p>
-    <p>Address: 123 Main St.</p>
-    <p>Phone Number: 555-555-5555</p>
-    <p>Email Address: john.doe@example.com</p>
+    <p>Name: {{ selectedAddress.firstName }}</p>
+    <p>
+      Address:
+      {{
+        selectedAddress.addressLine1 +
+          ", " +
+          selectedAddress.city +
+          ", " +
+          selectedAddress.state +
+          ", " +
+          selectedAddress.country +
+          "."
+      }}
+    </p>
+    <p>Postal Code: {{ selectedAddress.postalCode }}</p>
+    <p>Phone Number: {{ selectedAddress.mobile }}</p>
+    <p>Telephone Number: {{ selectedAddress.telephone }}</p>
   </div>
   <div class="col-12">
     <h4>Shipping Options</h4>
-    <p>Standard Shipping (3-5 business days): $4.99</p>
+    <p>
+      {{ selectedShippingOption.method }} ({{
+        selectedShippingOption.deliveryTime
+      }}): {{ selectedShippingOption.cost | currency }}
+    </p>
   </div>
 
   <div class="col-12">
     <h4>Payment Information</h4>
-    <p>Card Number: **** **** **** 1234</p>
-    <p>Expiration Date: 12/24</p>
+    <p>
+      Card Holder Name: {{ selectedPaymentOption.name }}
+      Card Number: **** **** ****
+      {{ selectedPaymentOption.accountNo | slice : -4 }}
+    </p>
+    <p>Expiration Date: {{ selectedPaymentOption.expiry }}</p>
   </div>
 
   <div class="col-12">
     <h4>Order Total</h4>
-    <p>Total Cost: $14.98</p>
-  </div>
-
-  <div class="col-12 d-flex">
-    <p-button class="mx-auto">Confirm Order</p-button>
+    <p>Total Cost: {{ total | currency }}</p>
   </div>
 </div>

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CategoryDto } from 'src/app/shared/models/categoryDto';
-import { DiscountDto } from 'src/app/shared/models/discountDto';
-import { ProductDto } from 'src/app/shared/models/productDto';
+import { CategoryDto } from 'src/app/shared/models/shared/categoryDto';
+import { DiscountDto } from 'src/app/shared/models/shared/discountDto';
+import { ProductDto } from 'src/app/shared/models/shared/productDto';
 import { uploadFiles } from 'src/app/shared/services/photo.service';
 import { environment } from 'src/environments/environment';
 
@@ -12,22 +12,15 @@ import { environment } from 'src/environments/environment';
 })
 export class AdminService {
   private adminApiUrl: string = environment.baseApiUrl + 'admin/';
-  private categoryApiUrl: string = environment.baseApiUrl + 'category/';
-  private discountApiUrl: string = environment.baseApiUrl + 'discount/';
-  private productApiUrl: string = environment.baseApiUrl + 'product/';
+  private categoryApiUrl: string = environment.baseApiUrl + 'categories/';
+  private discountApiUrl: string = environment.baseApiUrl + 'discounts/';
+  private productApiUrl: string = environment.baseApiUrl + 'products/';
 
   constructor(private httpClient: HttpClient) {}
 
   // Generate new Guid
   private generate_uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
-      /[xy]/g,
-      function (c) {
-        var uuid = (Math.random() * 16) | 0,
-          v = c == 'x' ? uuid : (uuid & 0x3) | 0x8;
-        return uuid.toString(16);
-      }
-    );
+    return '9bb999a9-dffa-483a-8db6-0d1fc2dd60b2';
   }
 
   // Custom map for colors, sizes, tags and images
@@ -94,13 +87,14 @@ export class AdminService {
     colors: string[],
     productImages: string[]
   ): Observable<ProductDto> {
+    body.id = this.generate_uuidv4();
     body.tags = this.customMap(tags);
     body.sizes = this.customMap(sizes);
     body.colors = this.customMap(colors);
     if (productImages != undefined) {
       body.productImages = this.customMap(productImages, body.id);
     }
-    return this.httpClient.post<ProductDto>(this.productApiUrl + 'add', body);
+    return this.httpClient.post<ProductDto>(this.productApiUrl, body);
   }
 
   updateProdcut(
@@ -128,7 +122,7 @@ export class AdminService {
   }
 
   getProductList(): Observable<ProductDto[]> {
-    return this.httpClient.get<ProductDto[]>(this.productApiUrl + 'list');
+    return this.httpClient.get<ProductDto[]>(this.productApiUrl);
   }
 
   getProduct(id: string): Observable<ProductDto> {
@@ -146,7 +140,7 @@ export class AdminService {
   // <-----Discount----->
 
   addDiscount(body: DiscountDto): Observable<DiscountDto> {
-    return this.httpClient.post<DiscountDto>(this.discountApiUrl + 'add', body);
+    return this.httpClient.post<DiscountDto>(this.discountApiUrl, body);
   }
 
   updateDiscount(body: DiscountDto): Observable<DiscountDto> {
@@ -157,7 +151,7 @@ export class AdminService {
   }
 
   getDiscountList(): Observable<DiscountDto[]> {
-    return this.httpClient.get<DiscountDto[]>(this.discountApiUrl + 'list');
+    return this.httpClient.get<DiscountDto[]>(this.discountApiUrl);
   }
 
   getDiscount(id: string): Observable<DiscountDto> {

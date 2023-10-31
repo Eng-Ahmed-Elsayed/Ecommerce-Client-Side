@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { ProductImage } from '../models/productImageDto';
+import { ProductImage } from '../models/shared/productImageDto';
 
 @Injectable({
   providedIn: 'root',
@@ -150,7 +150,7 @@ export class PhotoService {
 
 // Create a full image path
 export function createImgPath(imgPath: string | undefined): string {
-  return `${environment.baseServerUrl}${imgPath}`;
+  return imgPath !== undefined ? `${environment.baseServerUrl}${imgPath}` : '';
 }
 
 // Generic upload Files function

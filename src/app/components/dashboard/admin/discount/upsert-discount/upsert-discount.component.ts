@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
-import { DiscountDto } from 'src/app/shared/models/discountDto';
+import { DiscountDto } from 'src/app/shared/models/shared/discountDto';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ProductDto } from 'src/app/shared/models/productDto';
+import { ProductDto } from 'src/app/shared/models/shared/productDto';
 import { createImgPath } from 'src/app/shared/services/photo.service';
 
 @Component({

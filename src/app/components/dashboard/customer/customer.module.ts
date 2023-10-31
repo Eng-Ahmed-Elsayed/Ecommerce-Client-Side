@@ -22,9 +22,13 @@ import { UserAddressComponent } from './user-address/user-address.component';
 import { UserPaymentComponent } from './user-payment/user-payment.component';
 import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 import { ShippingOptionsComponent } from './shipping-options/shipping-options.component';
-import { UserPaymentFormComponent } from './user-payment-form/user-payment-form.component';
 import { TabMenuModule } from 'primeng/tabmenu';
-import { UserAddressFormComponent } from './user-address-form/user-address-form.component';
+import { UserAddressFormComponent } from './user-address/user-address-form/user-address-form.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { UserAddressSelectionComponent } from './user-address/user-address-selection/user-address-selection.component';
+import { UserPaymentFormComponent } from './user-payment/user-payment-form/user-payment-form.component';
+import { UserPaymentSelectionComponent } from './user-payment/user-payment-selection/user-payment-selection.component';
+import { StepsModule } from 'primeng/steps';
 
 @NgModule({
   declarations: [
@@ -37,6 +41,9 @@ import { UserAddressFormComponent } from './user-address-form/user-address-form.
     OrderConfirmationComponent,
     ShippingOptionsComponent,
     UserAddressFormComponent,
+    OrderSummaryComponent,
+    UserAddressSelectionComponent,
+    UserPaymentSelectionComponent,
   ],
   imports: [
     CommonModule,
@@ -56,6 +63,7 @@ import { UserAddressFormComponent } from './user-address-form/user-address-form.
     InputMaskModule,
     TableModule,
     TabMenuModule,
+    StepsModule,
   ],
   exports: [ShoppingCartComponent],
 })

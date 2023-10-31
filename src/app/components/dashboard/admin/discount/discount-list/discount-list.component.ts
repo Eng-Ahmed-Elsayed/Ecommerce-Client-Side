@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DiscountDto } from 'src/app/shared/models/discountDto';
+import { DiscountDto } from 'src/app/shared/models/shared/discountDto';
 import { AdminService } from '../../services/admin.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';

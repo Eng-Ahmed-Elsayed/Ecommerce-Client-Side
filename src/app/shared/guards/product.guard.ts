@@ -7,7 +7,7 @@ import {
 import { Observable } from 'rxjs';
 import { ProductService } from '../services/product.service';
 import { inject } from '@angular/core';
-import { ProductDto } from '../models/productDto';
+import { ProductDto } from '../models/shared/productDto';
 
 // Product Resolver Guards
 export const getProductListResolver: ResolveFn<Observable<ProductDto[]>> = (

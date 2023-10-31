@@ -1,65 +1,80 @@
 <div class="container-fluid p-3">
   <div class="row d-flex flex-column-reverse flex-md-row">
     <div class="col-12 col-md-6 col-lg-7">
+      <p-steps
+        [model]="stepsItems"
+        [readonly]="true"
+        [activeIndex]="activeIndex"
+      ></p-steps>
       <div class="custom-input-card">
-        <app-user-address></app-user-address>
-        <app-shipping-options></app-shipping-options>
-        <app-user-payment-form></app-user-payment-form>
-        <app-order-confirmation></app-order-confirmation>
+        <app-user-address-selection
+          [userAddresses]="userAddresses"
+          (selectedAddressEvent)="selectAddress($event)"
+          [hidden]="!(activeIndex == 0)"
+        ></app-user-address-selection>
+        <app-shipping-options
+          [shippingOptions]="shippingOptions"
+          (selectedShippingOptionEvent)="selectShippingOption($event)"
+          [hidden]="!(activeIndex == 1)"
+        ></app-shipping-options>
+        <app-user-payment-selection
+          [userPayments]="userPayments"
+          (selectedPaymentEvent)="selectPayment($event)"
+          [hidden]="!(activeIndex == 2)"
+        ></app-user-payment-selection>
+        <app-order-confirmation
+          [selectedAddress]="selectedAddress"
+          [selectedShippingOption]="selectedShippingOption"
+          [selectedPaymentOption]="selectedPayment"
+          [total]="total"
+          *ngIf="activeIndex == 3"
+        ></app-order-confirmation>
+      </div>
+      <div
+        class="d-flex justify-content-center mb-2 mb-md-0"
+        *ngIf="!isSelected"
+      >
+        <span class="text-danger">Please Select an Option.</span>
+      </div>
+      <div
+        [class]="
+          activeIndex == 0
+            ? 'd-flex justify-content-end'
+            : 'd-flex justify-content-between'
+        "
+      >
+        <p-button
+          label="Back"
+          (onClick)="prevPage()"
+          icon="pi pi-angle-left"
+          [disabled]="false"
+          *ngIf="activeIndex != 0"
+        ></p-button>
+        <p-button
+          label="Next"
+          (onClick)="nextPage()"
+          icon="pi pi-angle-right"
+          iconPos="right"
+          styleClass="p-button-success"
+          *ngIf="activeIndex != 3"
+        ></p-button>
+        <p-button
+          label="Complete"
+          (onClick)="complete()"
+          icon="pi pi-angle-right"
+          iconPos="right"
+          styleClass="p-button-success"
+          *ngIf="activeIndex == 3"
+        ></p-button>
       </div>
     </div>
     <div class="col-12 col-md-6 col-lg-5 mb-3 mb-md-0">
-      <div class="custom-input-card d-flex flex-column">
-        <p-panel
-          header="3 items"
-          [collapsed]="false"
-          [toggleable]="true"
-          styleClass="mb-2 w-100"
-        >
-          <ng-template pTemplate="icons">
-            <span class="pe-1"> Show Details </span>
-          </ng-template>
-          <ng-template pTemplate="content">
-            <div class="d-flex flex-column">
-              <div
-                class="d-flex justify-content-between align-items-center mb-2"
-                *ngFor="let product of products"
-              >
-                <span class="d-flex align-items-center">
-                  <img
-                    class="custom-product-img me-2 rounded"
-                    [src]="
-                      'https://primefaces.org/cdn/primeng/images/demo/product/' +
-                      product.image
-                    "
-                    [alt]="product.name"
-                  /><span>{{ product.name | slice : 0 : 20 }}</span>
-                </span>
-                <span>{{ product.price | currency }} <small>x1</small> </span>
-              </div>
-              <span class="ms-auto">
-                <p-button
-                  label="Edit"
-                  icon="pi pi-pencil"
-                  styleClass=" p-button-text"
-                  routerLink="/dashboard/cart"
-                ></p-button>
-              </span>
-            </div>
-          </ng-template>
-        </p-panel>
-
-        <div class="d-flex justify-content-between p-2">
-          <span>Subtotal</span><span>{{ 510 | currency }}</span>
-        </div>
-        <div class="d-flex justify-content-between p-2">
-          <span>Shipping</span><span>{{ 7 | currency }}</span>
-        </div>
-        <hr />
-        <div class="d-flex justify-content-between h5 p-2">
-          <span>Total (tax incl.)</span><span>{{ 517 | currency }}</span>
-        </div>
-      </div>
+      <app-order-summary
+        [cartItems]="cartItems"
+        [subTotal]="subTotal"
+        [total]="total"
+        [shippingCost]="shippingCost"
+      ></app-order-summary>
     </div>
   </div>
 </div>

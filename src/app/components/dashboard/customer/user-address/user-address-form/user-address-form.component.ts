@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
-import { Country } from 'src/app/shared/models/country';
-import { UserAddressDto } from 'src/app/shared/models/userAddressDto';
-import { CustomerService } from '../../../../shared/services/customer.service';
+import { Country } from 'src/app/shared/models/shared/country';
+import { UserAddressDto } from 'src/app/shared/models/customer/userAddressDto';
+import { CustomerService } from '../../../../../shared/services/customer.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({

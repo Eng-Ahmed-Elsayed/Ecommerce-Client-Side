@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryDto } from 'src/app/shared/models/categoryDto';
 import { AdminService } from '../../services/admin.service';
 import {
   ConfirmEventType,
@@ -8,6 +7,7 @@ import {
 } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
 import { createImgPath } from 'src/app/shared/services/photo.service';
+import { CategoryDto } from 'src/app/shared/models/shared/categoryDto';
 
 @Component({
   selector: 'app-category-list',

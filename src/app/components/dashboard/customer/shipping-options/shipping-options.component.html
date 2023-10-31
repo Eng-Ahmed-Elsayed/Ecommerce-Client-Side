@@ -1,49 +1,39 @@
-<h2>Shipping Options</h2>
-<div class="d-flex align-items-center my-2">
-  <label for="shippingMethod" class="me-2">Choose a shipping method:</label>
-  <p-dropdown
-    [options]="shippingOptions"
-    [(ngModel)]="shippingMethod"
-    placeholder="Select a Shipping Method"
-    optionLabel="method"
-    optionValue="method"
-    inputId="shippingMethod"
-  ></p-dropdown>
-</div>
-<hr />
-<p-table [value]="shippingOptions" [tableStyle]="{ 'min-width': '100%' }">
+<p-table
+  #dt
+  [value]="shippingOptions"
+  [tableStyle]="{ 'min-width': '80%' }"
+  [rowHover]="true"
+  dataKey="method"
+  (selectionChange)="selectShippingOption($event)"
+>
+  <ng-template pTemplate="caption">
+    <h4>Select Shipping Option</h4>
+  </ng-template>
   <ng-template pTemplate="header">
     <tr>
+      <th style="width: 4rem"></th>
       <th>Shipping Method</th>
       <th>Estimated Delivery Time</th>
       <th>Cost</th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-product>
+  <ng-template pTemplate="body" let-shippingOption>
     <tr>
-      <td>{{ product.method }}</td>
-      <td>{{ product.deliveryTime }}</td>
-      <td>{{ product.cost }}</td>
+      <td>
+        <p-tableRadioButton [value]="shippingOption"></p-tableRadioButton>
+      </td>
+      <td>{{ shippingOption.method }}</td>
+      <td>{{ shippingOption.deliveryTime }}</td>
+      <td>{{ shippingOption.cost }}</td>
     </tr>
   </ng-template>
 </p-table>
-
+<hr />
 <div class="d-flex flex-column mt-3">
   <p>
     Please note that shipping rates may vary depending on the customer's
     location and order size. For more information, please refer to our shipping
     policies.
   </p>
-
-  <p>
-    If you have any questions or concerns about your shipment, please contact
-    our customer service team at support@example.com.
-  </p>
-
-  <p>We also offer free shipping for orders above $50.</p>
-
   <p>Thank you for shopping with us!</p>
 </div>
-<span class="d-flex justify-content-center">
-  <p-button>Continue</p-button>
-</span>

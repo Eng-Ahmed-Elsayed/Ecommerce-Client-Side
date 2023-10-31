@@ -1,4 +1,4 @@
-import { ProductDto } from './productDto';
+import { ProductDto } from '../shared/productDto';
 
 export interface CartItemDto {
   id?: string;

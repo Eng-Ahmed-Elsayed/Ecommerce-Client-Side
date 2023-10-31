@@ -2,12 +2,12 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { Observable, map, shareReplay } from 'rxjs';
 import { CustomerService } from '../../../../shared/services/customer.service';
-import { ShoppingCartDto } from 'src/app/shared/models/shoppingCartDto';
-import { CartItemDto } from 'src/app/shared/models/cartItemDto';
+import { ShoppingCartDto } from 'src/app/shared/models/customer/shoppingCartDto';
 import { createImgPath } from 'src/app/shared/services/photo.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
 import { InputNumberInputEvent } from 'primeng/inputnumber';
+import { CartItemDto } from 'src/app/shared/models/customer/cartItemDto';
 
 @Component({
   selector: 'app-shopping-cart',

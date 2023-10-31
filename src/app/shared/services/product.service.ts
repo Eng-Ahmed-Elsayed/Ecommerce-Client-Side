@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../models/product';
-import { ProductDto } from '../models/productDto';
+import { Product } from '../models/shared/product';
+import { ProductDto } from '../models/shared/productDto';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class ProductService {
-  private productApiUrl: string = environment.baseApiUrl + 'product/';
+  private productApiUrl: string = environment.baseApiUrl + 'products/';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -1288,7 +1288,7 @@ export class ProductService {
 
   // API end points
   getProductList(): Observable<ProductDto[]> {
-    return this.httpClient.get<ProductDto[]>(this.productApiUrl + 'list');
+    return this.httpClient.get<ProductDto[]>(this.productApiUrl);
   }
 
   getProduct(id: string): Observable<ProductDto> {

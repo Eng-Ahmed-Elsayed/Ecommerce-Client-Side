@@ -2,20 +2,24 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
-import { CartItemDto } from 'src/app/shared/models/cartItemDto';
-import { ShoppingCartDto } from 'src/app/shared/models/shoppingCartDto';
-import { UserAddressDto } from 'src/app/shared/models/userAddressDto';
-import { UserPaymentDto } from 'src/app/shared/models/userPaymentDto';
+import { ShoppingCartDto } from 'src/app/shared/models/customer/shoppingCartDto';
+import { UserAddressDto } from 'src/app/shared/models/customer/userAddressDto';
+import { UserPaymentDto } from 'src/app/shared/models/customer/userPaymentDto';
 import { environment } from 'src/environments/environment';
+import { ShippingOptionDto } from '../models/shared/shippingOptionDto';
+import { CartItemDto } from '../models/customer/cartItemDto';
+import { OrderDetailsDto } from '../models/customer/orderDetails';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CustomerService {
-  private baseUserApiUrl: string = environment.baseApiUrl + 'user/';
-  private paymentUrl: string = this.baseUserApiUrl + 'payment/';
-  private addressUrl: string = this.baseUserApiUrl + 'address/';
-  private cartUrl: string = this.baseUserApiUrl + 'cart/';
+  private baseUserApiUrl: string = environment.baseApiUrl + 'users/';
+  private paymentUrl: string = this.baseUserApiUrl + 'payments/';
+  private addressUrl: string = this.baseUserApiUrl + 'addresses/';
+  private cartUrl: string = this.baseUserApiUrl + 'carts/';
+  private OrdersUrl: string = this.baseUserApiUrl + 'orders/';
+  private shippingOptUrl: string = environment.baseApiUrl + 'shipping-options/';
 
   constructor(
     private httpClient: HttpClient,
@@ -108,5 +112,38 @@ export class CustomerService {
 
   deleteCartItem(id: string) {
     return this.httpClient.delete(this.cartUrl + id);
+  }
+
+  // Shipping option
+  getShippingOptionList(): Observable<ShippingOptionDto[]> {
+    return this.httpClient.get<ShippingOptionDto[]>(this.shippingOptUrl);
+  }
+
+  // Add Order
+  addOrder(body: OrderDetailsDto) {
+    console.log(body);
+    return this.confirmationService.confirm({
+      message: 'Do you want to make this order.',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.httpClient.post(this.OrdersUrl, body).subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Order has been created successfully!',
+              detail: 'You have just added an new order.',
+            });
+          },
+          error: (err: HttpErrorResponse) => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Can not add your order.',
+              detail: 'Faild to add new order, please try again later.',
+            });
+            console.log(err);
+          },
+        });
+      },
+    });
   }
 }

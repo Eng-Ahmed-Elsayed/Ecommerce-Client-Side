@@ -6,10 +6,10 @@
       [value]="userPayments"
       [rows]="10"
       [paginator]="true"
-      [globalFilterFields]="['name', 'accountNo', 'provider']"
+      [globalFilterFields]="['name', 'accountNo']"
       [tableStyle]="{ 'min-width': '80%' }"
       [rowHover]="true"
-      dataKey="id"
+      dataKey="name"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
       [showCurrentPageReport]="true"
     >
@@ -35,17 +35,22 @@
           <th pSortableColumn="accountNo" style="min-width: 15rem">
             Account No <p-sortIcon field="accountNo"></p-sortIcon>
           </th>
-          <th pSortableColumn="provider">
-            Provider <p-sortIcon field="provider"></p-sortIcon>
-          </th>
+          <th>Expiry Date</th>
           <th></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-userPayment>
         <tr>
           <td>{{ userPayment.name }}</td>
-          <td>{{ userPayment.accountNo }}</td>
-          <td>{{ userPayment.provider }}</td>
+          <!-- We can use custom pipe to do it in one step -->
+          <td>
+            {{ userPayment.accountNo | slice : 0 : 4 }}-{{
+              userPayment.accountNo | slice : 4 : 8
+            }}-{{ userPayment.accountNo | slice : 8 : 12 }}-{{
+              userPayment.accountNo | slice : 12
+            }}
+          </td>
+          <td>{{ userPayment.expiry }}</td>
           <td>
             <span class="d-flex">
               <button

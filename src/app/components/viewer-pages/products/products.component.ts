@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SelectItem } from 'primeng/api';
-import { Product } from 'src/app/shared/models/product';
+import { Product } from 'src/app/shared/models/shared/product';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 

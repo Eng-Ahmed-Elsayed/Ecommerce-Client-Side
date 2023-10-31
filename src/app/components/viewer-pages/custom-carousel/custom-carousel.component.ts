@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CategoryDto } from 'src/app/shared/models/categoryDto';
+import { CategoryDto } from 'src/app/shared/models/shared/categoryDto';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 import { createImgPath } from 'src/app/shared/services/photo.service';
 

@@ -5,8 +5,8 @@ import { FileUploadEvent } from 'primeng/fileupload';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
-import { CategoryDto } from 'src/app/shared/models/categoryDto';
 import { Observable, map } from 'rxjs';
+import { CategoryDto } from 'src/app/shared/models/shared/categoryDto';
 
 @Component({
   selector: 'app-upsert-category',

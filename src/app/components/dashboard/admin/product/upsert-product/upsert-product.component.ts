@@ -5,9 +5,9 @@ import { AdminService } from '../../services/admin.service';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
-import { CategoryDto } from 'src/app/shared/models/categoryDto';
-import { ProductDto } from 'src/app/shared/models/productDto';
+import { ProductDto } from 'src/app/shared/models/shared/productDto';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { CategoryDto } from 'src/app/shared/models/shared/categoryDto';
 
 @Component({
   selector: 'app-upsert-product',
