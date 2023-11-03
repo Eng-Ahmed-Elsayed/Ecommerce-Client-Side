@@ -29,6 +29,8 @@ import { UserAddressSelectionComponent } from './user-address/user-address-selec
 import { UserPaymentFormComponent } from './user-payment/user-payment-form/user-payment-form.component';
 import { UserPaymentSelectionComponent } from './user-payment/user-payment-selection/user-payment-selection.component';
 import { StepsModule } from 'primeng/steps';
+import { OrdersHistoryComponent } from './orders-history/orders-history.component';
+import { ChipModule } from 'primeng/chip';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,7 @@ import { StepsModule } from 'primeng/steps';
     OrderSummaryComponent,
     UserAddressSelectionComponent,
     UserPaymentSelectionComponent,
+    OrdersHistoryComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +67,7 @@ import { StepsModule } from 'primeng/steps';
     TableModule,
     TabMenuModule,
     StepsModule,
+    ChipModule,
   ],
   exports: [ShoppingCartComponent],
 })

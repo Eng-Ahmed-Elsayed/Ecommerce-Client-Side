@@ -108,6 +108,30 @@ mat-sidenav-content {
   margin: 0.5rem 0 1.3rem 0;
 }
 
+.text-700 {
+  color: var(--surface-700) !important;
+}
+
+.text-900 {
+  color: var(--surface-900) !important;
+}
+
+.surface-100 {
+  background-color: var(--surface-100);
+}
+
+.surface-section {
+  background-color: var(--surface-section);
+}
+
+.surface-d {
+  background-color: var(--surface-d);
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
 p-carousel {
   .cart-item {
     border: 2px solid var(--surface-d);
@@ -119,14 +143,6 @@ p-carousel {
   }
 }
 
-// .confirmdialog {
-//   z-index: 1001 !important;
-// }
-// .card-sidebar {
-//   z-index: 1000 !important;
-// }
-
-// custom-data-view.component
 .dataView-img,
 .carousel-img {
   transition: all 0.3s ease;
@@ -136,6 +152,22 @@ p-carousel {
 .dataView-img:hover,
 .carousel-img:hover {
   transform: translateY(-3px);
+}
+
+.p-dataview.p-dataview-list .p-dataview-content > .p-grid > div {
+  border: 0;
+}
+
+.dataView-item-container {
+  border-bottom: 3px solid var(--surface-border) !important;
+}
+
+// Order history
+.order-history-container {
+  .p-dataview .p-dataview-header {
+    border: 0 !important;
+    margin-bottom: 1rem;
+  }
 }
 
 // product-overview.component

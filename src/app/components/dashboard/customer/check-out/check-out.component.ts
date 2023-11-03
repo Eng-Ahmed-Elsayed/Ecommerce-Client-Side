@@ -194,5 +194,14 @@ export class CheckOutComponent implements OnInit {
   selectPayment(value: any) {
     this.selectedPayment = value;
   }
-  // After user select shipping method  make
+
+  // If new user address(the user has not any address).
+  newUserAddress(val: UserAddressDto) {
+    this.userAddresses.push(val);
+  }
+
+  // If new user payment.
+  newUserPayment(val: UserPaymentDto) {
+    this.userPayments.push(val);
+  }
 }

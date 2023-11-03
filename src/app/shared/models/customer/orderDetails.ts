@@ -8,4 +8,5 @@ export interface OrderDetailsDto {
   shippingOptionId?: string;
   userAddressId?: string;
   userPaymentId?: string;
+  createdAt?: Date;
 }

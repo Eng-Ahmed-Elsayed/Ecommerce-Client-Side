@@ -80,6 +80,7 @@
                     label="Add to Cart"
                     icon="pi pi-shopping-cart"
                     styleClass="p-button-raised "
+                    [disabled]="product.quantity == 0"
                     type="submit"
                   ></p-button>
                   <p-button

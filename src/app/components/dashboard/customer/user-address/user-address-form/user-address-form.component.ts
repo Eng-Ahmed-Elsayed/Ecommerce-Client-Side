@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Country } from 'src/app/shared/models/shared/country';
@@ -16,6 +16,7 @@ export class UserAddressFormComponent implements OnInit {
   userAddressForm!: FormGroup;
   @Input() userAddress!: UserAddressDto;
   @Input() isUpdate: boolean = false;
+  @Output() newUserAddressEvent = new EventEmitter<UserAddressDto>();
   // Have to put this in the form before the API call.
   selectedCountry: any;
   selectedState: any;
@@ -136,12 +137,13 @@ export class UserAddressFormComponent implements OnInit {
     // If add add new
     if (!this.isUpdate) {
       this.customerService.addUserAddress(body).subscribe({
-        next: () => {
+        next: (res: UserAddressDto) => {
           this.messageService.add({
             severity: 'success',
             summary: 'Added new address successfully!',
             detail: 'You have just added a new address method successfully.',
           });
+          this.newUserAddressEvent.emit(res);
         },
         error: (err: HttpErrorResponse) => {
           this.messageService.add({

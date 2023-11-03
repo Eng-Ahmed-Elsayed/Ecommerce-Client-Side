@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../../../../shared/services/customer.service';
@@ -17,6 +17,7 @@ export class UserPaymentFormComponent implements OnInit {
   userPaymentForm!: FormGroup;
   @Input() userPayment!: UserPaymentDto;
   @Input() isUpdate: boolean = false;
+  @Output() newUserPaymentEvent = new EventEmitter<UserPaymentDto>();
 
   // constructor(private router: Router) {}
 
@@ -58,12 +59,13 @@ export class UserPaymentFormComponent implements OnInit {
       this.customerService
         .addUserPayment(this.userPaymentForm.getRawValue())
         .subscribe({
-          next: () => {
+          next: (res: UserPaymentDto) => {
             this.messageService.add({
               severity: 'success',
               summary: 'Added new payment successfully!',
               detail: 'You have just added a new payment method successfully.',
             });
+            this.newUserPaymentEvent.emit(res);
           },
           error: (err: HttpErrorResponse) => {
             this.messageService.add({

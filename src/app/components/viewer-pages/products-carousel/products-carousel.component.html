@@ -30,11 +30,20 @@
                 icon="pi pi-eye"
                 routerLink="/product/{{ product.id }}"
               ></p-button>
+              <!-- If the product out of stock disable add to my cart functionality -->
               <p-button
                 type="button"
                 styleClass="p-button p-button-rounded mr-2"
                 icon="pi pi-shopping-cart"
                 (click)="shopCartConfirm(product.id)"
+                *ngIf="product.inventory!.quantity != 0"
+              ></p-button>
+              <p-button
+                type="button"
+                styleClass="p-button p-button-rounded mr-2"
+                icon="pi pi-shopping-cart"
+                *ngIf="product.inventory!.quantity == 0"
+                [disabled]="true"
               ></p-button>
               <p-button
                 type="button"

@@ -5,6 +5,7 @@ import { Product } from 'src/app/shared/models/shared/product';
 import { ProductDto } from 'src/app/shared/models/shared/productDto';
 import { CustomOverlayService } from 'src/app/shared/services/custom-overlay.service';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 @Component({
   selector: 'app-custom-data-view',
@@ -25,7 +26,8 @@ export class CustomDataViewComponent implements OnInit {
   // gridLayoutContainer!: Element;
   constructor(
     private productService: ProductService,
-    private customOverlayService: CustomOverlayService
+    private customOverlayService: CustomOverlayService,
+    private utilityService: UtilityService
   ) {}
 
   ngOnInit(): void {
@@ -50,9 +52,7 @@ export class CustomDataViewComponent implements OnInit {
   getSeverity = (product: ProductDto) =>
     this.productService.getSeverity(product);
 
-  inputFilter(event: Event) {
-    return (event.target as HTMLTextAreaElement)?.value;
-  }
+  inputFilter = (event: Event) => this.utilityService.inputFilter(event);
 
   //   clear(dataView: DataView) {
   //     dataView.;

@@ -53,6 +53,7 @@ export class UserAddressComponent implements OnInit {
     this.customerService.getUserAddresssList().subscribe({
       next: (res: UserAddressDto[]) => {
         this.userAddresses = res;
+        console.log(this.userAddresses.length);
       },
       error: (err: HttpErrorResponse) => {
         this.messageService.add({

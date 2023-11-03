@@ -1,0 +1,101 @@
+<div class="container-fluid px-3 order-history-container">
+  <p-dataView
+    #dv
+    [value]="orders"
+    [paginator]="true"
+    [rows]="3"
+    filterBy="id,createdAt,total"
+    styleClass=""
+  >
+    <ng-template pTemplate="header">
+      <div class="row">
+        <div class="col-12 col-sm-6 mb-3 mb-sm-0">
+          <h2>My Orders</h2>
+          <span>You can find all your orders here.</span>
+        </div>
+        <div
+          class="col-12 col-sm-6 d-flex justify-content-end align-items-center"
+        >
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input
+              type="search"
+              pInputText
+              placeholder="Search keyword"
+              (input)="dv.filter(inputFilter($event), 'contains')"
+            />
+          </span>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template let-order pTemplate="listItem">
+      <div class="row order-container">
+        <div class="col-12 surface-d py-3">
+          <div class="row p-4">
+            <div
+              class="col-12 col-sm-4 d-flex flex-row justify-content-between justify-content-sm-center flex-sm-column mb-2 mb-sm-0 order-details"
+            >
+              <span class="text-700 text-primary me-2 me-sm-0"
+                >Order Number</span
+              >
+              <span>{{ order.id }}</span>
+            </div>
+            <div
+              class="col-12 col-sm-4 d-flex flex-row justify-content-between justify-content-sm-center flex-sm-column mb-2 mb-sm-0 order-details"
+            >
+              <span class="text-700 text-primary me-2 me-sm-0">Order Date</span>
+              <span>{{ order.createdAt }}</span>
+            </div>
+            <div
+              class="col-12 col-sm-4 d-flex flex-row justify-content-between justify-content-sm-center flex-sm-column mb-2 mb-sm-0 order-details"
+            >
+              <span class="text-700 text-primary me-2 me-sm-0"
+                >Total Amount</span
+              >
+              <span class="">{{ order.total | currency }}</span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-12 dataView-item-container py-3"
+          *ngFor="let orderItem of order.orderItems"
+        >
+          <div class="row p-4">
+            <div
+              class="col-12 col-md-6 d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-start"
+            >
+              <img
+                [src]="
+                  createImgPath(orderItem.product.productImages[0].imgPath)
+                "
+                [alt]="orderItem.product.name"
+                class="order-img rounded my-0 my-md-3"
+              />
+              <div class="d-flex flex-column px-0 px-md-3 my-0 my-md-3">
+                <span class="text-900 mt-2 mt-md-0">{{
+                  orderItem.product.name
+                }}</span>
+                <span class="text-700 mt-2"
+                  >{{ orderItem.product?.price | currency }}
+                  <small>x{{ orderItem.quantity }}</small>
+                </span>
+                <span class="text-primary mt-2"
+                  >{{ orderItem.price | currency }}
+                </span>
+              </div>
+            </div>
+            <div
+              class="col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start"
+            >
+              <p-chip
+                [label]="'Delivered on ' + order.createdAt"
+                icon="pi pi-check"
+                styleClass="my-3 my-md-0"
+              ></p-chip>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+</div>

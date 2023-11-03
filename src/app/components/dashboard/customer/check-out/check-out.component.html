@@ -7,21 +7,38 @@
         [activeIndex]="activeIndex"
       ></p-steps>
       <div class="custom-input-card">
+        <!-- User Addresses  -->
         <app-user-address-selection
           [userAddresses]="userAddresses"
           (selectedAddressEvent)="selectAddress($event)"
           [hidden]="!(activeIndex == 0)"
+          *ngIf="userAddresses?.length != 0"
         ></app-user-address-selection>
+        <app-user-address-form
+          [checkOut]="true"
+          (newUserAddressEvent)="newUserAddress($event)"
+          [hidden]="!(activeIndex == 0)"
+          *ngIf="userAddresses?.length == 0"
+        ></app-user-address-form>
+        <!-- Shipping Options -->
         <app-shipping-options
           [shippingOptions]="shippingOptions"
           (selectedShippingOptionEvent)="selectShippingOption($event)"
           [hidden]="!(activeIndex == 1)"
         ></app-shipping-options>
+        <!-- User Payments -->
         <app-user-payment-selection
           [userPayments]="userPayments"
           (selectedPaymentEvent)="selectPayment($event)"
           [hidden]="!(activeIndex == 2)"
+          *ngIf="userPayments?.length != 0"
         ></app-user-payment-selection>
+        <app-user-payment-form
+          (newUserPaymentEvent)="newUserPayment($event)"
+          [hidden]="!(activeIndex == 2)"
+          *ngIf="userPayments?.length == 0"
+        ></app-user-payment-form>
+        <!-- Order Confirmation -->
         <app-order-confirmation
           [selectedAddress]="selectedAddress"
           [selectedShippingOption]="selectedShippingOption"

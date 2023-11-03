@@ -65,6 +65,16 @@ export class NavComponent implements OnInit {
         routerLink: '/auth/edit-user',
       },
       {
+        label: 'My Cart',
+        icon: 'pi pi-shopping-bag',
+        routerLink: '/dashboard/user/cart',
+      },
+      {
+        label: 'My Watchlist',
+        icon: 'pi pi-heart',
+        routerLink: '/dashboard/user/watchlist',
+      },
+      {
         label: 'Addresses',
         icon: 'pi pi-map-marker',
         routerLink: '/dashboard/user/address',
@@ -75,19 +85,9 @@ export class NavComponent implements OnInit {
         routerLink: '/dashboard/user/payment',
       },
       {
-        label: 'Orders',
-        icon: 'pi pi-shopping-bag',
-        routerLink: '/dashboard/check-out',
-      },
-      {
-        label: 'Order History',
+        label: 'Orders History',
         icon: 'pi pi-history',
-        routerLink: '/dashboard/order-history',
-      },
-      {
-        label: 'My Watchlist',
-        icon: 'pi pi-heart',
-        routerLink: '/dashboard/order-history',
+        routerLink: '/dashboard/user/orders-history',
       },
       {
         label: 'Logout',

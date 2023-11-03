@@ -1,0 +1,18 @@
+.order-img {
+  width: 7rem;
+  height: 7rem;
+}
+
+.order-container {
+  border: 1rem solid var(--surface-ground) !important;
+}
+
+.order-details {
+  border-right: 1px solid var(--surface-300);
+}
+
+@media (max-width: 575.9px) {
+  .order-details {
+    border-inline: 1px solid var(--surface-300);
+  }
+}

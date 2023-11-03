@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { ShippingOptionDto } from '../models/shared/shippingOptionDto';
 import { CartItemDto } from '../models/customer/cartItemDto';
 import { OrderDetailsDto } from '../models/customer/orderDetails';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +25,8 @@ export class CustomerService {
   constructor(
     private httpClient: HttpClient,
     private confirmationService: ConfirmationService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router
   ) {}
 
   // User Payment API
@@ -119,7 +121,7 @@ export class CustomerService {
     return this.httpClient.get<ShippingOptionDto[]>(this.shippingOptUrl);
   }
 
-  // Add Order
+  // Orders Api
   addOrder(body: OrderDetailsDto) {
     console.log(body);
     return this.confirmationService.confirm({
@@ -133,6 +135,8 @@ export class CustomerService {
               summary: 'Order has been created successfully!',
               detail: 'You have just added an new order.',
             });
+            // Navigate to the orders history
+            this.router.navigateByUrl('/dashboard/user/orders-history');
           },
           error: (err: HttpErrorResponse) => {
             this.messageService.add({
@@ -145,5 +149,9 @@ export class CustomerService {
         });
       },
     });
+  }
+
+  getOrders(): Observable<OrderDetailsDto[]> {
+    return this.httpClient.get<OrderDetailsDto[]>(this.OrdersUrl);
   }
 }
