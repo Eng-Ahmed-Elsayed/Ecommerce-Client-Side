@@ -6,6 +6,7 @@ import { LayoutService } from 'src/app/shared/services/layout.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CustomerService } from '../../../shared/services/customer.service';
 import { ShoppingCartDto } from 'src/app/shared/models/customer/shoppingCartDto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -25,13 +26,14 @@ export class NavComponent implements OnInit {
   anonymousMenuItems: MenuItem[] | undefined;
   billMenuItems: MenuItem[] | undefined;
   searchForProductVisible!: boolean;
-  searchValue!: string;
+  searchValue: string = '';
 
   constructor(
     private messageService: MessageService,
     private layoutService: LayoutService,
     private authService: AuthService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -48,13 +50,6 @@ export class NavComponent implements OnInit {
           this.authService.getUserImgPath() === ''
             ? '../../../../assets/images/user/default-user-image.png'
             : this.authService.getUserImgPath();
-        // User cart
-        // this.customerService.cartReview().subscribe({
-        //   next: (res: ShoppingCartDto) => {
-        //     console.log(res);
-        //     this.cartItems = res.cartItems;
-        //   },
-        // });
       }
     });
 
@@ -144,5 +139,13 @@ export class NavComponent implements OnInit {
 
   showDialog() {
     this.searchForProductVisible = true;
+  }
+
+  searchForProducts() {
+    this.router.navigate(['/products'], {
+      queryParams: { name: this.searchValue },
+    });
+    this.searchValue = '';
+    this.searchForProductVisible = false;
   }
 }

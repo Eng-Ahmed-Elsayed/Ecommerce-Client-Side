@@ -180,9 +180,9 @@ export class AuthService {
 }
 
 export function tokenGetter() {
-  let token = sessionStorage.getItem('token');
+  let token = localStorage.getItem('token');
   if (token === null) {
-    token = localStorage.getItem('token');
+    token = sessionStorage.getItem('token');
   }
   return token;
 }

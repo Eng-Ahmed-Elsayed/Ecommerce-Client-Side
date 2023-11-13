@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/shared/product';
 import { ProductDto } from '../models/shared/productDto';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ProductParameters } from '../models/shared/productParameters';
 
 @Injectable({
   providedIn: 'root',
@@ -1293,5 +1294,15 @@ export class ProductService {
 
   getProduct(id: string): Observable<ProductDto> {
     return this.httpClient.get<ProductDto>(this.productApiUrl + id);
+  }
+
+  searchAndFilterProducts(
+    productParameters: ProductParameters
+  ): Observable<HttpResponse<ProductDto[]>> {
+    let params = new HttpParams({ fromObject: productParameters });
+    return this.httpClient.get<ProductDto[]>(this.productApiUrl + 'search', {
+      params,
+      observe: 'response',
+    });
   }
 }

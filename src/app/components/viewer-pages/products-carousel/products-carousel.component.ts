@@ -27,7 +27,7 @@ export class ProductsCarouselComponent {
   getSeverity = (product: ProductDto) =>
     this.productService.getSeverity(product);
 
-  shopCartConfirm = (productId: string) => {
+  shoppingCartConfirmation = (productId: string) => {
     let cartItem: CartItemDto = {
       quantity: 1,
       productId: productId,
@@ -35,7 +35,7 @@ export class ProductsCarouselComponent {
     this.customerService.addCartItem(cartItem);
   };
 
-  // shopCartConfirm = () =>
+  // shoppingCartConfirmation = () =>
   //   this.customOverlayService.confirmDialog(
   //     'Are you sure that you want to add this item to your cart?'
   //   );

@@ -184,7 +184,11 @@
       [(ngModel)]="searchValue"
       class="w-100 me-3"
     />
-    <p-button label="Search" styleClass="p-button-raised"></p-button>
+    <p-button
+      label="Search"
+      styleClass="p-button-raised"
+      (onClick)="searchForProducts()"
+    ></p-button>
   </span>
 </p-dialog>
 

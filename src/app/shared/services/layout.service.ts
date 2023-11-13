@@ -7,6 +7,7 @@ import { filter, map, shareReplay } from 'rxjs';
   providedIn: 'root',
 })
 export class LayoutService {
+  // For navbar conponent
   // If in products page make the breakpoint too large
   // because we will need space for filter(Like price filter and etc).
   private isLarge$ = this.router.events
@@ -22,6 +23,12 @@ export class LayoutService {
         );
       })
     );
+
+  // For sidebars (like filter sidebar).
+  isSmall$ = this.breakpointObserver.observe('(max-width: 1199.98px)').pipe(
+    map((result) => result.matches),
+    shareReplay()
+  );
 
   private responsiveOptions: any[] = [
     {
@@ -120,4 +127,5 @@ export class LayoutService {
   }
 
   getIsLarge = () => this.isLarge$;
+  getIsSmall = () => this.isSmall$;
 }

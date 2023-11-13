@@ -2,43 +2,32 @@
   #dv
   [value]="products"
   [rows]="rows"
-  (layout)="(layout)"
+  [layout]="layout"
   [paginator]="paginator"
   [sortField]="sortField"
   [sortOrder]="sortOrder"
   [filterBy]="filterBy"
   gridStyleClass="row"
+  [lazy]="true"
+  (onLazyLoad)="loadProducts($event)"
+  [totalRecords]="pagination == undefined ? undefined : pagination.TotalCount"
+  [loading]="loading"
 >
   <ng-template pTemplate="header">
-    <div
-      class="flex justify-content-center align-items-start sm:align-items-center sm:justify-content-between flex-column sm:flex-row"
-    >
+    <div class="flex justify-content-between align-items-center w-100">
+      <p-button
+        (click)="emitsidebarVisibleValue()"
+        icon="pi pi-filter"
+        styleClass="p-button-text me-2 me-sm-0"
+        *ngIf="isSmall"
+      ></p-button>
       <p-dropdown
         [options]="sortOptions"
         (ngModel)="(sortKey)"
         placeholder="Sort By"
         (onChange)="onSortChange($event)"
-        styleClass="mb-2 sm:mb-0"
+        styleClass="me-2 me-sm-0"
       ></p-dropdown>
-
-      <div class="flex mb-2 sm:mb-0">
-        <!-- <button
-          pButton
-          label="Clear"
-          class="p-button-outlined"
-          icon="pi pi-filter-slash"
-          (click)="clear(dt1)"
-        ></button> -->
-        <span class="p-input-icon-left ml-auto">
-          <i class="pi pi-search"></i>
-          <input
-            type="search"
-            pInputText
-            placeholder="Search keyword"
-            (input)="dv.filter(inputFilter($event), 'contains')"
-          />
-        </span>
-      </div>
       <p-dataViewLayoutOptions (layout)="(layout)"></p-dataViewLayoutOptions>
     </div>
   </ng-template>
@@ -49,11 +38,8 @@
         class="flex d-flex flex-column sm:flex-row xl:align-items-start mx-4 py-4 gap-4 dataView-item-container dataView-item-container"
       >
         <img
-          class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round dataView-img"
-          [src]="
-            'https://primefaces.org/cdn/primeng/images/demo/product/' +
-            product.image
-          "
+          class="shadow-2 block xl:block mx-auto border-round dataView-list-img"
+          [src]="createImgPath(product.productImages[0].imgPath)"
           [alt]="product.name"
         />
         <div
@@ -64,18 +50,23 @@
           >
             <div class="text-2xl font-bold text-900">{{ product.name }}</div>
             <p-rating
-              [ngModel]="product.rating"
+              [ngModel]="5"
               [readonly]="true"
               [cancel]="false"
             ></p-rating>
+            <!-- <p-rating
+              [ngModel]="product.rating"
+              [readonly]="true"
+              [cancel]="false"
+            ></p-rating> -->
             <div class="flex align-items-center gap-3">
               <span class="flex align-items-center gap-2">
                 <i class="pi pi-tag"></i>
-                <span class="font-semibold">{{ product.category }}</span>
+                <span class="font-semibold">{{ product.category.name }}</span>
               </span>
               <p-tag
-                [value]="product.inventoryStatus"
-                [severity]="'info'"
+                [value]="product.inventory.status"
+                [severity]="getSeverity(product)"
               ></p-tag>
             </div>
           </div>
@@ -85,13 +76,9 @@
             <span class="text-2xl font-semibold">{{
               "$" + product.price
             }}</span>
-            <button
-              pButton
-              icon="pi pi-shopping-cart"
-              class="md:align-self-end mb-2 p-button-rounded"
-              (click)="shopCartConfirm()"
-              [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"
-            ></button>
+            <app-shopping-cart-button
+              [product]="product"
+            ></app-shopping-cart-button>
           </div>
         </div>
       </div>
@@ -106,41 +93,34 @@
         >
           <span class="flex align-items-center g-2">
             <i class="pi pi-tag mr-1"></i>
-            <span class="font-semibold">{{ product.category }}</span>
+            <span class="font-semibold">{{ product.category.name }}</span>
           </span>
-          <p-tag [value]="product.inventoryStatus" [severity]="'info'"></p-tag>
-          <!-- <p-tag
-            [value]="product.inventoryStatus"
+          <p-tag
+            [value]="product.inventory.status"
             [severity]="getSeverity(product)"
-          ></p-tag> -->
+          ></p-tag>
         </div>
         <div class="flex flex-column align-items-center g-3 py-5">
           <img
-            class="w-9 shadow-2 border-round dataView-img"
-            [src]="
-              'https://primefaces.org/cdn/primeng/images/demo/product/' +
-              product.image
-            "
+            class="shadow-2 border-round dataView-grid-img"
+            [src]="createImgPath(product.productImages[0].imgPath)"
             [alt]="product.name"
           />
           <div class="text-2xl font-bold">{{ product.name }}</div>
-          <p-rating
-            [ngModel]="product.rating"
-            [readonly]="true"
-            [cancel]="false"
-          ></p-rating>
+          <p-rating [ngModel]="5" [readonly]="true" [cancel]="false"></p-rating>
+          <!-- <p-rating
+              [ngModel]="product.rating"
+              [readonly]="true"
+              [cancel]="false"
+            ></p-rating> -->
         </div>
         <div class="flex align-items-center justify-content-between">
           <span class="text-2xl font-semibold">{{
             product.price | currency
           }}</span>
-          <button
-            pButton
-            icon="pi pi-shopping-cart"
-            class="p-button-rounded"
-            (click)="shopCartConfirm()"
-            [disabled]="product.inventoryStatus === 'OUTOFSTOCK'"
-          ></button>
+          <app-shopping-cart-button
+            [product]="product"
+          ></app-shopping-cart-button>
         </div>
       </div>
     </div>

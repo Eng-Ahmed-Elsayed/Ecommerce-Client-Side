@@ -35,6 +35,7 @@ import { SidebarModule } from 'primeng/sidebar';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { CustomProductColorsComponent } from './custom-product-colors/custom-product-colors.component';
 import { CustomProductSizesComponent } from './custom-product-sizes/custom-product-sizes.component';
+import { CustomComponentsModule } from '../custom-components/custom-components.module';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { CustomProductSizesComponent } from './custom-product-sizes/custom-produ
     CheckboxModule,
     SidebarModule,
     ToggleButtonModule,
+    CustomComponentsModule,
   ],
   exports: [CustomProductColorsComponent, CustomProductSizesComponent],
 })

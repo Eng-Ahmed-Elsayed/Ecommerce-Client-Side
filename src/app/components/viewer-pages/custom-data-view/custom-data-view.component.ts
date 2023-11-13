@@ -1,9 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SelectItem } from 'primeng/api';
-import { DataView } from 'primeng/dataview';
-import { Product } from 'src/app/shared/models/shared/product';
+import { DataViewLazyLoadEvent } from 'primeng/dataview';
+import { Pagination } from 'src/app/shared/models/shared/pagination';
 import { ProductDto } from 'src/app/shared/models/shared/productDto';
 import { CustomOverlayService } from 'src/app/shared/services/custom-overlay.service';
+import { createImgPath } from 'src/app/shared/services/photo.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { UtilityService } from 'src/app/shared/services/utility.service';
 
@@ -13,48 +15,59 @@ import { UtilityService } from 'src/app/shared/services/utility.service';
   styleUrls: ['./custom-data-view.component.scss'],
 })
 export class CustomDataViewComponent implements OnInit {
-  @Input() products!: Product[];
+  @Input() products!: ProductDto[] | undefined;
   @Input() paginator: boolean = false;
   @Input() sortOptions!: SelectItem[];
   @Input() filterBy!: string;
-  @Input() rows: number = 6;
+  @Input() rows: number = 9;
+  @Input() pagination!: Pagination;
+  @Input() loading: boolean = false;
+  @Output() currentPageEvent = new EventEmitter<number>();
+
+  // server-side sidebar filter.
+  @Input() isSmall: boolean = false;
+  @Output() sidebarVisibleValueEmitter = new EventEmitter<boolean>(false);
+
   sortField!: string;
   sortOrder!: number;
   sortKey!: string;
 
-  layout: string = 'list';
-  // gridLayoutContainer!: Element;
+  layout: 'list' | 'grid' = 'grid';
+
   constructor(
     private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute,
     private customOverlayService: CustomOverlayService,
     private utilityService: UtilityService
   ) {}
 
-  ngOnInit(): void {
-    // Add class row to the grid layout container(To solve the conflict between bootstrap and primeflex )
-    // document.getElementsByClassName('grid-nogutter')[0].classList.add('row');
-  }
-  onSortChange(event: any) {
-    let value = event.value;
+  ngOnInit(): void {}
 
-    if (value.indexOf('!') === 0) {
-      this.sortOrder = -1;
-      this.sortField = value.substring(1, value.length);
-    } else {
-      this.sortOrder = 1;
-      this.sortField = value;
-    }
+  onSortChange(event: any) {
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: {
+        orderBy: event.value,
+      },
+      queryParamsHandling: 'merge', // preserve the existing query params in the route
+    });
   }
-  shopCartConfirm = () =>
-    this.customOverlayService.confirmDialog(
-      'Are you sure that you want to add this item to your cart?'
-    );
+
+  createImgPath = (imgPath: string) => createImgPath(imgPath);
+
   getSeverity = (product: ProductDto) =>
     this.productService.getSeverity(product);
 
-  inputFilter = (event: Event) => this.utilityService.inputFilter(event);
+  // Disable filter by name here after we have added a filters from the DB
+  // We will solve this later.
+  // inputFilter = (event: Event) => this.utilityService.inputFilter(event);
 
-  //   clear(dataView: DataView) {
-  //     dataView.;
-  // }
+  loadProducts = (event: DataViewLazyLoadEvent) => {
+    this.currentPageEvent.emit(event.first / event.rows + 1);
+  };
+
+  emitsidebarVisibleValue() {
+    this.sidebarVisibleValueEmitter.emit(true);
+  }
 }

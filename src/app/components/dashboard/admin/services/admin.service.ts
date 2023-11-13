@@ -19,7 +19,7 @@ export class AdminService {
   constructor(private httpClient: HttpClient) {}
 
   // Generate new Guid
-  private generate_uuidv4() {
+  private generateTempGuid() {
     return '9bb999a9-dffa-483a-8db6-0d1fc2dd60b2';
   }
 
@@ -27,7 +27,7 @@ export class AdminService {
   private customMap(arr: any[], id: string = '') {
     if (id === '') {
       return arr.map((val: string) => ({
-        id: this.generate_uuidv4(),
+        id: this.generateTempGuid(),
         name: val,
       }));
     }
@@ -35,7 +35,7 @@ export class AdminService {
     // Image map is diffrent
     else {
       return arr.map((val: string) => ({
-        id: this.generate_uuidv4(),
+        id: this.generateTempGuid(),
         imgPath: val,
         productId: id,
       }));
@@ -87,7 +87,7 @@ export class AdminService {
     colors: string[],
     productImages: string[]
   ): Observable<ProductDto> {
-    body.id = this.generate_uuidv4();
+    body.id = this.generateTempGuid();
     body.tags = this.customMap(tags);
     body.sizes = this.customMap(sizes);
     body.colors = this.customMap(colors);

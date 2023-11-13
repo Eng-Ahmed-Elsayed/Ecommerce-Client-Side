@@ -23,3 +23,12 @@ export const getProductResolver: ResolveFn<Observable<ProductDto>> = (
 ) => {
   return inject(ProductService).getProduct(route.paramMap.get('id')!);
 };
+
+// export const searchAndFilterProductsResolver: ResolveFn<Observable<ProductDto[]>> = (
+//   route: ActivatedRouteSnapshot,
+//   state: RouterStateSnapshot
+// ) => {
+//   return inject(ProductService).searchAndFilterProducts(
+//     route.queryParamMap.get('q')!
+//   );
+// };

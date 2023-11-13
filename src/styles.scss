@@ -143,15 +143,51 @@ p-carousel {
   }
 }
 
-.dataView-img,
+.dataView-list-img,
+.dataView-grid-img,
 .carousel-img {
   transition: all 0.3s ease;
-  width: 100%;
   border-radius: 0.3rem;
 }
-.dataView-img:hover,
+
+.dataView-list-img:hover,
+.dataView-grid-img:hover,
 .carousel-img:hover {
   transform: translateY(-3px);
+}
+
+.carousel-img {
+  width: 100%;
+}
+
+.dataView-list-img {
+  width: 18vw;
+  height: 8rem;
+}
+
+.dataView-grid-img {
+  width: 18vw;
+  height: 10rem;
+  margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 991.9px) {
+  .dataView-list-img,
+  .dataView-grid-img {
+    width: 25vw;
+  }
+}
+@media screen and (max-width: 575.9px) {
+  .dataView-list-img,
+  .dataView-grid-img {
+    width: 50vw;
+  }
+}
+@media screen and (min-width: 1199px) {
+  .dataView-list-img,
+  .dataView-grid-img {
+    width: 14vw;
+  }
 }
 
 .p-dataview.p-dataview-list .p-dataview-content > .p-grid > div {
@@ -160,6 +196,33 @@ p-carousel {
 
 .dataView-item-container {
   border-bottom: 3px solid var(--surface-border) !important;
+}
+
+.p-dataview-emptymessage {
+  color: #f44336;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+// Search for products
+// Category scroll panel
+.categories-fliter .p-scrollpanel-content {
+  padding-bottom: 0 !important;
+}
+
+.custom-list {
+  li {
+    list-style: none;
+    transition: all 0.3s ease;
+    margin-bottom: 0.5rem;
+  }
+  li:hover,
+  li:focus {
+    transform: translateX(6px);
+  }
+  .selected-category {
+    color: var(--primary-color);
+  }
 }
 
 // Order history

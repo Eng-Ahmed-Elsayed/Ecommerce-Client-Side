@@ -12,7 +12,10 @@ const routes: Routes = [
     component: ProductOverviewComponent,
     resolve: { product: getProductResolver },
   },
-  { path: 'products', component: ProductsComponent },
+  {
+    path: 'products',
+    component: ProductsComponent,
+  },
   { path: 'products/:filter', component: ProductsComponent },
 ];
 
