@@ -22,7 +22,6 @@ export class OrdersHistoryComponent implements OnInit {
     this.customerService.getOrders().subscribe({
       next: (res: OrderDetailsDto[]) => {
         this.orders = res;
-        console.log(res);
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);

@@ -68,7 +68,7 @@
   </div>
   <!-- Categories -->
   <div class="row my-3">
-    <h4>Shop By Categories <a href="#!">View all</a></h4>
+    <h4>Shop By Categories <a routerLink="/products">View all</a></h4>
     <app-custom-carousel
       [items]="caregories"
       [withName]="true"
@@ -76,12 +76,12 @@
   </div>
   <!-- New products -->
   <div class="row my-3">
-    <h4>New Products <a href="#!">View all</a></h4>
+    <h4>New Products <a routerLink="/products">View all</a></h4>
     <app-products-carousel [products]="products"></app-products-carousel>
   </div>
   <!-- Featured products -->
   <div class="row my-3">
-    <h4>Featured Products <a href="#!">View all</a></h4>
+    <h4>Featured Products <a routerLink="/products">View all</a></h4>
     <app-products-carousel [products]="products"></app-products-carousel>
   </div>
   <!--  -->
@@ -103,7 +103,7 @@
   </div>
   <!-- Top brands -->
   <div class="row my-3">
-    <h4>Top Brands <a href="#!">View all</a></h4>
+    <h4>Top Brands <a routerLink="/products">View all</a></h4>
     <app-custom-carousel
       [items]="products"
       [withName]="false"

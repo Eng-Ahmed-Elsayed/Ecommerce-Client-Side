@@ -1,10 +1,8 @@
 import { ProductDto } from '../shared/productDto';
 
-export interface OrderItemsDto {
+export interface CheckListItemDto {
   id?: string;
-  orderDetailsId?: string;
+  checkListId?: string;
   productId?: string;
   product?: ProductDto;
-  quantity?: number;
-  price?: number;
 }

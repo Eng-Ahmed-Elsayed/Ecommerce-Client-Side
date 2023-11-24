@@ -6,16 +6,22 @@
     [responsiveOptions]="responsiveOptions"
   >
     <ng-template let-item pTemplate="item">
-      <div class="cart-item rounded mx-2 text-center py-5 px-3">
+      <div class="custom-carousel-item rounded mx-2 text-center pt-4 px-3">
         <div class="mb-3">
           <img
             [src]="createImgPath(item.imgPath)"
             [alt]="item.name"
-            [class]="'carousel-img ' + imgClass"
+            [class]="'carousel-img cursor-pointer ' + imgClass"
+            (click)="filterByCategory(item.name!)"
           />
         </div>
         <div *ngIf="withName">
-          <h6 class="mb-1">{{ item.name }}</h6>
+          <h6
+            class="cursor-pointer font-bold"
+            (click)="filterByCategory(item.name!)"
+          >
+            {{ item.name | uppercase | slice : 0 : 20 }}
+          </h6>
         </div>
       </div>
     </ng-template>

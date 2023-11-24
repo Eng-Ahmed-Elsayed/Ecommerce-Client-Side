@@ -4,6 +4,7 @@ import { AdminService } from '../../services/admin.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/http';
 import { createImgPath } from 'src/app/shared/services/photo.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 @Component({
   selector: 'app-discount-list',
@@ -17,6 +18,7 @@ export class DiscountListComponent implements OnInit {
 
   constructor(
     private adminService: AdminService,
+    private utilityService: UtilityService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
@@ -32,9 +34,7 @@ export class DiscountListComponent implements OnInit {
 
   createImgPath = (imgPath: string) => createImgPath(imgPath);
 
-  inputFilter(event: Event) {
-    return (event.target as HTMLTextAreaElement)?.value;
-  }
+  inputFilter = (event: Event) => this.utilityService.inputFilter(event);
 
   openNew() {
     // this.discount = {};

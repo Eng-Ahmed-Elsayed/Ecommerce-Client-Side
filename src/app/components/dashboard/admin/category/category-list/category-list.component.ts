@@ -8,6 +8,7 @@ import {
 import { HttpErrorResponse } from '@angular/common/http';
 import { createImgPath } from 'src/app/shared/services/photo.service';
 import { CategoryDto } from 'src/app/shared/models/shared/categoryDto';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 @Component({
   selector: 'app-category-list',
@@ -22,6 +23,7 @@ export class CategoryListComponent implements OnInit {
   constructor(
     private adminService: AdminService,
     private confirmationService: ConfirmationService,
+    private utilityService: UtilityService,
     private messageService: MessageService
   ) {}
 
@@ -36,9 +38,7 @@ export class CategoryListComponent implements OnInit {
 
   createImgPath = (imgPath: string) => createImgPath(imgPath);
 
-  inputFilter(event: Event) {
-    return (event.target as HTMLTextAreaElement)?.value;
-  }
+  inputFilter = (event: Event) => this.utilityService.inputFilter(event);
 
   openNew() {
     // this.category = {};

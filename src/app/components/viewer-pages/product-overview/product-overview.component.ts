@@ -41,10 +41,6 @@ export class ProductOverviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.photoService.getImages().then((images: any[]) => {
-    //   console.log(images.slice(0, 4));
-    //   this.images = images.slice(0, 4);
-    // });
     this.orderForm = this.fb.group({
       // color: [],
       // size: [],

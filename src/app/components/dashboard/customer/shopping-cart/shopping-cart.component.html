@@ -16,11 +16,11 @@
           }"
         >
           <p-dataView #dv [value]="cartItems">
-            <ng-template
-              pTemplate="header"
-              *ngIf="!(isSmall$ | async) && !isSidebar"
-            >
-              <div class="row text-center">
+            <ng-template pTemplate="header" *ngIf="!isSidebar">
+              <div
+                class="row text-center"
+                *ngIf="!(isSmall$ | async) && !isSidebar"
+              >
                 <div class="col-3">Product</div>
                 <div class="col-2">Price</div>
                 <div class="col-3">Qty</div>
@@ -37,8 +37,7 @@
 
             <ng-template let-cartItem pTemplate="listItem">
               <div
-                class="row align-items-center text-center mb-2 p-3"
-                style="border-width: 1px; border-radius: var(--border-radius)"
+                class="row align-items-center text-center mb-2 p-3 cart-item-container"
               >
                 <div
                   [class]="
@@ -48,14 +47,23 @@
                   "
                 >
                   <img
-                    class="w-50 me-sm-2 rounded"
+                    class="w-50 me-sm-2 rounded cursor-pointer"
+                    style="height: 5rem"
                     [src]="
                       createImgPath(cartItem.product.productImages[0]?.imgPath)
                     "
                     [alt]="cartItem.product.name"
-                  /><span>{{ cartItem.product.name }}</span>
+                    routerLink="/product/{{ cartItem.product.id }}"
+                  /><span
+                    class="cursor-pointer"
+                    routerLink="/product/{{ cartItem.product.id }}"
+                    >{{ cartItem.product.name }}</span
+                  >
                 </div>
-                <div [class]="isSidebar ? 'col-12' : 'col-12 col-sm-2'">
+                <div
+                  [class]="isSidebar ? 'col-12' : 'col-12 col-sm-2'"
+                  *ngIf="!isSidebar"
+                >
                   {{ cartItem.product.price | currency }}
                 </div>
                 <div [class]="isSidebar ? 'col-12' : 'col-12 col-sm-3'">

@@ -1,5 +1,5 @@
 <div class="col">
-  <div class="card">
+  <div class="card mx-0 px-0">
     <p-carousel
       [value]="products"
       [numVisible]="numVisible"
@@ -8,22 +8,30 @@
       [responsiveOptions]="responsiveOptions"
     >
       <ng-template let-product pTemplate="item">
-        <div class="cart-item rounded mx-2 text-center py-5 px-3">
+        <div class="custom-carousel-item rounded mx-2 text-center py-4 px-3">
           <div class="mb-3">
             <img
               [src]="createImgPath(product.productImages[0].imgPath)"
               [alt]="product.name"
-              class="carousel-img"
+              class="product-img cursor-pointer"
+              routerLink="/product/{{ product.id }}"
             />
           </div>
           <div>
-            <h4 class="mb-1">{{ product.name }}</h4>
-            <h6 class="mt-0 mb-3">{{ "$" + product.price }}</h6>
+            <span
+              class="mb-1 text-2xl font-bold cursor-pointer"
+              routerLink="/product/{{ product.id }}"
+            >
+              {{ product.name | uppercase | slice : 0 : 20 }}
+            </span>
+            <h6 class="mt-0 mb-3 text-2xl font-semibold">
+              {{ "$" + product.price }}
+            </h6>
             <p-tag
               [value]="product.inventory.status"
               [severity]="getSeverity(product)"
             ></p-tag>
-            <div class="car-buttons mt-5">
+            <div class="mt-4">
               <p-button
                 type="button"
                 styleClass="p-button-info p-button-rounded mr-2"
@@ -34,12 +42,9 @@
               <app-shopping-cart-button
                 [product]="product"
               ></app-shopping-cart-button>
-              <p-button
-                type="button"
-                styleClass="p-button-success p-button-rounded mr-2"
-                icon="pi pi-star-fill"
-                (click)="favouritConfirm()"
-              ></p-button>
+              <app-check-list-button
+                [product]="product"
+              ></app-check-list-button>
             </div>
           </div>
         </div>

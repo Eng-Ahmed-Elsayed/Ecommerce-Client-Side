@@ -1,0 +1,13 @@
+<p-button
+  icon="pi pi-heart"
+  [styleClass]="styleClass"
+  (onClick)="addItemToCheckList()"
+  *ngIf="!product?.isInCheckList"
+></p-button>
+
+<p-button
+  icon="pi pi-heart-fill"
+  [styleClass]="styleClass"
+  (onClick)="deleteItemToCheckList()"
+  *ngIf="product?.isInCheckList"
+></p-button>

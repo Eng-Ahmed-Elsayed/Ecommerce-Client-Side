@@ -3,6 +3,7 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { CustomerService } from '../../../../shared/services/customer.service';
 import { UserPaymentDto } from 'src/app/shared/models/customer/userPaymentDto';
 import { HttpErrorResponse } from '@angular/common/http';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 @Component({
   selector: 'app-user-payment',
@@ -19,6 +20,7 @@ export class UserPaymentComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private messageService: MessageService,
+    private utilityService: UtilityService,
     private confirmationService: ConfirmationService
   ) {}
 
@@ -45,9 +47,7 @@ export class UserPaymentComponent implements OnInit {
     this.activeItem = this.items[0];
   }
 
-  inputFilter(event: Event) {
-    return (event.target as HTMLTextAreaElement)?.value;
-  }
+  inputFilter = (event: Event) => this.utilityService.inputFilter(event);
 
   getPaymentList() {
     this.customerService.getUserPaymentsList().subscribe({

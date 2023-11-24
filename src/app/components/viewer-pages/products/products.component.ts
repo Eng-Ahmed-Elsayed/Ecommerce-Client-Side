@@ -65,6 +65,8 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.nameFilter = params['name'] != undefined ? params['name'] : '';
+      this.categoryFilter =
+        params['category'] != undefined ? params['category'] : '';
       this.orderBy = params['orderBy'] != undefined ? params['orderBy'] : '';
       this.searchAndFilterProducts();
     });
@@ -170,10 +172,6 @@ export class ProductsComponent implements OnInit {
     this.sidebarVisible = val;
   }
 
-  filterByCategory(categoryName: string) {
-    if (this.categoryFilter != categoryName) {
-      this.categoryFilter = categoryName;
-      this.searchAndFilterProducts();
-    }
-  }
+  filterByCategory = (category: string) =>
+    this.productService.filterByCategory(category);
 }

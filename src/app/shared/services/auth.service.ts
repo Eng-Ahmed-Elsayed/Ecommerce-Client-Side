@@ -77,10 +77,13 @@ export class AuthService {
     // email: string,
     stayLoggedIn: boolean = false
   ) {
+    // Remove old tokens
+    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+    // Add new one
     stayLoggedIn
       ? localStorage.setItem('token', token)
       : sessionStorage.setItem('token', token);
-    // this.userEmail = email;
     this.sendAuthStateChangeNotification();
     this.router.navigateByUrl(returnURL || '/');
   }

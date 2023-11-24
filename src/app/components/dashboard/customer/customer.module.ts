@@ -31,6 +31,9 @@ import { UserPaymentSelectionComponent } from './user-payment/user-payment-selec
 import { StepsModule } from 'primeng/steps';
 import { OrdersHistoryComponent } from './orders-history/orders-history.component';
 import { ChipModule } from 'primeng/chip';
+import { WatchListComponent } from './watch-list/watch-list.component';
+import { TagModule } from 'primeng/tag';
+import { RatingModule } from 'primeng/rating';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,7 @@ import { ChipModule } from 'primeng/chip';
     UserAddressSelectionComponent,
     UserPaymentSelectionComponent,
     OrdersHistoryComponent,
+    WatchListComponent,
   ],
   imports: [
     CommonModule,
@@ -68,6 +72,8 @@ import { ChipModule } from 'primeng/chip';
     TabMenuModule,
     StepsModule,
     ChipModule,
+    TagModule,
+    RatingModule,
   ],
   exports: [ShoppingCartComponent],
 })

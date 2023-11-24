@@ -37,9 +37,7 @@ export class CustomDataViewComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private router: Router,
-    private route: ActivatedRoute,
-    private customOverlayService: CustomOverlayService,
-    private utilityService: UtilityService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {}
@@ -59,10 +57,6 @@ export class CustomDataViewComponent implements OnInit {
   getSeverity = (product: ProductDto) =>
     this.productService.getSeverity(product);
 
-  // Disable filter by name here after we have added a filters from the DB
-  // We will solve this later.
-  // inputFilter = (event: Event) => this.utilityService.inputFilter(event);
-
   loadProducts = (event: DataViewLazyLoadEvent) => {
     this.currentPageEvent.emit(event.first / event.rows + 1);
   };
@@ -70,4 +64,7 @@ export class CustomDataViewComponent implements OnInit {
   emitsidebarVisibleValue() {
     this.sidebarVisibleValueEmitter.emit(true);
   }
+
+  filterByCategory = (category: string) =>
+    this.productService.filterByCategory(category);
 }

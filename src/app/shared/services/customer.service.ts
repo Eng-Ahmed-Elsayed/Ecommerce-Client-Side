@@ -10,6 +10,8 @@ import { ShippingOptionDto } from '../models/shared/shippingOptionDto';
 import { CartItemDto } from '../models/customer/cartItemDto';
 import { OrderDetailsDto } from '../models/customer/orderDetails';
 import { Router } from '@angular/router';
+import { CheckListDto } from '../models/customer/checkListDto';
+import { CheckListItemDto } from '../models/customer/checkListItemDto';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +21,8 @@ export class CustomerService {
   private paymentUrl: string = this.baseUserApiUrl + 'payments/';
   private addressUrl: string = this.baseUserApiUrl + 'addresses/';
   private cartUrl: string = this.baseUserApiUrl + 'carts/';
-  private OrdersUrl: string = this.baseUserApiUrl + 'orders/';
+  private ordersUrl: string = this.baseUserApiUrl + 'orders/';
+  private checkListUrl: string = this.baseUserApiUrl + 'checkList/';
   private shippingOptUrl: string = environment.baseApiUrl + 'shipping-options/';
 
   constructor(
@@ -29,7 +32,7 @@ export class CustomerService {
     private router: Router
   ) {}
 
-  // User Payment API
+  // User Payment APIs.
   getUserPayment(id: string): Observable<UserPaymentDto> {
     return this.httpClient.get<UserPaymentDto>(this.paymentUrl + id);
   }
@@ -50,7 +53,7 @@ export class CustomerService {
     return this.httpClient.delete(this.paymentUrl + id);
   }
 
-  // User Address API
+  // User Address APIs.
 
   getUserAddress(id: string): Observable<UserAddressDto> {
     return this.httpClient.get<UserAddressDto>(this.addressUrl + id);
@@ -72,7 +75,7 @@ export class CustomerService {
     return this.httpClient.delete(this.addressUrl + id);
   }
 
-  // Cart API
+  // Cart APIs.
   cartReview(): Observable<ShoppingCartDto> {
     return this.httpClient.get<ShoppingCartDto>(this.cartUrl);
   }
@@ -94,7 +97,7 @@ export class CustomerService {
           error: (err: HttpErrorResponse) => {
             this.messageService.add({
               severity: 'error',
-              summary: 'Add produt to your cart failed!',
+              summary: 'Add product to your cart failed!',
               detail: 'Faild to add new product to your cart.',
             });
             console.log(err);
@@ -116,19 +119,19 @@ export class CustomerService {
     return this.httpClient.delete(this.cartUrl + id);
   }
 
-  // Shipping option
+  // Shipping option APIs.
   getShippingOptionList(): Observable<ShippingOptionDto[]> {
     return this.httpClient.get<ShippingOptionDto[]>(this.shippingOptUrl);
   }
 
-  // Orders Api
+  // Orders APIs.
   addOrder(body: OrderDetailsDto) {
     console.log(body);
     return this.confirmationService.confirm({
       message: 'Do you want to make this order.',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.httpClient.post(this.OrdersUrl, body).subscribe({
+        this.httpClient.post(this.ordersUrl, body).subscribe({
           next: () => {
             this.messageService.add({
               severity: 'success',
@@ -152,6 +155,19 @@ export class CustomerService {
   }
 
   getOrders(): Observable<OrderDetailsDto[]> {
-    return this.httpClient.get<OrderDetailsDto[]>(this.OrdersUrl);
+    return this.httpClient.get<OrderDetailsDto[]>(this.ordersUrl);
+  }
+
+  // Favorites APIs.
+  checkListReview(): Observable<CheckListItemDto[]> {
+    return this.httpClient.get<CheckListItemDto[]>(this.checkListUrl);
+  }
+
+  addCheckListItem(body: CheckListItemDto) {
+    return this.httpClient.post<CheckListItemDto>(this.checkListUrl, body);
+  }
+
+  deleteCheckListItem(id: string | undefined) {
+    return this.httpClient.delete(this.checkListUrl + id);
   }
 }

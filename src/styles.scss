@@ -4,64 +4,6 @@
 /* --- */
 /* TYPOGRAPHY */
 /* --- */
-// h1,
-// h2,
-// h3,
-// h4,
-// h5,
-// h6 {
-//   color: var(--primary-color);
-// }
-
-// h1,
-// h2,
-// h3,
-// h4,
-// h5,
-// h6 {
-//   font-family: var(--title-font-family);
-//   font-weight: var(--font-weight-semibold);
-// }
-
-// h1 {
-//   font-size: var(--h1-font-size);
-//   font-weight: var(--font-weight-bold);
-// }
-
-// h2 {
-//   font-size: var(--h2-font-size);
-//   font-weight: var(--font-weight-bold);
-// }
-
-// h3 {
-//   font-size: var(--h3-font-size);
-// }
-
-// h4 {
-//   font-size: var(--h4-font-size);
-// }
-
-// h5 {
-//   font-size: var(--h5-font-size);
-// }
-
-// h6 {
-//   color: var(--light-color);
-//   font-size: var(--h6-font-size);
-// }
-
-// p {
-//   color: var(--p-color);
-//   font-size: var(--p-font-size);
-//   font-weight: var(--font-weight-normal);
-// }
-
-// ul li {
-//   color: var(--p-color);
-//   font-size: var(--p-font-size);
-//   font-weight: var(--font-weight-normal);
-// }
-
 html,
 body {
   height: 100%;
@@ -133,7 +75,7 @@ mat-sidenav-content {
 }
 
 p-carousel {
-  .cart-item {
+  .custom-carousel-item {
     border: 2px solid var(--surface-d);
     border-radius: 3px;
     height: 100%;
@@ -143,8 +85,62 @@ p-carousel {
   }
 }
 
+// Data view
+.border-1 {
+  border-width: 1px !important;
+  border-style: solid;
+}
+
+.surface-border {
+  border-color: var(--surface-border) !important;
+}
+
+.border-round {
+  border-radius: var(--border-radius) !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.flex-1 {
+  flex: 1 1 0% !important;
+}
+
+.shadow-2 {
+  box-shadow:
+    0px 4px 10px rgba(0, 0, 0, 0.03),
+    0px 0px 2px rgba(0, 0, 0, 0.06),
+    0px 2px 6px rgba(0, 0, 0, 0.12) !important;
+}
+
+.font-bold {
+  font-weight: 700 !important;
+}
+
+.font-semibold {
+  font-weight: 600 !important;
+}
+
+.text-2xl {
+  font-size: 1.5rem !important;
+}
+
+.text-900 {
+  color: var(--surface-900) !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.data-view-grid-item {
+  padding-block: calc(var(--bs-gutter-x) * 0.5);
+}
+
 .dataView-list-img,
 .dataView-grid-img,
+.product-img,
 .carousel-img {
   transition: all 0.3s ease;
   border-radius: 0.3rem;
@@ -152,12 +148,30 @@ p-carousel {
 
 .dataView-list-img:hover,
 .dataView-grid-img:hover,
+.product-img:hover,
 .carousel-img:hover {
   transform: translateY(-3px);
 }
 
 .carousel-img {
   width: 100%;
+  height: 5rem;
+}
+
+.product-img {
+  width: 100%;
+  height: 10rem;
+}
+
+@media screen and (min-width: 992px) {
+  .product-img {
+    height: 30vh;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .product-img {
+    height: 35vh;
+  }
 }
 
 .dataView-list-img {
@@ -474,6 +488,10 @@ p-inputnumber,
   }
   .card {
     padding: 1rem;
+  }
+  .cart-item-container {
+    border: 1px solid var(--surface-border) !important;
+    border-radius: var(--border-radius);
   }
 }
 

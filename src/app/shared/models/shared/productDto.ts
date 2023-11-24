@@ -27,4 +27,5 @@ export interface ProductDto {
   inventory?: InventoryDto;
   discountId?: string;
   discount?: DiscountDto;
+  isInCheckList?: boolean;
 }

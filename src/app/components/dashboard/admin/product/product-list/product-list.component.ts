@@ -6,6 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ProductDto } from 'src/app/shared/models/shared/productDto';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { createImgPath } from 'src/app/shared/services/photo.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 @Component({
   selector: 'app-all-products',
@@ -20,6 +21,7 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private adminService: AdminService,
+    private utilityService: UtilityService,
     private confirmationService: ConfirmationService,
     private messageService: MessageService
   ) {}
@@ -34,9 +36,8 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  inputFilter(event: Event) {
-    return (event.target as HTMLTextAreaElement)?.value;
-  }
+  inputFilter = (event: Event) => this.utilityService.inputFilter(event);
+
   getSeverity = (product: ProductDto) =>
     this.productService.getSeverity(product);
 

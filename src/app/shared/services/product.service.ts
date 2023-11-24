@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ProductParameters } from '../models/shared/productParameters';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ import { ProductParameters } from '../models/shared/productParameters';
 export class ProductService {
   private productApiUrl: string = environment.baseApiUrl + 'products/';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   getProductsData() {
     return [
@@ -1303,6 +1304,12 @@ export class ProductService {
     return this.httpClient.get<ProductDto[]>(this.productApiUrl + 'search', {
       params,
       observe: 'response',
+    });
+  }
+
+  filterByCategory(category: string) {
+    this.router.navigate(['/products'], {
+      queryParams: { category: category },
     });
   }
 }

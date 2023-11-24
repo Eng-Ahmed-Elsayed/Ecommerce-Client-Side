@@ -41,7 +41,7 @@ export class ProductsCarouselComponent {
   //   );
   favouritConfirm = () =>
     this.customOverlayService.confirmDialog(
-      'Are you sure that you want to add this item to your favorites?'
+      'Are you sure that you want to add this item to your check list?'
     );
 
   createImgPath = (imgPath: string) => createImgPath(imgPath);

@@ -1,0 +1,74 @@
+<div class="container-fluid">
+  <p-dataView
+    #dv
+    [value]="checkListItems"
+    [rows]="rows"
+    [layout]="layout"
+    [paginator]="paginator"
+    gridStyleClass="row"
+  >
+    <ng-template pTemplate="header">
+      <h1>My Watch List</h1>
+    </ng-template>
+
+    <ng-template let-checkListItem pTemplate="gridItem">
+      <!-- This (*ngIf) if the user used check-list-button and made it unchecked. -->
+      <div
+        class="col-12 col-sm-6 col-lg-4 data-view-grid-item"
+        *ngIf="checkListItem.product.isInCheckList"
+      >
+        <div class="p-4 border-1 surface-border border-round">
+          <div
+            class="d-flex flex-wrap align-items-center justify-content-between gap-2"
+          >
+            <span class="d-flex align-items-center gap-2">
+              <i class="pi pi-tag mr-1"></i>
+              <span
+                class="font-semibold cursor-pointer"
+                (click)="filterByCategory(checkListItem.product.category.name!)"
+                >{{
+                  checkListItem.product.category.name
+                    | uppercase
+                    | slice : 0 : 10
+                }}</span
+              >
+            </span>
+            <p-tag
+              [value]="checkListItem.product.inventory.status"
+              [severity]="getSeverity(checkListItem.product)"
+            ></p-tag>
+          </div>
+          <div class="d-flex flex-column align-items-center gap-3 py-5">
+            <img
+              class="shadow-2 border-round dataView-grid-img cursor-pointer"
+              [src]="
+                createImgPath(checkListItem.product.productImages[0].imgPath)
+              "
+              [alt]="checkListItem.product.name"
+              routerLink="/product/{{ checkListItem.product.id }}"
+            />
+            <div
+              class="text-2xl font-bold cursor-pointer"
+              routerLink="/product/{{ checkListItem.product.id }}"
+            >
+              {{ checkListItem.product.name | uppercase | slice : 0 : 20 }}
+            </div>
+            <p-rating
+              [ngModel]="5"
+              [readonly]="true"
+              [cancel]="false"
+            ></p-rating>
+          </div>
+          <div class="d-flex align-items-center justify-content-between">
+            <span class="text-2xl font-semibold">{{
+              checkListItem.product.price | currency
+            }}</span>
+            <app-check-list-button
+              [product]="checkListItem.product"
+            ></app-check-list-button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+</div>

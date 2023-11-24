@@ -33,7 +33,7 @@ export class LayoutService {
   private responsiveOptions: any[] = [
     {
       breakpoint: '1199px',
-      numVisible: 2,
+      numVisible: 3,
       numScroll: 1,
     },
     {
@@ -42,10 +42,16 @@ export class LayoutService {
       numScroll: 2,
     },
     {
-      breakpoint: '767px',
-      numVisible: 1,
+      breakpoint: '855px',
+      numVisible: 2,
       numScroll: 1,
     },
+    {
+      breakpoint: '767px',
+      numVisible: 2,
+      numScroll: 1,
+    },
+
     {
       breakpoint: '575px',
       numVisible: 1,
@@ -73,12 +79,12 @@ export class LayoutService {
   private customCarouselResponsiveOptions: any[] = [
     {
       breakpoint: '1199px',
-      numVisible: 8,
+      numVisible: 6,
       numScroll: 1,
     },
     {
       breakpoint: '991px',
-      numVisible: 7,
+      numVisible: 5,
       numScroll: 1,
     },
     {
