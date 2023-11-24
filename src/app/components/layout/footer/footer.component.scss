@@ -2,9 +2,9 @@
 /* Footer */
 /* --- */
 .footer {
-  padding-block: 4rem;
+  padding: 4rem;
+  border-top: 1px solid var(--surface-border);
   border-bottom: 0.625rem solid var(--primary-color);
-  // border-bottom: 0.625rem solid $secondary-color;
   position: relative;
 }
 
@@ -22,7 +22,8 @@
 }
 
 .site-footer-link {
-  color: var(--primary-color);
+  // color: var(--primary-color);
+  color: var(--secondary-color);
   font-size: var(--copyright-font-size);
   font-weight: var(--font-weight-medium);
   line-height: normal;
@@ -30,7 +31,8 @@
 }
 
 .site-footer-link:hover {
-  color: var(--secondary-color);
+  // color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 .copyright-text {
@@ -52,4 +54,9 @@
   color: var(--p-color);
   font-size: var(--menu-font-size);
   font-weight: var(--font-weight-medium);
+}
+
+h6 {
+  font-weight: 600;
+  color: var(--primary-color);
 }

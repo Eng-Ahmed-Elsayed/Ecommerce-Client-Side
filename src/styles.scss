@@ -546,3 +546,8 @@ p-inputnumber {
 .error-message {
   max-width: 25rem;
 }
+
+// Scroll to top btn
+.p-scrolltop-sticky {
+  position: fixed !important;
+}
