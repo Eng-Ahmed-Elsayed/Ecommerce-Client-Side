@@ -22,7 +22,6 @@ export class ErrorHandlerService implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = this.handleError(error);
-        console.log(errorMessage);
         return throwError(() => new Error(errorMessage));
       })
     );
@@ -37,31 +36,40 @@ export class ErrorHandlerService implements HttpInterceptor {
       return this.handleUnauthorized(error);
     } else if (error.status === 403) {
       return this.handleForbidden(error);
+    } else if (error.status === 500) {
+      return this.handleInternalServer(error);
     } else {
       return `Error: ${error.message}`;
     }
   }
 
   private handleForbidden(error: HttpErrorResponse): string {
-    this.router.navigate(['/forbidden'], {
+    this.router.navigate(['/error/500'], {
       queryParams: { returnUrl: this.router.url },
     });
 
     return 'Forbidden';
   }
+  private handleInternalServer(error: HttpErrorResponse): string {
+    this.router.navigate(['/error/500'], {
+      queryParams: { returnUrl: this.router.url },
+    });
+
+    return 'Interal Server Error';
+  }
 
   private handleNotFound(error: HttpErrorResponse): string {
     if (this.router.url.search('/list') === -1) {
-      this.router.navigate(['/404']);
+      this.router.navigate(['/error/404']);
     }
     return error.message;
   }
 
   private handleUnauthorized(error: HttpErrorResponse): string {
-    if (this.router.url === '/login') {
+    if (this.router.url === '/auth/login') {
       return error.error.errorMessage;
     } else {
-      this.router.navigate(['/login'], {
+      this.router.navigate(['/error/unauthorized'], {
         queryParams: { returnUrl: this.router.url },
       });
       return error.message;
@@ -70,8 +78,8 @@ export class ErrorHandlerService implements HttpInterceptor {
 
   private handleBadRequest(error: HttpErrorResponse): string {
     if (
-      this.router.url === '/register' ||
-      this.router.url.startsWith('/reset-password')
+      this.router.url === '/auth/register' ||
+      this.router.url.startsWith('/auth/reset-password')
     ) {
       let message = '';
       const values: string[] = Object.values(error.error.errors);
@@ -82,6 +90,7 @@ export class ErrorHandlerService implements HttpInterceptor {
 
       return message.slice(0, -4);
     } else {
+      this.router.navigate(['/error/bad-request']);
       return error.error ? error.error : error.message;
     }
   }

@@ -1,0 +1,22 @@
+<div class="container-fluid py-5">
+  <div
+    class="text-center d-flex align-items-center justify-content-center flex-column"
+    style="box-sizing: border-box"
+  >
+    <h1 class="text-blue-500 mb-0 error-code">{{ errorCode }}</h1>
+    <h3 class="text-blue-700 error-name">{{ errorName }}</h3>
+    <p class="text-3xl error-message">
+      {{ errorMessage }}
+    </p>
+    <button
+      type="button"
+      pbutton=""
+      class="p-button p-component"
+      style="margin-top: 50px"
+      tabindex="0"
+      (click)="navigateToUrl()"
+    >
+      <span class="p-button-label">{{ btnText }}</span>
+    </button>
+  </div>
+</div>

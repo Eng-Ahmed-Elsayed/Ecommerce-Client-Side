@@ -40,11 +40,11 @@ import { tokenGetter } from './shared/services/auth.service';
     }),
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: ErrorHandlerService,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerService,
+      multi: true,
+    },
     ConfirmationService,
     MessageService,
   ],

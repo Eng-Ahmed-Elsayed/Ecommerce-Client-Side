@@ -17,7 +17,9 @@ import { CartItemDto } from 'src/app/shared/models/customer/cartItemDto';
 export class ShoppingCartComponent implements OnInit {
   @Input() isSidebar: boolean = false;
   @Input() cartItems!: CartItemDto[] | undefined;
+  total!: number | undefined;
 
+  // Flag to track if there is a new changes if Qty for any item.
   isChange: boolean = false;
 
   private breakpointObserver = inject(BreakpointObserver);
@@ -37,7 +39,7 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit(): void {
     this.customerService.cartReview().subscribe({
       next: (res: ShoppingCartDto) => {
-        // console.log(res);
+        this.total = res.total;
         this.cartItems = res.cartItems;
       },
     });
@@ -57,6 +59,7 @@ export class ShoppingCartComponent implements OnInit {
                 'You have deleted the product from your cart successfully.',
             });
             this.cartItems = this.cartItems?.filter((x) => x.id != id);
+            this.updateTotal();
           },
           error: (err: HttpErrorResponse) => {
             this.messageService.add({
@@ -100,6 +103,8 @@ export class ShoppingCartComponent implements OnInit {
                 cartItem.product?.price != undefined
               ) {
                 cartItem.price = cartItem.quantity * cartItem.product.price;
+                this.updateTotal();
+
                 return cartItem;
               }
             }
@@ -117,5 +122,12 @@ export class ShoppingCartComponent implements OnInit {
       });
       this.isChange = false;
     }
+  }
+  // Update the total after the user change the qty or delete item(later after he uses discount code).
+  updateTotal() {
+    this.total = this.cartItems
+      ?.map((x) => x.price)
+      .reduce((a, b) => a! + b!, 0);
+    console.log(this.total);
   }
 }
