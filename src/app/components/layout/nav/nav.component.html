@@ -1,197 +1,204 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav
-    #drawer
-    class="sidenav"
-    fixedInViewport
-    [attr.role]="(isLarge$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isLarge$ | async) ? 'over' : 'side'"
-    [opened]="(isLarge$ | async) === false"
-  >
-    <mat-toolbar class="px-3">Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/">Home</a>
-      <a mat-list-item [matMenuTriggerFor]="customer">Customer</a>
-      <mat-menu #customer="matMenu">
-        <a mat-menu-item routerLink="/dashboard/cart">My Cart</a>
-        <a mat-menu-item routerLink="/dashboard/check-out">Check Out</a>
-      </mat-menu>
-      <a mat-list-item [matMenuTriggerFor]="discount">Discount</a>
-      <mat-menu #discount="matMenu">
-        <a mat-menu-item routerLink="/dashboard/admin/discount/add"
-          >Add Discount</a
-        >
-        <a mat-menu-item routerLink="/dashboard/admin/discount/list"
-          >Discount List</a
-        >
-      </mat-menu>
+<ng-container *ngIf="isAuthForm">
+  <app-layout-auth></app-layout-auth>
+  <p-toast></p-toast>
+</ng-container>
 
-      <a mat-list-item [matMenuTriggerFor]="category">Category</a>
-      <mat-menu #category="matMenu">
-        <a mat-menu-item routerLink="/dashboard/admin/category/add"
-          >Add Category</a
-        >
-        <a mat-menu-item routerLink="/dashboard/admin/category/list"
-          >Category List</a
-        >
-      </mat-menu>
-
-      <a mat-list-item [matMenuTriggerFor]="product">Product</a>
-      <mat-menu #product="matMenu">
-        <a mat-menu-item routerLink="/dashboard/admin/product/add"
-          >Add Product</a
-        >
-        <a mat-menu-item routerLink="/dashboard/admin/product/all"
-          >All Products</a
-        >
-      </mat-menu>
-
-      <a mat-list-item [matMenuTriggerFor]="viewerPages">Viewer Pages</a>
-      <mat-menu #viewerPages="matMenu">
-        <a mat-menu-item routerLink="/products"
-          >Search and filter for products</a
-        >
-      </mat-menu>
-
-      <a mat-list-item routerLink="/dashboard">Dashboard</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar
-      class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center"
+<ng-container *ngIf="!isAuthForm">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav
+      #drawer
+      class="sidenav"
+      fixedInViewport
+      [attr.role]="(isLarge$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isLarge$ | async) ? 'over' : 'side'"
+      [opened]="(isLarge$ | async) === false"
     >
-      <span
-        class="d-flex align-items-center text-center w-100 px-2 px-sm-4 px-lg-5"
-      >
-        <button
-          type="button"
-          class="me-auto me-sm-0"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()"
-          *ngIf="isLarge$ | async"
-        >
-          <mat-icon aria-label="Side nav toggle icon"> menu</mat-icon>
-        </button>
-        <span class="me-auto me-sm-0">Ecommerce Full Stack</span>
-      </span>
-      <span
-        class="d-flex justify-content-between justify-content-sm-end align-items-center user-actions w-100 px-2 px-sm-4 px-lg-5"
-      >
-        <!-- Search for products -->
-        <p-button
-          styleClass="p-button-secondary p-button-text"
-          icon="pi pi-search"
-          (click)="showDialog()"
-        >
-        </p-button>
-        <!-- Notifications -->
-        <p-button
-          styleClass="p-button-secondary p-button-text"
-          (click)="billMenu.toggle($event)"
-          *ngIf="isAuthenticated"
-        >
-          <i
-            class="pi pi-bell p-text-secondary"
-            pBadge
-            value="2"
-            style="font-size: 1.5rem"
-          ></i
-        ></p-button>
-        <!-- User actions -->
-        <!-- If user -->
-        <p-button
-          styleClass="p-button-text p-button-secondary"
-          (click)="userMenu.toggle($event)"
-          *ngIf="isAuthenticated"
-        >
-          <img
-            alt="logo"
-            [src]="userImgPath"
-            style="width: 2rem"
-            class="me-2"
-          />
-          <span>{{ username }}</span>
-        </p-button>
-        <!-- Else -->
-        <p-button
-          styleClass="p-button-text p-button-secondary"
-          icon="pi pi-user"
-          (click)="anonymousMenu.toggle($event)"
-          *ngIf="!isAuthenticated"
-        >
-        </p-button>
-        <!-- My cart -->
-        <p-button
-          (click)="cartVisible = true"
-          styleClass="p-button-rounded p-button-secondary p-button-text"
-          icon="pi pi-shopping-cart"
-        ></p-button>
-      </span>
-    </mat-toolbar>
-    <!-- Add Content Here -->
-    <div class="my-5 my-sm-2" style="min-height: 70%">
-      <router-outlet></router-outlet>
-    </div>
-    <app-footer></app-footer>
-    <p-scrollTop target="parent" icon="pi pi-arrow-up"></p-scrollTop>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+      <mat-toolbar class="px-3">Menu</mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item routerLink="/">Home</a>
+        <a mat-list-item [matMenuTriggerFor]="customer">Customer</a>
+        <mat-menu #customer="matMenu">
+          <a mat-menu-item routerLink="/dashboard/cart">My Cart</a>
+          <a mat-menu-item routerLink="/dashboard/check-out">Check Out</a>
+        </mat-menu>
+        <a mat-list-item [matMenuTriggerFor]="discount">Discount</a>
+        <mat-menu #discount="matMenu">
+          <a mat-menu-item routerLink="/dashboard/admin/discount/add"
+            >Add Discount</a
+          >
+          <a mat-menu-item routerLink="/dashboard/admin/discount/list"
+            >Discount List</a
+          >
+        </mat-menu>
 
-<!-- Card sidebar -->
-<p-sidebar
-  [(visible)]="cartVisible"
-  position="right"
-  [style]="{ width: '25rem', 'max-width': '100vw' }"
-  styleClass="card-sidebar"
->
-  <ng-template pTemplate="header"
-    ><a
-      routerLink="/dashboard/user/cart"
-      class="text-decoration-none text-white h3"
-      >My Cart</a
-    ></ng-template
+        <a mat-list-item [matMenuTriggerFor]="category">Category</a>
+        <mat-menu #category="matMenu">
+          <a mat-menu-item routerLink="/dashboard/admin/category/add"
+            >Add Category</a
+          >
+          <a mat-menu-item routerLink="/dashboard/admin/category/list"
+            >Category List</a
+          >
+        </mat-menu>
+
+        <a mat-list-item [matMenuTriggerFor]="product">Product</a>
+        <mat-menu #product="matMenu">
+          <a mat-menu-item routerLink="/dashboard/admin/product/add"
+            >Add Product</a
+          >
+          <a mat-menu-item routerLink="/dashboard/admin/product/all"
+            >All Products</a
+          >
+        </mat-menu>
+
+        <a mat-list-item [matMenuTriggerFor]="viewerPages">Viewer Pages</a>
+        <mat-menu #viewerPages="matMenu">
+          <a mat-menu-item routerLink="/products"
+            >Search and filter for products</a
+          >
+        </mat-menu>
+
+        <a mat-list-item routerLink="/dashboard">Dashboard</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar
+        class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center"
+      >
+        <span
+          class="d-flex align-items-center text-center w-100 px-2 px-sm-4 px-lg-5"
+        >
+          <button
+            type="button"
+            class="me-auto me-sm-0"
+            aria-label="Toggle sidenav"
+            mat-icon-button
+            (click)="drawer.toggle()"
+            *ngIf="isLarge$ | async"
+          >
+            <mat-icon aria-label="Side nav toggle icon"> menu</mat-icon>
+          </button>
+          <span class="me-auto me-sm-0">Ecommerce Full Stack</span>
+        </span>
+        <span
+          class="d-flex justify-content-between justify-content-sm-end align-items-center user-actions w-100 px-2 px-sm-4 px-lg-5"
+        >
+          <!-- Search for products -->
+          <p-button
+            styleClass="p-button-secondary p-button-text"
+            icon="pi pi-search"
+            (click)="showDialog()"
+          >
+          </p-button>
+          <!-- Notifications -->
+          <p-button
+            styleClass="p-button-secondary p-button-text"
+            (click)="billMenu.toggle($event)"
+            *ngIf="isAuthenticated"
+          >
+            <i
+              class="pi pi-bell p-text-secondary"
+              pBadge
+              value="2"
+              style="font-size: 1.5rem"
+            ></i
+          ></p-button>
+          <!-- User actions -->
+          <!-- If user -->
+          <p-button
+            styleClass="p-button-text p-button-secondary"
+            (click)="userMenu.toggle($event)"
+            *ngIf="isAuthenticated"
+          >
+            <img
+              alt="logo"
+              [src]="userImgPath"
+              style="width: 2rem"
+              class="me-2"
+            />
+            <span>{{ username }}</span>
+          </p-button>
+          <!-- Else -->
+          <p-button
+            styleClass="p-button-text p-button-secondary"
+            icon="pi pi-user"
+            (click)="anonymousMenu.toggle($event)"
+            *ngIf="!isAuthenticated"
+          >
+          </p-button>
+          <!-- My cart -->
+          <p-button
+            (click)="cartVisible = true"
+            styleClass="p-button-rounded p-button-secondary p-button-text"
+            icon="pi pi-shopping-cart"
+          ></p-button>
+        </span>
+      </mat-toolbar>
+      <!-- Add Content Here -->
+      <div class="my-5 my-sm-2" style="min-height: 70%">
+        <router-outlet></router-outlet>
+      </div>
+      <app-footer></app-footer>
+      <p-scrollTop target="parent" icon="pi pi-arrow-up"></p-scrollTop>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <!-- Card sidebar -->
+  <p-sidebar
+    [(visible)]="cartVisible"
+    position="right"
+    [style]="{ width: '25rem', 'max-width': '100vw' }"
+    styleClass="card-sidebar"
   >
-  <ng-template pTemplate="content">
-    <app-shopping-cart
-      [isSidebar]="true"
-      *ngIf="this.isAuthenticated"
-    ></app-shopping-cart>
-    <p>Please login first to review your cart.</p>
-  </ng-template>
-</p-sidebar>
+    <ng-template pTemplate="header"
+      ><a
+        routerLink="/dashboard/user/cart"
+        class="text-decoration-none text-white h3"
+        >My Cart</a
+      ></ng-template
+    >
+    <ng-template pTemplate="content">
+      <app-shopping-cart
+        [isSidebar]="true"
+        *ngIf="this.isAuthenticated"
+      ></app-shopping-cart>
+      <p>Please login first to review your cart.</p>
+    </ng-template>
+  </p-sidebar>
 
-<!-- User Menu -->
-<p-menu #userMenu [model]="userMenuItems" [popup]="true"></p-menu>
-<!-- Anonymous Menu -->
-<p-menu #anonymousMenu [model]="anonymousMenuItems" [popup]="true"></p-menu>
+  <!-- User Menu -->
+  <p-menu #userMenu [model]="userMenuItems" [popup]="true"></p-menu>
+  <!-- Anonymous Menu -->
+  <p-menu #anonymousMenu [model]="anonymousMenuItems" [popup]="true"></p-menu>
 
-<!-- Notifications menu -->
-<p-menu #billMenu [model]="billMenuItems" [popup]="true"></p-menu>
+  <!-- Notifications menu -->
+  <p-menu #billMenu [model]="billMenuItems" [popup]="true"></p-menu>
 
-<!-- Search for products -->
-<p-dialog
-  header="Search For Products"
-  [(visible)]="searchForProductVisible"
-  [modal]="true"
-  [draggable]="false"
-  [resizable]="false"
-  styleClass="custom-p-dialog"
->
-  <span class="d-flex justify-content-center">
-    <input
-      type="text"
-      pInputText
-      [(ngModel)]="searchValue"
-      class="w-100 me-3"
-    />
-    <p-button
-      label="Search"
-      styleClass="p-button-raised"
-      (onClick)="searchForProducts()"
-    ></p-button>
-  </span>
-</p-dialog>
+  <!-- Search for products -->
+  <p-dialog
+    header="Search For Products"
+    [(visible)]="searchForProductVisible"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    styleClass="custom-p-dialog"
+  >
+    <span class="d-flex justify-content-center">
+      <input
+        type="text"
+        pInputText
+        [(ngModel)]="searchValue"
+        class="w-100 me-3"
+      />
+      <p-button
+        label="Search"
+        styleClass="p-button-raised"
+        (onClick)="searchForProducts()"
+      ></p-button>
+    </span>
+  </p-dialog>
 
-<!-- Confirm dialog & toast  -->
-<app-confirm-dialog></app-confirm-dialog>
-<p-toast></p-toast>
+  <!-- Confirm dialog & toast  -->
+  <app-confirm-dialog></app-confirm-dialog>
+  <p-toast></p-toast>
+</ng-container>

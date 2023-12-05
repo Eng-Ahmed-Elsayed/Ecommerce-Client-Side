@@ -22,6 +22,9 @@ export class ErrorHandlerService implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         let errorMessage = this.handleError(error);
+        if (this.router.url.startsWith('/auth')) {
+          return throwError(() => errorMessage);
+        }
         return throwError(() => new Error(errorMessage));
       })
     );
@@ -65,8 +68,9 @@ export class ErrorHandlerService implements HttpInterceptor {
     return error.message;
   }
 
-  private handleUnauthorized(error: HttpErrorResponse): string {
-    if (this.router.url === '/auth/login') {
+  private handleUnauthorized(error: any): string {
+    if (this.router.url.startsWith('/auth')) {
+      // console.log(error.error.errorMessage);
       return error.error.errorMessage;
     } else {
       this.router.navigate(['/error/unauthorized'], {

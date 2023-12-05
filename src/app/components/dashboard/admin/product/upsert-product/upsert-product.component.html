@@ -15,6 +15,10 @@
                 />
                 <label htmlFor="name">Product Name</label>
               </span>
+              <app-generic-input-errors
+                [genericFormControl]="upsertProductForm.get('name')"
+                inputName="Name"
+              ></app-generic-input-errors>
             </div>
             <div class="col-12 col-md-4">
               <span class="p-float-label">
@@ -26,6 +30,7 @@
                   [minFractionDigits]="2"
                   [min]="0"
                   class="w-100"
+                  [required]="true"
                 >
                 </p-inputNumber>
                 <label htmlFor="price">Price</label>
@@ -41,6 +46,10 @@
                 />
                 <label htmlFor="productCode">Product Code</label>
               </span>
+              <app-generic-input-errors
+                [genericFormControl]="upsertProductForm.get('productCode')"
+                inputName="Product code"
+              ></app-generic-input-errors>
             </div>
             <div class="col-12 col-md-4">
               <span class="p-float-label">
@@ -52,12 +61,20 @@
                 />
                 <label htmlFor="productSKU">Product SKU</label>
               </span>
+              <app-generic-input-errors
+                [genericFormControl]="upsertProductForm.get('productSKU')"
+                inputName="Product SKU"
+              ></app-generic-input-errors>
             </div>
             <div class="col-12">
               <p-editor
                 formControlName="description"
                 [style]="{ height: '20rem' }"
               ></p-editor>
+              <app-generic-input-errors
+                [genericFormControl]="upsertProductForm.get('description')"
+                inputName="Description"
+              ></app-generic-input-errors>
             </div>
             <div class="col-12">
               <p-fileUpload
@@ -79,6 +96,10 @@
                   </ul>
                 </ng-template>
               </p-fileUpload>
+              <app-generic-input-errors
+                [genericFormControl]="upsertProductForm.get('productImages')"
+                inputName="Name"
+              ></app-generic-input-errors>
             </div>
           </div>
         </div>
@@ -94,6 +115,10 @@
                 optionValue="value"
                 styleClass="w-100"
               ></p-dropdown>
+              <app-generic-input-errors
+                [genericFormControl]="upsertProductForm.get('status')"
+                inputName="Status"
+              ></app-generic-input-errors>
             </div>
             <div class="col-12 custom-input-card">
               <h5>Tags</h5>
@@ -104,6 +129,10 @@
                 [addOnTab]="true"
                 [showClear]="true"
               ></p-chips>
+              <app-generic-input-errors
+                [genericFormControl]="upsertProductForm.get('tags')"
+                inputName="Tags"
+              ></app-generic-input-errors>
             </div>
             <div class="col-12 custom-input-card">
               <h5>Caregory</h5>
@@ -118,6 +147,7 @@
                 optionLabel="name"
                 optionValue="id"
                 styleClass="w-100"
+                [required]="true"
                 *ngIf="urlPath === 'add'"
               ></p-dropdown>
               <!-- If update -->
@@ -130,6 +160,7 @@
                 optionLabel="name"
                 optionValue="id"
                 styleClass="w-100"
+                [required]="true"
                 *ngIf="urlPath === 'update'"
               ></p-dropdown>
             </div>
@@ -140,6 +171,10 @@
                 (colorsValueEmitter)="addColorsToForm($event)"
                 [colorsValue]="upsertProductForm.get('colors')?.value"
               ></app-custom-product-colors>
+              <app-generic-input-errors
+                [genericFormControl]="upsertProductForm.get('colors')"
+                inputName="Colors"
+              ></app-generic-input-errors>
             </div>
             <div class="col-12 custom-input-card">
               <h5>Sizes</h5>
@@ -148,12 +183,20 @@
                 (sizesValueEmitter)="addSizesToForm($event)"
                 [sizesValue]="upsertProductForm.get('sizes')?.value"
               ></app-custom-product-sizes>
+              <app-generic-input-errors
+                [genericFormControl]="upsertProductForm.get('sizes')"
+                inputName="Sizes"
+              ></app-generic-input-errors>
             </div>
             <div
               class="col-12 custom-input-card d-flex justify-content-between"
             >
               <h5>In Stock</h5>
               <p-inputSwitch formControlName="inStock"></p-inputSwitch>
+              <app-generic-input-errors
+                [genericFormControl]="upsertProductForm.get('inStock')"
+                inputName="In Stock"
+              ></app-generic-input-errors>
             </div>
             <div class="col-12 custom-input-card">
               <h5>Quantity</h5>
@@ -172,6 +215,7 @@
                 inputStyleClass="p-inputtext-sm inputNumber text-center"
                 [min]="0"
                 [max]="99999"
+                [required]="true"
               ></p-inputNumber>
             </div>
           </div>
@@ -182,7 +226,7 @@
           pButton
           type="submit"
           (click)="uploadFiles(pFile.files); pFile.clear()"
-          [disabled]="pFile.files.length === 0"
+          [disabled]="pFile.files.length === 0 || upsertProductForm.invalid"
           *ngIf="urlPath === 'add'"
         >
           Add Product
@@ -191,6 +235,7 @@
           pButton
           type="submit"
           (click)="uploadFiles(pFile.files)"
+          [disabled]="upsertProductForm.invalid || upsertProductForm.pristine"
           *ngIf="urlPath === 'update'"
         >
           Update Product

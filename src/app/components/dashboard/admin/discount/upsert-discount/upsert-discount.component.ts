@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 import { MessageService } from 'primeng/api';
 import { ActivatedRoute } from '@angular/router';
@@ -33,26 +38,46 @@ export class UpsertDiscountComponent implements OnInit {
 
   ngOnInit(): void {
     // Add discount form
-    if (this.urlPath === 'add') {
-      this.upsertDiscountForm = this.fb.group({
-        name: [''],
-        discountPercent: [''],
-        isActive: [false],
-        products: [''],
-      });
-    }
+    this.upsertDiscountForm = this.fb.group({
+      name: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(40),
+          ],
+        },
+      ],
+      discountPercent: [
+        '',
+        {
+          validators: [Validators.required],
+        },
+      ],
+      isActive: [
+        false,
+        {
+          validators: [Validators.required],
+        },
+      ],
+      products: [''],
+    });
     // Update discount form
-    else {
+    if (this.urlPath !== 'add') {
       this.activatedRoute.data.subscribe({
         next: (data: any) => {
           let discount: DiscountDto = data.discount;
-          this.upsertDiscountForm = this.fb.group({
-            id: [discount.id],
-            name: [discount.name],
-            discountPercent: [discount.discountPercent],
-            isActive: [discount.isActive],
-            // products: [discount.products],
+          this.upsertDiscountForm.reset({
+            id: discount.id,
+            name: discount.name,
+            discountPercent: discount.discountPercent,
+            isActive: discount.isActive,
           });
+          this.upsertDiscountForm.addControl(
+            'id',
+            new FormControl(discount.id)
+          );
           // Update source and target products so we will be able
           // to add products to this discount and also remove it.
           this.sourceProducts = discount.otherProducts;
@@ -89,10 +114,8 @@ export class UpsertDiscountComponent implements OnInit {
     // Update discount
     else {
       let discountBody: DiscountDto = this.upsertDiscountForm.getRawValue();
-      // discountBody.newProducts = this.targetProducts;
       // We will use other products to set the new products
       discountBody.otherProducts = this.targetProducts;
-      console.log(discountBody);
       this.adminService.updateDiscount(discountBody).subscribe({
         next: (res: DiscountDto) => {
           this.messageService.add({

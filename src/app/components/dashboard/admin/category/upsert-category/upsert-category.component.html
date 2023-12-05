@@ -17,6 +17,10 @@
                     />
                     <label htmlFor="name">Category Name</label>
                   </span>
+                  <app-generic-input-errors
+                    [genericFormControl]="upsertCategoryForm.get('name')"
+                    inputName="Name"
+                  ></app-generic-input-errors>
                 </div>
                 <div class="col-12">
                   <span class="p-float-label">
@@ -30,6 +34,10 @@
                     ></textarea>
                     <label for="float-input">Summary</label>
                   </span>
+                  <app-generic-input-errors
+                    [genericFormControl]="upsertCategoryForm.get('description')"
+                    inputName="Description"
+                  ></app-generic-input-errors>
                 </div>
               </div>
             </div>
@@ -59,7 +67,9 @@
               pButton
               type="submit"
               (click)="uploadFiles(pFile.files); pFile.clear()"
-              [disabled]="pFile.files.length === 0"
+              [disabled]="
+                pFile.files.length === 0 || upsertCategoryForm.invalid
+              "
               *ngIf="urlPath === 'add'"
             >
               Add Category
@@ -68,6 +78,9 @@
               pButton
               type="submit"
               (click)="uploadFiles(pFile.files); pFile.clear()"
+              [disabled]="
+                upsertCategoryForm.invalid || upsertCategoryForm.pristine
+              "
               *ngIf="urlPath === 'update'"
             >
               Update Category

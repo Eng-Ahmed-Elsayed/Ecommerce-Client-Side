@@ -1,0 +1,76 @@
+<div class="text-900 text-xl font-bold mb-2 text-center">Login</div>
+<form
+  [formGroup]="loginForm"
+  class="mt-3"
+  (submit)="loginUser()"
+  autocomplete="off"
+>
+  <div class="row">
+    <!-- Username input -->
+    <div class="col-12 custom-input-group">
+      <span class="p-float-label">
+        <input
+          pInputText
+          id="userName"
+          formControlName="userName"
+          class="w-100"
+          autocomplete="off"
+        />
+        <label htmlFor="userName">Username</label>
+      </span>
+      <app-generic-input-errors
+        [genericFormControl]="loginForm.get('userName')"
+        inputName="Username"
+      ></app-generic-input-errors>
+    </div>
+    <!-- Password input -->
+    <div class="col-12 custom-input-group">
+      <span class="p-float-label">
+        <p-password
+          formControlName="password"
+          styleClass="w-100"
+          inputStyleClass="w-100"
+          [toggleMask]="true"
+          [feedback]="false"
+          autocomplete="off"
+        ></p-password>
+        <label htmlFor="password">Password</label>
+      </span>
+      <app-generic-input-errors
+        [genericFormControl]="loginForm.get('password')"
+        inputName="Password"
+      ></app-generic-input-errors>
+    </div>
+
+    <div class="col-12 py-3">
+      <button
+        pButton
+        pRipple
+        label="Sign In"
+        class="w-100"
+        type="submit"
+        [disabled]="loginForm.invalid"
+      ></button>
+    </div>
+    <div class="col-12" *ngIf="errorMessage!.length > 0">
+      <app-custom-input-error
+        [condition]="errorMessage!.length > 0"
+        [msg]="errorMessage"
+      ></app-custom-input-error>
+    </div>
+    <div class="col-12 text-center">
+      <small class="cursor-pointer" routerLink="/auth/forgot-password"
+        >forget password?</small
+      >
+      <p class="py-3">
+        Don’t you have an account,
+        <span
+          class="cursor-pointer"
+          style="color: var(--primary-color)"
+          routerLink="/auth/register"
+          >sign up</span
+        >
+      </p>
+    </div>
+  </div>
+</form>

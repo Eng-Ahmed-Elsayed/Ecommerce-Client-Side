@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { FileUploadEvent } from 'primeng/fileupload';
 import { AdminService } from '../../services/admin.service';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
@@ -41,58 +46,134 @@ export class UpsertProductComponent implements OnInit {
     this.colorStateOptions = this.productService.getColors();
 
     // Add product form
-    if (this.urlPath === 'add') {
-      // Get all categories
-      this.activatedRoute.data.subscribe({
-        next: (data: any) => {
-          this.caregoryOptions = data.categoryList;
+
+    // Get all categories
+    this.activatedRoute.data.subscribe({
+      next: (data: any) => {
+        this.caregoryOptions = data.categoryList;
+      },
+    });
+    this.upsertProductForm = this.fb.group({
+      name: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(40),
+          ],
         },
-      });
-      this.upsertProductForm = this.fb.group({
-        name: [''],
-        description: [''],
-        productCode: [''],
-        productSKU: [''],
-        price: [],
-        status: ['draft'],
-        inStock: [false],
-        colors: [''],
-        productImages: [''],
-        tags: new FormControl<string[] | null>(null),
-        sizes: [],
-        quantity: [1],
-        categoryId: [''],
-        // inventoryId: [''],
-        // discountId: [''],
-      });
-    }
+      ],
+      description: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(100),
+          ],
+        },
+      ],
+      productCode: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(4),
+            Validators.maxLength(30),
+          ],
+        },
+      ],
+      productSKU: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(4),
+            Validators.maxLength(16),
+          ],
+        },
+      ],
+      price: [
+        ,
+        {
+          validators: [Validators.required],
+        },
+      ],
+      status: [
+        'draft',
+        {
+          validators: [Validators.required],
+        },
+      ],
+      inStock: [
+        false,
+        {
+          validators: [Validators.required],
+        },
+      ],
+      colors: [
+        '',
+        {
+          validators: [Validators.maxLength(20)],
+        },
+      ],
+      tags: [
+        '',
+        {
+          validators: [Validators.maxLength(20)],
+        },
+      ],
+      sizes: [
+        '',
+        {
+          validators: [Validators.maxLength(20)],
+        },
+      ],
+      productImages: [
+        '',
+        {
+          validators: [Validators.maxLength(6)],
+        },
+      ],
+      quantity: [
+        1,
+        {
+          validators: [Validators.required],
+        },
+      ],
+      categoryId: [''],
+      inventoryId: ['9bb999a9-dffa-483a-8db6-0d1fc2dd60b2'],
+      discountId: [''],
+    });
+
     // Update product form
-    else {
+    if (this.urlPath !== 'add') {
       this.activatedRoute.data.subscribe({
         next: (data: any) => {
           // Get categories
           this.caregoryOptions = data.categoryList;
           // Get product
           let product: ProductDto = data.product;
-          this.upsertProductForm = this.fb.group({
-            id: [product.id],
-            name: [product.name],
-            description: [product.description],
-            productCode: [product.productCode],
-            productSKU: [product.productSKU],
-            price: [product.price],
-            status: [product.status],
-            inStock: [product.inStock],
-            colors: [product.colors?.map((x) => x.name)],
+          this.upsertProductForm.reset({
+            name: product.name,
+            description: product.description,
+            productCode: product.productCode,
+            productSKU: product.productSKU,
+            price: product.price,
+            status: product.status,
+            inStock: product.inStock,
+            colors: product.colors?.map((x) => x.name),
             productImages: [],
             // productImages: [product.productImages],
-            tags: [product.tags?.map((x) => x.name)],
-            sizes: [product.sizes?.map((x) => x.name)],
-            quantity: [product.quantity],
-            categoryId: [product.categoryId],
-            inventoryId: [product.inventoryId],
-            discountId: [product.discountId],
+            tags: product.tags?.map((x) => x.name),
+            sizes: product.sizes?.map((x) => x.name),
+            quantity: product.quantity,
+            categoryId: product.categoryId,
+            inventoryId: product.inventoryId,
+            discountId: product.discountId,
           });
+          this.upsertProductForm.addControl('id', new FormControl(product.id));
         },
       });
     }

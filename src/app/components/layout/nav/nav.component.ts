@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, filter, map } from 'rxjs';
 import { MenuItem, MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/shared/services/layout.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { CustomerService } from '../../../shared/services/customer.service';
 import { ShoppingCartDto } from 'src/app/shared/models/customer/shoppingCartDto';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -18,6 +18,7 @@ export class NavComponent implements OnInit {
   isAuthenticated!: boolean;
   username!: string;
   userImgPath!: string;
+  isAuthForm!: boolean;
 
   cartVisible: boolean = false;
   // cartItems: CartItemDto[] | undefined;
@@ -37,6 +38,22 @@ export class NavComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    // If it is an auth page with form like(login, ...etc) but not edit-user page.
+    // first filter router events and get NavigationEnd then map it and get the url
+    // then check if it is an auth page with form or not.
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .pipe(
+        map((x) =>
+          x.url.startsWith('/auth') && !x.url.endsWith('/edit-user')
+            ? true
+            : false
+        )
+      )
+      .subscribe((isAuthForm) => {
+        this.isAuthForm = isAuthForm;
+      });
+
     // If the screen is large or no
     this.layoutService.getIsLarge().subscribe((isLarge) => {
       this.isLarge$ = isLarge;

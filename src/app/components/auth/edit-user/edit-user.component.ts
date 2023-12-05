@@ -1,6 +1,6 @@
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserDto } from '../models/userDto';
@@ -11,6 +11,7 @@ import {
   UploadEvent,
 } from 'primeng/fileupload';
 import { createImgPath } from 'src/app/shared/services/photo.service';
+import passwordMatchValidator from '../../custom-components/validators/passwordMatchValidator';
 
 @Component({
   selector: 'app-edit-user',
@@ -22,6 +23,7 @@ export class EditUserComponent implements OnInit {
   updateUserForm!: FormGroup;
   userEmail!: string | undefined;
   oldBirthdate!: string | undefined;
+  currentBirthdate!: Date | undefined;
   oldImgPath!: string | undefined;
 
   uploadedFiles: any[] = [];
@@ -36,30 +38,83 @@ export class EditUserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userChangePasswordForm = this.fb.group({
-      currentPassword: [],
-      password: [],
-      confirmPassword: [],
-    });
+    // Change password form
+    this.userChangePasswordForm = this.fb.group(
+      {
+        currentPassword: [
+          ,
+          {
+            validators: [
+              Validators.required,
+              Validators.minLength(7),
+              Validators.maxLength(20),
+            ],
+          },
+        ],
+        password: [
+          ,
+          {
+            validators: [
+              Validators.required,
+              Validators.minLength(7),
+              Validators.maxLength(20),
+            ],
+          },
+        ],
+        confirmPassword: [
+          ,
+          {
+            validators: [
+              Validators.required,
+              Validators.minLength(7),
+              Validators.maxLength(20),
+            ],
+          },
+        ],
+      },
+      { validators: passwordMatchValidator, updateOn: 'blur' }
+    );
+    // Get the user data and set it to the form
     this.activatedRoute.data.subscribe((data) => {
       let user: UserDto = data['user'];
       this.userEmail = user.email;
       this.oldBirthdate = user.birthdate?.toString().split('T')[0];
+      this.currentBirthdate = user.birthdate;
       this.oldImgPath = createImgPath(user.imgPath);
-      // this.oldBirthdate = `${user.birthdate?.getDate()}/${user.birthdate?.getMonth()}/${user.birthdate?.getFullYear()}`;
 
       this.updateUserForm = this.fb.group({
-        firstName: [user.firstName],
-        lastName: [user.lastName],
-        phoneNumber: [user.phoneNumber],
-        birthdate: [user.birthdate],
+        firstName: [
+          user.firstName,
+          {
+            validators: [Validators.minLength(3), Validators.maxLength(40)],
+          },
+        ],
+        lastName: [
+          user.lastName,
+          {
+            validators: [Validators.minLength(3), Validators.maxLength(40)],
+          },
+        ],
+        phoneNumber: [
+          user.phoneNumber,
+          {
+            validators: [Validators.minLength(4), Validators.maxLength(25)],
+          },
+        ],
+        birthdate: [],
         twoFactorEnabled: [user.twoFactorEnabled],
       });
     });
+    // Make the max date = now - 14 years.
+    this.maxDate.setFullYear(this.maxDate.getFullYear() - 14);
   }
 
   updateUser() {
-    this.authService.updateUser(this.updateUserForm.getRawValue()).subscribe({
+    let userDto: UserDto = this.updateUserForm.getRawValue();
+    if (userDto.birthdate == null || userDto.birthdate == undefined) {
+      userDto.birthdate = this.currentBirthdate;
+    }
+    this.authService.updateUser(userDto).subscribe({
       next: (res: any) => {
         this.messageService.add({
           severity: 'success',

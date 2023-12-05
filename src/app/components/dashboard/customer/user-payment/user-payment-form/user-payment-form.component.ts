@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerService } from '../../../../../shared/services/customer.service';
 import { MessageService } from 'primeng/api';
@@ -29,27 +34,72 @@ export class UserPaymentFormComponent implements OnInit {
 
   ngOnInit(): void {
     // If add add new
-    if (!this.isUpdate) {
-      this.userPaymentForm = this.fb.group({
-        name: [''],
-        accountNo: [],
-        expiry: [''],
-        cvv: [''],
-        remember: [''],
-        provider: ['Test: ' + (Math.random() + 1).toString(36).substring(7)],
-      });
-    }
+    this.userPaymentForm = this.fb.group({
+      name: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(40),
+          ],
+        },
+      ],
+      accountNo: [
+        ,
+        {
+          validators: [
+            Validators.required,
+            Validators.pattern('^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$'),
+          ],
+        },
+      ],
+      expiry: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.pattern('^(0[1-9]|1[0-2])/([0-9]{2}|[0-9]{4})$'),
+          ],
+        },
+      ],
+      cvv: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(3),
+          ],
+        },
+      ],
+      remember: [''],
+      provider: [
+        'Test: ' + (Math.random() + 1).toString(36).substring(7),
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(3),
+            Validators.maxLength(40),
+          ],
+        },
+      ],
+    });
+
     // Update
-    else {
-      this.userPaymentForm = this.fb.group({
-        id: [this.userPayment.id],
-        name: [this.userPayment.name],
-        accountNo: [this.userPayment.accountNo],
-        expiry: [this.userPayment.expiry],
-        cvv: [this.userPayment.cvv],
-        remember: [this.userPayment.remember],
-        provider: [this.userPayment.provider],
+    if (this.isUpdate) {
+      this.userPaymentForm.reset({
+        name: this.userPayment.name,
+        accountNo: this.userPayment.accountNo,
+        expiry: this.userPayment.expiry,
+        cvv: this.userPayment.cvv,
+        remember: this.userPayment.remember,
+        provider: this.userPayment.provider,
       });
+      this.userPaymentForm.addControl(
+        'id',
+        new FormControl(this.userPayment.id)
+      );
     }
   }
 
@@ -66,6 +116,11 @@ export class UserPaymentFormComponent implements OnInit {
               detail: 'You have just added a new payment method successfully.',
             });
             this.newUserPaymentEvent.emit(res);
+            this.userPaymentForm.reset({
+              provider: [
+                'Test: ' + (Math.random() + 1).toString(36).substring(7),
+              ],
+            });
           },
           error: (err: HttpErrorResponse) => {
             this.messageService.add({

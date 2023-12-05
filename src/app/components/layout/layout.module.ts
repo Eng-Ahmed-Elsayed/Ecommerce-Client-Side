@@ -24,6 +24,7 @@ import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
 import { CustomerModule } from '../dashboard/customer/customer.module';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { LayoutAuthComponent } from './layout-auth/layout-auth.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ScrollTopModule } from 'primeng/scrolltop';
     NavComponent,
     ToastComponent,
     ConfirmDialogComponent,
+    LayoutAuthComponent,
   ],
   imports: [
     CommonModule,

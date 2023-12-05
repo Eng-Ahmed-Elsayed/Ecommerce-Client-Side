@@ -24,14 +24,16 @@ export class AdminService {
   }
 
   // Custom map for colors, sizes, tags and images
-  private customMap(arr: any[], id: string = '') {
+  private customMap(arr: any[] | null, id: string = '') {
+    if (arr == null || arr?.length == 0) {
+      return [];
+    }
     if (id === '') {
       return arr.map((val: string) => ({
         id: this.generateTempGuid(),
         name: val,
       }));
     }
-
     // Image map is diffrent
     else {
       return arr.map((val: string) => ({

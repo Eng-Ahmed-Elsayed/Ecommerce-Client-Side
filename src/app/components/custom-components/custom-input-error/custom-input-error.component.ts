@@ -6,5 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./custom-input-error.component.scss'],
 })
 export class CustomInputErrorComponent {
+  @Input() condition: boolean | undefined = false;
   @Input() msg: string = '';
 }

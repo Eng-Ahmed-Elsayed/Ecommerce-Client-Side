@@ -7,7 +7,7 @@
           <div class="row">
             <div class="col-12">
               <div class="row">
-                <div class="col-12">
+                <div class="col-12 mb-3">
                   <span class="p-float-label">
                     <input
                       pInputText
@@ -17,6 +17,10 @@
                     />
                     <label htmlFor="name">Discount Name</label>
                   </span>
+                  <app-generic-input-errors
+                    [genericFormControl]="upsertDiscountForm.get('name')"
+                    inputName="Name"
+                  ></app-generic-input-errors>
                 </div>
 
                 <div
@@ -41,15 +45,29 @@
                     [max]="0.99"
                     [minFractionDigits]="1"
                     [maxFractionDigits]="3"
+                    [required]="true"
                   ></p-inputNumber>
+                  <app-generic-input-errors
+                    [genericFormControl]="
+                      upsertDiscountForm.get('discountPercent')
+                    "
+                    inputName="Name"
+                  ></app-generic-input-errors>
                 </div>
                 <div
                   class="col-12 custom-input-card d-flex justify-content-between"
                 >
                   <h5>Is Active</h5>
-                  <p-inputSwitch formControlName="isActive"></p-inputSwitch>
+                  <p-inputSwitch
+                    formControlName="isActive"
+                    [required]="true"
+                  ></p-inputSwitch>
+                  <app-generic-input-errors
+                    [genericFormControl]="upsertDiscountForm.get('isActive')"
+                    inputName="Name"
+                  ></app-generic-input-errors>
                 </div>
-                <div class="col-12 card">
+                <div class="col-12 card" *ngIf="urlPath === 'update'">
                   <p-pickList
                     [source]="sourceProducts"
                     [target]="targetProducts"
@@ -65,7 +83,6 @@
                     breakpoint="800px"
                     [showSourceControls]="false"
                     [showTargetControls]="false"
-                    *ngIf="urlPath === 'update'"
                   >
                     <ng-template let-product pTemplate="item">
                       <div
@@ -101,10 +118,22 @@
           </div>
 
           <div class="col-12 d-flex justify-content-center">
-            <button pButton type="submit" *ngIf="urlPath === 'add'">
+            <button
+              pButton
+              type="submit"
+              [disabled]="upsertDiscountForm.invalid"
+              *ngIf="urlPath === 'add'"
+            >
               Add Discount
             </button>
-            <button pButton type="submit" *ngIf="urlPath === 'update'">
+            <button
+              pButton
+              type="submit"
+              [disabled]="
+                upsertDiscountForm.invalid || upsertDiscountForm.pristine
+              "
+              *ngIf="urlPath === 'update'"
+            >
               Update Discount
             </button>
           </div>

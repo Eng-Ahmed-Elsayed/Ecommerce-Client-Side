@@ -109,7 +109,8 @@
     <div [class]="isSidebar ? 'col-12' : 'col-12 col-lg-4'">
       <div class="card d-flex flex-column">
         <div class="d-flex justify-content-between">
-          <span>4 Items</span><span>{{ total | currency }}</span>
+          <span>{{ cartItems?.length }} Items</span
+          ><span>{{ total | currency }}</span>
         </div>
         <div class="d-flex justify-content-between">
           <span>Discount</span><span>TBD</span>

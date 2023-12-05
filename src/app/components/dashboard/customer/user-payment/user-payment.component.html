@@ -42,13 +42,8 @@
       <ng-template pTemplate="body" let-userPayment>
         <tr>
           <td>{{ userPayment.name }}</td>
-          <!-- We can use custom pipe to do it in one step -->
           <td>
-            {{ userPayment.accountNo | slice : 0 : 4 }}-{{
-              userPayment.accountNo | slice : 4 : 8
-            }}-{{ userPayment.accountNo | slice : 8 : 12 }}-{{
-              userPayment.accountNo | slice : 12
-            }}
+            {{ userPayment.accountNo }}
           </td>
           <td>{{ userPayment.expiry }}</td>
           <td>

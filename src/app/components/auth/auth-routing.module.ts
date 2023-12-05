@@ -1,54 +1,54 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthComponent } from './auth.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { EmailConfirmationComponent } from './email-confirmation/email-confirmation.component';
-import { TwoStepVerificationComponent } from './two-step-verification/two-step-verification.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { SendEmailConfirmationComponent } from './send-email-confirmation/send-email-confirmation.component';
+
 import { EditUserComponent } from './edit-user/edit-user.component';
 import {
   getUserDataResolver,
   notAuthenticatedGuard,
   userAuthenticatedGuard,
 } from 'src/app/shared/guards/auth.guard';
+import { LoginV2Component } from './login-v2/login-v2.component';
+import { EmailConfirmationV2Component } from './email-confirmation-v2/email-confirmation-v2.component';
+import { RegisterV2Component } from './register-v2/register-v2.component';
+import { SendEmailConfirmationV2Component } from './send-email-confirmation-v2/send-email-confirmation-v2.component';
+import { TwoStepVerificationV2Component } from './two-step-verification-v2/two-step-verification-v2.component';
+import { ForgotPasswordV2Component } from './forgot-password-v2/forgot-password-v2.component';
+import { RestPasswordV2Component } from './rest-password-v2/rest-password-v2.component';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginV2Component,
     canActivate: [notAuthenticatedGuard],
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    component: RegisterV2Component,
     canActivate: [notAuthenticatedGuard],
   },
   {
     path: 'email-confirmation',
-    component: EmailConfirmationComponent,
+    component: EmailConfirmationV2Component,
     canActivate: [notAuthenticatedGuard],
   },
   {
     path: 'send-email-confirmation',
-    component: SendEmailConfirmationComponent,
+    component: SendEmailConfirmationV2Component,
     canActivate: [notAuthenticatedGuard],
   },
   {
     path: 'two-step-verification',
-    component: TwoStepVerificationComponent,
+    component: TwoStepVerificationV2Component,
     canActivate: [notAuthenticatedGuard],
   },
   {
     path: 'forgot-password',
-    component: ForgotPasswordComponent,
+    component: ForgotPasswordV2Component,
     canActivate: [notAuthenticatedGuard],
   },
   {
     path: 'reset-password',
-    component: ResetPasswordComponent,
+    component: RestPasswordV2Component,
     canActivate: [notAuthenticatedGuard],
   },
   {

@@ -1,0 +1,40 @@
+<div class="text-900 text-xl font-bold mb-2 text-center">
+  Two Step Verification
+</div>
+<form
+  [formGroup]="twoStepLoginForm"
+  class="mt-3"
+  (submit)="twoStepLoginUser()"
+  autocomplete="off"
+>
+  <div class="row">
+    <!-- Email input -->
+    <div class="col-12 custom-input-group">
+      <span class="p-float-label">
+        <input pInputText id="token" formControlName="token" class="w-100" />
+        <label htmlFor="token">Verification Code</label>
+      </span>
+      <app-generic-input-errors
+        [genericFormControl]="twoStepLoginForm.get('token')"
+        inputName="Token"
+      ></app-generic-input-errors>
+    </div>
+
+    <div class="col-12 py-3">
+      <button
+        pButton
+        pRipple
+        label="Login"
+        class="w-100"
+        type="submit"
+        [disabled]="twoStepLoginForm.invalid || twoStepLoginForm.pristine"
+      ></button>
+    </div>
+    <div class="col-12" *ngIf="errorMessage!.length > 0">
+      <app-custom-input-error
+        [condition]="errorMessage!.length > 0"
+        [msg]="errorMessage"
+      ></app-custom-input-error>
+    </div>
+  </div>
+</form>

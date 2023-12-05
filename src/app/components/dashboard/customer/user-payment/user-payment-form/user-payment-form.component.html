@@ -4,6 +4,10 @@
     <div class="col-12 custom-input-group">
       <label for="class">Card Holder Name</label>
       <input id="name" type="text" required pInputText formControlName="name" />
+      <app-generic-input-errors
+        [genericFormControl]="userPaymentForm.get('name')"
+        inputName="Name"
+      ></app-generic-input-errors>
     </div>
     <div class="col-12 col-lg-6 custom-input-group">
       <label id="accountNo" for="lastname">Account Number</label>
@@ -12,8 +16,12 @@
         mask="9999-9999-9999-9999"
         formControlName="accountNo"
         styleClass="w-100"
-        [unmask]="true"
+        [required]="true"
       ></p-inputMask>
+      <app-generic-input-errors
+        [genericFormControl]="userPaymentForm.get('accountNo')"
+        inputName="Account Number"
+      ></app-generic-input-errors>
     </div>
     <div class="col-6 col-lg-3 custom-input-group">
       <label id="expiry" for="date">Expiry Date</label>
@@ -22,7 +30,12 @@
         mask="99/99"
         formControlName="expiry"
         styleClass="w-100"
+        [required]="true"
       ></p-inputMask>
+      <app-generic-input-errors
+        [genericFormControl]="userPaymentForm.get('expiry')"
+        inputName="Expiry date"
+      ></app-generic-input-errors>
     </div>
     <div class="col-6 col-lg-3 custom-input-group">
       <label for="cvv">CVV</label>
@@ -31,7 +44,12 @@
         mask="999"
         formControlName="cvv"
         styleClass="w-100"
+        [required]="true"
       ></p-inputMask>
+      <app-generic-input-errors
+        [genericFormControl]="userPaymentForm.get('cvv')"
+        inputName="CVV"
+      ></app-generic-input-errors>
     </div>
     <div class="col-12 custom-input-group align-items-center flex-md-row">
       <span class="d-flex align-items-center me-3">
@@ -45,7 +63,12 @@
           >Save credit card information for future</label
         >
       </span>
-      <button pButton pRipple label="Save"></button>
+      <button
+        pButton
+        pRipple
+        label="Save"
+        [disabled]="userPaymentForm.invalid || userPaymentForm.pristine"
+      ></button>
     </div>
   </div>
 </form>

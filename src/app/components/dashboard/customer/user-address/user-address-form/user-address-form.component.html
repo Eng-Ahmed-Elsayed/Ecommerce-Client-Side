@@ -11,6 +11,10 @@
         />
         <label htmlFor="firstName">First Name</label>
       </span>
+      <app-generic-input-errors
+        [genericFormControl]="userAddressForm.get('firstName')"
+        inputName="First name"
+      ></app-generic-input-errors>
     </div>
     <div class="col-12 col-md-6 custom-input-group">
       <span class="p-float-label">
@@ -22,6 +26,10 @@
         />
         <label htmlFor="lastName">Last Name</label>
       </span>
+      <app-generic-input-errors
+        [genericFormControl]="userAddressForm.get('lastName')"
+        inputName="Last name"
+      ></app-generic-input-errors>
     </div>
     <div class="col-12 custom-input-group">
       <span class="p-float-label">
@@ -33,6 +41,10 @@
         />
         <label htmlFor="addressLine1">Address Line 1</label>
       </span>
+      <app-generic-input-errors
+        [genericFormControl]="userAddressForm.get('addressLine1')"
+        inputName="Address line 1"
+      ></app-generic-input-errors>
     </div>
     <div class="col-12 custom-input-group">
       <span class="p-float-label">
@@ -44,6 +56,10 @@
         />
         <label htmlFor="addressLine2">Address Line 2</label>
       </span>
+      <app-generic-input-errors
+        [genericFormControl]="userAddressForm.get('addressLine2')"
+        inputName="Address line 2"
+      ></app-generic-input-errors>
     </div>
     <div class="col-12 col-md-6 col-lg-4 custom-input-group">
       <span class="p-float-label">
@@ -58,6 +74,10 @@
         ></p-dropdown>
         <label for="country">Country</label>
       </span>
+      <app-generic-input-errors
+        [genericFormControl]="userAddressForm.get('country')"
+        inputName="Country"
+      ></app-generic-input-errors>
     </div>
     <div class="col-12 col-md-6 col-lg-4 custom-input-group">
       <span class="p-float-label">
@@ -73,6 +93,10 @@
         ></p-dropdown>
         <label for="state">State</label>
       </span>
+      <app-generic-input-errors
+        [genericFormControl]="userAddressForm.get('state')"
+        inputName="State"
+      ></app-generic-input-errors>
     </div>
     <div class="col-12 col-md-6 col-lg-4 custom-input-group">
       <span class="p-float-label">
@@ -86,6 +110,10 @@
         ></p-dropdown>
         <label for="city">City</label>
       </span>
+      <app-generic-input-errors
+        [genericFormControl]="userAddressForm.get('city')"
+        inputName="City"
+      ></app-generic-input-errors>
     </div>
     <div class="col-12 col-md-6 col-lg-4 custom-input-group">
       <span class="p-float-label">
@@ -99,24 +127,14 @@
           [unmask]="true"
           [autoClear]="false"
           [required]="true"
-          [class]="
-            userAddressForm.get('postalCode')?.invalid &&
-            userAddressForm.get('postalCode')?.dirty
-              ? 'ng-invalid ng-dirty'
-              : 'ng-valid'
-          "
         >
         </p-inputMask>
         <label htmlFor="postalCode">Postal Code</label>
       </span>
-      <app-custom-input-error
-        [msg]="
-          userAddressForm.get('postalCode')?.invalid &&
-          userAddressForm.get('postalCode')?.dirty
-            ? 'Please enter a valid Postal Code'
-            : ''
-        "
-      ></app-custom-input-error>
+      <app-generic-input-errors
+        [genericFormControl]="userAddressForm.get('postalCode')"
+        inputName="Postal code"
+      ></app-generic-input-errors>
     </div>
     <div class="col-12 col-md-6 col-lg-4 custom-input-group">
       <span class="p-float-label">
@@ -127,9 +145,14 @@
           placeholder="(999) 999-9999"
           styleClass="w-100"
           [autoClear]="false"
+          [unmask]="true"
         ></p-inputMask>
         <label htmlFor="telephone">Phone Telephone</label>
       </span>
+      <app-generic-input-errors
+        [genericFormControl]="userAddressForm.get('telephone')"
+        inputName="Telephone"
+      ></app-generic-input-errors>
     </div>
     <div class="col-12 col-md-6 col-lg-4 custom-input-group">
       <span class="p-float-label">
@@ -140,12 +163,22 @@
           placeholder="(999) 999-9999"
           styleClass="w-100"
           [autoClear]="false"
+          [unmask]="true"
         ></p-inputMask>
         <label htmlFor="mobile">Phone Mobile</label>
       </span>
+      <app-generic-input-errors
+        [genericFormControl]="userAddressForm.get('mobile')"
+        inputName="Mobile"
+      ></app-generic-input-errors>
     </div>
     <div class="col-12 d-flex justify-content-center align-items-center">
-      <button pButton pRipple label="Save"></button>
+      <button
+        pButton
+        pRipple
+        label="Save"
+        [disabled]="userAddressForm.invalid"
+      ></button>
     </div>
   </div>
 </form>

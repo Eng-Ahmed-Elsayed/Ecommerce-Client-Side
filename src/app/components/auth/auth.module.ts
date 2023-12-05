@@ -6,7 +6,7 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { LayoutModule } from '../layout/layout.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,6 +27,15 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { InputMaskModule } from 'primeng/inputmask';
 import { CalendarModule } from 'primeng/calendar';
 import { PasswordModule } from 'primeng/password';
+import { CustomComponentsModule } from '../custom-components/custom-components.module';
+import { LoginV2Component } from './login-v2/login-v2.component';
+import { RegisterV2Component } from './register-v2/register-v2.component';
+import { EmailConfirmationV2Component } from './email-confirmation-v2/email-confirmation-v2.component';
+import { ForgotPasswordV2Component } from './forgot-password-v2/forgot-password-v2.component';
+import { RestPasswordV2Component } from './rest-password-v2/rest-password-v2.component';
+import { SendEmailConfirmationV2Component } from './send-email-confirmation-v2/send-email-confirmation-v2.component';
+import { CheckboxModule } from 'primeng/checkbox';
+import { TwoStepVerificationV2Component } from './two-step-verification-v2/two-step-verification-v2.component';
 
 @NgModule({
   declarations: [
@@ -40,11 +49,19 @@ import { PasswordModule } from 'primeng/password';
     SendEmailConfirmationComponent,
     TwoStepVerificationComponent,
     EditUserComponent,
+    LoginV2Component,
+    RegisterV2Component,
+    EmailConfirmationV2Component,
+    ForgotPasswordV2Component,
+    RestPasswordV2Component,
+    SendEmailConfirmationV2Component,
+    TwoStepVerificationV2Component,
   ],
   imports: [
     CommonModule,
     AuthRoutingModule,
     LayoutModule,
+    FormsModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -59,6 +76,8 @@ import { PasswordModule } from 'primeng/password';
     InputNumberModule,
     InputMaskModule,
     PasswordModule,
+    CustomComponentsModule,
+    CheckboxModule,
   ],
   providers: [],
 })

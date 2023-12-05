@@ -1,0 +1,36 @@
+<app-custom-input-error
+  [condition]="
+    genericFormControl?.hasError('required') && genericFormControl?.dirty
+  "
+  [msg]="inputName + ' is required.'"
+></app-custom-input-error>
+<!-- Min length error message -->
+<app-custom-input-error
+  [condition]="genericFormControl?.hasError('minlength')"
+  [msg]="
+    inputName +
+    ' length should be more than ' +
+    genericFormControl?.getError('minlength')?.['requiredLength'] +
+    '.'
+  "
+></app-custom-input-error>
+<!-- Max length error message -->
+<app-custom-input-error
+  [condition]="genericFormControl?.hasError('maxlength')"
+  [msg]="
+    inputName +
+    ' length should be less than ' +
+    genericFormControl?.getError('maxlength')?.['requiredLength'] +
+    '.'
+  "
+></app-custom-input-error>
+<!-- Pattern error message -->
+<app-custom-input-error
+  [condition]="genericFormControl?.hasError('pattern')"
+  [msg]="'Please enter a vaild ' + inputName + '.'"
+></app-custom-input-error>
+<!-- Email error message -->
+<app-custom-input-error
+  [condition]="genericFormControl?.hasError('email')"
+  msg="Please enter a vaild email."
+></app-custom-input-error>

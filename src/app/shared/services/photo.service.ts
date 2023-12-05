@@ -149,8 +149,10 @@ export class PhotoService {
 }
 
 // Create a full image path
-export function createImgPath(imgPath: string | undefined): string {
-  return imgPath !== undefined ? `${environment.baseServerUrl}${imgPath}` : '';
+export function createImgPath(imgPath: string | undefined | null): string {
+  return imgPath !== undefined && imgPath !== null
+    ? `${environment.baseServerUrl}${imgPath}`
+    : '';
 }
 
 // Generic upload Files function

@@ -18,6 +18,10 @@
                   />
                   <label htmlFor="firstName">First Name</label>
                 </span>
+                <app-generic-input-errors
+                  [genericFormControl]="updateUserForm.get('firstName')"
+                  inputName="First name"
+                ></app-generic-input-errors>
               </div>
               <div class="col-12 col-sm-6 custom-input-group">
                 <span class="p-float-label">
@@ -29,6 +33,10 @@
                   />
                   <label htmlFor="lastName">Last Name</label>
                 </span>
+                <app-generic-input-errors
+                  [genericFormControl]="updateUserForm.get('lastName')"
+                  inputName="Last name"
+                ></app-generic-input-errors>
               </div>
               <div class="col-12 col-sm-6 custom-input-group">
                 <span class="p-float-label">
@@ -54,6 +62,10 @@
                   ></p-inputMask>
                   <label htmlFor="phoneNumber">Phone Number</label>
                 </span>
+                <app-generic-input-errors
+                  [genericFormControl]="updateUserForm.get('phoneNumber')"
+                  inputName="Phone number"
+                ></app-generic-input-errors>
               </div>
               <div class="col-12 col-sm-6 custom-input-group">
                 <span class="p-float-label">
@@ -74,7 +86,12 @@
                   formControlName="birthdate"
                   [minDate]="minDate"
                   [maxDate]="maxDate"
+                  [defaultDate]="maxDate"
                 ></p-calendar>
+                <app-generic-input-errors
+                  [genericFormControl]="updateUserForm.get('birthdate')"
+                  inputName="Birthdate"
+                ></app-generic-input-errors>
               </div>
               <div
                 class="col-12 d-flex justify-content-center align-items-center mt-3"
@@ -96,7 +113,7 @@
         <div class="row custom-input-card">
           <div class="col-12">
             <div class="row d-flex">
-              <div class="col-12 col-sm-6 col-md-4 custom-input-group">
+              <div class="col-12 col-sm-6 col-md-6 custom-input-group">
                 <span class="p-float-label">
                   <p-password
                     formControlName="currentPassword"
@@ -106,8 +123,14 @@
                   ></p-password>
                   <label htmlFor="currentPassword">Current Password</label>
                 </span>
+                <app-generic-input-errors
+                  [genericFormControl]="
+                    userChangePasswordForm.get('currentPassword')
+                  "
+                  inputName="Current password"
+                ></app-generic-input-errors>
               </div>
-              <div class="col-12 col-sm-6 col-md-4 custom-input-group">
+              <div class="col-12 col-sm-6 col-md-6 custom-input-group">
                 <span class="p-float-label">
                   <p-password
                     formControlName="password"
@@ -116,8 +139,12 @@
                   ></p-password>
                   <label htmlFor="password">New Password</label>
                 </span>
+                <app-generic-input-errors
+                  [genericFormControl]="userChangePasswordForm.get('password')"
+                  inputName="New password"
+                ></app-generic-input-errors>
               </div>
-              <div class="col-12 col-sm-6 col-md-4 custom-input-group">
+              <div class="col-12 col-sm-6 col-md-6 custom-input-group">
                 <span class="p-float-label">
                   <p-password
                     formControlName="confirmPassword"
@@ -127,9 +154,19 @@
                   ></p-password>
                   <label htmlFor="confirmPassword">Confirm Password</label>
                 </span>
+                <app-generic-input-errors
+                  [genericFormControl]="
+                    userChangePasswordForm.get('confirmPassword')
+                  "
+                  inputName="Confirm password"
+                ></app-generic-input-errors>
+                <app-custom-input-error
+                  [condition]="userChangePasswordForm.errors?.['passwordMismatch']"
+                  msg="Passwords do not match."
+                ></app-custom-input-error>
               </div>
               <div
-                class="col-sm-6 col-md-12 d-flex justify-content-center align-items-center mt-2 mt-sm-0 mt-md-2"
+                class="col-sm-6 d-flex justify-content-center align-items-center mt-2 mt-sm-0 mt-md-2"
               >
                 <button pButton type="submit">Change Password</button>
               </div>
@@ -147,6 +184,7 @@
             [src]="oldImgPath"
             alt="Current Image"
             class="shadow-lg rounded current-img"
+            *ngIf="oldImgPath != ''"
           />
         </div>
         <div class="col-12 col-sm-8 flex justify-content-center">

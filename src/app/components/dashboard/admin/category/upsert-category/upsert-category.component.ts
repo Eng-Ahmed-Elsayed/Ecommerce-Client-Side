@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AdminService } from '../../services/admin.service';
 import { FileUploadEvent } from 'primeng/fileupload';
 import { HttpErrorResponse, HttpEventType } from '@angular/common/http';
@@ -28,24 +33,45 @@ export class UpsertCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     // Add category form
-    if (this.urlPath === 'add') {
-      this.upsertCategoryForm = this.fb.group({
-        name: [''],
-        description: [''],
-        imgPath: [''],
-      });
-    }
+
+    this.upsertCategoryForm = this.fb.group({
+      name: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(5),
+            Validators.maxLength(40),
+          ],
+        },
+      ],
+      description: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(100),
+          ],
+        },
+      ],
+      imgPath: [''],
+    });
+
     // Update category form
-    else {
+    if (this.urlPath !== 'add') {
       this.activatedRoute.data.subscribe({
         next: (data: any) => {
           let category: CategoryDto = data.category;
-          this.upsertCategoryForm = this.fb.group({
-            id: [category.id],
-            name: [category.name],
-            description: [category.description],
-            imgPath: [category.imgPath],
+          this.upsertCategoryForm.reset({
+            name: category.name,
+            description: category.description,
+            imgPath: category.imgPath,
           });
+          this.upsertCategoryForm.addControl(
+            'id',
+            new FormControl(category.id)
+          );
         },
       });
     }

@@ -129,26 +129,26 @@ export class AuthService {
   }
 
   getUserRole() {
-    return this.decodedToken()[
+    return this.decodedToken()?.[
       'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
     ];
   }
 
   getUsername() {
-    return this.decodedToken()[
+    return this.decodedToken()?.[
       'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
     ];
   }
 
   getUserEmail() {
-    return this.decodedToken()[
+    return this.decodedToken()?.[
       'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'
     ];
   }
 
   getUserImgPath() {
-    return this.decodedToken()['imgPath'] !== ''
-      ? createImgPath(this.decodedToken()['imgPath'])
+    return this.decodedToken()?.['imgPath'] !== ''
+      ? createImgPath(this.decodedToken()?.['imgPath'])
       : '';
   }
 

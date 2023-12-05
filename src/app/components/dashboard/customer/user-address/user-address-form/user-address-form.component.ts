@@ -1,10 +1,16 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Country } from 'src/app/shared/models/shared/country';
 import { UserAddressDto } from 'src/app/shared/models/customer/userAddressDto';
 import { CustomerService } from '../../../../../shared/services/customer.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { State } from 'src/app/shared/models/shared/state';
 
 @Component({
   selector: 'app-user-address-form',
@@ -73,26 +79,106 @@ export class UserAddressFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // If add add new
-    if (!this.isUpdate) {
-      this.userAddressForm = this.fb.group({
-        firstName: [''],
-        lastName: [''],
-        addressLine1: [''],
-        addressLine2: [''],
-        country: [''],
-        state: [''],
-        city: [''],
-        postalCode: [],
-        telephone: [],
-        mobile: [],
-      });
-    }
+    // If add new.
+    this.userAddressForm = this.fb.group({
+      firstName: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(20),
+          ],
+        },
+      ],
+      lastName: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(20),
+          ],
+        },
+      ],
+      addressLine1: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(80),
+          ],
+        },
+      ],
+      addressLine2: [
+        '',
+        {
+          validators: [Validators.minLength(2), Validators.maxLength(80)],
+        },
+      ],
+      country: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(40),
+          ],
+        },
+      ],
+      state: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(40),
+          ],
+        },
+      ],
+      city: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(2),
+            Validators.maxLength(40),
+          ],
+        },
+      ],
+      postalCode: [
+        ,
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(4),
+            Validators.maxLength(10),
+          ],
+        },
+      ],
+      telephone: [
+        ,
+        {
+          validators: [Validators.minLength(4), Validators.maxLength(25)],
+        },
+      ],
+      mobile: [
+        ,
+        {
+          validators: [
+            Validators.required,
+            Validators.minLength(4),
+            Validators.maxLength(25),
+          ],
+        },
+      ],
+    });
     // Update
-    else {
+    if (this.isUpdate) {
       // Get Country and state to the form
       // and set Selected State and Selected Country
-      let formCountry, formState;
+      let formCountry!: Country, formState!: State;
       this.countries.forEach((country) => {
         if (country.name == this.userAddress.country) {
           this.selectedCountry = this.userAddress.country;
@@ -105,19 +191,22 @@ export class UserAddressFormComponent implements OnInit {
           });
         }
       });
-      this.userAddressForm = this.fb.group({
-        id: [this.userAddress.id],
-        firstName: [this.userAddress.firstName],
-        lastName: [this.userAddress.lastName],
-        addressLine1: [this.userAddress.addressLine1],
-        addressLine2: [this.userAddress.addressLine2],
-        country: [formCountry],
-        state: [formState],
-        city: [this.userAddress.city],
-        postalCode: [this.userAddress.postalCode],
-        telephone: [this.userAddress.telephone],
-        mobile: [this.userAddress.mobile],
+      this.userAddressForm.reset({
+        firstName: this.userAddress.firstName,
+        lastName: this.userAddress.lastName,
+        addressLine1: this.userAddress.addressLine1,
+        addressLine2: this.userAddress.addressLine2,
+        country: formCountry,
+        state: formState,
+        city: this.userAddress.city,
+        postalCode: this.userAddress.postalCode,
+        telephone: this.userAddress.telephone,
+        mobile: this.userAddress.mobile,
       });
+      this.userAddressForm.addControl(
+        'id',
+        new FormControl(this.userAddress.id)
+      );
     }
   }
 
@@ -134,7 +223,12 @@ export class UserAddressFormComponent implements OnInit {
     let body: UserAddressDto = this.userAddressForm.getRawValue();
     body.country = this.selectedCountry;
     body.state = this.selectedState;
-    // If add add new
+    // body.postalCode = body.postalCode?.replaceAll('_', '');
+    // body.telephone = body.mobile?.replaceAll('_', '');
+    // body.mobile = body.mobile?.replaceAll('_', '');
+    console.log(body);
+
+    // If add new address
     if (!this.isUpdate) {
       this.customerService.addUserAddress(body).subscribe({
         next: (res: UserAddressDto) => {
@@ -144,6 +238,7 @@ export class UserAddressFormComponent implements OnInit {
             detail: 'You have just added a new address method successfully.',
           });
           this.newUserAddressEvent.emit(res);
+          this.userAddressForm.reset();
         },
         error: (err: HttpErrorResponse) => {
           this.messageService.add({
@@ -154,6 +249,7 @@ export class UserAddressFormComponent implements OnInit {
           console.log(err);
         },
       });
+      // Update address
     } else {
       this.customerService.updateUserAddress(body).subscribe({
         next: () => {

@@ -29,6 +29,7 @@ import { UpsertDiscountComponent } from './discount/upsert-discount/upsert-disco
 import { DiscountListComponent } from './discount/discount-list/discount-list.component';
 import { PickListModule } from 'primeng/picklist';
 import { ViewerPagesModule } from '../../viewer-pages/viewer-pages.module';
+import { CustomComponentsModule } from '../../custom-components/custom-components.module';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ViewerPagesModule } from '../../viewer-pages/viewer-pages.module';
     RouterModule,
     PickListModule,
     ViewerPagesModule,
+    CustomComponentsModule,
   ],
 })
 export class AdminModule {}

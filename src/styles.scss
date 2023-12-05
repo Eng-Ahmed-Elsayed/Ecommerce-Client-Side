@@ -126,6 +126,10 @@ p-carousel {
   font-weight: 700 !important;
 }
 
+.font-medium {
+  font-weight: 500 !important;
+}
+
 .font-semibold {
   font-weight: 600 !important;
 }
@@ -138,8 +142,16 @@ p-carousel {
   font-size: 1.75rem !important;
 }
 
+.text-300 {
+  color: var(--surface-300) !important;
+}
+
 .text-900 {
   color: var(--surface-900) !important;
+}
+
+.text-xl {
+  font-size: 1.25rem !important;
 }
 
 .cursor-pointer {
@@ -550,4 +562,27 @@ p-inputnumber {
 // Scroll to top btn
 .p-scrolltop-sticky {
   position: fixed !important;
+}
+
+// Auth V2
+.auth-container {
+  padding-inline: 25vw;
+}
+
+@media screen and (max-width: 575.9px) {
+  .auth-container {
+    padding-inline: 2rem !important;
+  }
+}
+
+@media screen and (max-width: 991.9px) {
+  .auth-container {
+    padding-inline: 20vw;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .auth-container {
+    padding-inline: 30vw;
+  }
 }

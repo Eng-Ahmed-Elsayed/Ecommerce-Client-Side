@@ -31,7 +31,11 @@ export const notAuthenticatedGuard: CanActivateFn = (route, state) => {
 };
 
 export const isUserAdminGuard: CanActivateFn = (route, state) => {
-  return inject(AuthService).getUserRole() === 'Administrator';
+  if (inject(AuthService).getUserRole() !== 'Administrator') {
+    inject(Router).navigate(['/error/forbidden']);
+    return false;
+  }
+  return true;
 };
 
 export const getUserDataResolver: ResolveFn<Observable<UserDto>> = (
