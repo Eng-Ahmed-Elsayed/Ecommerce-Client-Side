@@ -1,0 +1,35 @@
+.col-12 {
+  margin-block: 2rem;
+  overflow: hidden;
+}
+
+.banner-content {
+  padding: 2rem 1rem;
+  margin-bottom: 0;
+}
+
+.img-zoom {
+  will-change: transform;
+  transition: transform 0.64s ease;
+}
+
+.img-zoom:hover {
+  transform: scale(1.06);
+}
+
+.banner-img {
+  width: 50%;
+  max-width: 100%;
+}
+
+@media screen and (max-width: 767.9px) {
+  .banner-img {
+    width: 100%;
+  }
+}
+
+.person-img {
+  width: 18rem;
+  height: 18rem;
+  margin-bottom: 1.5rem;
+}

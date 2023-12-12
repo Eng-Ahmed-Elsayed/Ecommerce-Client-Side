@@ -81,18 +81,17 @@ export class ErrorHandlerService implements HttpInterceptor {
   }
 
   private handleBadRequest(error: HttpErrorResponse): string {
-    if (
-      this.router.url === '/auth/register' ||
-      this.router.url.startsWith('/auth/reset-password')
-    ) {
-      let message = '';
-      const values: string[] = Object.values(error.error.errors);
+    if (this.router.url === '/auth/register') {
+      return error.error.errorMessage;
+    } else if (this.router.url.startsWith('/auth')) {
+      return error.error;
+      // let message = '';
+      // const values: string[] = Object.values(error.error.errors);
 
-      values.map((m: string) => {
-        message += m + '<br>';
-      });
-
-      return message.slice(0, -4);
+      // values.map((m: string) => {
+      //   message += m + '<br>';
+      // });
+      // return message.slice(0, -4);
     } else {
       this.router.navigate(['/error/bad-request']);
       return error.error ? error.error : error.message;

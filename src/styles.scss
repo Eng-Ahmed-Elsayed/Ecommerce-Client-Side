@@ -50,6 +50,14 @@ mat-sidenav-content {
   margin: 0.5rem 0 1.3rem 0;
 }
 
+.line-height-3 {
+  line-height: 1.5 !important;
+}
+
+.text-600 {
+  color: var(--surface-600) !important;
+}
+
 .text-700 {
   color: var(--surface-700) !important;
 }
@@ -584,5 +592,28 @@ p-inputnumber {
 @media screen and (min-width: 1200px) {
   .auth-container {
     padding-inline: 30vw;
+  }
+}
+
+// FAQS
+.faqs-opts {
+  .p-ripple.p-element {
+    border: 0 !important;
+    border-radius: var(--border-radius) !important;
+    margin-bottom: 1rem;
+    padding-block: 1rem;
+    color: #ffffffde !important;
+  }
+
+  .p-highlight {
+    background-color: var(--primary-color) !important;
+  }
+}
+
+.faqs-accordion-container {
+  .p-accordion .p-accordion-header:not(.p-disabled) .p-accordion-header-link:focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 0;
   }
 }

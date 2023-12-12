@@ -36,6 +36,12 @@ import { ToggleButtonModule } from 'primeng/togglebutton';
 import { CustomProductColorsComponent } from './custom-product-colors/custom-product-colors.component';
 import { CustomProductSizesComponent } from './custom-product-sizes/custom-product-sizes.component';
 import { CustomComponentsModule } from '../custom-components/custom-components.module';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { FaqsComponent } from './faqs/faqs.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { InputMaskModule } from 'primeng/inputmask';
+import { AccordionModule } from 'primeng/accordion';
 
 @NgModule({
   declarations: [
@@ -48,6 +54,9 @@ import { CustomComponentsModule } from '../custom-components/custom-components.m
     ProductsComponent,
     CustomProductColorsComponent,
     CustomProductSizesComponent,
+    AboutUsComponent,
+    ContactUsComponent,
+    FaqsComponent,
   ],
   imports: [
     CommonModule,
@@ -78,6 +87,9 @@ import { CustomComponentsModule } from '../custom-components/custom-components.m
     SidebarModule,
     ToggleButtonModule,
     CustomComponentsModule,
+    InputTextareaModule,
+    InputMaskModule,
+    AccordionModule,
   ],
   exports: [CustomProductColorsComponent, CustomProductSizesComponent],
 })

@@ -14,7 +14,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginV2Component implements OnInit {
   loginForm!: FormGroup;
-  hidePassword: boolean = true;
   errorMessage: string = '';
   returnUrl: string = this.activatedRoute.snapshot.queryParams['returnUrl'];
   private clientId = environment.googleClientId;
