@@ -53,9 +53,9 @@
             <th style="width: 4rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th pSortableColumn="id" style="min-width: 15rem">
+            <!-- <th pSortableColumn="id" style="min-width: 15rem">
               Id <p-sortIcon field="id"></p-sortIcon>
-            </th>
+            </th> -->
             <th pSortableColumn="name" style="min-width: 15rem">
               Name <p-sortIcon field="name"></p-sortIcon>
             </th>
@@ -70,14 +70,13 @@
             <td>
               <p-tableCheckbox [value]="category"></p-tableCheckbox>
             </td>
-            <td>{{ category.id }}</td>
+            <!-- <td>{{ category.id }}</td> -->
             <td>{{ category.name }}</td>
             <td>
               <img
                 [src]="createImgPath(category.imgPath)"
                 [alt]="category.name"
-                width="100"
-                class="shadow-lg rounded"
+                class="shadow-lg rounded table-img"
               />
               <!-- {{ createImgPath(category.imgPath) }} -->
             </td>

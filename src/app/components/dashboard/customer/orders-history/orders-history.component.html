@@ -4,13 +4,15 @@
     [value]="orders"
     [paginator]="true"
     [rows]="3"
-    filterBy="id,createdAt,total"
+    sortField="createdAt"
+    [loading]="loading"
+    filterBy="id,createdAt,total,discountCode"
     styleClass=""
   >
     <ng-template pTemplate="header">
       <div class="row">
         <div class="col-12 col-sm-6 mb-3 mb-sm-0">
-          <h2>My Orders</h2>
+          <h2 class="text-900">My Orders</h2>
           <span>You can find all your orders here.</span>
         </div>
         <div
@@ -31,9 +33,10 @@
     <ng-template let-order pTemplate="listItem">
       <div class="row order-container">
         <div class="col-12 surface-d py-3">
+          <!-- Order header -->
           <div class="row p-4">
             <div
-              class="col-12 col-sm-4 d-flex flex-row justify-content-between justify-content-sm-center flex-sm-column mb-2 mb-sm-0 order-details"
+              class="col-12 col-sm-3 d-flex flex-row justify-content-between justify-content-sm-center flex-sm-column mb-2 mb-sm-0 order-details"
             >
               <span class="text-700 text-primary me-2 me-sm-0"
                 >Order Number</span
@@ -41,13 +44,25 @@
               <span>{{ order.id }}</span>
             </div>
             <div
-              class="col-12 col-sm-4 d-flex flex-row justify-content-between justify-content-sm-center flex-sm-column mb-2 mb-sm-0 order-details"
+              class="col-12 col-sm-3 d-flex flex-row justify-content-between justify-content-sm-center flex-sm-column mb-2 mb-sm-0 order-details"
             >
               <span class="text-700 text-primary me-2 me-sm-0">Order Date</span>
-              <span>{{ order.createdAt }}</span>
+              <span>{{ order.createdAt | date }}</span>
+            </div>
+            <!-- Discount Code -->
+            <div
+              class="col-12 col-sm-3 d-flex flex-row justify-content-between justify-content-sm-center flex-sm-column mb-2 mb-sm-0 order-details"
+            >
+              <span class="text-700 text-primary me-2 me-sm-0"
+                >Disount Code</span
+              >
+              <span *ngIf="order.discountCode != null">{{
+                order.discountCode
+              }}</span>
+              <span *ngIf="order.discountCode == null">No Code</span>
             </div>
             <div
-              class="col-12 col-sm-4 d-flex flex-row justify-content-between justify-content-sm-center flex-sm-column mb-2 mb-sm-0 order-details"
+              class="col-12 col-sm-3 d-flex flex-row justify-content-between justify-content-sm-center flex-sm-column mb-2 mb-sm-0 order-details"
             >
               <span class="text-700 text-primary me-2 me-sm-0"
                 >Total Amount</span
@@ -56,14 +71,13 @@
             </div>
           </div>
         </div>
-        <div
-          class="col-12 dataView-item-container py-3"
-          *ngFor="let orderItem of order.orderItems"
-        >
+        <!-- Order body (order items) -->
+        <div class="col-12 py-3" *ngFor="let orderItem of order.orderItems">
           <div class="row p-4">
             <div
               class="col-12 col-md-6 d-flex flex-column flex-md-row align-items-center justify-content-center justify-content-md-start"
             >
+              <!-- Procuct image -->
               <img
                 [src]="
                   createImgPath(orderItem.product.productImages[0].imgPath)
@@ -71,55 +85,74 @@
                 [alt]="orderItem.product.name"
                 class="order-img rounded my-0 my-md-3"
               />
-              <div class="d-flex flex-column px-0 px-md-3 my-0 my-md-3">
+              <div
+                class="d-flex flex-column px-0 px-md-3 my-0 my-md-3 text-center text-md-start"
+              >
+                <!-- Product name -->
                 <span class="text-900 mt-2 mt-md-0">{{
                   orderItem.product.name
                 }}</span>
+                <!-- Product priceBeforeDiscount -->
+                <span
+                  class="text-700 mt-2"
+                  *ngIf="orderItem.discountPercent != null"
+                >
+                  <del>
+                    {{ orderItem.product?.priceBeforeDiscount | currency }}</del
+                  >
+                  <span class="ms-2 text-primary"
+                    >{{ orderItem.discountPercent * 100 }}% Off
+                  </span>
+                </span>
+                <!-- Product price -->
                 <span class="text-700 mt-2"
                   >{{ orderItem.product?.price | currency }}
                   <small>x{{ orderItem.quantity }}</small>
                 </span>
+                <!-- Order Item total -->
                 <span class="text-primary mt-2"
                   >{{ orderItem.price | currency }}
                 </span>
               </div>
             </div>
+            <!-- Delivered on date(it is the createdAt date for now) -->
             <div
               class="col-12 col-md-6 d-flex align-items-center justify-content-center justify-content-md-start"
             >
               <p-chip
-                [label]="'Delivered on ' + order.createdAt"
+                [label]="'Delivered on ' + (order.createdAt | date)"
                 icon="pi pi-check"
                 styleClass="my-3 my-md-0"
               ></p-chip>
             </div>
           </div>
         </div>
-        <!-- <div class="col-12">
+        <!-- Order actions -->
+        <div class="col-12">
           <div class="row">
-            <div class="col-3">
+            <div class="col-6 col-md-3 ps-0 pb-2 pb-md-0">
               <p-button
                 label="Archive Order"
                 icon="pi pi-folder"
-                styleClass="p-button-raised w-100 h-100 "
+                styleClass="p-button-raised p-button-success w-100 h-100 "
               ></p-button>
             </div>
-            <div class="col-3">
+            <div class="col-6 col-md-3 px-0 pe-md-2 pb-2 pb-md-0">
               <p-button
                 label="Return"
                 icon="pi
               pi-refresh"
-                styleClass="p-button-raised w-100 h-100 "
+                styleClass="p-button-raised p-button-warning w-100 h-100 "
               ></p-button>
             </div>
-            <div class="col-3">
+            <div class="col-6 col-md-3 ps-0 pt-2 pt-md-0">
               <p-button
                 label="View Invoice"
                 icon="pi pi-file"
-                styleClass="p-button-raised w-100 h-100"
+                styleClass="p-button-raised p-button-info w-100 h-100"
               ></p-button>
             </div>
-            <div class="col-3">
+            <div class="col-6 col-md-3 px-0 pt-2 pt-md-0">
               <p-button
                 label="Write a Review"
                 icon="pi pi-comment"
@@ -127,7 +160,7 @@
               ></p-button>
             </div>
           </div>
-        </div> -->
+        </div>
       </div>
     </ng-template>
   </p-dataView>

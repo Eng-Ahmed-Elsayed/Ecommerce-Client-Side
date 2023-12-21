@@ -20,12 +20,14 @@ export interface ProductDto {
   colors?: ColorDto[];
   sizes?: SizeDto[];
   productImages?: ProductImage[];
+  discounts?: DiscountDto[];
+  // Save the old price to display it with the new price
+  priceBeforeDiscount?: number;
+  // Used in upsert porduct
   quantity?: number;
   categoryId?: string;
   category?: CategoryDto;
   inventoryId?: string;
   inventory?: InventoryDto;
-  discountId?: string;
-  discount?: DiscountDto;
   isInCheckList?: boolean;
 }

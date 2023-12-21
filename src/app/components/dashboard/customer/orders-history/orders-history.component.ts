@@ -12,6 +12,7 @@ import { UtilityService } from 'src/app/shared/services/utility.service';
 })
 export class OrdersHistoryComponent implements OnInit {
   orders!: OrderDetailsDto[];
+  loading: boolean = true;
 
   constructor(
     private customerService: CustomerService,
@@ -21,7 +22,22 @@ export class OrdersHistoryComponent implements OnInit {
   ngOnInit(): void {
     this.customerService.getOrders().subscribe({
       next: (res: OrderDetailsDto[]) => {
-        this.orders = res;
+        this.orders = res.sort(
+          (a, b) =>
+            new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime()
+        );
+        // Set price and priceBeforeDiscount if this order item has a discount.
+        this.orders.forEach((o) => {
+          if (o.discountCode != null) {
+            o.orderItems?.forEach((i) => {
+              if (i.discountPercent != null && i.product != undefined) {
+                i.product.priceBeforeDiscount = i.product?.price;
+                i.product.price = i.product?.price! * (1 - i.discountPercent);
+              }
+            });
+          }
+        });
+        this.loading = false;
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);

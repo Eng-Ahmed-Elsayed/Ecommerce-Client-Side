@@ -61,7 +61,6 @@ export class UpsertDiscountComponent implements OnInit {
           validators: [Validators.required],
         },
       ],
-      products: [''],
     });
     // Update discount form
     if (this.urlPath !== 'add') {

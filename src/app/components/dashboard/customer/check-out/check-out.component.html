@@ -47,12 +47,14 @@
           *ngIf="activeIndex == 3"
         ></app-order-confirmation>
       </div>
+      <!-- Error message -->
       <div
         class="d-flex justify-content-center mb-2 mb-md-0"
         *ngIf="!isSelected"
       >
         <span class="text-danger">Please Select an Option.</span>
       </div>
+      <!-- Steps buttons -->
       <div
         [class]="
           activeIndex == 0
@@ -85,12 +87,15 @@
         ></p-button>
       </div>
     </div>
+    <!-- Order summary -->
     <div class="col-12 col-md-6 col-lg-5 mb-3 mb-md-0">
       <app-order-summary
         [cartItems]="cartItems"
         [subTotal]="subTotal"
         [total]="total"
         [shippingCost]="shippingCost"
+        [discount]="discount"
+        (addDicountCodeEvent)="addDiscountCode($event)"
       ></app-order-summary>
     </div>
   </div>

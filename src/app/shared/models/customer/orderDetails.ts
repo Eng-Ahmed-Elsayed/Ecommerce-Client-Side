@@ -9,4 +9,5 @@ export interface OrderDetailsDto {
   userAddressId?: string;
   userPaymentId?: string;
   createdAt?: Date;
+  discountCode?: string;
 }

@@ -62,9 +62,10 @@ export class ErrorHandlerService implements HttpInterceptor {
   }
 
   private handleNotFound(error: HttpErrorResponse): string {
-    if (this.router.url.search('/list') === -1) {
-      this.router.navigate(['/error/404']);
-    }
+    // if (this.router.url.search('/list') === -1) {
+    //   this.router.navigate(['/error/404']);
+    // }
+    // I want to make error/404 for only client pages not the server responses.
     return error.message;
   }
 

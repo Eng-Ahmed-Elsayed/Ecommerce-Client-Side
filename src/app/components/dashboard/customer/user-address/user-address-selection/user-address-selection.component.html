@@ -3,7 +3,7 @@
   [value]="userAddresses"
   [tableStyle]="{ 'min-width': '80%' }"
   [rowHover]="true"
-  dataKey="country"
+  dataKey="id"
   (selectionChange)="selectAddress($event)"
   *ngIf="userAddresses?.length != 0"
 >

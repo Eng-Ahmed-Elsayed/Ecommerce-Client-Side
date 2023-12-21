@@ -49,7 +49,7 @@ export class LoginV2Component implements OnInit {
             ],
           },
         ],
-        stayLoggedIn: [''],
+        stayLoggedIn: [true],
       },
       { updateOn: 'blur' }
     );

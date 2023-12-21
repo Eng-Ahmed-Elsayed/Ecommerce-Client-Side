@@ -3,7 +3,7 @@
   [value]="userPayments"
   [tableStyle]="{ 'min-width': '80%' }"
   [rowHover]="true"
-  dataKey="name"
+  dataKey="id"
   (selectionChange)="selectPayment($event)"
   *ngIf="userPayments?.length != 0"
 >

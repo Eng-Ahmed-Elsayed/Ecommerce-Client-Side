@@ -13,55 +13,59 @@
       [mode]="(isLarge$ | async) ? 'over' : 'side'"
       [opened]="(isLarge$ | async) === false"
     >
-      <mat-toolbar class="px-3">Menu</mat-toolbar>
+      <mat-toolbar class="d-flex justify-content-center"
+        ><img
+          src="../../../../assets/images/logo/logo.png"
+          alt="logo"
+          class="logo"
+      /></mat-toolbar>
       <mat-nav-list>
         <a mat-list-item routerLink="/">Home</a>
-        <a mat-list-item [matMenuTriggerFor]="customer">Customer</a>
-        <mat-menu #customer="matMenu">
-          <a mat-menu-item routerLink="/dashboard/cart">My Cart</a>
-          <a mat-menu-item routerLink="/dashboard/check-out">Check Out</a>
-        </mat-menu>
-        <a mat-list-item [matMenuTriggerFor]="discount">Discount</a>
-        <mat-menu #discount="matMenu">
-          <a mat-menu-item routerLink="/dashboard/admin/discount/add"
-            >Add Discount</a
-          >
-          <a mat-menu-item routerLink="/dashboard/admin/discount/list"
-            >Discount List</a
-          >
-        </mat-menu>
+        <!-- Admin Links -->
+        <ng-container *ngIf="isAuthenticated && userRole == 'Administrator'">
+          <a mat-list-item [matMenuTriggerFor]="product">Product</a>
+          <mat-menu #product="matMenu">
+            <a mat-menu-item routerLink="/dashboard/admin/product/add"
+              >Add Product</a
+            >
+            <a mat-menu-item routerLink="/dashboard/admin/product/all"
+              >Products List</a
+            >
+          </mat-menu>
+          <a mat-list-item [matMenuTriggerFor]="category">Category</a>
+          <mat-menu #category="matMenu">
+            <a mat-menu-item routerLink="/dashboard/admin/category/add"
+              >Add Category</a
+            >
+            <a mat-menu-item routerLink="/dashboard/admin/category/list"
+              >Category List</a
+            >
+          </mat-menu>
+          <a mat-list-item [matMenuTriggerFor]="discount">Discount</a>
+          <mat-menu #discount="matMenu">
+            <a mat-menu-item routerLink="/dashboard/admin/discount/add"
+              >Add Discount</a
+            >
+            <a mat-menu-item routerLink="/dashboard/admin/discount/list"
+              >Discount List</a
+            >
+          </mat-menu>
+          <a mat-list-item [matMenuTriggerFor]="viewerPages">Viewer Pages</a>
+          <mat-menu #viewerPages="matMenu">
+            <a mat-menu-item routerLink="/products">Products</a>
+            <a mat-menu-item routerLink="/about-us">About Us</a>
+            <a mat-menu-item routerLink="/contact-us">Contact Us</a>
+            <a mat-menu-item routerLink="/faqs">Faqs</a>
+          </mat-menu>
+        </ng-container>
 
-        <a mat-list-item [matMenuTriggerFor]="category">Category</a>
-        <mat-menu #category="matMenu">
-          <a mat-menu-item routerLink="/dashboard/admin/category/add"
-            >Add Category</a
-          >
-          <a mat-menu-item routerLink="/dashboard/admin/category/list"
-            >Category List</a
-          >
-        </mat-menu>
-
-        <a mat-list-item [matMenuTriggerFor]="product">Product</a>
-        <mat-menu #product="matMenu">
-          <a mat-menu-item routerLink="/dashboard/admin/product/add"
-            >Add Product</a
-          >
-          <a mat-menu-item routerLink="/dashboard/admin/product/all"
-            >All Products</a
-          >
-        </mat-menu>
-
-        <a mat-list-item [matMenuTriggerFor]="viewerPages">Viewer Pages</a>
-        <mat-menu #viewerPages="matMenu">
-          <a mat-menu-item routerLink="/products"
-            >Search and filter for products</a
-          >
-          <a mat-menu-item routerLink="/about-us">About Us</a>
-          <a mat-menu-item routerLink="/faqs">Faqs</a>
-          <a mat-menu-item routerLink="/contact-us">Contact Us</a>
-        </mat-menu>
-
-        <a mat-list-item routerLink="/dashboard">Dashboard</a>
+        <!-- Viewer Links -->
+        <ng-container *ngIf="userRole == 'Viewer' || !isAuthenticated">
+          <a mat-list-item routerLink="/products">Products</a>
+          <a mat-list-item routerLink="/about-us">About Us</a>
+          <a mat-list-item routerLink="/faqs">Faqs</a>
+          <a mat-list-item routerLink="/contact-us">Contact Us</a>
+        </ng-container>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
@@ -81,6 +85,7 @@
           >
             <mat-icon aria-label="Side nav toggle icon"> menu</mat-icon>
           </button>
+
           <span class="me-auto me-sm-0">Ecommerce Full Stack</span>
         </span>
         <span
@@ -94,7 +99,7 @@
           >
           </p-button>
           <!-- Notifications -->
-          <p-button
+          <!-- <p-button
             styleClass="p-button-secondary p-button-text"
             (click)="billMenu.toggle($event)"
             *ngIf="isAuthenticated"
@@ -105,7 +110,7 @@
               value="2"
               style="font-size: 1.5rem"
             ></i
-          ></p-button>
+          ></p-button> -->
           <!-- User actions -->
           <!-- If user -->
           <p-button
@@ -165,7 +170,9 @@
         [isSidebar]="true"
         *ngIf="this.isAuthenticated"
       ></app-shopping-cart>
-      <p>Please login first to review your cart.</p>
+      <p *ngIf="!this.isAuthenticated">
+        Please login first to review your cart.
+      </p>
     </ng-template>
   </p-sidebar>
 
@@ -175,7 +182,7 @@
   <p-menu #anonymousMenu [model]="anonymousMenuItems" [popup]="true"></p-menu>
 
   <!-- Notifications menu -->
-  <p-menu #billMenu [model]="billMenuItems" [popup]="true"></p-menu>
+  <!-- <p-menu #billMenu [model]="billMenuItems" [popup]="true"></p-menu> -->
 
   <!-- Search for products -->
   <p-dialog

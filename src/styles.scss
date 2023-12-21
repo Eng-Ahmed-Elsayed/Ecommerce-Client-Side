@@ -617,3 +617,14 @@ p-inputnumber {
     box-shadow: 0 0 0 0;
   }
 }
+
+// mat-menu (On nav component)
+.mat-mdc-menu-content {
+  width: 12.5rem !important ;
+}
+
+// p-table
+.table-img {
+  width: 4rem;
+  height: 4rem;
+}

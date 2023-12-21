@@ -16,6 +16,7 @@ import { NavigationEnd, Router } from '@angular/router';
 export class NavComponent implements OnInit {
   isLarge$!: Observable<boolean>;
   isAuthenticated!: boolean;
+  userRole!: string;
   username!: string;
   userImgPath!: string;
   isAuthForm!: boolean;
@@ -61,12 +62,14 @@ export class NavComponent implements OnInit {
     // User informations
     this.authService.authChange.subscribe((value) => {
       this.isAuthenticated = value;
+      // If auth get the username, profile img and user role.
       if (this.isAuthenticated) {
         this.username = this.authService.getUsername();
         this.userImgPath =
           this.authService.getUserImgPath() === ''
             ? '../../../../assets/images/user/default-user-image.png'
             : this.authService.getUserImgPath();
+        this.userRole = this.authService.getUserRole();
       }
     });
 
@@ -120,22 +123,22 @@ export class NavComponent implements OnInit {
         routerLink: '/auth/register',
       },
     ];
-    this.billMenuItems = [
-      {
-        label: 'New Order',
-        items: [
-          {
-            tooltip: 'dsfsf',
-            label: 'You have 3 new orders.',
-            icon: 'pi pi-shopping-cart',
-          },
-          {
-            label: 'Delete',
-            icon: 'pi pi-times',
-          },
-        ],
-      },
-    ];
+    // this.billMenuItems = [
+    //   {
+    //     label: 'New Order',
+    //     items: [
+    //       {
+    //         tooltip: 'dsfsf',
+    //         label: 'You have 3 new orders.',
+    //         icon: 'pi pi-shopping-cart',
+    //       },
+    //       {
+    //         label: 'Delete',
+    //         icon: 'pi pi-times',
+    //       },
+    //     ],
+    //   },
+    // ];
   }
 
   update() {

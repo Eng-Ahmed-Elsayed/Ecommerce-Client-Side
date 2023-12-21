@@ -12,6 +12,7 @@ import { OrderDetailsDto } from '../models/customer/orderDetails';
 import { Router } from '@angular/router';
 import { CheckListDto } from '../models/customer/checkListDto';
 import { CheckListItemDto } from '../models/customer/checkListItemDto';
+import { DiscountDto } from '../models/shared/discountDto';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,7 @@ export class CustomerService {
   private ordersUrl: string = this.baseUserApiUrl + 'orders/';
   private checkListUrl: string = this.baseUserApiUrl + 'checkList/';
   private shippingOptUrl: string = environment.baseApiUrl + 'shipping-options/';
+  private discountApiUrl: string = environment.baseApiUrl + 'discounts/codes/';
 
   constructor(
     private httpClient: HttpClient,
@@ -169,5 +171,12 @@ export class CustomerService {
 
   deleteCheckListItem(id: string | undefined) {
     return this.httpClient.delete(this.checkListUrl + id);
+  }
+
+  // Get Discount by code
+  getDiscount(code: string): Observable<DiscountDto> {
+    return this.httpClient.get<DiscountDto>(this.discountApiUrl, {
+      params: { code: code },
+    });
   }
 }

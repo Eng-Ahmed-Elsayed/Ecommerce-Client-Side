@@ -168,10 +168,9 @@ export class UpsertProductComponent implements OnInit {
             // productImages: [product.productImages],
             tags: product.tags?.map((x) => x.name),
             sizes: product.sizes?.map((x) => x.name),
-            quantity: product.quantity,
+            quantity: product.inventory?.quantity,
             categoryId: product.categoryId,
             inventoryId: product.inventoryId,
-            discountId: product.discountId,
           });
           this.upsertProductForm.addControl('id', new FormControl(product.id));
         },

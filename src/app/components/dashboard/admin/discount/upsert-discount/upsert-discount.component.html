@@ -129,9 +129,7 @@
             <button
               pButton
               type="submit"
-              [disabled]="
-                upsertDiscountForm.invalid || upsertDiscountForm.pristine
-              "
+              [disabled]="upsertDiscountForm.invalid"
               *ngIf="urlPath === 'update'"
             >
               Update Discount

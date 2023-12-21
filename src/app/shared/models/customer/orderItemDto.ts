@@ -7,4 +7,6 @@ export interface OrderItemsDto {
   product?: ProductDto;
   quantity?: number;
   price?: number;
+  discountCode?: string;
+  discountPercent?: number;
 }

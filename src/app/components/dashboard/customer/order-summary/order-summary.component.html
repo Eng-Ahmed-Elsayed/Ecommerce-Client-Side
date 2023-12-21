@@ -21,17 +21,27 @@
               [alt]="cartItem.product?.name"
             /><span>{{ cartItem.product?.name | slice : 0 : 20 }}</span>
           </span>
-          <span
+          <span *ngIf="cartItem.product?.priceBeforeDiscount == null"
             >{{ cartItem.product?.price | currency }}
             <small>x{{ cartItem.quantity }}</small>
           </span>
+          <div
+            class="d-flex flex-column"
+            *ngIf="cartItem.product?.priceBeforeDiscount != null"
+          >
+            <del>{{ cartItem.product?.priceBeforeDiscount | currency }} </del>
+            <span
+              >{{ cartItem.product?.price | currency }}
+              <small>x{{ cartItem.quantity }}</small>
+            </span>
+          </div>
         </div>
         <span class="ms-auto">
           <p-button
             label="Edit"
             icon="pi pi-pencil"
             styleClass=" p-button-text"
-            routerLink="/dashboard/cart"
+            routerLink="/dashboard/user/cart"
           ></p-button>
         </span>
       </div>
@@ -39,19 +49,45 @@
   </p-panel>
 
   <div class="d-flex justify-content-between p-2">
-    <span class="me-2">Subtotal</span><span>{{ subTotal | currency }}</span>
+    <span class="me-2 p-text-secondary">Subtotal</span
+    ><span>{{ subTotal | currency }}</span>
   </div>
   <div class="d-flex justify-content-between p-2">
-    <span class="me-2">Shipping</span
+    <span class="me-2 p-text-secondary">Shipping</span
     ><span>{{
       shippingCost != 0
         ? (shippingCost | currency)
         : "Please select shipping method."
     }}</span>
   </div>
+  <div class="p-inputgroup mt-3">
+    <span class="p-inputgroup-addon border-0">
+      <i class="pi pi-tag"></i>
+    </span>
+    <input
+      type="text"
+      [class]="discount != null ? 'text-primary' : ''"
+      pInputText
+      placeholder="Promo code"
+      [(ngModel)]="dicountCode"
+      (blur)="addDiscountCode()"
+    />
+  </div>
+  <app-custom-input-error
+    [condition]="dicountCode.length != 6 && dicountCode.length != 0"
+    msg="Please enter a vaild dicount code."
+  ></app-custom-input-error>
+  <div class="d-flex justify-content-between p-2" *ngIf="discount != null">
+    <span class="me-2 p-text-secondary">Discount Name</span
+    ><span>{{ discount.name }}</span>
+  </div>
+  <div class="d-flex justify-content-between p-2" *ngIf="discount != null">
+    <span class="me-2 p-text-secondary">Discount Value</span
+    ><span class="text-primary">{{ discount.discountPercent! * 100 }}%</span>
+  </div>
   <hr />
   <div class="d-flex justify-content-between h5 p-2">
-    <span class="me-2">Total (tax incl.)</span
-    ><span>{{ total | currency }}</span>
+    <span class="me-2 p-text-secondary">Total (tax incl.)</span
+    ><span class="text-primary">{{ total | currency }}</span>
   </div>
 </div>
