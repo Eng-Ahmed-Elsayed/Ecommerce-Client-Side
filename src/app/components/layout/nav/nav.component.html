@@ -69,9 +69,7 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <mat-toolbar
-        class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-center"
-      >
+      <mat-toolbar class="d-flex justify-content-between align-items-center">
         <span
           class="d-flex align-items-center text-center w-100 px-2 px-sm-4 px-lg-5"
         >
@@ -86,10 +84,12 @@
             <mat-icon aria-label="Side nav toggle icon"> menu</mat-icon>
           </button>
 
-          <span class="me-auto me-sm-0">Ecommerce Full Stack</span>
+          <span class="me-auto me-sm-0" *ngIf="!(isLarge$ | async)"
+            >Ecommerce Full Stack</span
+          >
         </span>
         <span
-          class="d-flex justify-content-between justify-content-sm-end align-items-center user-actions w-100 px-2 px-sm-4 px-lg-5"
+          class="d-flex justify-content-end align-items-center user-actions w-100 px-2 px-sm-4 px-lg-5"
         >
           <!-- Search for products -->
           <p-button

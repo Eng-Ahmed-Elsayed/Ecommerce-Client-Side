@@ -6,6 +6,7 @@
     </div>
   </div>
 
+  <!-- Shopping cart dataview container -->
   <div class="row">
     <div [class]="isSidebar ? 'col-12' : 'col-12 col-lg-8'">
       <div class="card">
@@ -15,7 +16,8 @@
             height: isSidebar ? '50vh' : '100%'
           }"
         >
-          <p-dataView #dv [value]="cartItems">
+          <p-dataView #dv [value]="cartItems" [loading]="loading">
+            <!-- Dataview header -->
             <ng-template pTemplate="header" *ngIf="!isSidebar">
               <div
                 class="row text-center"
@@ -35,6 +37,7 @@
               </div>
             </ng-template>
 
+            <!-- Dataview items -->
             <ng-template let-cartItem pTemplate="listItem">
               <div
                 class="row align-items-center text-center mb-2 p-3 cart-item-container"
@@ -85,7 +88,6 @@
                     (onBlur)="onQtyInputBlur($event, cartItem)"
                   ></p-inputNumber>
                 </div>
-                <!-- <div class="col-12 col-sm-2">10</div> -->
                 <div
                   [class]="isSidebar ? 'col-12' : 'col-12 col-sm-2'"
                   style="color: var(--primary-color)"

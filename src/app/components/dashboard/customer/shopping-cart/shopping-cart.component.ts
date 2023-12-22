@@ -18,6 +18,7 @@ export class ShoppingCartComponent implements OnInit {
   @Input() isSidebar: boolean = false;
   @Input() cartItems!: CartItemDto[] | undefined;
   total!: number | undefined;
+  loading: boolean = true;
 
   // Flag to track if there is a new changes if Qty for any item.
   isChange: boolean = false;
@@ -41,6 +42,7 @@ export class ShoppingCartComponent implements OnInit {
       next: (res: ShoppingCartDto) => {
         this.total = res.total;
         this.cartItems = res.cartItems;
+        this.loading = false;
       },
     });
   }
