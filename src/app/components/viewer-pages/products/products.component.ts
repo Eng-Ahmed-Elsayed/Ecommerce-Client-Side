@@ -172,6 +172,13 @@ export class ProductsComponent implements OnInit {
     this.sidebarVisible = val;
   }
 
-  filterByCategory = (category: string) =>
-    this.productService.filterByCategory(category);
+  filterByCategory = (category: string) => {
+    // If you click the same category disable the filter(like a toggle).
+    if (this.categoryFilter != category) {
+      this.categoryFilter = category;
+    } else {
+      this.categoryFilter = '';
+    }
+    this.searchAndFilterProducts();
+  };
 }

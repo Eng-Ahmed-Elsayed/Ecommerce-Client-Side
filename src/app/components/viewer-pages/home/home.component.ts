@@ -5,10 +5,11 @@ import { PhotoService } from 'src/app/shared/services/photo.service';
 import { ProductService } from 'src/app/shared/services/product.service';
 import { CustomerService } from '../../../shared/services/customer.service';
 import { ProductDto } from 'src/app/shared/models/shared/productDto';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { AdminService } from '../../dashboard/admin/services/admin.service';
 import { CategoryDto } from 'src/app/shared/models/shared/categoryDto';
 import { CartItemDto } from 'src/app/shared/models/customer/cartItemDto';
+import { ProductParameters } from 'src/app/shared/models/shared/productParameters';
 
 @Component({
   selector: 'app-home',
@@ -33,19 +34,40 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.adminService.getCategoryList().subscribe({
       next: (res: CartItemDto[]) => {
-        this.caregories = res;
+        this.caregories = res.length > 10 ? res.slice(0, 10) : res;
       },
       error: (err: HttpErrorResponse) => console.log(err.message),
     });
 
-    this.productService.getProductList().subscribe({
-      next: (res: ProductDto[]) => {
-        this.products = res;
+    let productParameters: ProductParameters = {
+      pageNumber: 1,
+      pageSize: 12,
+      name: '',
+      orderBy: 'createdAt desc',
+      availability: [],
+      colors: [],
+      sizes: [],
+      minPrice: 0,
+      maxPrice: 20000,
+      category: '',
+    };
+    this.productService.searchAndFilterProducts(productParameters).subscribe({
+      next: (res: HttpResponse<ProductDto[]>) => {
+        this.products = res.body;
       },
-      error: (err: HttpErrorResponse) => console.log(err.message),
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      },
     });
 
-    this.photoService.getImages().then((images) => {
+    // this.productService.getProductList().subscribe({
+    //   next: (res: ProductDto[]) => {
+    //     this.products = res;
+    //   },
+    //   error: (err: HttpErrorResponse) => console.log(err.message),
+    // });
+
+    this.photoService.getGalleriaImages().then((images) => {
       this.images = images;
     });
 

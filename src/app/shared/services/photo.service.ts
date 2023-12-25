@@ -135,6 +135,20 @@ export class PhotoService {
     return Promise.resolve(this.getData());
   }
 
+  getGalleriaImages() {
+    let imagePath = 'assets/images/galleria/';
+    let images: any = [];
+    for (let i = 1; i < 8; i++) {
+      images.push({
+        itemImageSrc: imagePath + i + '.jpg',
+        thumbnailImageSrc: imagePath + i + '.jpg',
+        alt: 'Description for Image ' + i,
+        title: 'Title ' + i,
+      });
+    }
+    return Promise.resolve(images);
+  }
+
   public getGalleriaProductImage(
     productImage: ProductImage[],
     productName: string

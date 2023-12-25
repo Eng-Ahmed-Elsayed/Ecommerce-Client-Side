@@ -1,8 +1,8 @@
-import { FormGroup } from '@angular/forms';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 export default function passwordMatchValidator(
-  group: FormGroup
-): { [key: string]: any } | null {
+  group: AbstractControl
+): ValidationErrors | null {
   const password = group.get('password');
   const confirmPassword = group.get('confirmPassword');
   if (password && confirmPassword && password.value !== confirmPassword.value) {

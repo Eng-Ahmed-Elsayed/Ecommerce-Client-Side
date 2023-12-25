@@ -5,11 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserDto } from '../models/userDto';
 import { MessageService } from 'primeng/api';
-import {
-  FileUploadEvent,
-  FileUploadHandlerEvent,
-  UploadEvent,
-} from 'primeng/fileupload';
+import { FileUploadHandlerEvent } from 'primeng/fileupload';
 import { createImgPath } from 'src/app/shared/services/photo.service';
 import passwordMatchValidator from '../../custom-components/validators/passwordMatchValidator';
 
@@ -22,7 +18,7 @@ export class EditUserComponent implements OnInit {
   userChangePasswordForm!: FormGroup;
   updateUserForm!: FormGroup;
   userEmail!: string | undefined;
-  oldBirthdate!: string | undefined;
+  oldBirthdate!: Date | undefined;
   currentBirthdate!: Date | undefined;
   oldImgPath!: string | undefined;
 
@@ -72,13 +68,13 @@ export class EditUserComponent implements OnInit {
           },
         ],
       },
-      { validators: passwordMatchValidator, updateOn: 'blur' }
+      { validators: [passwordMatchValidator], updateOn: 'blur' }
     );
     // Get the user data and set it to the form
     this.activatedRoute.data.subscribe((data) => {
       let user: UserDto = data['user'];
       this.userEmail = user.email;
-      this.oldBirthdate = user.birthdate?.toString().split('T')[0];
+      this.oldBirthdate = user.birthdate;
       this.currentBirthdate = user.birthdate;
       this.oldImgPath = createImgPath(user.imgPath);
 
