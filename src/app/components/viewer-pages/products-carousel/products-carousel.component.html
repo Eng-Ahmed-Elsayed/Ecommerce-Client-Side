@@ -22,7 +22,11 @@
               class="mb-1 text-2xl font-bold cursor-pointer"
               routerLink="/product/{{ product.id }}"
             >
-              {{ product.name | uppercase | slice : 0 : 20 }}
+              {{
+                product.name.length > 20
+                  ? (product.name | uppercase | slice : 0 : 20) + "..."
+                  : (product.name | uppercase)
+              }}
             </span>
             <h6 class="mt-0 mb-3 text-2xl font-semibold">
               {{ "$" + product.price }}

@@ -26,12 +26,15 @@
               <span
                 class="font-semibold cursor-pointer"
                 (click)="filterByCategory(checkListItem.product.category.name!)"
-                >{{
-                  checkListItem.product.category.name
-                    | uppercase
-                    | slice : 0 : 10
-                }}</span
               >
+                {{
+                  checkListItem.product.category.name!.length > 20
+                    ? (checkListItem.product.category.name
+                        | uppercase
+                        | slice : 0 : 10) + "..."
+                    : checkListItem.product.category.name.name
+                }}
+              </span>
             </span>
             <p-tag
               [value]="checkListItem.product.inventory.status"
@@ -51,7 +54,12 @@
               class="text-2xl font-bold cursor-pointer"
               routerLink="/product/{{ checkListItem.product.id }}"
             >
-              {{ checkListItem.product.name | uppercase | slice : 0 : 20 }}
+              <!-- {{ checkListItem.product.name | uppercase | slice : 0 : 20 }} -->
+              {{
+                checkListItem.name.length > 20
+                  ? (checkListItem.name | uppercase | slice : 0 : 20) + "..."
+                  : (checkListItem.name | uppercase)
+              }}
             </div>
             <p-rating
               [ngModel]="5"

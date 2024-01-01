@@ -20,7 +20,11 @@
             class="cursor-pointer font-bold"
             (click)="filterByCategory(item.name!)"
           >
-            {{ item.name | uppercase | slice : 0 : 20 }}
+            {{
+              item.name.length > 20
+                ? (item.name | uppercase | slice : 0 : 20) + "..."
+                : (item.name | uppercase)
+            }}
           </h6>
         </div>
       </div>

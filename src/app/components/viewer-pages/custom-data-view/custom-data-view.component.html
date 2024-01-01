@@ -37,11 +37,13 @@
     </div>
   </ng-template>
 
+  <!-- ListItem template -->
   <ng-template let-product pTemplate="listItem">
     <div class="col-12 px-4">
       <div
         class="d-flex flex-column flex-sm-row align-items-center mx-4 py-4 gap-3 dataView-item-container"
       >
+        <!-- Product img -->
         <img
           class="shadow-2 d-block d-xl-block mx-auto border-round dataView-list-img cursor-pointer"
           [src]="createImgPath(product.productImages[0].imgPath)"
@@ -52,30 +54,41 @@
           class="d-flex flex-column flex-sm-row justify-content-between align-items-center align-items-xl-start flex-1 gap-2"
         >
           <div
-            class="flex flex-column align-items-center align-items-sm-start gap-3 text-center text-sm-start"
+            class="d-flex flex-column align-items-center align-items-sm-start gap-3 text-center text-sm-start"
           >
+            <!-- Product title -->
             <div
               class="text-2xl font-bold text-900 cursor-pointer"
               routerLink="/product/{{ product.id }}"
             >
-              {{ product.name | uppercase | slice : 0 : 20 }}
+              {{
+                product.name.length > 20
+                  ? (product.name | uppercase | slice : 0 : 20) + "..."
+                  : (product.name | uppercase)
+              }}
             </div>
+            <!-- Product rating -->
             <p-rating
               [ngModel]="product.avgRating"
               [readonly]="true"
               [cancel]="false"
             ></p-rating>
             <div class="d-flex align-items-center gap-3">
+              <!-- Product category -->
               <span class="d-flex align-items-center gap-2">
                 <i class="pi pi-tag"></i>
                 <span
                   class="font-semibold cursor-pointer"
                   (click)="filterByCategory(product.category.name!)"
                   >{{
-                    product.category.name | uppercase | slice : 0 : 10
+                    product.category.name.length > 10
+                      ? (product.category.name | uppercase | slice : 0 : 10) +
+                        "..."
+                      : (product.category.name | uppercase)
                   }}</span
                 >
               </span>
+              <!-- Product status -->
               <p-tag
                 [value]="product.inventory.status"
                 [severity]="getSeverity(product)"
@@ -85,9 +98,11 @@
           <div
             class="d-flex flex-column align-items-center align-items-sm-end gap-2"
           >
+            <!-- Product price -->
             <span class="text-2xl font-semibold">{{
               product.price | currency
             }}</span>
+            <!-- Shopping cart btn -->
             <app-shopping-cart-button
               [product]="product"
             ></app-shopping-cart-button>
@@ -97,48 +112,72 @@
     </div>
   </ng-template>
 
+  <!-- GridItem templete -->
   <ng-template let-product pTemplate="gridItem">
     <div class="col-12 col-sm-6 col-lg-4 data-view-grid-item">
       <div class="p-4 border-1 surface-border border-round">
+        <!-- Card header -->
         <div
           class="d-flex flex-wrap align-items-center justify-content-between gap-2"
         >
+          <!-- Category name -->
           <span class="d-flex align-items-center gap-2">
             <i class="pi pi-tag mr-1"></i>
             <span
               class="font-semibold cursor-pointer"
               (click)="filterByCategory(product.category.name!)"
-              >{{ product.category.name | uppercase | slice : 0 : 10 }}</span
             >
+              {{
+                product.category.name.length > 10
+                  ? (product.category.name | uppercase | slice : 0 : 10) + "..."
+                  : (product.category.name | uppercase)
+              }}
+            </span>
           </span>
+          <!-- Status -->
           <p-tag
             [value]="product.inventory.status"
             [severity]="getSeverity(product)"
           ></p-tag>
         </div>
-        <div class="d-flex flex-column align-items-center gap-3 py-5">
+        <!-- Card body -->
+        <div
+          class="d-flex flex-column align-items-center gap-3 py-5"
+          style="min-height: 100%"
+        >
+          <!-- Product img -->
           <img
             class="shadow-2 border-round dataView-grid-img cursor-pointer"
             [src]="createImgPath(product.productImages[0].imgPath)"
             [alt]="product.name"
             routerLink="/product/{{ product.id }}"
           />
+          <!-- Product name -->
           <div
-            class="text-2xl font-bold cursor-pointer"
+            class="text-2xl font-bold cursor-pointer text-center"
+            style="min-height: 5rem"
             routerLink="/product/{{ product.id }}"
           >
-            {{ product.name | uppercase | slice : 0 : 20 }}
+            {{
+              product.name.length > 20
+                ? (product.name | uppercase | slice : 0 : 20) + "..."
+                : (product.name | uppercase)
+            }}
           </div>
+          <!-- Product rating -->
           <p-rating
             [ngModel]="product.avgRating"
             [readonly]="true"
             [cancel]="false"
           ></p-rating>
         </div>
+        <!-- Card footer -->
         <div class="d-flex align-items-center justify-content-between">
+          <!-- Product price -->
           <span class="text-2xl font-semibold">{{
             product.price | currency
           }}</span>
+          <!-- Shopping cart btn -->
           <app-shopping-cart-button
             [product]="product"
           ></app-shopping-cart-button>

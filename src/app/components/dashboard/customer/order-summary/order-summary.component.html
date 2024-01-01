@@ -19,7 +19,15 @@
               class="custom-product-img me-2 rounded"
               [src]="createImgPath(cartItem)"
               [alt]="cartItem.product?.name"
-            /><span>{{ cartItem.product?.name | slice : 0 : 20 }}</span>
+            /><span>
+              <!-- {{ cartItem.product?.name | slice : 0 : 20 }} -->
+              {{
+                (cartItem.product?.name)!.length > 20
+                  ? (cartItem.product?.name | uppercase | slice : 0 : 20) +
+                    "..."
+                  : (cartItem.product?.name | uppercase)
+              }}
+            </span>
           </span>
           <span *ngIf="cartItem.product?.priceBeforeDiscount == null"
             >{{ cartItem.product?.price | currency }}

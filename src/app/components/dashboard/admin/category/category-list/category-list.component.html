@@ -80,7 +80,13 @@
               />
               <!-- {{ createImgPath(category.imgPath) }} -->
             </td>
-            <td>{{ category.description | slice : 0 : 20 }}</td>
+            <td>
+              {{
+                category.description.length > 20
+                  ? (category.description | uppercase | slice : 0 : 20) + "..."
+                  : (category.description | uppercase)
+              }}
+            </td>
             <td>
               <span class="d-flex">
                 <button
