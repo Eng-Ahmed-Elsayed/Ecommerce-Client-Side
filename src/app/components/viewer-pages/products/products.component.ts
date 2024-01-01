@@ -84,6 +84,8 @@ export class ProductsComponent implements OnInit {
       { label: 'Name Descending', value: 'name desc' },
       { label: 'Price High to Low', value: 'price desc' },
       { label: 'Price Low to High', value: 'price' },
+      // { label: 'Rating High to Low', value: 'AvgRating desc' },
+      // { label: 'Rating Low to High', value: 'AvgRating' },
     ];
 
     // If the screen is small or no

@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { CheckListDto } from '../models/customer/checkListDto';
 import { CheckListItemDto } from '../models/customer/checkListItemDto';
 import { DiscountDto } from '../models/shared/discountDto';
+import { ReviewDto } from '../models/shared/reviewDto';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,7 @@ export class CustomerService {
   private checkListUrl: string = this.baseUserApiUrl + 'checkList/';
   private shippingOptUrl: string = environment.baseApiUrl + 'shipping-options/';
   private discountApiUrl: string = environment.baseApiUrl + 'discounts/codes/';
+  private reviewApiUrl: string = environment.baseApiUrl + 'reviews/';
 
   constructor(
     private httpClient: HttpClient,
@@ -178,5 +180,26 @@ export class CustomerService {
     return this.httpClient.get<DiscountDto>(this.discountApiUrl, {
       params: { code: code },
     });
+  }
+
+  // Reviews APIs
+  getReview(id: string) {
+    return this.httpClient.get(this.reviewApiUrl + id);
+  }
+
+  getReviewList(id: string) {
+    return this.httpClient.get(this.reviewApiUrl);
+  }
+
+  AddReview(body: ReviewDto) {
+    return this.httpClient.post<ReviewDto>(this.reviewApiUrl, body);
+  }
+
+  updateReview(body: ReviewDto) {
+    return this.httpClient.put<ReviewDto>(this.reviewApiUrl, body);
+  }
+
+  deleteReview(id: string) {
+    return this.httpClient.delete(this.reviewApiUrl + id);
   }
 }

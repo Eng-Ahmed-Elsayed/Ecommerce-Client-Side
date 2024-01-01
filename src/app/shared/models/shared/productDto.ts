@@ -3,6 +3,7 @@ import { ColorDto } from './colorDto';
 import { DiscountDto } from './discountDto';
 import { InventoryDto } from './inventoryDto';
 import { ProductImage } from './productImageDto';
+import { ReviewDto } from './reviewDto';
 import { SizeDto } from './sizeDto';
 import { TagDto } from './tagDto';
 
@@ -13,7 +14,6 @@ export interface ProductDto {
   productCode?: string;
   productSKU?: string;
   price?: number;
-  rating?: number;
   status?: string;
   inStock?: boolean;
   tags?: TagDto[];
@@ -30,4 +30,7 @@ export interface ProductDto {
   inventoryId?: string;
   inventory?: InventoryDto;
   isInCheckList?: boolean;
+  // Reviews
+  reviews?: ReviewDto[];
+  avgRating?: number;
 }

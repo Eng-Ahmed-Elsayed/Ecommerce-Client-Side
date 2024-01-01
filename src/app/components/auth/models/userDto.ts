@@ -1,3 +1,5 @@
+import { ReviewDto } from 'src/app/shared/models/shared/reviewDto';
+
 export interface UserDto {
   id?: string;
   userName?: string;
@@ -12,4 +14,5 @@ export interface UserDto {
   birthdate?: Date;
   imgPath?: string;
   twoFactorEnabled?: boolean;
+  reviews?: ReviewDto[];
 }

@@ -140,6 +140,10 @@ export class AuthService {
     ];
   }
 
+  getUserId() {
+    return this.decodedToken()?.['id'];
+  }
+
   getUserEmail() {
     return this.decodedToken()?.[
       'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'

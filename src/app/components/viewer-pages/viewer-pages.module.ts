@@ -42,6 +42,7 @@ import { FaqsComponent } from './faqs/faqs.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputMaskModule } from 'primeng/inputmask';
 import { AccordionModule } from 'primeng/accordion';
+import { SpeedDialModule } from 'primeng/speeddial';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { AccordionModule } from 'primeng/accordion';
     InputTextareaModule,
     InputMaskModule,
     AccordionModule,
+    SpeedDialModule,
   ],
   exports: [CustomProductColorsComponent, CustomProductSizesComponent],
 })

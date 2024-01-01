@@ -69,7 +69,7 @@ export class DiscountListComponent implements OnInit {
               this.messageService.add({
                 severity: 'error',
                 summary: 'Delete discount failed!',
-                detail: err.message,
+                detail: "Cann't delete this discount please try again later.",
               });
               console.log(err);
             },

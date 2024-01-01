@@ -501,15 +501,47 @@ p-inputnumber,
     font-size: 0.9rem;
     color: var(--gray-300);
   }
+}
 
-  .review {
-    margin-bottom: 1rem;
-    border-bottom: 1px solid var(--surface-border);
+.review {
+  padding: 1rem !important;
+  border-bottom: 1px solid var(--surface-border) !important;
+  border-radius: initial !important;
+}
 
-    span {
-      font-size: 1rem;
-      margin-bottom: 0.5rem;
-    }
+.review-header-container {
+  position: relative;
+  height: 50px;
+
+  .speeddial-right {
+    // SpeedDial
+    right: 0;
+    top: 0;
+  }
+
+  .review-header {
+    left: 0;
+    top: 7px;
+    position: absolute;
+  }
+
+  .pi {
+    font-weight: 400 !important;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+  .p-speeddial-button.p-button.p-button-icon-only {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  // .p-button.p-button-text:enabled:hover {
+  //   border: 0;
+  // }
+  .p-button:focus {
+    box-shadow: none;
   }
 }
 

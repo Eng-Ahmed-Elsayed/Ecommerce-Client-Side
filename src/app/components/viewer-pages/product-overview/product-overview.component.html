@@ -32,11 +32,13 @@
             {{ product.price | currency }}
           </span>
           <p-rating
-            [ngModel]="ratingValue"
+            [ngModel]="product.avgRating"
             [readonly]="true"
             [cancel]="false"
           ></p-rating>
-          <span class="ms-0 ms-md-1">24 reviews</span>
+          <span class="ms-0 ms-md-1"
+            >{{ product.reviews?.length }} reviews</span
+          >
         </p>
       </div>
       <div class="row">
@@ -140,45 +142,141 @@
           </div>
         </div>
       </p-tabPanel>
+      <!-- Reviews tab -->
       <p-tabPanel header="Reviews">
+        <!-- Product reviews container -->
         <h3>Customer Reviews</h3>
-        <div class="d-flex flex-column review">
-          <h4>Absolute Perfect</h4>
-          <p-rating
-            [ngModel]="ratingValue"
-            [readonly]="true"
-            [cancel]="false"
-          ></p-rating>
-          <p>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-            eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci
-            velit, sed quia non numquam eius modi.
-          </p>
-          <span>Darlene Robertson, 2 days ago</span>
-        </div>
-        <div class="d-flex flex-column review">
-          <h4>Absolute Perfect</h4>
-          <p-rating
-            [ngModel]="ratingValue"
-            [readonly]="true"
-            [cancel]="false"
-          ></p-rating>
-          <p>
-            Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-            accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
-            quae ab illo inventore veritatis et quasi architecto beatae vitae
-            dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
-            aspernatur aut odit aut fugit, sed quia consequuntur magni dolores
-            eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci
-            velit, sed quia non numquam eius modi.
-          </p>
-          <span>Darlene Robertson, 2 days ago</span>
-        </div>
+        <ng-container *ngIf="product.reviews?.length != 0">
+          <!-- Dataview so we can add sorting and pagination -->
+          <p-dataView
+            #dv
+            [value]="product.reviews"
+            [sortField]="sortField"
+            [sortOrder]="sortOrder"
+            [paginator]="true"
+            [rows]="3"
+          >
+            <ng-template pTemplate="header">
+              <div
+                class="d-flex flex-column flex-md-row justify-md-content-between"
+              >
+                <p-dropdown
+                  [options]="sortOptions"
+                  [(ngModel)]="sortKey"
+                  placeholder="Sort Reviews"
+                  (onChange)="onSortChange($event)"
+                  styleClass="mb-2 mb-md-0"
+                ></p-dropdown>
+              </div>
+            </ng-template>
+            <ng-template let-review pTemplate="listItem">
+              <div class="d-flex flex-column review card">
+                <span class="review-header-container">
+                  <span class="h5 review-header">{{ review.title }}</span>
+                  <!-- If the review for this user make him able to delete or edit it. -->
+                  <p-speedDial
+                    [model]="reviewMenuItems"
+                    direction="down"
+                    showIcon="pi pi-ellipsis-v"
+                    hideIcon="pi pi-times"
+                    buttonClassName="p-button-rounded p-button-text"
+                    className="speeddial-right"
+                    *ngIf="
+                      isAuthenticated && userReview?.userId == review.userId
+                    "
+                  ></p-speedDial>
+                </span>
+                <p-rating
+                  [ngModel]="review.rating"
+                  [readonly]="true"
+                  [cancel]="false"
+                  class="mb-2"
+                ></p-rating>
+                <p>
+                  {{ review.comment }}
+                </p>
+                <span class="mb-2"
+                  >{{ review.user?.userName }},
+                  {{ review.createdAt | date }}</span
+                >
+              </div>
+            </ng-template>
+          </p-dataView>
+        </ng-container>
+        <!-- Review Form container -->
+        <!-- If user and do not have a review. Or if he edits his review -->
+        <ng-container
+          *ngIf="
+            isAuthenticated && (userReview == null || upsertReview == 'update')
+          "
+        >
+          <h3 class="mt-4">Add Review</h3>
+          <!-- Upsert form -->
+          <form
+            [formGroup]="reviewForm"
+            (submit)="upsertReview == 'add' ? addReview() : updateReview()"
+            autocomplete="off"
+          >
+            <div class="row">
+              <!-- Title input -->
+              <div class="col-12 col-md-7 custom-input-group">
+                <span class="p-float-label">
+                  <input
+                    pInputText
+                    id="title"
+                    formControlName="title"
+                    class="w-100"
+                    autocomplete="off"
+                  />
+                  <label htmlFor="title">Title</label>
+                </span>
+                <app-generic-input-errors
+                  [genericFormControl]="reviewForm.get('title')"
+                  inputName="Title"
+                ></app-generic-input-errors>
+              </div>
+              <!-- Rating input -->
+              <div class="col-12 col-md-7 custom-input-group">
+                <p-rating
+                  formControlName="rating"
+                  [readonly]="false"
+                  [cancel]="false"
+                ></p-rating>
+              </div>
+              <!-- Comment input -->
+              <div class="col-12 col-md-7 custom-input-group">
+                <span class="p-float-label">
+                  <textarea
+                    id="comment"
+                    rows="5"
+                    cols="150"
+                    style="max-width: 100%; min-height: 150px"
+                    pInputTextarea
+                    [autoResize]="true"
+                    formControlName="comment"
+                  ></textarea>
+                  <label htmlFor="comment">Comment</label>
+                </span>
+                <app-generic-input-errors
+                  [genericFormControl]="reviewForm.get('comment')"
+                  inputName="Comment"
+                ></app-generic-input-errors>
+              </div>
+              <div class="col-12 col-md-7 py-3">
+                <button
+                  pButton
+                  pRipple
+                  label="SUBMIT REVIEW"
+                  class="w-100"
+                  type="submit"
+                  [disabled]="reviewForm.invalid || reviewForm.pristine"
+                ></button>
+              </div>
+            </div>
+          </form>
+        </ng-container>
       </p-tabPanel>
+      <!-- Shipping tap -->
       <p-tabPanel header="Shipping & Returns">
         <h3>Shipping Placeholder</h3>
         <p>
