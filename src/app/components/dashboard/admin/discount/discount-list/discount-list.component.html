@@ -51,7 +51,7 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th style="width: 4rem">
+            <th style="width: 3rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
             <th pSortableColumn="code">
@@ -76,8 +76,19 @@
             </td>
             <td>{{ discount.code }}</td>
             <td>{{ discount.name }}</td>
-            <td>{{ discount.discountPercent }}</td>
-            <td>{{ discount.isActive }}</td>
+            <td>{{ discount.discountPercent | percent }}</td>
+            <td>
+              <i
+                class="pi pi-check"
+                style="color: #9fdaa8"
+                *ngIf="discount.isActive"
+              ></i>
+              <i
+                class="pi pi-times"
+                style="color: #df7491"
+                *ngIf="!discount.isActive"
+              ></i>
+            </td>
             <td>
               <span class="d-flex">
                 <button
@@ -93,7 +104,7 @@
                   pButton
                   pRipple
                   icon="pi pi-trash"
-                  class="p-button-rounded p-button-warning"
+                  class="p-button-rounded p-button-danger"
                   (click)="deleteDiscount(discount)"
                 ></button>
               </span>

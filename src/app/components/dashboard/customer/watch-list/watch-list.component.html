@@ -28,11 +28,11 @@
                 (click)="filterByCategory(checkListItem.product.category.name!)"
               >
                 {{
-                  checkListItem.product.category.name!.length > 20
+                  checkListItem.product.category.name?.length > 20
                     ? (checkListItem.product.category.name
                         | uppercase
                         | slice : 0 : 10) + "..."
-                    : checkListItem.product.category.name.name
+                    : checkListItem.product.category.name
                 }}
               </span>
             </span>
@@ -56,9 +56,10 @@
             >
               <!-- {{ checkListItem.product.name | uppercase | slice : 0 : 20 }} -->
               {{
-                checkListItem.name.length > 20
-                  ? (checkListItem.name | uppercase | slice : 0 : 20) + "..."
-                  : (checkListItem.name | uppercase)
+                checkListItem.product.name?.length > 20
+                  ? (checkListItem.product.name | uppercase | slice : 0 : 20) +
+                    "..."
+                  : (checkListItem.product.name | uppercase)
               }}
             </div>
             <p-rating

@@ -59,32 +59,32 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th style="width: 4rem">
+            <th style="width: 3rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
-            <th pSortableColumn="name" style="min-width: 15rem">
-              Name <p-sortIcon field="name"></p-sortIcon>
+            <th pSortableColumn="name" style="min-width: 5rem">
+              Product <p-sortIcon field="name"></p-sortIcon>
             </th>
-            <th pSortableColumn="productCode" style="min-width: 15rem">
+            <th pSortableColumn="productCode" style="min-width: 3rem">
               Product Code <p-sortIcon field="productCode"></p-sortIcon>
             </th>
-            <th style="min-width: 5rem">Image</th>
-            <th pSortableColumn="price" style="min-width: 10rem">
+            <!-- <th style="min-width: 5rem">Image</th> -->
+            <th pSortableColumn="price" style="min-width: 5rem">
               Price <p-sortIcon field="price"></p-sortIcon>
             </th>
-            <th pSortableColumn="category.name" style="min-width: 10rem">
+            <th pSortableColumn="category.name" style="min-width: 3rem">
               Category <p-sortIcon field="category"></p-sortIcon>
             </th>
-            <th pSortableColumn="rating">
-              Reviews <p-sortIcon field="rating"></p-sortIcon>
+            <th pSortableColumn="avgRating">
+              Reviews <p-sortIcon field="avgRating"></p-sortIcon>
             </th>
-            <th pSortableColumn="status" style="min-width: 5rem">
+            <th pSortableColumn="status" style="min-width: 3rem">
               Status <p-sortIcon field="status"></p-sortIcon>
             </th>
             <th pSortableColumn="inventory.status" style="min-width: 10rem">
               Inventory Status <p-sortIcon field="inventoryStatus"></p-sortIcon>
             </th>
-            <th pSortableColumn="inventory.quantity" style="min-width: 10rem">
+            <th pSortableColumn="inventory.quantity" style="min-width: 3rem">
               Quantity <p-sortIcon field="quantity"></p-sortIcon>
             </th>
             <th></th>
@@ -95,15 +95,22 @@
             <td>
               <p-tableCheckbox [value]="product"></p-tableCheckbox>
             </td>
-            <td>{{ product.name | titlecase }}</td>
+            <td class="d-flex align-items-center">
+              <img
+                [src]="createImgPath(product.productImages[0].imgPath)"
+                [alt]="product.name"
+                class="shadow-lg rounded table-img me-2"
+              />
+              <span>{{ product.name | titlecase }}</span>
+            </td>
             <td>{{ product.productCode }}</td>
-            <td>
+            <!-- <td>
               <img
                 [src]="createImgPath(product.productImages[0].imgPath)"
                 [alt]="product.name"
                 class="shadow-lg rounded table-img"
               />
-            </td>
+            </td> -->
             <td>{{ product.price | currency : "USD" }}</td>
             <td>{{ product.category.name | titlecase }}</td>
             <td>
@@ -141,7 +148,7 @@
                   pButton
                   pRipple
                   icon="pi pi-trash"
-                  class="p-button-rounded p-button-warning"
+                  class="p-button-rounded p-button-danger"
                   (click)="deleteProduct(product)"
                 ></button>
               </span>

@@ -91,7 +91,7 @@
   </div>
   <div class="d-flex justify-content-between p-2" *ngIf="discount != null">
     <span class="me-2 p-text-secondary">Discount Value</span
-    ><span class="text-primary">{{ discount.discountPercent! * 100 }}%</span>
+    ><span class="text-primary">{{ discount.discountPercent! | percent }}</span>
   </div>
   <hr />
   <div class="d-flex justify-content-between h5 p-2">

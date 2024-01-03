@@ -101,7 +101,7 @@
                     {{ orderItem.product?.priceBeforeDiscount | currency }}</del
                   >
                   <span class="ms-2 text-primary"
-                    >{{ orderItem.discountPercent * 100 }}% Off
+                    >{{ orderItem.discountPercent | percent }} Off
                   </span>
                 </span>
                 <!-- Product price -->

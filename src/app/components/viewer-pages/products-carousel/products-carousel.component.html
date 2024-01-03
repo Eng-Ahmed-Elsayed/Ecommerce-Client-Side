@@ -8,7 +8,9 @@
       [responsiveOptions]="responsiveOptions"
     >
       <ng-template let-product pTemplate="item">
-        <div class="custom-carousel-item rounded mx-2 text-center py-4 px-3">
+        <div
+          class="custom-carousel-item rounded mx-2 text-center py-4 px-3 d-flex flex-column justify-content-between"
+        >
           <div class="mb-3">
             <img
               [src]="createImgPath(product.productImages[0].imgPath)"

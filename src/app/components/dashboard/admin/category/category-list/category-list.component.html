@@ -50,18 +50,17 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th style="width: 4rem">
+            <th style="width: 3rem">
               <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
             </th>
             <!-- <th pSortableColumn="id" style="min-width: 15rem">
               Id <p-sortIcon field="id"></p-sortIcon>
             </th> -->
-            <th pSortableColumn="name" style="min-width: 15rem">
+            <th pSortableColumn="name" style="min-width: 5rem">
               Name <p-sortIcon field="name"></p-sortIcon>
             </th>
-            <th>Image</th>
-            <th style="min-width: 15rem">Description</th>
-
+            <!-- <th>Image</th> -->
+            <th style="min-width: 5rem">Description</th>
             <th></th>
           </tr>
         </ng-template>
@@ -71,15 +70,22 @@
               <p-tableCheckbox [value]="category"></p-tableCheckbox>
             </td>
             <!-- <td>{{ category.id }}</td> -->
-            <td>{{ category.name }}</td>
-            <td>
+            <td class="d-flex align-items-center">
+              <img
+                [src]="createImgPath(category.imgPath)"
+                [alt]="category.name"
+                class="shadow-lg rounded table-img me-2"
+              />
+              <span>{{ category.name }}</span>
+            </td>
+            <!-- <td>
               <img
                 [src]="createImgPath(category.imgPath)"
                 [alt]="category.name"
                 class="shadow-lg rounded table-img"
               />
-              <!-- {{ createImgPath(category.imgPath) }} -->
-            </td>
+
+            </td> -->
             <td>
               {{
                 category.description.length > 20
@@ -108,7 +114,7 @@
                   pButton
                   pRipple
                   icon="pi pi-trash"
-                  class="p-button-rounded p-button-warning"
+                  class="p-button-rounded p-button-danger"
                   (click)="deleteCategory(category)"
                 ></button>
               </span>

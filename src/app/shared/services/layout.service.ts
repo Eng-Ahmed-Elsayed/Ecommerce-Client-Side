@@ -38,25 +38,30 @@ export class LayoutService {
     },
     {
       breakpoint: '991px',
-      numVisible: 3,
+      numVisible: 2,
       numScroll: 2,
     },
     {
-      breakpoint: '855px',
-      numVisible: 2,
-      numScroll: 1,
-    },
-    {
-      breakpoint: '767px',
-      numVisible: 2,
-      numScroll: 1,
-    },
-
-    {
-      breakpoint: '575px',
+      breakpoint: '665px',
       numVisible: 1,
       numScroll: 1,
     },
+    // {
+    //   breakpoint: '855px',
+    //   numVisible: 2,
+    //   numScroll: 1,
+    // },
+    // {
+    //   breakpoint: '767px',
+    //   numVisible: 2,
+    //   numScroll: 1,
+    // },
+
+    // {
+    //   breakpoint: '575px',
+    //   numVisible: 1,
+    //   numScroll: 1,
+    // },
   ];
   private accessoriesResponsiveOptions: any[] = [
     {
