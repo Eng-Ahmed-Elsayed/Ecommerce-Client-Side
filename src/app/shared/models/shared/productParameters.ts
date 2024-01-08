@@ -10,4 +10,5 @@ export interface ProductParameters {
   maxPrice: number | null;
   orderBy?: string | null;
   category?: string | null;
+  featured?: boolean;
 }

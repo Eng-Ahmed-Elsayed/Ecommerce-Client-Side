@@ -4,12 +4,12 @@
   styleClass="p-button p-button-rounded mr-2"
   icon="pi pi-shopping-cart"
   (click)="shoppingCartConfirmation(product.id!)"
-  *ngIf="product.inventory!.quantity != 0"
+  *ngIf="product.inventory?.quantity != 0"
 ></p-button>
 <p-button
   type="button"
   styleClass="p-button p-button-rounded mr-2"
   icon="pi pi-shopping-cart"
-  *ngIf="product.inventory!.quantity == 0"
+  *ngIf="product.inventory?.quantity == 0"
   [disabled]="true"
 ></p-button>

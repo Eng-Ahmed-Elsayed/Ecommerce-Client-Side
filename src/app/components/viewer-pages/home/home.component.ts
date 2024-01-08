@@ -17,9 +17,10 @@ import { ProductParameters } from 'src/app/shared/models/shared/productParameter
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  products!: ProductDto[] | undefined | any;
+  newProducts!: ProductDto[] | undefined | any;
+  featuredProducts!: ProductDto[] | undefined | any;
+  recommendedProducts!: ProductDto[] | undefined | any;
   caregories!: CategoryDto[] | undefined | any;
-  recommendedProducts!: Product[] | undefined | any;
   images: any[] | undefined;
   responsiveOptions: any[] | undefined;
   accessoriesResponsiveOptions!: any[];
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
       error: (err: HttpErrorResponse) => console.log(err.message),
     });
 
+    // Product parameters for all request we will just change featured prop
     let productParameters: ProductParameters = {
       pageNumber: 1,
       pageSize: 12,
@@ -50,22 +52,39 @@ export class HomeComponent implements OnInit {
       minPrice: 0,
       maxPrice: 20000,
       category: '',
+      featured: false,
     };
+    // New products
     this.productService.searchAndFilterProducts(productParameters).subscribe({
       next: (res: HttpResponse<ProductDto[]>) => {
-        this.products = res.body;
+        this.newProducts = res.body;
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
       },
     });
 
-    // this.productService.getProductList().subscribe({
-    //   next: (res: ProductDto[]) => {
-    //     this.products = res;
-    //   },
-    //   error: (err: HttpErrorResponse) => console.log(err.message),
-    // });
+    // Random products
+    productParameters.orderBy = 'name';
+    this.productService.searchAndFilterProducts(productParameters).subscribe({
+      next: (res: HttpResponse<ProductDto[]>) => {
+        this.recommendedProducts = res.body;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      },
+    });
+
+    // Featured products
+    productParameters.featured = true;
+    this.productService.searchAndFilterProducts(productParameters).subscribe({
+      next: (res: HttpResponse<ProductDto[]>) => {
+        this.featuredProducts = res.body;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.log(err);
+      },
+    });
 
     this.photoService.getGalleriaImages().then((images) => {
       this.images = images;
@@ -75,9 +94,5 @@ export class HomeComponent implements OnInit {
 
     this.accessoriesResponsiveOptions =
       this.layoutService.getAccessoriesResponsiveOptions();
-
-    this.productService
-      .getProducts()
-      .then((data) => (this.recommendedProducts = data.slice(0, 12)));
   }
 }

@@ -30,6 +30,7 @@ import { DiscountListComponent } from './discount/discount-list/discount-list.co
 import { PickListModule } from 'primeng/picklist';
 import { ViewerPagesModule } from '../../viewer-pages/viewer-pages.module';
 import { CustomComponentsModule } from '../../custom-components/custom-components.module';
+import { UpsertFeatureProductsComponent } from './product/upsert-feature-products/upsert-feature-products.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CustomComponentsModule } from '../../custom-components/custom-component
     CategoryListComponent,
     UpsertDiscountComponent,
     DiscountListComponent,
+    UpsertFeatureProductsComponent,
   ],
   imports: [
     CommonModule,

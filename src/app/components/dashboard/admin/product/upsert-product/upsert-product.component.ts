@@ -106,12 +106,13 @@ export class UpsertProductComponent implements OnInit {
           validators: [Validators.required],
         },
       ],
-      inStock: [
-        false,
-        {
-          validators: [Validators.required],
-        },
-      ],
+      // inStock: [
+      //   false,
+      //   {
+      //     validators: [Validators.required],
+      //   },
+      // ],
+      featured: [false],
       colors: [
         '',
         {
@@ -162,7 +163,8 @@ export class UpsertProductComponent implements OnInit {
             productSKU: product.productSKU,
             price: product.price,
             status: product.status,
-            inStock: product.inStock,
+            // inStock: product.inStock,
+            featured: product.featured,
             colors: product.colors?.map((x) => x.name),
             productImages: [],
             // productImages: [product.productImages],

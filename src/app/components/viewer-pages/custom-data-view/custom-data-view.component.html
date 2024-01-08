@@ -46,7 +46,7 @@
         <!-- Product img -->
         <img
           class="shadow-2 d-block d-xl-block mx-auto border-round dataView-list-img cursor-pointer"
-          [src]="createImgPath(product.productImages[0].imgPath)"
+          [src]="createImgPath(product.productImages?.[0].imgPath)"
           [alt]="product.name"
           routerLink="/product/{{ product.id }}"
         />
@@ -81,7 +81,7 @@
                   class="font-semibold cursor-pointer"
                   (click)="filterByCategory(product.category.name!)"
                   >{{
-                    product.category.name.length > 10
+                    product.category.name?.length > 10
                       ? (product.category.name | uppercase | slice : 0 : 10) +
                         "..."
                       : (product.category.name | uppercase)
@@ -90,7 +90,7 @@
               </span>
               <!-- Product status -->
               <p-tag
-                [value]="product.inventory.status"
+                [value]="product.inventory?.status"
                 [severity]="getSeverity(product)"
               ></p-tag>
             </div>
@@ -128,7 +128,7 @@
               (click)="filterByCategory(product.category.name!)"
             >
               {{
-                product.category.name.length > 10
+                product.category.name?.length > 10
                   ? (product.category.name | uppercase | slice : 0 : 10) + "..."
                   : (product.category.name | uppercase)
               }}
@@ -136,7 +136,7 @@
           </span>
           <!-- Status -->
           <p-tag
-            [value]="product.inventory.status"
+            [value]="product.inventory?.status"
             [severity]="getSeverity(product)"
           ></p-tag>
         </div>
@@ -148,7 +148,7 @@
           <!-- Product img -->
           <img
             class="shadow-2 border-round dataView-grid-img cursor-pointer"
-            [src]="createImgPath(product.productImages[0].imgPath)"
+            [src]="createImgPath(product.productImages?.[0].imgPath)"
             [alt]="product.name"
             routerLink="/product/{{ product.id }}"
           />

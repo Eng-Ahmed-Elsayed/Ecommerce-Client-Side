@@ -6,6 +6,7 @@
       [numScroll]="2"
       [circular]="false"
       [responsiveOptions]="responsiveOptions"
+      [circular]="true"
     >
       <ng-template let-product pTemplate="item">
         <div
@@ -34,7 +35,7 @@
               {{ "$" + product.price }}
             </h6>
             <p-tag
-              [value]="product.inventory.status"
+              [value]="product.inventory?.status"
               [severity]="getSeverity(product)"
             ></p-tag>
             <div class="mt-4">

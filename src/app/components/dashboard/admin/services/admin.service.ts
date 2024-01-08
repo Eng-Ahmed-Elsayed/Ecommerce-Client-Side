@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CategoryDto } from 'src/app/shared/models/shared/categoryDto';
 import { DiscountDto } from 'src/app/shared/models/shared/discountDto';
 import { ProductDto } from 'src/app/shared/models/shared/productDto';
+import { UpsertFeatureProductsDto } from 'src/app/shared/models/shared/upsertFeatureProductsDto';
 import { uploadFiles } from 'src/app/shared/services/photo.service';
 import { environment } from 'src/environments/environment';
 
@@ -137,6 +138,19 @@ export class AdminService {
 
   deleteProductsRange(body: ProductDto[]) {
     return this.httpClient.delete(this.productApiUrl, { body });
+  }
+
+  getFeatureProductsAndOther() {
+    return this.httpClient.get<UpsertFeatureProductsDto>(
+      this.productApiUrl + 'feature-products/'
+    );
+  }
+
+  upsertFeatureProducts(body: UpsertFeatureProductsDto) {
+    return this.httpClient.patch(
+      this.productApiUrl + 'feature-products/',
+      body
+    );
   }
 
   // <-----Discount----->

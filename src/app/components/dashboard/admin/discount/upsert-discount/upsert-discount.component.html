@@ -98,10 +98,21 @@
                             style="width: 4rem; height: 4rem"
                           />
                           <div class="d-flex flex-column g-2">
-                            <span class="font-bold">{{ product.name }}</span>
+                            <span class="font-bold">{{
+                              product.name.length > 20
+                                ? (product.name | uppercase | slice : 0 : 20) +
+                                  "..."
+                                : (product.name | uppercase)
+                            }}</span>
                             <div class="d-flex align-items-center g-2">
-                              <i class="pi pi-tag text-sm"></i>
-                              <span>{{ product.category }}</span>
+                              <i class="pi pi-tag text-sm me-1"></i>
+                              <span>{{
+                                product.category?.name.length > 10
+                                  ? (product.category?.name
+                                      | uppercase
+                                      | slice : 0 : 10) + "..."
+                                  : (product.category?.name | uppercase)
+                              }}</span>
                             </div>
                           </div>
                         </span>

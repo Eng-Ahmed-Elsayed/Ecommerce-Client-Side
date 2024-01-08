@@ -40,7 +40,7 @@ export class UpsertCategoryComponent implements OnInit {
         {
           validators: [
             Validators.required,
-            Validators.minLength(5),
+            Validators.minLength(2),
             Validators.maxLength(40),
           ],
         },

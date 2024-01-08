@@ -69,15 +69,17 @@
       [withName]="true"
     ></app-custom-carousel>
   </div>
-  <!-- New products -->
-  <div class="row my-3">
-    <h4>New Products <a routerLink="/products">View all</a></h4>
-    <app-products-carousel [products]="products"></app-products-carousel>
-  </div>
   <!-- Featured products -->
   <div class="row my-3">
     <h4>Featured Products <a routerLink="/products">View all</a></h4>
-    <app-products-carousel [products]="products"></app-products-carousel>
+    <app-products-carousel
+      [products]="featuredProducts"
+    ></app-products-carousel>
+  </div>
+  <!-- New products -->
+  <div class="row my-3">
+    <h4>New Products <a routerLink="/products">View all</a></h4>
+    <app-products-carousel [products]="newProducts"></app-products-carousel>
   </div>
   <!--  -->
   <div class="row my-3 g-3">
@@ -151,7 +153,9 @@
   <div class="row my-3">
     <h4>Recommended For You <a routerLink="/products">View all</a></h4>
     <div class="col-12">
-      <app-custom-data-view [products]="products"></app-custom-data-view>
+      <app-custom-data-view
+        [products]="recommendedProducts"
+      ></app-custom-data-view>
     </div>
   </div>
 </div>

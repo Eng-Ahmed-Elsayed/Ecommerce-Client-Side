@@ -12,8 +12,7 @@
           'status',
           'productCode',
           'productSKU',
-          'price',
-          'inStock'
+          'price'
         ]"
         [tableStyle]="{ 'min-width': '75rem' }"
         [rowHover]="true"
@@ -123,7 +122,7 @@
             <td>{{ product.status | titlecase }}</td>
             <td>
               <p-tag
-                [value]="product.inventory.status"
+                [value]="product.inventory?.status"
                 [severity]="getSeverity(product)"
               ></p-tag>
             </td>

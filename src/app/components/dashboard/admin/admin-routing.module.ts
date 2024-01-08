@@ -14,6 +14,7 @@ import {
 } from './guards/admin.guard';
 import { UpsertDiscountComponent } from './discount/upsert-discount/upsert-discount.component';
 import { DiscountListComponent } from './discount/discount-list/discount-list.component';
+import { UpsertFeatureProductsComponent } from './product/upsert-feature-products/upsert-feature-products.component';
 
 const routes: Routes = [
   { path: '', component: AdminComponent },
@@ -32,6 +33,7 @@ const routes: Routes = [
       product: getProductResolver,
     },
   },
+  { path: 'product/featrue/update', component: UpsertFeatureProductsComponent },
 
   // Category
   { path: 'category/add', component: UpsertCategoryComponent },

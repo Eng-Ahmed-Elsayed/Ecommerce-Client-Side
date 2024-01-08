@@ -188,7 +188,7 @@
                 inputName="Sizes"
               ></app-generic-input-errors>
             </div>
-            <div
+            <!-- <div
               class="col-12 custom-input-card d-flex justify-content-between"
             >
               <h5>In Stock</h5>
@@ -196,6 +196,16 @@
               <app-generic-input-errors
                 [genericFormControl]="upsertProductForm.get('inStock')"
                 inputName="In Stock"
+              ></app-generic-input-errors>
+            </div> -->
+            <div
+              class="col-12 custom-input-card d-flex justify-content-between"
+            >
+              <h5>Featured</h5>
+              <p-inputSwitch formControlName="featured"></p-inputSwitch>
+              <app-generic-input-errors
+                [genericFormControl]="upsertProductForm.get('featured')"
+                inputName="Featured"
               ></app-generic-input-errors>
             </div>
             <div class="col-12 custom-input-card">

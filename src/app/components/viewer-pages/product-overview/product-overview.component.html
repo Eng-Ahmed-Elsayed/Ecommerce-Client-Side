@@ -1,6 +1,6 @@
 <div class="container-fluid px-4 py-2 product-overview">
   <div class="row mb-5">
-    <div class="col-12 col-md-6 mb-3">
+    <div class="col-12 col-lg-6 mb-3 d-flex justify-content-center">
       <p-galleria
         [value]="images"
         [showIndicators]="false"
@@ -12,7 +12,7 @@
         thumbnailsPosition="left"
         [numVisible]="4"
         [responsiveOptions]="responsiveOptions"
-        [containerStyle]="{ 'max-width': '640px' }"
+        [containerStyle]="{ 'max-width': '700px' }"
       >
         <ng-template pTemplate="item" let-item>
           <img [src]="item.itemImageSrc" class="itemImage rounded" />
@@ -22,13 +22,15 @@
         </ng-template>
       </p-galleria>
     </div>
-    <div class="col-12 col-md-6 px-5">
+    <div class="col-12 col-lg-6 px-5">
       <div class="row">
-        <h3>{{ product.name | uppercase }}</h3>
+        <span class="text-center text-sm-start font-bold text-3xl">
+          {{ product.name | uppercase }}
+        </span>
         <p
           class="d-flex flex-column justify-content-center align-items-center flex-sm-row align-items-md-center justify-content-sm-between"
         >
-          <span class="h4 me-0 me-md-1">
+          <span class="text-2xl me-0 me-md-1 font-semibold p-text-secondary">
             {{ product.price | currency }}
           </span>
           <p-rating
@@ -36,7 +38,7 @@
             [readonly]="true"
             [cancel]="false"
           ></p-rating>
-          <span class="ms-0 ms-md-1"
+          <span class="ms-0 ms-md-1 font-semibold p-text-secondary"
             >{{ product.reviews?.length }} reviews</span
           >
         </p>
@@ -50,45 +52,54 @@
             (submit)="addCartItem()"
           >
             <div class="row">
-              <app-custom-product-colors></app-custom-product-colors>
+              <div class="col-12 my-3">
+                <h6 class="font-bold">Colors</h6>
+                <app-custom-product-colors></app-custom-product-colors>
+              </div>
               <div class="col-12 mb-3">
-                <div class="row">
-                  <h6>Size</h6>
-                  <app-custom-product-sizes></app-custom-product-sizes>
-                </div>
+                <h6 class="font-bold">Size</h6>
+                <app-custom-product-sizes></app-custom-product-sizes>
               </div>
               <div class="col-12">
-                <h6>Quantity</h6>
                 <div
-                  class="d-flex justify-content-center justify-content-sm-between align-items-center"
+                  class="d-flex flex-column flex-md-row justify-content-center align-items-center align-items-md-end"
                 >
-                  <p-inputNumber
-                    formControlName="quantity"
-                    [showButtons]="true"
-                    buttonLayout="horizontal"
-                    inputId="horizontal"
-                    spinnerMode="horizontal"
-                    [step]="1"
-                    decrementButtonClass="p-button-danger p-button-help p-button-text"
-                    incrementButtonClass="p-button-success p-button-help p-button-text"
-                    incrementButtonIcon="pi pi-plus"
-                    decrementButtonIcon="pi pi-minus"
-                    inputStyleClass="p-inputtext-sm inputNumber text-center"
-                    [min]="1"
-                    [max]="99"
-                  ></p-inputNumber>
+                  <div
+                    class="d-flex flex-column justify-content-between align-items-center"
+                  >
+                    <h6 class="font-bold">Quantity</h6>
+                    <p-inputNumber
+                      formControlName="quantity"
+                      [showButtons]="true"
+                      buttonLayout="horizontal"
+                      inputId="horizontal"
+                      spinnerMode="horizontal"
+                      [step]="1"
+                      decrementButtonClass="p-button-danger p-button-help p-button-text"
+                      incrementButtonClass="p-button-success p-button-help p-button-text"
+                      incrementButtonIcon="pi pi-plus"
+                      decrementButtonIcon="pi pi-minus"
+                      inputStyleClass="p-inputtext-sm inputNumber text-center"
+                      [min]="1"
+                      [max]="99"
+                    ></p-inputNumber>
+                  </div>
 
-                  <p-button
-                    label="Add to Cart"
-                    icon="pi pi-shopping-cart"
-                    styleClass="p-button-raised "
-                    [disabled]="product.inventory?.quantity == 0"
-                    type="submit"
-                  ></p-button>
-                  <app-check-list-button
-                    [product]="product"
-                    [styleClass]="'p-button-help p-button-text'"
-                  ></app-check-list-button>
+                  <div
+                    class="d-flex justify-content-between align-items-center mt-3 mt-md-0"
+                  >
+                    <p-button
+                      label="Add to Cart"
+                      icon="pi pi-shopping-cart"
+                      styleClass="p-button-raised "
+                      [disabled]="product.inventory?.quantity == 0"
+                      type="submit"
+                    ></p-button>
+                    <app-check-list-button
+                      [product]="product"
+                      [styleClass]="'p-button-help p-button-text'"
+                    ></app-check-list-button>
+                  </div>
                 </div>
               </div>
             </div>

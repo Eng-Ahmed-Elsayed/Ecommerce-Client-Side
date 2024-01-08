@@ -15,7 +15,7 @@ export interface ProductDto {
   productSKU?: string;
   price?: number;
   status?: string;
-  inStock?: boolean;
+  // inStock?: boolean;
   tags?: TagDto[];
   colors?: ColorDto[];
   sizes?: SizeDto[];
@@ -33,4 +33,5 @@ export interface ProductDto {
   // Reviews
   reviews?: ReviewDto[];
   avgRating?: number;
+  featured?: boolean;
 }
