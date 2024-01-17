@@ -27,7 +27,7 @@
 
 To run this project locally:
 
-1. Clone the repository.
+1. Clone the repository and server side repository.
 2. Install dependencies for the frontend and backend.
 3. Start the backend server.
 4. Run the Angular app: `ng serve -o` for a dev server.
