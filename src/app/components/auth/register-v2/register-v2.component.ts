@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import passwordMatchValidator from '../../custom-components/validators/passwordMatchValidator';
+import { RegistrationResponseDto } from '../models/registrationResponseDto';
 
 @Component({
   selector: 'app-register-v2',
@@ -73,14 +74,18 @@ export class RegisterV2Component implements OnInit {
         });
       },
       error: (err: any) => {
-        this.errorMessage = err;
+        this.errorMessage = '';
+        let values: string[] = Object.values(err);
+        values.forEach((m: string) => {
+          this.errorMessage += m + '\n';
+        });
         this.messageService.add({
           severity: 'error',
-          summary: err,
+          summary: this.errorMessage,
         });
       },
       complete: () => {
-        this.router.navigateByUrl('auth/login');
+        this.router.navigateByUrl('/auth/login');
       },
     });
   }

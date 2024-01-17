@@ -20,6 +20,7 @@
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [(selection)]="selectedProducts"
         [showCurrentPageReport]="true"
+        [loading]="loading"
       >
         <ng-template pTemplate="caption">
           <h1 class="mb-3">Manage Products</h1>
@@ -33,7 +34,7 @@
                 label="New"
                 icon="pi pi-plus"
                 class="p-button-success me-0 me-sm-2 mb-3 mb-sm-0"
-                (click)="openNew()"
+                routerLink="/dashboard/admin/product/add"
               ></button>
               <button
                 pButton
@@ -94,13 +95,19 @@
             <td>
               <p-tableCheckbox [value]="product"></p-tableCheckbox>
             </td>
-            <td class="d-flex align-items-center">
-              <img
-                [src]="createImgPath(product.productImages[0].imgPath)"
-                [alt]="product.name"
-                class="shadow-lg rounded table-img me-2"
-              />
-              <span>{{ product.name | titlecase }}</span>
+            <td>
+              <div class="d-flex align-items-center">
+                <img
+                  [src]="createImgPath(product.productImages[0].imgPath)"
+                  [alt]="product.name"
+                  class="shadow-lg rounded table-img me-2"
+                />
+                <span>{{
+                  product.name.length > 25
+                    ? (product.name | titlecase | slice : 0 : 25) + "..."
+                    : (product.name | titlecase)
+                }}</span>
+              </div>
             </td>
             <td>{{ product.productCode }}</td>
             <!-- <td>

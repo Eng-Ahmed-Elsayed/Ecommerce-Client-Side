@@ -118,13 +118,12 @@ export class EditUserComponent implements OnInit {
           detail: 'Your information has beed updated successfully!',
         });
       },
-      error: (err: HttpErrorResponse) => {
+      error: (err: any) => {
         this.messageService.add({
           severity: 'error',
           summary: 'Update failed!',
-          detail: JSON.stringify(err.error.errors),
+          detail: 'Please enter a vaild input to update your informations.',
         });
-        console.log(err);
       },
     });
   }
@@ -139,13 +138,16 @@ export class EditUserComponent implements OnInit {
             detail: 'Your password has beed updated successfully!',
           });
         },
-        error: (err: HttpErrorResponse) => {
+        error: (err: any[]) => {
+          let errorMessage: string = '';
+          err.forEach((obj) => {
+            errorMessage += obj?.['description'] + '\n';
+          });
           this.messageService.add({
             severity: 'error',
             summary: 'Update failed!',
-            detail: JSON.stringify(err.error.errors),
+            detail: errorMessage,
           });
-          console.log(err);
         },
       });
   }

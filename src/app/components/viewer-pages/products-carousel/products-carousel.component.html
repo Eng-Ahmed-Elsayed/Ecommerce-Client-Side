@@ -9,8 +9,37 @@
       [circular]="true"
     >
       <ng-template let-product pTemplate="item">
+        <!-- If Loading -->
+        <div
+          class="d-flex justify-content-center align-items-center my-3"
+          *ngIf="loading"
+        >
+          <div class="d-flex flex-column justify-content-center">
+            <p-skeleton
+              width="10rem"
+              height="4rem"
+              styleClass="mb-2"
+            ></p-skeleton>
+            <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton height="2rem" styleClass="mb-2 mx-auto"></p-skeleton>
+            <div class="d-flex justify-content-center">
+              <p-skeleton
+                shape="circle"
+                size="2rem"
+                styleClass="me-2"
+              ></p-skeleton>
+              <p-skeleton
+                shape="circle"
+                size="2rem"
+                styleClass="ms-2"
+              ></p-skeleton>
+            </div>
+          </div>
+        </div>
+        <!-- Loading is done show the items -->
         <div
           class="custom-carousel-item rounded mx-2 text-center py-4 px-3 d-flex flex-column justify-content-between"
+          *ngIf="!loading"
         >
           <div class="mb-3">
             <img
@@ -22,7 +51,7 @@
           </div>
           <div>
             <span
-              class="mb-1 text-2xl font-bold cursor-pointer"
+              class="mb-1 text-xl font-bold cursor-pointer"
               routerLink="/product/{{ product.id }}"
             >
               {{
@@ -31,7 +60,7 @@
                   : (product.name | uppercase)
               }}
             </span>
-            <h6 class="mt-0 mb-3 text-2xl font-semibold">
+            <h6 class="mt-0 text-xl mb-3 font-semibold">
               {{ "$" + product.price }}
             </h6>
             <p-tag

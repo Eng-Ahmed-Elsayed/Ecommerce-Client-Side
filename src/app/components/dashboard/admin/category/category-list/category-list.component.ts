@@ -19,6 +19,7 @@ export class CategoryListComponent implements OnInit {
   categories!: CategoryDto[];
   category!: CategoryDto;
   selectedCategories!: CategoryDto[];
+  loading: boolean = true;
 
   constructor(
     private adminService: AdminService,
@@ -31,6 +32,7 @@ export class CategoryListComponent implements OnInit {
     this.adminService.getCategoryList().subscribe({
       next: (res) => {
         this.categories = res;
+        this.loading = false;
       },
       error: (err) => console.log(err),
     });

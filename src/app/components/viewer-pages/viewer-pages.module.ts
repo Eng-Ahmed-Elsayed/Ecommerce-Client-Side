@@ -43,6 +43,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputMaskModule } from 'primeng/inputmask';
 import { AccordionModule } from 'primeng/accordion';
 import { SpeedDialModule } from 'primeng/speeddial';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { SpeedDialModule } from 'primeng/speeddial';
     InputMaskModule,
     AccordionModule,
     SpeedDialModule,
+    SkeletonModule,
   ],
   exports: [CustomProductColorsComponent, CustomProductSizesComponent],
 })

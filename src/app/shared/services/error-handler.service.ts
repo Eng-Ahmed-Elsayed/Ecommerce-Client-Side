@@ -83,7 +83,7 @@ export class ErrorHandlerService implements HttpInterceptor {
 
   private handleBadRequest(error: HttpErrorResponse): string {
     if (this.router.url === '/auth/register') {
-      return error.error.errorMessage;
+      return error.error.errors;
     } else if (this.router.url.startsWith('/auth')) {
       return error.error;
       // let message = '';

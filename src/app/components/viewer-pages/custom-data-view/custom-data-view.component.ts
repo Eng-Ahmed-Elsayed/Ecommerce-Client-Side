@@ -15,7 +15,7 @@ import { UtilityService } from 'src/app/shared/services/utility.service';
   styleUrls: ['./custom-data-view.component.scss'],
 })
 export class CustomDataViewComponent implements OnInit {
-  @Input() products!: ProductDto[] | undefined;
+  @Input() products!: ProductDto[] | undefined | any;
   @Input() paginator: boolean = false;
   @Input() sortOptions!: SelectItem[];
   @Input() filterBy!: string;

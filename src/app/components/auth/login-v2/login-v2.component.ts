@@ -50,8 +50,9 @@ export class LoginV2Component implements OnInit {
           },
         ],
         stayLoggedIn: [true],
-      },
-      { updateOn: 'blur' }
+      }
+      // ,
+      // { updateOn: 'blur' }
     );
 
     // @ts-ignore

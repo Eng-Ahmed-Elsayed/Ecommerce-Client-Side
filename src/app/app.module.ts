@@ -12,12 +12,6 @@ import { ErrorHandlerService } from './shared/services/error-handler.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { tokenGetter } from './shared/services/auth.service';
 
-// Get the token
-// export function tokenGetter() {
-//   console.log(localStorage.getItem('token'));
-//   return localStorage.getItem('token');
-// }
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -40,11 +34,11 @@ import { tokenGetter } from './shared/services/auth.service';
     }),
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: ErrorHandlerService,
-    //   multi: true,
-    // },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerService,
+      multi: true,
+    },
     ConfirmationService,
     MessageService,
   ],

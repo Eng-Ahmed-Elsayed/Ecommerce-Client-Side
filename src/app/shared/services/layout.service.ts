@@ -38,19 +38,19 @@ export class LayoutService {
     },
     {
       breakpoint: '991px',
+      numVisible: 3,
+      numScroll: 1,
+    },
+    {
+      breakpoint: '855px',
       numVisible: 2,
-      numScroll: 2,
+      numScroll: 1,
     },
     {
       breakpoint: '665px',
       numVisible: 1,
       numScroll: 1,
     },
-    // {
-    //   breakpoint: '855px',
-    //   numVisible: 2,
-    //   numScroll: 1,
-    // },
     // {
     //   breakpoint: '767px',
     //   numVisible: 2,

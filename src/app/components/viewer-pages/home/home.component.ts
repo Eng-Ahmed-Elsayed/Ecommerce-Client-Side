@@ -17,10 +17,18 @@ import { ProductParameters } from 'src/app/shared/models/shared/productParameter
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  newProducts!: ProductDto[] | undefined | any;
-  featuredProducts!: ProductDto[] | undefined | any;
-  recommendedProducts!: ProductDto[] | undefined | any;
-  caregories!: CategoryDto[] | undefined | any;
+  // Products
+  featuredProducts: ProductDto[] | null = [{}, {}, {}];
+  newProducts: ProductDto[] | null = [{}, {}, {}];
+  recommendedProducts: ProductDto[] | null = [{}, {}, {}];
+  // Loaders for produts
+  featuredProductsLoading: boolean = true;
+  newProductsLoading: boolean = true;
+  recommendedProductsLoading: boolean = true;
+  // Categories
+  categories: CategoryDto[] | null = [{}, {}, {}, {}, {}, {}, {}];
+  categoriesLoading: boolean = true;
+  //
   images: any[] | undefined;
   responsiveOptions: any[] | undefined;
   accessoriesResponsiveOptions!: any[];
@@ -35,7 +43,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.adminService.getCategoryList().subscribe({
       next: (res: CartItemDto[]) => {
-        this.caregories = res.length > 10 ? res.slice(0, 10) : res;
+        this.categories = res.length > 10 ? res.slice(0, 10) : res;
+        this.categoriesLoading = false;
       },
       error: (err: HttpErrorResponse) => console.log(err.message),
     });
@@ -58,6 +67,7 @@ export class HomeComponent implements OnInit {
     this.productService.searchAndFilterProducts(productParameters).subscribe({
       next: (res: HttpResponse<ProductDto[]>) => {
         this.newProducts = res.body;
+        this.newProductsLoading = false;
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
@@ -69,6 +79,7 @@ export class HomeComponent implements OnInit {
     this.productService.searchAndFilterProducts(productParameters).subscribe({
       next: (res: HttpResponse<ProductDto[]>) => {
         this.recommendedProducts = res.body;
+        this.recommendedProductsLoading = false;
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);
@@ -80,6 +91,7 @@ export class HomeComponent implements OnInit {
     this.productService.searchAndFilterProducts(productParameters).subscribe({
       next: (res: HttpResponse<ProductDto[]>) => {
         this.featuredProducts = res.body;
+        this.featuredProductsLoading = false;
       },
       error: (err: HttpErrorResponse) => {
         console.log(err);

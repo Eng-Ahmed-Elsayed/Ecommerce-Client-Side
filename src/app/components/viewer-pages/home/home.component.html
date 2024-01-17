@@ -53,20 +53,24 @@
   </div>
   <div class="row new-customers-ad rounded-pill text-center">
     <h2>50% Off For New Customers</h2>
-    <p>Free Shipping & Free Return at no order min. Restricitons apply</p>
-    <a routerLink="/dashboard/user/cart">
-      <button mat-fab extended color="primary">
-        <mat-icon>shop</mat-icon>
-        Start Your Order Now
-      </button></a
-    >
+    <p class="p-text-secondary">
+      Free Shipping & Free Return at no order min. Restricitons apply
+    </p>
+
+    <p-button
+      routerLink="/dashboard/user/cart"
+      label="Start Your Order Now"
+      icon="pi pi-shopping-bag"
+      styleClass="p-button-raised rounded-pill px-4 py-3 mb-3  text-white"
+    ></p-button>
   </div>
   <!-- Categories -->
   <div class="row my-3">
     <h4>Shop By Categories <a routerLink="/products">View all</a></h4>
     <app-custom-carousel
-      [items]="caregories"
+      [items]="categories"
       [withName]="true"
+      [loading]="categoriesLoading"
     ></app-custom-carousel>
   </div>
   <!-- Featured products -->
@@ -74,12 +78,16 @@
     <h4>Featured Products <a routerLink="/products">View all</a></h4>
     <app-products-carousel
       [products]="featuredProducts"
+      [loading]="featuredProductsLoading"
     ></app-products-carousel>
   </div>
   <!-- New products -->
   <div class="row my-3">
     <h4>New Products <a routerLink="/products">View all</a></h4>
-    <app-products-carousel [products]="newProducts"></app-products-carousel>
+    <app-products-carousel
+      [products]="newProducts"
+      [loading]="newProductsLoading"
+    ></app-products-carousel>
   </div>
   <!--  -->
   <div class="row my-3 g-3">
@@ -102,9 +110,10 @@
   <div class="row my-3">
     <h4>Top Brands <a routerLink="/products">View all</a></h4>
     <app-custom-carousel
-      [items]="caregories"
+      [items]="categories"
       [withName]="false"
       imgClass="rounded-pill"
+      [loading]="categoriesLoading"
     ></app-custom-carousel>
   </div>
 
@@ -155,6 +164,7 @@
     <div class="col-12">
       <app-custom-data-view
         [products]="recommendedProducts"
+        [loading]="recommendedProductsLoading"
       ></app-custom-data-view>
     </div>
   </div>

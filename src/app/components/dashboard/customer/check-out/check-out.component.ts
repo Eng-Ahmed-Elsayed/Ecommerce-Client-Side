@@ -261,16 +261,20 @@ export class CheckOutComponent implements OnInit {
       // Make a copy
       this.tempCartItems = this.cartItems?.slice();
       // Filter the items if the product has this discount then map.
-      this.cartItems = this.tempCartItems
-        ?.filter((c) =>
-          c?.product?.discounts?.find((d) => d.id == this.discount?.id)
-        )
-        .map((c) => {
-          // Make a new objects if you did not this it will modify the original array
-          // including tempCartItems because they have the same ref to the object(cart item and product).
-          // You can also use deep copy to get the same result if the arry is has more complex objects.
-          let cartItem = { ...c };
+      //   ?.filter((c) =>
+      //   c?.product?.discounts?.find((d) => d.id == this.discount?.id)
+      // )
+      this.cartItems = this.tempCartItems?.map((c) => {
+        // Make a new objects if you did not this it will modify the original array
+        // including tempCartItems because they have the same ref to the object(cart item and product).
+        // You can also use deep copy to get the same result if the arry is has more complex objects.
+        let cartItem = { ...c };
+        // if the product has this discount so we can apply the discount
+        if (
+          cartItem?.product?.discounts?.find((d) => d.id == this.discount?.id)
+        ) {
           let product = { ...cartItem.product };
+          // To prevent the error
           if (product != undefined) {
             // Save old price then apply the discount
             product.priceBeforeDiscount = cartItem.product?.price;
@@ -278,8 +282,9 @@ export class CheckOutComponent implements OnInit {
               product.price! * (1 - this.discount?.discountPercent!);
           }
           cartItem.product = product;
-          return cartItem;
-        });
+        }
+        return cartItem;
+      });
       // Update total and suptotal
       this.updateTotalAndSupTotal();
     }

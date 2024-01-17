@@ -19,6 +19,11 @@ mat-sidenav-content {
   -moz-osx-font-smoothing: grayscale;
 }
 
+// Toast
+.p-toast-top-right {
+  white-space: pre-line;
+}
+
 // Search dialog in the nav bar
 .custom-p-dialog {
   width: 70vw;
@@ -64,6 +69,10 @@ mat-sidenav-content {
 
 .text-900 {
   color: var(--surface-900) !important;
+}
+
+.text-white {
+  color: var(--text-color) !important;
 }
 
 .text-blue-500 {
@@ -146,6 +155,9 @@ p-carousel {
   font-size: 12px;
 }
 
+.text-xl {
+  font-size: 1.2rem !important;
+}
 .text-2xl {
   font-size: 1.5rem !important;
 }
@@ -195,18 +207,20 @@ p-carousel {
 }
 
 .product-img {
-  width: 100%;
-  height: 10rem;
+  width: 10rem;
+  height: 5rem;
 }
 
 @media screen and (min-width: 992px) {
   .product-img {
-    height: 30vh;
+    width: 12rem;
+    height: 6rem;
   }
 }
 @media screen and (min-width: 1200px) {
   .product-img {
-    height: 35vh;
+    width: 16rem;
+    height: 8rem;
   }
 }
 

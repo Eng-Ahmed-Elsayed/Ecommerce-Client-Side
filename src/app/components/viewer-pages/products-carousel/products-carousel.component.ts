@@ -14,9 +14,11 @@ import { CartItemDto } from 'src/app/shared/models/customer/cartItemDto';
   styleUrls: ['./products-carousel.component.scss'],
 })
 export class ProductsCarouselComponent {
-  @Input() products!: ProductDto[];
+  @Input() products!: ProductDto[] | any;
   @Input() numVisible: number = 3;
   @Input() responsiveOptions = this.layoutService.getResponsiveOptions();
+  @Input() loading!: boolean;
+
   constructor(
     private layoutService: LayoutService,
     private customOverlayService: CustomOverlayService,

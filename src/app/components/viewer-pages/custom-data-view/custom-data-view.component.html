@@ -39,7 +39,7 @@
 
   <!-- ListItem template -->
   <ng-template let-product pTemplate="listItem">
-    <div class="col-12 px-4">
+    <div class="col-12 px-4" *ngIf="!loading">
       <div
         class="d-flex flex-column flex-sm-row align-items-center mx-4 py-4 gap-3 dataView-item-container"
       >
@@ -114,7 +114,7 @@
 
   <!-- GridItem templete -->
   <ng-template let-product pTemplate="gridItem">
-    <div class="col-12 col-sm-6 col-lg-4 data-view-grid-item">
+    <div class="col-12 col-sm-6 col-lg-4 data-view-grid-item" *ngIf="!loading">
       <div class="p-4 border-1 surface-border border-round">
         <!-- Card header -->
         <div
@@ -128,7 +128,7 @@
               (click)="filterByCategory(product.category.name!)"
             >
               {{
-                product.category.name?.length > 10
+                product.category?.name?.length > 10
                   ? (product.category.name | uppercase | slice : 0 : 10) + "..."
                   : (product.category.name | uppercase)
               }}

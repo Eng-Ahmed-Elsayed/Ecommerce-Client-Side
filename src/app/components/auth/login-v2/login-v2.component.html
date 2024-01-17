@@ -57,6 +57,12 @@
         [condition]="errorMessage!.length > 0"
         [msg]="errorMessage"
       ></app-custom-input-error>
+      <span
+        class="cursor-pointer ms-1"
+        *ngIf="errorMessage == 'Email is not confirmed.'"
+        routerLink="/auth/send-email-confirmation"
+        >Confirm email.</span
+      >
     </div>
     <div class="col-12 text-center">
       <small class="cursor-pointer" routerLink="/auth/forgot-password"

@@ -17,6 +17,7 @@ export class ProductListComponent implements OnInit {
   products!: ProductDto[];
   product!: ProductDto;
   selectedProducts!: ProductDto[];
+  loading: boolean = true;
 
   constructor(
     private productService: ProductService,
@@ -31,6 +32,7 @@ export class ProductListComponent implements OnInit {
     this.adminService.getProductList().subscribe({
       next: (res: ProductDto[]) => {
         this.products = res;
+        this.loading = false;
       },
       error: (err: HttpErrorResponse) => console.log(err.message),
     });
@@ -43,11 +45,11 @@ export class ProductListComponent implements OnInit {
 
   createImgPath = (imgPath: string) => createImgPath(imgPath);
 
-  openNew() {
-    // this.product = {};
-    // this.submitted = false;
-    // this.productDialog = true;
-  }
+  // openNew() {
+  //   // this.product = {};
+  //   // this.submitted = false;
+  //   // this.productDialog = true;
+  // }
 
   editProduct(product: Product) {
     // this.product = { ...product };

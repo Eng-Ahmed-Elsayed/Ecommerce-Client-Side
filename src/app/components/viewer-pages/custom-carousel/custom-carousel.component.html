@@ -1,13 +1,21 @@
 <div class="card">
   <p-carousel
     [value]="items"
-    [numVisible]="8"
+    [numVisible]="6"
     [numScroll]="1"
     [responsiveOptions]="responsiveOptions"
     [circular]="true"
   >
     <ng-template let-item pTemplate="item">
-      <div class="custom-carousel-item rounded mx-2 text-center pt-4 px-3">
+      <!-- If loading -->
+      <div class="d-flex" *ngIf="loading">
+        <p-skeleton shape="circle" size="5rem" styleClass="me-3"></p-skeleton>
+      </div>
+      <!-- Else Loading is done show the items -->
+      <div
+        class="custom-carousel-item rounded mx-2 text-center pt-4 px-3"
+        *ngIf="!loading"
+      >
         <div class="mb-3">
           <img
             [src]="createImgPath(item.imgPath)"
@@ -22,7 +30,7 @@
             (click)="filterByCategory(item.name!)"
           >
             {{
-              item.name.length > 20
+              item?.name?.length > 20
                 ? (item.name | uppercase | slice : 0 : 20) + "..."
                 : (item.name | uppercase)
             }}

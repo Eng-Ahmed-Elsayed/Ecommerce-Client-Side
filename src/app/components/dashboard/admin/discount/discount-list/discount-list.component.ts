@@ -15,6 +15,7 @@ export class DiscountListComponent implements OnInit {
   discounts!: DiscountDto[];
   discount!: DiscountDto;
   selectedDiscounts!: DiscountDto[];
+  loading: boolean = true;
 
   constructor(
     private adminService: AdminService,
@@ -27,6 +28,7 @@ export class DiscountListComponent implements OnInit {
     this.adminService.getDiscountList().subscribe({
       next: (res) => {
         this.discounts = res;
+        this.loading = false;
       },
       error: (err) => console.log(err),
     });

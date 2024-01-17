@@ -10,9 +10,10 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrls: ['./custom-carousel.component.scss'],
 })
 export class CustomCarouselComponent {
-  @Input() items!: CategoryDto[] | any[];
+  @Input() items: CategoryDto[] | any[] | any;
   @Input() imgClass!: string;
   @Input() withName: boolean = false;
+  @Input() loading!: boolean;
   responsiveOptions = this.layoutService.getCustomCarouselResponsiveOptions();
   constructor(
     private layoutService: LayoutService,
