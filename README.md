@@ -60,18 +60,18 @@ Watch the video on google dive.
 
 In this section, we present additional featured screenshots to showcase specific aspects of the application. You can see all the screenshots from the following links.
 
-* [User Authentication & Profile](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/screenshots/auth&user)
-* [Home](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/screenshots/home)
-* [Admin Panel](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/screenshots/admin-panel)
-* [Product Catalog](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/screenshots/product-catalog)
-* [Product Overview](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/screenshots/product-overview)
-* [Watch List](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/screenshots/watch-list)
-* [Shopping Cart](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/screenshots/shopping-cart)
-* [Check Out](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/screenshots/check-out)
-* [Order History](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/screenshots/order-history)
-* [Mobile Screen](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/screenshots/mobile-screen)
-* [Viewer Pages](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/screenshots/viewer-pages)
-* [Errors](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/screenshots/errors)
+* [User Authentication & Profile](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/auth&user)
+* [Home](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/home)
+* [Admin Panel](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/admin-panel)
+* [Product Catalog](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/product-catalog)
+* [Product Overview](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/product-overview)
+* [Watch List](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/watch-list)
+* [Shopping Cart](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/shopping-cart)
+* [Check Out](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/check-out)
+* [Order History](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/order-history)
+* [Mobile Screen](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/mobile-screen)
+* [Viewer Pages](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/viewer-pages)
+* [Errors](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/errors)
 
 ## Future Improvements
 
