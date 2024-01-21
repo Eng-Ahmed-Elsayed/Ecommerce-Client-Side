@@ -3,6 +3,14 @@
 * This project is a full-stack e-commerce web application built using Angular for the frontend and .NET API for the backend.
 * This is the client side you can find the [Server Side here](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Server-Side)
 
+## Description
+
+During a conversation with a friend working in a mall, I identified a significant challenge affecting customer engagement. Many customers were missing out on the latest discounts, offers, and new collections, expressing frustration over the difficulty of finding products on the mall's Facebook page.
+
+In response to this challenge, I envisioned a transformative solution: a dynamic and user-friendly E-commerce web application. Armed with my expertise in Angular and .NET, I proposed a platform that not only addresses the current issues but also elevates the overall shopping experience. The application aims to provide real-time updates on discounts, offers, and new collections, ensuring customers stay informed and engaged.
+
+My vision extends beyond basic updates – users will have the ability to effortlessly search and filter products, streamlining their shopping journey. As an E-commerce Full Stack developer, my role is to orchestrate the entire development process, from crafting an intuitive frontend using Angular to implementing a robust backend with .NET. This solution not only addresses the immediate concerns but also sets the stage for a modern, responsive, and customer-centric digital shopping experience, ultimately enhancing customer satisfaction and loyalty.
+
 ## Features
 
 * **User Authentication:** Secure user login, registration, reset password, email cofirmation and two step verification.
@@ -69,7 +77,7 @@ In this section, we present additional featured screenshots to showcase specific
 * [Shopping Cart](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/shopping-cart/SCREENSHOTS.md)
 * [Check Out](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/check-out/SCREENSHOTS.md)
 * [Order History](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/order-history/SCREENSHOTS.md)
-* [Mobile Screen](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/mobile-screen/SCREENSHOTS.md)
+* [Mobile Responsive](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/mobile-screen/SCREENSHOTS.md)
 * [Viewer Pages](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/viewer-pages/SCREENSHOTS.md)
 * [Errors](https://github.com/Eng-Ahmed-Elsayed/Ecommerce-Client-Side/tree/master/screenshots/errors/SCREENSHOTS.md)
 
