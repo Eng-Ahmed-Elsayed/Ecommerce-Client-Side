@@ -16,7 +16,7 @@ My vision extends beyond basic updates – users will have the ability to effort
 * **User Authentication:** Secure user login, registration, reset password, email cofirmation and two step verification.
 * **User Profile:** User updates his informations, password and profile image.
 * **Admin Panel:** Manage products, discounts, and categories efficiently to ensure the smooth operation of our e-commerce platform.
-* **Product Catalog:** Browse, filter and search for products.
+* **Product Catalog:** Responsive product catalog with advanced search functionalities and lazy loading.
 * **Product Overview:** User can explore different products with details and add it to his cart or his watch list. Also, He has the ability to contribute by adding reviews and ratings for products.
 * **Watch List:** Easily add and manage products you're interested in for future reference.
 * **Shopping Cart:** Add and manage items in the cart.
